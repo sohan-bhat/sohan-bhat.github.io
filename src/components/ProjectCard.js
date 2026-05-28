@@ -13,7 +13,6 @@ const ProjectCard = ({ project }) => {
     const [imageError, setImageError] = useState(false);
     const imgSrc = imageError || !project.image ? PLACEHOLDER_IMAGE : project.image;
     const codeLinks = buildCodeLinks(project);
-    const isProduction = project.status === 'Production';
 
     return (
         <div className="project-card">
@@ -53,9 +52,6 @@ const ProjectCard = ({ project }) => {
             <div className="project-content">
                 <div className="project-header">
                     <h3 className="project-title">{project.title}</h3>
-                    <span className={`project-badge ${isProduction ? 'badge-production' : 'badge-development'}`}>
-                        {isProduction ? 'Prod' : 'Dev'}
-                    </span>
                 </div>
                 <p>{project.description}</p>
                 <div className="project-tags">

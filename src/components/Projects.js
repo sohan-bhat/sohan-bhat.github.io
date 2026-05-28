@@ -33,7 +33,6 @@ const projects = [
         tags: ["React", "Node.js", "Groq API"],
         demoLink: "https://trymochi.netlify.app",
         codeLink: "https://github.com/sohan-bhat/Mochi",
-        status: "Production"
     },
     {
         id: 3,
@@ -43,13 +42,11 @@ const projects = [
         tags: ["React", "Node.js", "Groq API"],
         demoLink: "https://careerai.netlify.app",
         codeLink: "https://github.com/sohan-bhat/CareerAI",
-        status: "Production"
     }
 ];
 
 const projectGroups = {
     vacantcourt: {
-        label: 'vacantcourt-system',
         flow: 'detection → web',
         order: ['source', 'sink']
     }
