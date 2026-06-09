@@ -56,7 +56,7 @@ const Footer = () => {
                             <span>github.com/sohan-bhat</span>
                         </a>
                     </div>
-                    <p>© 2025 Sohan Bhat. Crafted with &lt;/&gt; and ♥</p>
+                    <p>Sohan Bhat</p>
                 </div>
             </div>
         </footer>

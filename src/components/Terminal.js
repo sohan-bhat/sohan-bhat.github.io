@@ -21,7 +21,7 @@ const Terminal = ({ onAnimationComplete }) => {
         const currentCommand = terminalData[commandIndex].command;
 
         if (charIndex < currentCommand.length) {
-            const timer = setTimeout(() => setCharIndex(charIndex + 1), 55);
+            const timer = setTimeout(() => setCharIndex(charIndex + 1), 35);
             return () => clearTimeout(timer);
         }
 
@@ -30,7 +30,7 @@ const Terminal = ({ onAnimationComplete }) => {
                 setDisplayedOutput([...displayedOutput, commandIndex]);
                 setCommandIndex(commandIndex + 1);
                 setCharIndex(0);
-            }, 200);
+            }, 130);
             return () => clearTimeout(outputTimer);
         }
     }, [commandIndex, charIndex, displayedOutput, terminalData, onAnimationComplete]);

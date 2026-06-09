@@ -55,8 +55,8 @@ const ProjectCard = ({ project }) => {
                 </div>
                 <p>{project.description}</p>
                 <div className="project-tags">
-                    {project.tags.map((tag, index) => (
-                        <span key={tag} className={`project-tag tag-${index % 4}`}>
+                    {project.tags.map((tag) => (
+                        <span key={tag} className="project-tag">
                             {tag}
                         </span>
                     ))}

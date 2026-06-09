@@ -11,7 +11,8 @@
       "Bash(git commit *)",
       "Bash(cp /Users/sohanb/.claude/image-cache/b92ba230-fb9f-404b-a5be-debe695593fa/7.png /Users/sohanb/code/portfolio/public/imgs/seasons/reefscape-logo.png)",
       "Bash(cp /Users/sohanb/.claude/image-cache/b92ba230-fb9f-404b-a5be-debe695593fa/6.png /Users/sohanb/code/portfolio/public/imgs/robot-2025.jpg)",
-      "Bash(cp /Users/sohanb/.claude/image-cache/b92ba230-fb9f-404b-a5be-debe695593fa/5.png /Users/sohanb/code/portfolio/public/imgs/banner-2025-fortworth.png)"
+      "Bash(cp /Users/sohanb/.claude/image-cache/b92ba230-fb9f-404b-a5be-debe695593fa/5.png /Users/sohanb/code/portfolio/public/imgs/banner-2025-fortworth.png)",
+      "Bash(npx react-scripts *)"
     ],
     "deny": [],
     "ask": []

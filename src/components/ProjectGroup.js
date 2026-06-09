@@ -9,10 +9,9 @@ const ProjectGroup = ({ config, projects }) => {
 
     return (
         <div className="project-group">
-            <span className="project-group-label">
-                <span className="project-group-name">{config.label}</span>
-                <span className="project-group-flow">{config.flow}</span>
-            </span>
+            <div className="project-group-header">
+                <span className="project-group-tag">Linked system</span>
+            </div>
             <div className="project-group-cards">
                 {ordered.map((project) => (
                     <ProjectCard key={project.id} project={project} />

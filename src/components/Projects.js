@@ -47,7 +47,7 @@ const projects = [
 
 const projectGroups = {
     vacantcourt: {
-        flow: 'detection → web',
+        label: 'VacantCourt',
         order: ['source', 'sink']
     }
 };
