@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FiArchive } from 'react-icons/fi';
 import '../styles/ProjectCard.css';
 
 const PLACEHOLDER_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f172a'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='14' text-anchor='middle' fill='%233b82f6' dominant-baseline='middle'%3ENo Image%3C/text%3E%3C/svg%3E";
@@ -52,6 +53,12 @@ const ProjectCard = ({ project }) => {
             <div className="project-content">
                 <div className="project-header">
                     <h3 className="project-title">{project.title}</h3>
+                    {project.legacy && (
+                        <span className="project-legacy" title="This project is no longer maintained">
+                            <FiArchive className="project-legacy-icon" aria-hidden="true" />
+                            No longer maintained
+                        </span>
+                    )}
                 </div>
                 <p>{project.description}</p>
                 <div className="project-tags">

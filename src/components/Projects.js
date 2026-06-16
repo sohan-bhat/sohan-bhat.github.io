@@ -5,6 +5,15 @@ import '../styles/Projects.css';
 
 const projects = [
     {
+        id: 6,
+        title: "SignNet",
+        description: "A convolutional neural network that sorts German traffic signs into 43 classes — backpropagation and all, written from scratch in pure NumPy with no PyTorch, TensorFlow, or autograd.",
+        image: "/imgs/SignNet.png",
+        tags: ["Python", "NumPy", "React", "TypeScript"],
+        demoLink: "https://signnet-cnn.netlify.app",
+        codeLink: "https://github.com/sohan-bhat/signnet",
+    },
+    {
         id: 4,
         title: "VacantCourt Config Utility",
         description: "Android app running on-device person detection (TensorFlow Lite) and pushing live court occupancy to Firebase. Camera in, signal out.",
@@ -26,6 +35,16 @@ const projects = [
         groupRole: "sink"
     },
     {
+        id: 5,
+        title: "Ensemble",
+        description: "An r/place for music — one shared orchestral score the whole world writes together, note by note. Anyone, anywhere, adds to the same global symphony.",
+        image: "/imgs/Ensemble.png",
+        tags: ["React", "Vite", "Express", "VexFlow", "LibSQL"],
+        demoLink: "https://ensemble-qnd2.onrender.com",
+        codeLink: "https://github.com/sohan-bhat/ensemble",
+    },
+
+    {
         id: 2,
         title: "Mochi",
         description: "A fully responsive recipe finder from just the ingredients you have!",
@@ -42,6 +61,7 @@ const projects = [
         tags: ["React", "Node.js", "Groq API"],
         demoLink: "https://careerai.netlify.app",
         codeLink: "https://github.com/sohan-bhat/CareerAI",
+        legacy: true,
     }
 ];
 
@@ -52,37 +72,47 @@ const projectGroups = {
     }
 };
 
-const splitProjects = (list) => {
-    const ungrouped = [];
-    const groupsById = {};
+// Build the render order, preserving the array order of `projects`. A grouped
+// project is emitted as a single ProjectGroup at the position of its first
+// member; later members of the same group are skipped.
+const buildRenderList = (list) => {
+    const out = [];
+    const seen = new Set();
     list.forEach((p) => {
-        if (p.groupId) {
-            (groupsById[p.groupId] ||= []).push(p);
-        } else {
-            ungrouped.push(p);
+        if (!p.groupId) {
+            out.push({ type: 'card', project: p });
+            return;
         }
+        if (seen.has(p.groupId)) return;
+        seen.add(p.groupId);
+        out.push({
+            type: 'group',
+            groupId: p.groupId,
+            members: list.filter((x) => x.groupId === p.groupId),
+        });
     });
-    return { ungrouped, groupsById };
+    return out;
 };
 
 const Projects = () => {
-    const { ungrouped, groupsById } = splitProjects(projects);
+    const renderList = buildRenderList(projects);
 
     return (
         <section className="projects">
             <div className="container">
                 <h2 className="section-title">Projects<span className="title-period">.</span></h2>
                 <div className="project-grid">
-                    {Object.entries(groupsById).map(([id, members]) => (
-                        <ProjectGroup
-                            key={id}
-                            config={projectGroups[id]}
-                            projects={members}
-                        />
-                    ))}
-                    {ungrouped.map((project) => (
-                        <ProjectCard key={project.id} project={project} />
-                    ))}
+                    {renderList.map((item) =>
+                        item.type === 'group' ? (
+                            <ProjectGroup
+                                key={item.groupId}
+                                config={projectGroups[item.groupId]}
+                                projects={item.members}
+                            />
+                        ) : (
+                            <ProjectCard key={item.project.id} project={item.project} />
+                        )
+                    )}
                 </div>
             </div>
         </section>
