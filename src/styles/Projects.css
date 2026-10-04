@@ -1,0 +1,47 @@
+.time-spine {
+    position: relative;
+}
+
+.time-spine::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    bottom: 24px;
+    width: 2px;
+    background: var(--line);
+}
+
+.spine-year {
+    position: relative;
+    padding-left: 2.2rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    margin: 1.8rem 0 1rem;
+}
+
+.spine-year-group:first-child .spine-year {
+    margin-top: 0;
+}
+
+.spine-year::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+}
+
+@media (max-width: 640px) {
+    .spine-year {
+        padding-left: 1.8rem;
+    }
+}

@@ -1,179 +1,53 @@
-/* One theme: the first page of a paper set in LaTeX, printed on a sheet that
-   lies on a desk. One typeface (New Computer Modern), one ink, and the logo's
-   terracotta as the only accent. Hovering anything clickable marks it like a
-   highlighter. */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 :root {
-    color-scheme: light;
-
-    --desk: #e4ddcf;
-    --paper: #fcfaf4;
-    --card: #fffefb;
-    --ink: #1f1c18;
-    --ink-2: #645c51;
+    --bg: #faf6ee;
+    --surface: #fffdf8;
+    --sand: #f0e9da;
+    --ink: #2e2a23;
+    --ink-soft: #6f665a;
+    --line: #e5dcc9;
     --accent: #bf5b30;
-    --accent-text: #a84f28;
-    --highlight: rgb(255 214 92 / 0.55);
-
-    --serif: 'NewCM Web', 'NewCM Fallback', Georgia, serif;
-
-    /* A faint grain, so the sheet reads as paper rather than a flat panel. */
-    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .24 0 0 0 0 .16 0 0 0 .55 -.24'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)'/%3E%3C/svg%3E");
+    --accent-soft: #f6e4d9;
+    --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-html {
-    -webkit-text-size-adjust: 100%;
-    scrollbar-gutter: stable;
-}
-
-/* No page scrolling behind an open card. The reserved scrollbar gutter takes
-   the color of the desk under the backdrop. */
-html:has(.card[open]) {
-    overflow: hidden;
-    background: #958f86;
-}
-
-/* flow-root keeps the sheet's margins inside the body, so the desk color
-   covers the whole page. */
 body {
-    display: flow-root;
-    min-height: 100vh;
-    background: var(--desk);
+    font-family: var(--font-body);
+    background-color: var(--bg);
     color: var(--ink);
-    font-family: var(--serif);
-    font-size: 18px;
-    line-height: 1.5;
-    font-kerning: normal;
-}
-
-img {
-    display: block;
-    max-width: 100%;
-}
-
-ol,
-ul {
-    list-style: none;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button {
-    font: inherit;
-    color: inherit;
-    text-align: inherit;
-    background: none;
-    border: 0;
-    cursor: pointer;
-}
-
-:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+    line-height: 1.65;
 }
 
 ::selection {
-    background: var(--highlight);
+    background: var(--accent-soft);
 }
 
-/* Read by screen readers, not shown. */
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
-/* The sheet: US Letter proportions on larger screens, the whole screen on
-   phones. The page number sits at its foot. */
-.sheet {
-    display: flex;
-    flex-direction: column;
-    width: min(816px, 100% - 48px);
-    aspect-ratio: 8.5 / 11;
-    margin: 40px auto 64px;
-    padding: 40px 96px 36px;
-    background: var(--paper) var(--grain);
-    box-shadow:
-        0 0 0 1px rgb(60 45 30 / 0.05),
-        0 1px 2px rgb(60 45 30 / 0.1),
-        0 16px 40px -12px rgb(60 45 30 / 0.22);
+section {
+    padding: 3.25rem 0;
 }
 
-sup {
-    font-size: 0.68em;
-    line-height: 0;
-    vertical-align: 0.5em;
+.section-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.75rem;
 }
 
-/* At the foot of the page: the footnote under a short rule, as LaTeX sets it,
-   then the page number. */
-.footnote {
-    margin-top: auto;
-    padding-top: 56px;
-    font-size: 14.5px;
-    line-height: 1.45;
-}
-
-.footnote::before {
-    content: '';
-    display: block;
-    width: 144px;
-    margin-bottom: 8px;
-    border-top: 1px solid var(--ink);
-}
-
-.footnote sup {
-    margin-right: 1px;
-}
-
-.folio {
-    padding-top: 28px;
-    text-align: center;
-    font-size: 16px;
-}
-
-@media (max-width: 860px) {
-    .sheet {
-        padding-inline: 64px;
-    }
-}
-
-@media (max-width: 640px) {
-    .sheet {
-        width: 100%;
-        aspect-ratio: auto;
-        min-height: 100vh;
-        min-height: 100dvh;
-        margin: 0;
-        padding: 16px 20px 24px;
-        box-shadow: none;
-    }
-
-    .footnote {
-        padding-top: 48px;
-    }
-
-    .folio {
-        padding-top: 24px;
-    }
-}
-
-@media (max-width: 359px) {
-    .sheet {
-        padding-inline: 16px;
-    }
+.title-period {
+    color: var(--accent);
 }

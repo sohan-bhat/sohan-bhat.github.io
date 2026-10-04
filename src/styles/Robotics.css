@@ -1,0 +1,78 @@
+.robotics-prose {
+    color: var(--ink-soft);
+    max-width: 58ch;
+    margin: -0.75rem 0 2rem;
+}
+
+.season-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.season-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.season-photo {
+    display: block;
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--line);
+    background: var(--sand);
+}
+
+.season-info {
+    padding: 1.15rem 1.35rem 1.35rem;
+}
+
+.season-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.season-year {
+    color: var(--accent);
+}
+
+.season-note {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-top: 0.15rem;
+}
+
+.season-banner {
+    display: block;
+    height: 110px;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: left;
+    margin-top: 0.9rem;
+}
+
+.tba-link {
+    display: inline-block;
+    margin-top: 1.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.tba-link:hover {
+    text-decoration: underline wavy;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+}
+
+@media (max-width: 768px) {
+    .season-list {
+        grid-template-columns: 1fr;
+    }
+}
