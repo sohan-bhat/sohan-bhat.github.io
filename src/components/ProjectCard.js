@@ -40,7 +40,7 @@ const ProjectCard = ({ project }) => (
 
         <div className="card-text">
             <p className="card-line">{project.line}</p>
-            <p className="card-stack">{project.stack.join(' · ')}</p>
+            <p className="card-stack">{project.stack.join(', ')}</p>
         </div>
     </article>
 );

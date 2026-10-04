@@ -114,28 +114,43 @@ const Projects = () => {
     const track = useRef(null);
     const [ends, setEnds] = useState({ start: true, end: false });
 
+    // Whether the track is at either end, which turns the arrows off. Checked
+    // on every scroll and whenever the track or its contents change size (Safari
+    // can run the first check before the cards are laid out).
     useEffect(() => {
         const element = track.current;
         const update = () => {
+            const max = element.scrollWidth - element.clientWidth;
             const start = element.scrollLeft <= 1;
-            const end = element.scrollLeft + element.clientWidth >= element.scrollWidth - 1;
+            const end = element.scrollLeft >= max - 1;
             setEnds((previous) => (previous.start === start && previous.end === end ? previous : { start, end }));
         };
         update();
         element.addEventListener('scroll', update, { passive: true });
-        window.addEventListener('resize', update);
+        const observer = new ResizeObserver(update);
+        observer.observe(element);
+        [...element.children].forEach((group) => observer.observe(group));
         return () => {
             element.removeEventListener('scroll', update);
-            window.removeEventListener('resize', update);
+            observer.disconnect();
         };
     }, []);
 
+    // Moves a screenful of cards, landing exactly where a card rests, so the
+    // snapping never pulls it back.
     const move = (direction) => {
         const element = track.current;
         const slots = [...element.querySelectorAll('.project-slot')];
-        const step = slots.length > 1 ? slots[1].offsetLeft - slots[0].offsetLeft : element.clientWidth;
-        const perScreen = Math.max(1, Math.floor((element.clientWidth * 0.9) / step));
-        element.scrollBy({ left: direction * step * perScreen, behavior: prefersLessMotion() ? 'auto' : 'smooth' });
+        const stops = slots.map((slot) => slot.offsetLeft - slots[0].offsetLeft);
+        const max = element.scrollWidth - element.clientWidth;
+        let current = 0;
+        stops.forEach((stop, i) => {
+            if (Math.abs(stop - element.scrollLeft) < Math.abs(stops[current] - element.scrollLeft)) current = i;
+        });
+        const step = stops.length > 1 ? stops[1] : element.clientWidth;
+        const perScreen = Math.max(1, Math.floor((element.clientWidth - slots[0].offsetLeft) / step));
+        const target = Math.min(stops.length - 1, Math.max(0, current + direction * perScreen));
+        element.scrollTo({ left: Math.min(max, stops[target]), behavior: prefersLessMotion() ? 'auto' : 'smooth' });
     };
 
     return (

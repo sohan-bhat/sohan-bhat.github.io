@@ -20,13 +20,6 @@
     box-sizing: border-box;
 }
 
-/* The side dial's links glide to their section, unless motion is reduced. */
-@media (prefers-reduced-motion: no-preference) {
-    html {
-        scroll-behavior: smooth;
-    }
-}
-
 /* The page never moves sideways: no rubber-banding or swipe gestures on a
    horizontal trackpad swipe, and nothing can widen it. Only the projects
    track scrolls sideways. */
