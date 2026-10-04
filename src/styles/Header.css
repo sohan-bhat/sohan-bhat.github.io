@@ -1,108 +1,53 @@
-.header {
-    padding: 6.5rem 0 2rem;
-}
-
-.hero-layout {
+.letterhead {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 3rem;
+    gap: 16px;
 }
 
-.hero-text {
-    min-width: 0;
+.logo {
+    display: block;
+    margin: -7px;
+    padding: 7px;
 }
 
-.hero-photo {
-    width: 230px;
-    height: 230px;
-    object-fit: cover;
-    border-radius: 22px;
-    border: 1px solid var(--line);
-    flex-shrink: 0;
-    margin-right: 4.5rem;
+.logo-mark {
+    display: block;
+    width: 30px;
+    height: 30px;
 }
 
-.hero-hi {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--accent);
-    margin-bottom: 0.25rem;
-}
-
-.title {
-    font-family: var(--font-display);
-    font-size: clamp(2.75rem, 8vw, 4.25rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-    margin-bottom: 1rem;
-}
-
-.subtitle {
-    font-size: 1.2rem;
-    color: var(--ink-soft);
-    max-width: 34rem;
-    margin-bottom: 1.75rem;
-}
-
-.social-links {
+.contact {
     display: flex;
-    align-items: center;
-    gap: 1.5rem;
     flex-wrap: wrap;
+    justify-content: flex-end;
+    column-gap: 18px;
+    font-size: 17px;
+    font-variant-caps: small-caps;
+    letter-spacing: 0.03em;
 }
 
-/* Icon-only links carry a drawn wavy underline (text-decoration is not
-   rendered under a bare svg glyph): gray at rest, accent on hover. */
-.social-link {
-    display: inline-flex;
-    font-size: 1.3rem;
-    color: var(--ink-soft);
-    text-decoration: none;
-    padding-bottom: 7px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M0 3 Q 2 1 4 3 T 8 3' fill='none' stroke='%236f665a' stroke-width='1'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-position: 0 100%;
-    background-size: 8px 4px;
+.contact a {
+    display: block;
+    padding: 9px 2px;
 }
 
-.social-link:hover {
-    color: var(--accent);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M0 3 Q 2 1 4 3 T 8 3' fill='none' stroke='%23bf5b30' stroke-width='1'/%3E%3C/svg%3E");
-}
-
-.social-email {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--ink-soft);
-    text-decoration: underline wavy;
-    text-decoration-color: var(--ink-soft);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 5px;
-}
-
-.social-email:hover {
-    color: var(--accent);
-    text-decoration-color: var(--accent);
-}
-
-@media (max-width: 600px) {
-    .header {
-        padding-top: 4.5rem;
+@media (hover: hover) {
+    .contact a:hover {
+        background: linear-gradient(transparent 30%, var(--highlight) 30%, var(--highlight) 82%, transparent 82%);
     }
+}
 
-    .hero-layout {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-        gap: 1.75rem;
+@media (max-width: 380px) {
+    .contact {
+        column-gap: 12px;
+        font-size: 16px;
     }
+}
 
-    .hero-photo {
-        width: 150px;
-        height: 150px;
-        border-radius: 18px;
-        margin-right: 0;
+@media (max-width: 359px) {
+    .contact {
+        column-gap: 10px;
+        font-size: 15px;
     }
 }
