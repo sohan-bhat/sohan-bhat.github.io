@@ -60,6 +60,7 @@
 }
 
 .project-track {
+    position: relative;
     display: flex;
     gap: var(--gap);
     overflow-x: auto;

@@ -29,7 +29,7 @@ const About = () => (
                         <h3 className="research-paper-title">
                             Early detection of silent training failures in neural networks
                         </h3>
-                        <p className="research-meta">Sohan Bhat · 2026</p>
+                        <p className="research-meta">Sohan Bhat, 2026</p>
                         <p className="research-description">
                             The network trains, the loss falls, and the model is still wrong.
                             A paper on catching that early.
