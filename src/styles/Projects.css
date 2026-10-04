@@ -140,7 +140,7 @@
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--ink-faint);
+    color: var(--ink-soft);
 }
 
 .project-month::before {
@@ -149,7 +149,7 @@
     height: 6px;
     margin-left: 3px;
     border-radius: 50%;
-    background: var(--ink-faint);
+    background: var(--ink-soft);
 }
 
 .project-month::after {

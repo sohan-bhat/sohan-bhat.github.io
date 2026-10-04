@@ -1,13 +1,12 @@
-/* A project card, kept quiet: a soft surface with no border, the title and
-   plain links across the top, the screenshot with rounded corners (dimmed a
-   little so white pages don't glare on the dark background), then one
-   sentence and the stack in softer text. */
+/* A project card: a soft raised surface with no border, the title and its
+   links across the top, the screenshot with rounded corners, then one
+   sentence and the stack. */
 .project-card {
     flex: 1;
     display: flex;
     flex-direction: column;
     padding: 0.7rem 0.7rem 0.95rem;
-    background: var(--surface);
+    background: var(--raised);
     border-radius: 12px;
 }
 
@@ -36,7 +35,7 @@
     font-size: 0.75rem;
     font-weight: 400;
     letter-spacing: 0;
-    color: var(--ink-faint);
+    color: var(--ink-soft);
 }
 
 .card-links {
@@ -46,17 +45,19 @@
 }
 
 .card-link {
-    font-size: 0.8rem;
-    color: var(--ink-soft);
-    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: rgb(239 232 220 / 0.35);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
     white-space: nowrap;
 }
 
 .card-link:hover {
-    color: var(--ink);
-    text-decoration: underline wavy;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
+    text-decoration-style: wavy;
+    text-decoration-color: var(--accent);
 }
 
 .card-image {
@@ -68,21 +69,20 @@
     object-position: top;
     border-radius: 8px;
     background: var(--sand);
-    filter: brightness(0.9);
 }
 
 .card-line {
     margin-top: 0.9rem;
     padding: 0 0.3rem;
-    font-size: 0.9rem;
+    font-size: 0.93rem;
     line-height: 1.55;
-    color: var(--ink-soft);
+    color: var(--ink);
 }
 
 /* Pinned to the bottom, so the stacks line up across the row. */
 .card-stack {
     margin-top: auto;
     padding: 0.8rem 0.3rem 0;
-    font-size: 0.76rem;
-    color: var(--ink-faint);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
 }
