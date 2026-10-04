@@ -1,3 +1,5 @@
+/* The timeline: one line down the left, a ring for each year, and a dot for
+   each project, level with its title. */
 .time-spine {
     position: relative;
 }
@@ -6,8 +8,8 @@
     content: '';
     position: absolute;
     left: 5px;
-    top: 8px;
-    bottom: 24px;
+    top: 10px;
+    bottom: 0;
     width: 2px;
     background: var(--line);
 }
@@ -20,7 +22,7 @@
     font-weight: 700;
     letter-spacing: 0.02em;
     color: var(--ink);
-    margin: 1.8rem 0 1rem;
+    margin: 2.25rem 0 1rem;
 }
 
 .spine-year-group:first-child .spine-year {

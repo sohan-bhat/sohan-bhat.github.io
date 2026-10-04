@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-
+/* A dark theme in the original's warm hues: near-black paper, cream ink, and
+   the logo's terracotta, lightened so it reads on dark backgrounds. */
 :root {
-    --bg: #faf6ee;
-    --surface: #fffdf8;
-    --sand: #f0e9da;
-    --ink: #2e2a23;
-    --ink-soft: #6f665a;
-    --line: #e5dcc9;
-    --accent: #bf5b30;
-    --accent-soft: #f6e4d9;
+    color-scheme: dark;
+    --bg: #13110f;
+    --surface: #1b1815;
+    --sand: #26221d;
+    --ink: #efe8dc;
+    --ink-soft: #a69d90;
+    --line: #2f2a24;
+    --accent: #e2774a;
+    --accent-soft: rgb(226 119 74 / 0.28);
     --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }

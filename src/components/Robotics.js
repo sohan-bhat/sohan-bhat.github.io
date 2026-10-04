@@ -5,9 +5,9 @@ const seasons = [
     {
         year: 2026,
         name: 'REBUILT',
-        note: 'FIRST AGE, presented by Haas',
+        note: 'Winner, Fort Worth District',
         photo: { src: '/imgs/robot-2026.jpg', alt: 'FRC Team 2714 robot at REBUILT 2026' },
-        banner: { src: '/imgs/blue-banner.png', alt: 'Blue banner' },
+        banner: { src: '/imgs/blue-banner.png', alt: 'Winner, 2026 Fort Worth District banner' },
     },
     {
         year: 2025,
@@ -23,8 +23,8 @@ const Robotics = () => (
         <div className="container">
             <h2 className="section-title">Robotics<span className="title-period">.</span></h2>
             <p className="robotics-prose">
-                I'm a programmer on FRC Team 2714, writing Java for the robot. I focus on
-                autonomous routines and vision integration with Limelight.
+                I write Java for FRC Team 2714's robot, mostly autonomous routines and
+                Limelight vision.
             </p>
 
             <div className="season-list">
@@ -45,6 +45,8 @@ const Robotics = () => (
                                 className="season-banner"
                                 src={season.banner.src}
                                 alt={season.banner.alt}
+                                width="280"
+                                height="390"
                                 loading="lazy"
                             />
                         </div>

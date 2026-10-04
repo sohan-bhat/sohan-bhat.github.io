@@ -9,22 +9,16 @@ const About = () => (
                     <h2 className="section-title">About<span className="title-period">.</span></h2>
                     <div className="about-prose">
                         <p>
-                            I'm 15 studying as a  sophomore at Heritage High School in Frisco, TX.
+                            I'm 15 and a sophomore at Heritage High School in Frisco, Texas.
                         </p>
                         <p>
-                            I build ML systems from scratch to understand what's under the frameworks.
-                            Most recently: SignNet, a convolutional neural network written entirely in
-                            NumPy (no PyTorch, no autograd) that classifies German traffic signs at 90%
-                            accuracy, with a live browser demo. Before that, a scalar autograd engine.
-                            That work led to a research paper on detecting silent training failures,
-                            born from a bug in SignNet that lost me weeks.
+                            I like building machine learning from scratch to see how it works.
+                            SignNet, a neural network written in plain NumPy, led to my research
+                            paper on silent training failures.
                         </p>
                         <p>
-                            I program for FRC Team 2714 in Java, heading into the season focused on
-                            vision and autonomous. I'm also training for USACO Gold in C++.
-                        </p>
-                        <p>
-                            Outside of that, I have a hobby in soccer and tennis while also loving to spend time hiking with my family.
+                            I also program for FRC Team 2714 and train for USACO Gold. Away from
+                            the screen, I play soccer and tennis and go hiking with my family.
                         </p>
                     </div>
                 </div>
@@ -38,8 +32,7 @@ const About = () => (
                         <p className="research-meta">Sohan Bhat · 2026</p>
                         <p className="research-description">
                             The network trains, the loss falls, and the model is still wrong.
-                            A study of how these failures slip through unnoticed and how to
-                            catch them early.
+                            A paper on catching that early.
                         </p>
                         <a
                             className="research-link"
