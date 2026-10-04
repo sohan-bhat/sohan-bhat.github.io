@@ -12,8 +12,7 @@
 
 .season-card {
     background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 12px;
     overflow: hidden;
 }
 
@@ -22,7 +21,6 @@
     width: 100%;
     height: 260px;
     object-fit: cover;
-    border-bottom: 1px solid var(--line);
     background: var(--sand);
 }
 
