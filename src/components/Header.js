@@ -1,26 +1,61 @@
 import React from 'react';
-import { LINKS } from '../content';
-import Logo from './Logo';
+import { FaGithub, FaXTwitter, FaInstagram } from 'react-icons/fa6';
 import '../styles/Header.css';
 
-// The letterhead: the mark on the left, where to find Sohan on the right.
 const Header = () => (
-    <header className="letterhead">
-        <a className="logo" href="#top" aria-label="Sohan Bhat, back to top">
-            <Logo />
-        </a>
-        <ul className="contact">
-            {LINKS.map(({ label, href }) => {
-                const external = !href.startsWith('mailto:');
-                return (
-                    <li key={label}>
-                        <a href={href} target={external ? '_blank' : undefined} rel={external ? 'me noreferrer' : undefined}>
-                            {label}
-                        </a>
-                    </li>
-                );
-            })}
-        </ul>
+    <header className="header">
+        <div className="container hero-layout">
+            <div className="hero-text">
+                <p className="hero-hi">hey, I'm</p>
+                <h1 className="title">Sohan Bhat</h1>
+                <p className="subtitle">
+                    I build ML systems and neural networks from scratch, web apps,
+                    Android tools, and FRC robots.
+                </p>
+
+                <div className="social-links">
+                    <a
+                        href="mailto:sohanrambhat@gmail.com"
+                        className="social-email"
+                    >
+                        sohanrambhat@gmail.com
+                    </a>
+                    <a
+                        href="https://github.com/sohan-bhat"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="social-link"
+                        aria-label="GitHub"
+                    >
+                        <FaGithub />
+                    </a>
+                    <a
+                        href="https://x.com/The_Sohan_Bhat"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="social-link"
+                        aria-label="X"
+                    >
+                        <FaXTwitter />
+                    </a>
+                    <a
+                        href="https://www.instagram.com/thesohanbhat"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="social-link"
+                        aria-label="Instagram"
+                    >
+                        <FaInstagram />
+                    </a>
+                </div>
+            </div>
+
+            <img
+                className="hero-photo"
+                src="/imgs/sohan.jpg"
+                alt="Sohan Bhat in the Rocky Mountains"
+            />
+        </div>
     </header>
 );
 
