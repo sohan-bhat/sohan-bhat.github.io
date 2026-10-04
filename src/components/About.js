@@ -36,7 +36,7 @@ const About = () => (
                         </p>
                         <a
                             className="research-link"
-                            href="https://docs.google.com/document/d/1m9FRd58Kw7oxOFHpu17VgfbktLi-XrZAXAe1FFqH_d8/edit?usp=sharing"
+                            href="/halt-preprint.pdf"
                             target="_blank"
                             rel="noreferrer"
                         >
