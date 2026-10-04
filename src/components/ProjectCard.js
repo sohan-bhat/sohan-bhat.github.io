@@ -1,84 +1,62 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/ProjectCard.css';
 
-const PLACEHOLDER_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f1eadb'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='10' text-anchor='middle' fill='%23a09480' dominant-baseline='middle'%3ENo Image%3C/text%3E%3C/svg%3E";
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-const buildCodeLinks = (project) => {
-    if (project.codeLinks) return project.codeLinks;
-    if (project.codeLink) return [{ label: 'Code', url: project.codeLink }];
-    return [];
+// "2026-08-29" -> "August 2026"
+const monthYear = (date) => {
+    const [year, month] = date.split('-');
+    return `${MONTHS[Number(month) - 1]} ${year}`;
 };
 
-const ProjectCard = ({ project }) => {
-    const [imageError, setImageError] = useState(false);
-    const imgSrc = imageError || !project.image ? PLACEHOLDER_IMAGE : project.image;
-    const codeLinks = buildCodeLinks(project);
+// Keeps each "·" on the line before it, so a wrapped list never starts with one.
+const keepDots = (text) => text.replace(/ · /g, '\u00a0· ');
 
-    return (
-        <article className="project-entry">
-            <div className="entry-main">
-                <div className="entry-title-row">
-                    <h4 className="entry-title">{project.title}</h4>
-                    {project.system && (
-                        <span className="entry-chip">{project.system}</span>
-                    )}
-                    {project.legacy && (
-                        <span className="entry-chip" title="This project is no longer maintained">
-                            retired
-                        </span>
-                    )}
-                    <div className="entry-links">
-                        {project.demoLink && (
-                            <a
-                                href={project.demoLink}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="entry-link"
-                            >
-                                Live ↗
-                            </a>
-                        )}
-                        {project.videoLink && (
-                            <a
-                                href={project.videoLink}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="entry-link"
-                            >
-                                Video ↗
-                            </a>
-                        )}
-                        {codeLinks.map((link) => (
-                            <a
-                                key={link.label}
-                                href={link.url}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="entry-link"
-                            >
-                                {link.label} ↗
-                            </a>
-                        ))}
-                    </div>
-                </div>
-                <p className="entry-description">{project.description}</p>
-                <div className="entry-tags">
-                    {project.tags.map((tag) => (
-                        <span key={tag} className="entry-tag">
-                            {tag}
-                        </span>
+// One project, laid out like an index card: the title, type, and date across
+// the top, a rule, then the screenshot beside a sentence, facts, and links.
+const ProjectCard = ({ project }) => (
+    <article className="project-card">
+        <header className="card-head">
+            <div>
+                <h4 className="card-title">{project.title}</h4>
+                <p className="card-meta">{project.type}</p>
+            </div>
+            <time className="card-date" dateTime={project.date}>
+                {monthYear(project.date)}
+            </time>
+        </header>
+
+        <div className="card-body">
+            <img
+                className="card-image"
+                src={`/imgs/card-${project.image}-560.webp`}
+                srcSet={`/imgs/card-${project.image}-560.webp 560w, /imgs/card-${project.image}-1120.webp 1120w`}
+                sizes="(max-width: 640px) 100vw, 300px"
+                width="560"
+                height="350"
+                alt={project.alt}
+                loading="lazy"
+            />
+            <div className="card-text">
+                <p className="card-line">{project.line}</p>
+                <dl className="card-facts">
+                    {project.facts.map(([label, value]) => (
+                        <div key={label}>
+                            <dt>{label}</dt>
+                            <dd>{keepDots(value)}</dd>
+                        </div>
+                    ))}
+                </dl>
+                <div className="card-links">
+                    {project.links.map((link) => (
+                        <a key={link.label} href={link.url} target="_blank" rel="noreferrer" className="card-link">
+                            {link.label} ↗
+                        </a>
                     ))}
                 </div>
             </div>
-            <img
-                className="entry-thumb"
-                src={imgSrc}
-                alt={project.title}
-                loading="lazy"
-                onError={() => setImageError(true)}
-            />
-        </article>
-    );
-};
+        </div>
+    </article>
+);
 
 export default React.memo(ProjectCard);

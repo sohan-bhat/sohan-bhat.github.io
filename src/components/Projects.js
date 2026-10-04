@@ -2,92 +2,111 @@ import React from 'react';
 import ProjectCard from './ProjectCard';
 import '../styles/Projects.css';
 
+// `date` is when each project started. `image` names the card-<image>-560 and
+// -1120 screenshots in public/imgs, cropped to 16:10.
 const projects = [
     {
-        id: 6,
-        title: "SignNet",
-        date: "2026-06-12",
-        description: "A convolutional neural network that sorts German traffic signs into 43 classes, with backpropagation written from scratch in pure NumPy. No PyTorch, TensorFlow, or autograd.",
-        image: "/imgs/SignNet.png",
-        tags: ["Python", "NumPy", "React", "TypeScript"],
-        demoLink: "https://signnet-cnn.netlify.app",
-        codeLink: "https://github.com/sohan-bhat/signnet",
+        id: 'taro',
+        title: 'Taro',
+        type: 'Meeting agent',
+        date: '2026-08-29',
+        line: 'A voice assistant for Google Meet. Say “Hey Taro” and it posts to Slack, files GitHub issues, or adds to a to-do list.',
+        facts: [['Stack', 'TypeScript · Next.js · Gemini']],
+        links: [
+            { label: 'Demo', url: 'https://trytaro.vercel.app/demo' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/Taro' },
+        ],
+        image: 'taro',
+        alt: 'Taro’s activation page: “Say it in the meeting. Done before you hang up.”',
     },
     {
-        id: 5,
-        title: "Ensemble",
-        date: "2026-02-08",
-        description: "An r/place for music: one shared orchestral score the whole world writes together, note by note. Anyone, anywhere, adds to the same global symphony.",
-        image: "/imgs/Ensemble.png",
-        tags: ["React", "Vite", "Express", "VexFlow", "LibSQL"],
-        demoLink: "https://ensemble-qnd2.onrender.com",
-        codeLink: "https://github.com/sohan-bhat/ensemble",
+        id: 'signnet',
+        title: 'SignNet',
+        type: 'Neural network',
+        date: '2026-06-12',
+        line: 'A neural network that sorts German traffic signs, built from scratch in NumPy. No PyTorch, no autograd.',
+        facts: [
+            ['Result', '90% test accuracy on 43 classes'],
+            ['Stack', 'Python · NumPy · React'],
+        ],
+        links: [
+            { label: 'Live', url: 'https://signnet-cnn.netlify.app' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/signnet' },
+        ],
+        image: 'signnet',
+        alt: 'SignNet’s demo page, “Traffic sign classification, built from scratch,” with its test accuracy.',
     },
     {
-        id: 7,
-        title: "Taro",
-        date: "2026-08-29",
-        description: "A voice-activated meeting assistant that joins Google Meet calls and listens for \"Hey Taro\". It posts to Slack, files GitHub issues, and builds todo lists live, mid-meeting, confirmed with an audible ding.",
-        image: "/imgs/Taro.png",
-        tags: ["TypeScript", "Next.js", "Express", "Gemini", "sherpa-onnx"],
-        demoLink: "https://trytaro.vercel.app/demo",
-        videoLink: "https://www.youtube.com/watch?v=su7_NPbPpzk",
-        codeLink: "https://github.com/sohan-bhat/Taro",
+        id: 'ensemble',
+        title: 'Ensemble',
+        type: 'Web app',
+        date: '2026-02-08',
+        line: 'An r/place for music: one orchestral score the whole world writes, note by note.',
+        facts: [['Stack', 'React · Express · VexFlow']],
+        links: [
+            { label: 'Live', url: 'https://ensemble-qnd2.onrender.com' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/ensemble' },
+        ],
+        image: 'ensemble',
+        alt: 'Ensemble’s shared score for violins, viola, cello, and bass.',
     },
     {
-        id: 4,
-        title: "VacantCourt Config Utility",
-        date: "2025-05-22",
-        description: "Android app running on-device person detection (TensorFlow Lite) and pushing live court occupancy to Firebase. Camera in, signal out.",
-        image: "/imgs/VacantCourtApp.png",
-        tags: ["Kotlin", "Android", "TensorFlow Lite", "Firebase", "CameraX"],
-        codeLink: "https://github.com/sohan-bhat/VacantCourtApp",
-        system: "VacantCourt system",
+        id: 'vacantcourt',
+        title: 'VacantCourt',
+        type: 'Android + web',
+        date: '2025-03-17',
+        line: 'A phone at the court spots players with an on-device model, and the website shows which courts are free.',
+        facts: [['Stack', 'Kotlin · TensorFlow Lite · React']],
+        links: [
+            { label: 'Live', url: 'https://vacantcourt.netlify.app' },
+            { label: 'App code', url: 'https://github.com/sohan-bhat/VacantCourtApp' },
+            { label: 'Web code', url: 'https://github.com/sohan-bhat/VacantCourt' },
+        ],
+        image: 'vacantcourt',
+        alt: 'VacantCourt’s home page above a camera feed that boxes each player on the court.',
     },
     {
-        id: 1,
-        title: "VacantCourt",
-        date: "2025-03-17",
-        description: "A real-time court availability system that finds free, nearby courts and shows if they're available. Play more, wait less.",
-        image: "/imgs/VacantCourtWebsite.png",
-        tags: ["Vite", "React", "Firebase", "Kotlin", "TensorFlow Lite"],
-        demoLink: "https://vacantcourt.netlify.app",
-        codeLink: "https://github.com/sohan-bhat/VacantCourt",
-        system: "VacantCourt system",
+        id: 'mochi',
+        title: 'Mochi',
+        type: 'Web app',
+        date: '2024-07-25',
+        line: 'Recipes from just the ingredients you already have.',
+        facts: [['Stack', 'React · Node.js · Groq']],
+        links: [
+            { label: 'Live', url: 'https://trymochi.netlify.app' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/Mochi' },
+        ],
+        image: 'mochi',
+        alt: 'Mochi’s home page: “Turn what you have into what you’ll cook tonight.”',
     },
     {
-        id: 2,
-        title: "Mochi",
-        date: "2024-07-25",
-        description: "A fully responsive recipe finder from just the ingredients you have!",
-        image: "/imgs/Mochi.png",
-        tags: ["React", "Node.js", "Groq API"],
-        demoLink: "https://trymochi.netlify.app",
-        codeLink: "https://github.com/sohan-bhat/Mochi",
+        id: 'career-ai',
+        title: 'Career AI',
+        type: 'Web app',
+        date: '2024-06-21',
+        line: 'Career ideas from your interests, suggested by AI.',
+        facts: [
+            ['Status', 'Retired'],
+            ['Stack', 'React · Node.js · Groq'],
+        ],
+        links: [
+            { label: 'Live', url: 'https://careerai.netlify.app' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/CareerAI' },
+        ],
+        image: 'careerai',
+        alt: 'Career AI suggesting careers from a list of interests.',
     },
-    {
-        id: 3,
-        title: "Career AI",
-        date: "2024-06-21",
-        description: "Find your dream careers with the help of a personalized on-board AI just based on your interests!",
-        image: "/imgs/CareerAI.png",
-        tags: ["React", "Node.js", "Groq API"],
-        demoLink: "https://careerai.netlify.app",
-        codeLink: "https://github.com/sohan-bhat/CareerAI",
-        legacy: true,
-    }
 ];
 
-const toMs = (iso) => new Date(iso).getTime();
-
+// Newest first, in runs of one year each.
 const groupByYear = (list) => {
-    const sorted = [...list].sort((a, b) => toMs(b.date) - toMs(a.date));
+    const sorted = [...list].sort((a, b) => b.date.localeCompare(a.date));
     const groups = [];
-    sorted.forEach((p) => {
-        const year = new Date(p.date).getUTCFullYear();
+    sorted.forEach((project) => {
+        const year = project.date.slice(0, 4);
         const last = groups[groups.length - 1];
-        if (last && last[0] === year) last[1].push(p);
-        else groups.push([year, [p]]);
+        if (last && last[0] === year) last[1].push(project);
+        else groups.push([year, [project]]);
     });
     return groups;
 };

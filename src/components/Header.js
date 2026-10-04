@@ -9,8 +9,7 @@ const Header = () => (
                 <p className="hero-hi">hey, I'm</p>
                 <h1 className="title">Sohan Bhat</h1>
                 <p className="subtitle">
-                    I build ML systems and neural networks from scratch, web apps,
-                    Android tools, and FRC robots.
+                    I build neural networks from scratch, web apps, and robots.
                 </p>
 
                 <div className="social-links">
