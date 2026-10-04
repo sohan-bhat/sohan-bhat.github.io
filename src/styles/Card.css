@@ -203,6 +203,11 @@
         font-size: 28px;
     }
 
+    .card-button {
+        width: 44px;
+        height: 44px;
+    }
+
     .card-body {
         display: block;
         padding: 20px 20px 24px;
