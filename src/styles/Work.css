@@ -1,0 +1,168 @@
+/* Figure 1: the work as a compact timeline. Each row has the year (where a
+   year begins), the month, a dot on the line, the title, and the type. The
+   titles take the link color, as links do in a LaTeX PDF, since each one
+   opens a card. */
+
+.work {
+    margin-top: 56px;
+}
+
+.timeline {
+    max-width: 30em;
+    margin-inline: auto;
+}
+
+.row {
+    --above: 6px;
+    --below: 6px;
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: 2.6em 2.1em 1.7em minmax(0, 1fr) auto;
+    align-items: baseline;
+    width: 100%;
+    padding: var(--above) 0 var(--below);
+}
+
+.starts-year:not(:first-child) .row {
+    --above: 18px;
+}
+
+.row > *,
+.row::before {
+    grid-row: 1;
+}
+
+.row-year {
+    grid-column: 1;
+    font-weight: 700;
+}
+
+.row-month {
+    grid-column: 2;
+    color: var(--ink-2);
+    font-variant-caps: all-small-caps;
+    letter-spacing: 0.06em;
+}
+
+.row-dot {
+    grid-column: 3;
+    align-self: stretch;
+    position: relative;
+}
+
+.row-title {
+    grid-column: 4;
+    color: var(--accent-text);
+}
+
+.row-type {
+    grid-column: 5;
+    padding-left: 16px;
+    color: var(--ink-2);
+    font-style: italic;
+}
+
+/* The line runs through every row, from the first dot to the last. */
+.row-dot::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: calc(-1 * var(--above));
+    bottom: calc(-1 * var(--below));
+    width: 1px;
+    background: var(--ink);
+}
+
+li:first-child .row-dot::after {
+    top: 0.84em;
+}
+
+li:last-child .row-dot::after {
+    bottom: calc(100% - 0.84em);
+}
+
+.row-dot::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    left: calc(50% - 3px);
+    top: calc(0.84em - 3.5px);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ink);
+    box-shadow: 0 0 0 3px var(--paper);
+}
+
+/* A highlighter stroke over the title and type, with slanted ends like a
+   chisel tip. */
+.row::before {
+    content: '';
+    grid-column: 4 / -1;
+    z-index: -1;
+    align-self: stretch;
+    margin: 4px -4px 1px -8px;
+    border-radius: 2px 3px;
+    background: var(--highlight);
+    transform: skewX(-14deg);
+    opacity: 0;
+}
+
+@media (hover: hover) {
+    .row:hover::before {
+        opacity: 1;
+    }
+}
+
+.row:focus-visible::before {
+    opacity: 1;
+}
+
+.work figcaption {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+@media (max-width: 640px) {
+    .work {
+        margin-top: 40px;
+    }
+
+    .timeline {
+        font-size: 17px;
+    }
+
+    /* 44px rows, for fingers. */
+    .row {
+        --above: 9.5px;
+        --below: 9.5px;
+        grid-template-columns: 2.5em 2em 1.5em minmax(0, 1fr) auto;
+    }
+
+    .starts-year:not(:first-child) .row {
+        --above: 16px;
+    }
+
+    .row-type {
+        padding-left: 12px;
+    }
+}
+
+@media (max-width: 359px) {
+    .timeline {
+        font-size: 16px;
+    }
+
+    .row {
+        --above: 10px;
+        --below: 10px;
+        grid-template-columns: 2.65em 1.9em 1.2em minmax(0, 1fr) auto;
+    }
+
+    .row-type {
+        padding-left: 8px;
+        font-size: 15px;
+    }
+}

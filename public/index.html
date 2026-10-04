@@ -2,17 +2,122 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg?v=2" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#faf6ee" />
-    <meta
-      name="description"
-      content="Sohan Bhat's Portfolio"
-    />
     <title>Sohan Bhat</title>
+    <meta name="description" content="Sohan Bhat's Portfolio" />
+    <meta name="author" content="Sohan Bhat" />
+    <link rel="canonical" href="https://sohan-bhat.github.io/" />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/ncm-web-book.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/ncm-web-book-italic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/ncm-web-bold.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- New Computer Modern, the typeface of LaTeX documents, subset for the web (see /fonts). -->
+    <style>
+      @font-face {
+        font-family: 'NewCM Web';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('%PUBLIC_URL%/fonts/ncm-web-book.woff2') format('woff2');
+        ascent-override: 80.6%;
+        descent-override: 19.4%;
+        line-gap-override: 0%;
+      }
+
+      @font-face {
+        font-family: 'NewCM Web';
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url('%PUBLIC_URL%/fonts/ncm-web-book-italic.woff2') format('woff2');
+        ascent-override: 80.6%;
+        descent-override: 19.4%;
+        line-gap-override: 0%;
+      }
+
+      @font-face {
+        font-family: 'NewCM Web';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('%PUBLIC_URL%/fonts/ncm-web-bold.woff2') format('woff2');
+        ascent-override: 80.6%;
+        descent-override: 19.4%;
+        line-gap-override: 0%;
+      }
+
+      /* Georgia, scaled to match, so text doesn't reflow when the fonts load. */
+      @font-face {
+        font-family: 'NewCM Fallback';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Georgia');
+        size-adjust: 99.7%;
+        ascent-override: 80.6%;
+        descent-override: 19.4%;
+        line-gap-override: 0%;
+      }
+
+      @font-face {
+        font-family: 'NewCM Fallback';
+        font-style: italic;
+        font-weight: 400;
+        src: local('Georgia Italic'), local('Georgia-Italic');
+        size-adjust: 99.7%;
+        ascent-override: 80.6%;
+        descent-override: 19.4%;
+        line-gap-override: 0%;
+      }
+
+      @font-face {
+        font-family: 'NewCM Fallback';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Georgia Bold'), local('Georgia-Bold');
+        size-adjust: 100.2%;
+        ascent-override: 80.6%;
+        descent-override: 19.4%;
+        line-gap-override: 0%;
+      }
+    </style>
+
+    <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg?v=4" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png?v=4" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png?v=4" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#fcfaf4" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sohan Bhat" />
+    <meta property="og:url" content="https://sohan-bhat.github.io/" />
+    <meta property="og:title" content="Sohan Bhat" />
+    <meta property="og:description" content="I’m 15 and I build neural networks from scratch, web apps, and robots." />
+    <meta property="og:image" content="https://sohan-bhat.github.io/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sohan Bhat’s name set like the title of a paper, with his photo taped beside it and the abstract: I’m 15 and I build neural networks from scratch, web apps, and robots." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@The_Sohan_Bhat" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sohan Bhat",
+        "url": "https://sohan-bhat.github.io/",
+        "image": "https://sohan-bhat.github.io/imgs/sohan-600.webp",
+        "description": "Student who builds neural networks from scratch, web apps, and robots.",
+        "affiliation": { "@type": "HighSchool", "name": "Heritage High School" },
+        "memberOf": { "@type": "Organization", "name": "FIRST Robotics Competition Team 2714" },
+        "knowsAbout": ["Machine learning", "Neural networks", "Robotics", "Web development"],
+        "sameAs": [
+          "https://github.com/sohan-bhat",
+          "https://x.com/The_Sohan_Bhat",
+          "https://www.instagram.com/thesohanbhat"
+        ]
+      }
+    </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
 </html>
