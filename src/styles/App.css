@@ -20,6 +20,13 @@
     box-sizing: border-box;
 }
 
+/* The side dial's links glide to their section, unless motion is reduced. */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
 body {
     font-family: var(--font-body);
     background-color: var(--bg);

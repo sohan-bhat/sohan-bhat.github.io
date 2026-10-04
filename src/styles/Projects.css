@@ -1,49 +1,166 @@
-/* The timeline: one line down the left, a ring for each year, and a dot for
-   each project, level with its title. */
-.time-spine {
-    position: relative;
+/* The projects carousel. The track runs the full width of the window, but
+   its first card lines up with the page's text (--edge). Sizes in cqw are
+   relative to this section's width. */
+.projects {
+    container-type: inline-size;
+    --edge: max(1.5rem, calc((100cqw - 1000px) / 2 + 1.5rem));
+    --gap: 1.25rem;
+    --card: 340px;
 }
 
-.time-spine::before {
-    content: '';
-    position: absolute;
-    left: 5px;
-    top: 10px;
-    bottom: 0;
-    width: 2px;
-    background: var(--line);
+.projects-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
 }
 
-.spine-year {
-    position: relative;
-    padding-left: 2.2rem;
+.projects-head .section-title {
+    margin-bottom: 0;
+}
+
+.projects-arrows {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.arrow {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    font-size: 1.05rem;
+    cursor: pointer;
+}
+
+.arrow:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.project-track {
+    display: flex;
+    gap: var(--gap);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--edge);
+    padding: 0 var(--edge) 0.5rem;
+    scrollbar-width: none;
+}
+
+.project-track::-webkit-scrollbar {
+    display: none;
+}
+
+.project-track:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+.year-group {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+}
+
+/* The year sticks to the left edge while its projects are in view, and the
+   next year pushes it out. */
+.year-row {
+    height: 2rem;
+}
+
+/* Sticky offsets count from inside the track's padding, so 0 is the edge
+   the cards line up with. */
+.year-label {
+    position: sticky;
+    left: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding-right: 0.75rem;
+    background: var(--bg);
     font-family: var(--font-display);
     font-size: 1.05rem;
     font-weight: 700;
     letter-spacing: 0.02em;
-    color: var(--ink);
-    margin: 2.25rem 0 1rem;
+    line-height: 2rem;
 }
 
-.spine-year-group:first-child .spine-year {
-    margin-top: 0;
-}
-
-.spine-year::before {
+.year-label::before {
     content: '';
-    position: absolute;
-    left: 6px;
-    top: 50%;
-    transform: translate(-50%, -50%);
     width: 12px;
     height: 12px;
-    border-radius: 50%;
-    background: var(--bg);
     border: 2px solid var(--accent);
+    border-radius: 50%;
+}
+
+.year-projects {
+    display: flex;
+    gap: var(--gap);
+}
+
+.project-slot {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    width: var(--card);
+    scroll-snap-align: start;
+}
+
+/* Each project's month, on a line that runs from one project to the next. */
+.project-month {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    height: 2rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+.project-month::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    margin-left: 2px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.project-month::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    margin-right: calc(-1 * var(--gap));
+    background: var(--line);
+}
+
+.year-group:last-child .project-slot:last-child .project-month::after {
+    visibility: hidden;
 }
 
 @media (max-width: 640px) {
-    .spine-year {
-        padding-left: 1.8rem;
+    .projects {
+        --gap: 1rem;
+        --card: min(84cqw, 340px);
+    }
+
+    .arrow {
+        width: 38px;
+        height: 38px;
     }
 }

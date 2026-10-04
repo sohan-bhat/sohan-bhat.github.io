@@ -6,20 +6,20 @@ const seasons = [
         year: 2026,
         name: 'REBUILT',
         note: 'Winner, Fort Worth District',
-        photo: { src: '/imgs/robot-2026.jpg', alt: 'FRC Team 2714 robot at REBUILT 2026' },
+        photo: { name: 'robot-2026', widths: [480, 640, 900], alt: 'FRC Team 2714 robot at REBUILT 2026' },
         banner: { src: '/imgs/blue-banner.png', alt: 'Winner, 2026 Fort Worth District banner' },
     },
     {
         year: 2025,
         name: 'REEFSCAPE',
         note: 'Winner, Fort Worth District',
-        photo: { src: '/imgs/robot-2025.jpg', alt: 'FRC Team 2714 robot at REEFSCAPE 2025' },
+        photo: { name: 'robot-2025', widths: [480, 640, 960], alt: 'FRC Team 2714 robot at REEFSCAPE 2025' },
         banner: { src: '/imgs/banner-2025-fortworth.png', alt: 'Winner, 2025 Fort Worth District banner' },
     },
 ];
 
 const Robotics = () => (
-    <section className="robotics">
+    <section className="robotics" id="robotics">
         <div className="container">
             <h2 className="section-title">Robotics<span className="title-period">.</span></h2>
             <p className="robotics-prose">
@@ -32,7 +32,9 @@ const Robotics = () => (
                     <article className="season-card" key={season.year}>
                         <img
                             className="season-photo"
-                            src={season.photo.src}
+                            src={`/imgs/${season.photo.name}-${season.photo.widths[0]}.webp`}
+                            srcSet={season.photo.widths.map((w) => `/imgs/${season.photo.name}-${w}.webp ${w}w`).join(', ')}
+                            sizes="(max-width: 768px) calc(100vw - 3rem), 464px"
                             alt={season.photo.alt}
                             loading="lazy"
                         />
