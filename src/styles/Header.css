@@ -27,9 +27,12 @@
     letter-spacing: 0.03em;
 }
 
+/* Wider than the word, so a short one like X is easy to tap; the negative
+   margin keeps the spacing as set. */
 .contact a {
     display: block;
-    padding: 9px 2px;
+    margin: 0 -6px;
+    padding: 9px 6px;
 }
 
 @media (hover: hover) {
@@ -49,5 +52,10 @@
     .contact {
         column-gap: 10px;
         font-size: 15px;
+    }
+
+    .contact a {
+        margin: 0 -5px;
+        padding-inline: 5px;
     }
 }
