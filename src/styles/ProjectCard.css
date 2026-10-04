@@ -1,13 +1,14 @@
-/* A project as an index card: the title and links across the top, a
-   terracotta rule, the screenshot, one sentence, and the stack. */
+/* A project card, kept quiet: a soft surface with no border, the title and
+   plain links across the top, the screenshot with rounded corners (dimmed a
+   little so white pages don't glare on the dark background), then one
+   sentence and the stack in softer text. */
 .project-card {
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    padding: 0.7rem 0.7rem 0.95rem;
     background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: 12px;
 }
 
 .card-head {
@@ -15,8 +16,7 @@
     align-items: baseline;
     justify-content: space-between;
     gap: 0.75rem;
-    padding: 0.85rem 1rem 0.8rem;
-    border-bottom: 1px solid rgb(226 119 74 / 0.45);
+    padding: 0.2rem 0.3rem 0.7rem;
 }
 
 .card-title {
@@ -25,41 +25,38 @@
     gap: 0.5rem;
     min-width: 0;
     font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 500;
     letter-spacing: -0.01em;
     line-height: 1.3;
 }
 
-.card-tag {
+.card-note {
     font-family: var(--font-body);
-    font-size: 0.64rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--ink-soft);
-    background: var(--sand);
-    border-radius: 999px;
-    padding: 0.1rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--ink-faint);
 }
 
 .card-links {
     flex: none;
     display: flex;
-    gap: 0.8rem;
+    gap: 0.9rem;
 }
 
 .card-link {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--accent);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
     text-decoration: none;
     white-space: nowrap;
 }
 
 .card-link:hover {
+    color: var(--ink);
     text-decoration: underline wavy;
-    text-underline-offset: 4px;
     text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
 }
 
 .card-image {
@@ -69,25 +66,23 @@
     aspect-ratio: 16 / 10;
     object-fit: cover;
     object-position: top;
+    border-radius: 8px;
     background: var(--sand);
-}
-
-.card-text {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 0.9rem 1rem 1rem;
+    filter: brightness(0.9);
 }
 
 .card-line {
-    font-size: 0.93rem;
+    margin-top: 0.9rem;
+    padding: 0 0.3rem;
+    font-size: 0.9rem;
     line-height: 1.55;
+    color: var(--ink-soft);
 }
 
-/* Pinned to the bottom, so the stacks line up across a row of cards. */
+/* Pinned to the bottom, so the stacks line up across the row. */
 .card-stack {
     margin-top: auto;
-    padding-top: 0.8rem;
-    font-size: 0.8rem;
-    color: var(--ink-soft);
+    padding: 0.8rem 0.3rem 0;
+    font-size: 0.76rem;
+    color: var(--ink-faint);
 }

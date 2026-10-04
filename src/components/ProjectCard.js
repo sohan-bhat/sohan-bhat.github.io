@@ -1,14 +1,14 @@
 import React from 'react';
 import '../styles/ProjectCard.css';
 
-// One project, laid out like an index card: the title and its links across
-// the top, a rule, the screenshot, one sentence, and what it's built with.
+// One project: the title and its links across the top, the screenshot, one
+// sentence, and what it's built with.
 const ProjectCard = ({ project }) => (
     <article className="project-card">
         <header className="card-head">
             <h4 className="card-title">
                 {project.title}
-                {project.retired && <span className="card-tag">retired</span>}
+                {project.retired && <span className="card-note">Retired</span>}
             </h4>
             <div className="card-links">
                 {project.links.map((link) => (
@@ -21,7 +21,7 @@ const ProjectCard = ({ project }) => (
                         title={link.title}
                         aria-label={`${project.title} ${link.title || link.label}`}
                     >
-                        {link.label} ↗
+                        {link.label}
                     </a>
                 ))}
             </div>
@@ -38,10 +38,8 @@ const ProjectCard = ({ project }) => (
             loading="lazy"
         />
 
-        <div className="card-text">
-            <p className="card-line">{project.line}</p>
-            <p className="card-stack">{project.stack.join(', ')}</p>
-        </div>
+        <p className="card-line">{project.line}</p>
+        <p className="card-stack">{project.stack.join(', ')}</p>
     </article>
 );
 
