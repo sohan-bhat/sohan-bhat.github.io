@@ -1,4 +1,5 @@
 import React from 'react';
+import SideNav from './components/SideNav';
 import Header from './components/Header';
 import About from './components/About';
 import Projects from './components/Projects';
@@ -9,6 +10,7 @@ import './styles/App.css';
 function App() {
     return (
         <div className="App">
+            <SideNav />
             <Header />
             <About />
             <Projects />

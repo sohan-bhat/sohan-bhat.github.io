@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import '../styles/Projects.css';
 
@@ -8,10 +8,9 @@ const projects = [
     {
         id: 'taro',
         title: 'Taro',
-        type: 'Meeting agent',
         date: '2026-08-29',
         line: 'A voice assistant for Google Meet. Say “Hey Taro” and it posts to Slack, files GitHub issues, or adds to a to-do list.',
-        facts: [['Stack', 'TypeScript · Next.js · Gemini']],
+        stack: ['TypeScript', 'Next.js', 'Gemini'],
         links: [
             { label: 'Demo', url: 'https://trytaro.vercel.app/demo' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/Taro' },
@@ -22,13 +21,9 @@ const projects = [
     {
         id: 'signnet',
         title: 'SignNet',
-        type: 'Neural network',
         date: '2026-06-12',
-        line: 'A neural network that sorts German traffic signs, built from scratch in NumPy. No PyTorch, no autograd.',
-        facts: [
-            ['Result', '90% test accuracy on 43 classes'],
-            ['Stack', 'Python · NumPy · React'],
-        ],
+        line: 'Sorts German traffic signs with 90% accuracy. Built from scratch in NumPy: no PyTorch, no autograd.',
+        stack: ['Python', 'NumPy', 'React'],
         links: [
             { label: 'Live', url: 'https://signnet-cnn.netlify.app' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/signnet' },
@@ -39,10 +34,9 @@ const projects = [
     {
         id: 'ensemble',
         title: 'Ensemble',
-        type: 'Web app',
         date: '2026-02-08',
         line: 'An r/place for music: one orchestral score the whole world writes, note by note.',
-        facts: [['Stack', 'React · Express · VexFlow']],
+        stack: ['React', 'Express', 'VexFlow'],
         links: [
             { label: 'Live', url: 'https://ensemble-qnd2.onrender.com' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/ensemble' },
@@ -53,14 +47,13 @@ const projects = [
     {
         id: 'vacantcourt',
         title: 'VacantCourt',
-        type: 'Android + web',
         date: '2025-03-17',
         line: 'A phone at the court spots players with an on-device model, and the website shows which courts are free.',
-        facts: [['Stack', 'Kotlin · TensorFlow Lite · React']],
+        stack: ['Kotlin', 'TensorFlow Lite', 'React'],
         links: [
             { label: 'Live', url: 'https://vacantcourt.netlify.app' },
-            { label: 'App code', url: 'https://github.com/sohan-bhat/VacantCourtApp' },
-            { label: 'Web code', url: 'https://github.com/sohan-bhat/VacantCourt' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/VacantCourt', title: 'Website code' },
+            { label: 'App', url: 'https://github.com/sohan-bhat/VacantCourtApp', title: 'Android app code' },
         ],
         image: 'vacantcourt',
         alt: 'VacantCourt’s home page above a camera feed that boxes each player on the court.',
@@ -68,10 +61,9 @@ const projects = [
     {
         id: 'mochi',
         title: 'Mochi',
-        type: 'Web app',
         date: '2024-07-25',
         line: 'Recipes from just the ingredients you already have.',
-        facts: [['Stack', 'React · Node.js · Groq']],
+        stack: ['React', 'Node.js', 'Groq'],
         links: [
             { label: 'Live', url: 'https://trymochi.netlify.app' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/Mochi' },
@@ -82,13 +74,10 @@ const projects = [
     {
         id: 'career-ai',
         title: 'Career AI',
-        type: 'Web app',
         date: '2024-06-21',
+        retired: true,
         line: 'Career ideas from your interests, suggested by AI.',
-        facts: [
-            ['Status', 'Retired'],
-            ['Stack', 'React · Node.js · Groq'],
-        ],
+        stack: ['React', 'Node.js', 'Groq'],
         links: [
             { label: 'Live', url: 'https://careerai.netlify.app' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/CareerAI' },
@@ -97,6 +86,8 @@ const projects = [
         alt: 'Career AI suggesting careers from a list of interests.',
     },
 ];
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 // Newest first, in runs of one year each.
 const groupByYear = (list) => {
@@ -113,23 +104,75 @@ const groupByYear = (list) => {
 
 const yearGroups = groupByYear(projects);
 
-const Projects = () => (
-    <section className="projects">
-        <div className="container">
-            <h2 className="section-title">Projects<span className="title-period">.</span></h2>
+const prefersLessMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            <div className="time-spine">
+// The projects as a sideways timeline: one card per project, newest first,
+// under a line with each project's month. The year sticks to the left edge
+// until the next year pushes it out. It stays one height however many
+// projects there are; the arrows move a screenful at a time.
+const Projects = () => {
+    const track = useRef(null);
+    const [ends, setEnds] = useState({ start: true, end: false });
+
+    useEffect(() => {
+        const element = track.current;
+        const update = () => {
+            const start = element.scrollLeft <= 1;
+            const end = element.scrollLeft + element.clientWidth >= element.scrollWidth - 1;
+            setEnds((previous) => (previous.start === start && previous.end === end ? previous : { start, end }));
+        };
+        update();
+        element.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        return () => {
+            element.removeEventListener('scroll', update);
+            window.removeEventListener('resize', update);
+        };
+    }, []);
+
+    const move = (direction) => {
+        const element = track.current;
+        const slots = [...element.querySelectorAll('.project-slot')];
+        const step = slots.length > 1 ? slots[1].offsetLeft - slots[0].offsetLeft : element.clientWidth;
+        const perScreen = Math.max(1, Math.floor((element.clientWidth * 0.9) / step));
+        element.scrollBy({ left: direction * step * perScreen, behavior: prefersLessMotion() ? 'auto' : 'smooth' });
+    };
+
+    return (
+        <section className="projects" id="projects">
+            <div className="container projects-head">
+                <h2 className="section-title">Projects<span className="title-period">.</span></h2>
+                <div className="projects-arrows">
+                    <button type="button" className="arrow" onClick={() => move(-1)} disabled={ends.start} aria-label="Newer projects">
+                        ←
+                    </button>
+                    <button type="button" className="arrow" onClick={() => move(1)} disabled={ends.end} aria-label="Older projects">
+                        →
+                    </button>
+                </div>
+            </div>
+
+            <div className="project-track" ref={track} role="region" aria-label="Projects, newest first" tabIndex={0}>
                 {yearGroups.map(([year, items]) => (
-                    <div className="spine-year-group" key={year}>
-                        <h3 className="spine-year">{year}</h3>
-                        {items.map((project) => (
-                            <ProjectCard key={project.id} project={project} />
-                        ))}
+                    <div className="year-group" key={year}>
+                        <div className="year-row">
+                            <h3 className="year-label">{year}</h3>
+                        </div>
+                        <div className="year-projects">
+                            {items.map((project) => (
+                                <div className="project-slot" key={project.id}>
+                                    <p className="project-month">
+                                        <time dateTime={project.date}>{MONTHS[Number(project.date.slice(5, 7)) - 1]}</time>
+                                    </p>
+                                    <ProjectCard project={project} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 ))}
             </div>
-        </div>
-    </section>
-);
+        </section>
+    );
+};
 
 export default Projects;

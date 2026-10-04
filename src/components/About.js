@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/About.css';
 
 const About = () => (
-    <section className="about">
+    <section className="about" id="about">
         <div className="container">
             <div className="about-layout">
                 <div className="about-col">
@@ -40,7 +40,7 @@ const About = () => (
                             target="_blank"
                             rel="noreferrer"
                         >
-                            Read the paper ↗
+                            Read the preprint ↗
                         </a>
                     </article>
                 </aside>

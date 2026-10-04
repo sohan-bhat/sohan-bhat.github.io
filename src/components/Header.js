@@ -3,7 +3,7 @@ import { FaGithub, FaXTwitter, FaInstagram } from 'react-icons/fa6';
 import '../styles/Header.css';
 
 const Header = () => (
-    <header className="header">
+    <header className="header" id="intro">
         <div className="container hero-layout">
             <div className="hero-text">
                 <p className="hero-hi">hey, I'm</p>
@@ -51,7 +51,11 @@ const Header = () => (
 
             <img
                 className="hero-photo"
-                src="/imgs/sohan.jpg"
+                src="/imgs/sohan-320.webp"
+                srcSet="/imgs/sohan-320.webp 320w, /imgs/sohan-600.webp 600w"
+                sizes="(max-width: 600px) 150px, 230px"
+                width="230"
+                height="230"
                 alt="Sohan Bhat in the Rocky Mountains"
             />
         </div>
