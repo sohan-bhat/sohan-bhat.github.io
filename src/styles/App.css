@@ -27,7 +27,16 @@
     }
 }
 
+/* The page never moves sideways: no rubber-banding or swipe gestures on a
+   horizontal trackpad swipe, and nothing can widen it. Only the projects
+   track scrolls sideways. */
+html,
 body {
+    overscroll-behavior-x: none;
+}
+
+body {
+    overflow-x: clip;
     font-family: var(--font-body);
     background-color: var(--bg);
     color: var(--ink);

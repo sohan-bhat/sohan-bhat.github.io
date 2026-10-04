@@ -152,24 +152,26 @@ const Projects = () => {
                 </div>
             </div>
 
-            <div className="project-track" ref={track} role="region" aria-label="Projects, newest first" tabIndex={0}>
-                {yearGroups.map(([year, items]) => (
-                    <div className="year-group" key={year}>
-                        <div className="year-row">
-                            <h3 className="year-label">{year}</h3>
+            <div className="track-frame">
+                <div className="project-track" ref={track} role="region" aria-label="Projects, newest first" tabIndex={0}>
+                    {yearGroups.map(([year, items]) => (
+                        <div className="year-group" key={year}>
+                            <div className="year-row">
+                                <h3 className="year-label">{year}</h3>
+                            </div>
+                            <div className="year-projects">
+                                {items.map((project) => (
+                                    <div className="project-slot" key={project.id}>
+                                        <p className="project-month">
+                                            <time dateTime={project.date}>{MONTHS[Number(project.date.slice(5, 7)) - 1]}</time>
+                                        </p>
+                                        <ProjectCard project={project} />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div className="year-projects">
-                            {items.map((project) => (
-                                <div className="project-slot" key={project.id}>
-                                    <p className="project-month">
-                                        <time dateTime={project.date}>{MONTHS[Number(project.date.slice(5, 7)) - 1]}</time>
-                                    </p>
-                                    <ProjectCard project={project} />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </section>
     );
