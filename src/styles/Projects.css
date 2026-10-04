@@ -49,6 +49,16 @@
     cursor: default;
 }
 
+/* Cards, months, and years are cut off just before the page's left margin
+   (with a short fade), so a year pushed out by the next one disappears there
+   instead of drifting into the margin, and nothing runs under the dial. The
+   fade is on a still frame around the track, not on the track itself, so
+   scrolling stays smooth. */
+.track-frame {
+    -webkit-mask-image: linear-gradient(to right, transparent calc(var(--edge) - 40px), #000 var(--edge));
+    mask-image: linear-gradient(to right, transparent calc(var(--edge) - 40px), #000 var(--edge));
+}
+
 .project-track {
     display: flex;
     gap: var(--gap);

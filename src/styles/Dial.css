@@ -1,0 +1,166 @@
+/* The section strip: a short mark for each section, --gap apart, with one
+   small tick between. The strip slides by --turn sections (set as the page
+   scrolls) past a still index mark at its middle, and fades out toward its
+   ends. It is tall enough that all four sections stay in its clear middle
+   at either end of the page. */
+.dial {
+    --gap: 32px;
+    position: fixed;
+    left: 22px;
+    top: calc(50% - 4.5 * var(--gap));
+    z-index: 10;
+    width: 150px;
+    height: calc(9 * var(--gap));
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+}
+
+.dial-scale {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    transform: translateY(calc(var(--turn, 0) * var(--gap) * -1));
+}
+
+.dial-mark,
+.dial-tick {
+    position: absolute;
+    left: 0;
+    border-radius: 1px;
+    background: var(--ink-soft);
+}
+
+.dial-mark {
+    top: calc(var(--i) * var(--gap) - 1px);
+    width: 14px;
+    height: 2px;
+    opacity: 0.7;
+}
+
+.dial-mark.is-active {
+    width: 20px;
+    background: var(--accent);
+    opacity: 1;
+}
+
+.dial-tick {
+    top: calc(var(--i) * var(--gap) - 0.5px);
+    width: 6px;
+    height: 1px;
+    opacity: 0.45;
+}
+
+/* Each name is a link whose 24px-tall box also covers its mark, so the mark
+   can be clicked too. Sections are 32px apart, so the boxes never touch. */
+.dial-section {
+    position: absolute;
+    left: -6px;
+    top: calc(var(--i) * var(--gap) - 12px);
+    display: flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 8px 0 36px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+    pointer-events: auto;
+    border-radius: 4px;
+}
+
+.dial-section:hover,
+.dial-section.is-active {
+    color: var(--ink);
+}
+
+.dial-section:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 0;
+}
+
+/* The still index mark, at the strip's middle. */
+.dial-index {
+    position: absolute;
+    left: -8px;
+    top: calc(50% - 1px);
+    width: 4px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--accent);
+}
+
+/* Under 1280px the names would reach the page's text, so they show (and
+   take clicks) only while the strip is hovered or a name has keyboard focus.
+   The hover area is the whole strip, not just a name. */
+@media (max-width: 1279px) {
+    .dial::before {
+        content: '';
+        position: absolute;
+        left: -22px;
+        top: 0;
+        bottom: 0;
+        width: 56px;
+        pointer-events: auto;
+    }
+
+    .dial-section,
+    .dial-section.is-active {
+        color: transparent;
+        pointer-events: none;
+        transition: color 0.15s ease;
+    }
+
+    .dial:hover .dial-section,
+    .dial:focus-within .dial-section {
+        color: var(--ink-soft);
+        pointer-events: auto;
+    }
+
+    .dial:hover .dial-section.is-active,
+    .dial:hover .dial-section:hover,
+    .dial:focus-within .dial-section.is-active {
+        color: var(--ink);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dial-section {
+        transition: none;
+    }
+}
+
+/* Below 1100px the page's text starts close to the edge, so the strip moves
+   tight to the edge as a position indicator (no names or links; see
+   Dial.js). */
+@media (max-width: 1099px) {
+    .dial {
+        --gap: 26px;
+        left: 6px;
+        width: 20px;
+    }
+
+    .dial::before {
+        content: none;
+    }
+
+    .dial-mark {
+        width: 10px;
+    }
+
+    .dial-mark.is-active {
+        width: 14px;
+    }
+
+    .dial-tick {
+        width: 4px;
+    }
+
+    .dial-index {
+        left: -5px;
+        width: 3px;
+    }
+}
