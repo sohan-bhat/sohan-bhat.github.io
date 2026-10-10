@@ -1,170 +1,213 @@
-/* The projects window: a title bar with the three window dots and the path,
-   then three columns (year folders, files, preview), like a laptop's file
-   browser in column view. On phones the columns stack. */
+/* The projects window, styled after an old desktop file manager: square
+   corners, a hard drop shadow, a pinstriped title bar with a close box, a
+   compact list in monospace, and a status bar along the bottom. */
 .finder {
-    overflow: hidden;
+    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    box-shadow: 0 24px 48px -24px rgb(0 0 0 / 0.6);
+    border: 1px solid #5a5148;
+    border-radius: 3px;
+    box-shadow: 6px 6px 0 rgb(0 0 0 / 0.55);
 }
 
 .finder-bar {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.65rem 1rem;
-    border-bottom: 1px solid var(--line);
+    justify-content: center;
+    height: 28px;
+    padding: 0 10px;
+    border-bottom: 1px solid #5a5148;
+    background: repeating-linear-gradient(to bottom, #3b352e 0 1px, var(--raised) 1px 3px);
+}
+
+.finder-close {
+    position: absolute;
+    left: 10px;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #8a8075;
     background: var(--raised);
 }
 
-.finder-lights {
-    display: flex;
-    gap: 0.4rem;
-}
-
-.finder-lights i {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: #4a433b;
-}
-
-.finder-lights i:first-child {
-    background: var(--accent);
-}
-
-.finder-path {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    font-size: 0.82rem;
-    color: var(--ink-soft);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.finder-path strong {
-    font-weight: 500;
-    color: var(--ink);
-}
-
-.finder-count {
+.finder-title {
+    padding: 0 10px;
+    background: var(--raised);
+    font-family: var(--mono);
     font-size: 0.78rem;
-    color: var(--ink-soft);
+    font-weight: 600;
+    letter-spacing: 0.04em;
 }
 
 .finder-body {
     display: grid;
-    grid-template-columns: 9.5rem 13rem minmax(0, 1fr);
-    min-height: 26rem;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
 }
 
-.finder-years,
-.finder-files {
+.finder-list {
+    border-right: 1px solid #5a5148;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+}
+
+.finder-list ul {
     list-style: none;
-    padding: 0.6rem;
-    border-right: 1px solid var(--line);
 }
 
-.finder-years button,
-.finder-files button {
-    display: flex;
+/* Name, kind, and date columns, shared by the header and every row. */
+.finder-head,
+.finder-file {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 7.5rem 5.5rem;
+    gap: 0.5rem;
     align-items: center;
-    gap: 0.6rem;
+}
+
+.finder-head {
+    padding: 0.35rem 0.75rem;
+    border-bottom: 1px solid #5a5148;
+    background: var(--raised);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+.finder-folder,
+.finder-file {
     width: 100%;
-    padding: 0.5rem 0.6rem;
+    min-height: 30px;
+    padding: 0.25rem 0.75rem;
     border: 0;
-    border-radius: 7px;
+    border-bottom: 1px solid rgb(255 255 255 / 0.04);
     background: none;
     color: var(--ink);
     font: inherit;
-    font-size: 0.92rem;
     text-align: left;
     cursor: pointer;
 }
 
-.finder-years button:hover,
-.finder-files button:hover {
+.finder-folder {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 600;
+}
+
+.finder-file {
+    padding-left: 2.1rem;
+}
+
+.finder-folder:hover,
+.finder-file:hover {
     background: rgb(255 255 255 / 0.04);
 }
 
-.finder-years button[aria-pressed='true'],
-.finder-files button[aria-pressed='true'] {
-    background: rgb(226 119 74 / 0.16);
+.finder-file[aria-pressed='true'] {
+    background: var(--accent);
+    color: #13110f;
 }
 
-.finder-years button:focus-visible,
-.finder-files button:focus-visible {
-    outline: 2px solid var(--accent);
+.finder-file[aria-pressed='true'] .finder-kind,
+.finder-file[aria-pressed='true'] .finder-date {
+    color: #13110f;
+}
+
+.finder-folder:focus-visible,
+.finder-file:focus-visible {
+    outline: 2px solid var(--ink);
     outline-offset: -2px;
 }
 
-.icon-folder,
-.icon-file {
-    flex: none;
-    width: 18px;
-    height: 16px;
+.finder-arrow {
+    width: 0.8rem;
+    color: var(--ink-soft);
 }
 
-.icon-folder path {
-    fill: var(--accent);
-    opacity: 0.85;
-}
-
-.icon-file path {
-    fill: none;
-    stroke: var(--ink-soft);
-    stroke-width: 1.2;
-    stroke-linejoin: round;
-}
-
-.finder-n,
-.finder-date {
+.finder-count {
     margin-left: auto;
-    font-size: 0.78rem;
+    font-weight: 400;
     color: var(--ink-soft);
 }
 
 .finder-name {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
     min-width: 0;
     overflow: hidden;
+    white-space: nowrap;
+}
+
+.finder-kind,
+.finder-date {
+    overflow: hidden;
+    color: var(--ink-soft);
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.finder-preview {
-    display: flex;
-    padding: 0.9rem;
+/* Tiny pixel-style icons: a tabbed folder and a page with a folded corner. */
+.finder-icon {
+    flex: none;
+    display: inline-block;
+    width: 14px;
+    height: 11px;
 }
 
-/* Phones and narrow tablets: years as a row of tabs, then the files, then
-   the open project. */
+.finder-icon-folder {
+    border: 1px solid var(--accent);
+    background: rgb(226 119 74 / 0.35);
+    clip-path: polygon(0 0, 45% 0, 55% 18%, 100% 18%, 100% 100%, 0 100%);
+}
+
+.finder-icon-file {
+    width: 11px;
+    height: 13px;
+    border: 1px solid currentColor;
+    clip-path: polygon(0 0, 70% 0, 100% 30%, 100% 100%, 0 100%);
+    opacity: 0.8;
+}
+
+.finder-preview {
+    display: flex;
+    padding: 0.75rem;
+}
+
+.finder-preview .project-card {
+    border-radius: 3px;
+}
+
+.finder-status {
+    padding: 0.3rem 0.75rem;
+    border-top: 1px solid #5a5148;
+    background: var(--raised);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+}
+
+/* Narrow screens: the list above the open project, without the kind column. */
 @media (max-width: 760px) {
     .finder-body {
         grid-template-columns: 1fr;
-        min-height: 0;
     }
 
-    .finder-years {
-        display: flex;
-        gap: 0.4rem;
-        overflow-x: auto;
+    .finder-list {
         border-right: 0;
-        border-bottom: 1px solid var(--line);
+        border-bottom: 1px solid #5a5148;
     }
 
-    .finder-years button {
-        width: auto;
-        white-space: nowrap;
+    .finder-head,
+    .finder-file {
+        grid-template-columns: minmax(0, 1fr) 5.5rem;
     }
 
-    .finder-files {
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-    }
-
-    .finder-count {
+    .finder-head span:nth-child(2),
+    .finder-kind {
         display: none;
+    }
+
+    .finder {
+        box-shadow: 4px 4px 0 rgb(0 0 0 / 0.55);
     }
 }
