@@ -33,7 +33,7 @@ const About = () => (
                             A paper on catching that early.
                         </p>
                         <a
-                            className="research-link"
+                            className="research-link retro-button"
                             href="/halt-preprint.pdf"
                             target="_blank"
                             rel="noreferrer"
