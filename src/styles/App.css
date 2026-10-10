@@ -63,3 +63,36 @@ section {
 .title-period {
     color: var(--accent);
 }
+
+/* A retro scrollbar to match: a square thumb with a hairline edge on a
+   finely hatched track. Chrome and Safari use the ::-webkit rules; Firefox,
+   which has no such selectors, gets matching colors. */
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+::-webkit-scrollbar-track {
+    border-left: 1px solid var(--line);
+    background: var(--bg) repeating-linear-gradient(45deg, rgb(255 255 255 / 0.03) 0 2px, transparent 2px 4px);
+}
+
+::-webkit-scrollbar-thumb {
+    border: 1px solid #5a5148;
+    background: var(--raised);
+    box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.08);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    border-color: var(--accent);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--bg);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    html {
+        scrollbar-color: #5a5148 var(--bg);
+    }
+}
