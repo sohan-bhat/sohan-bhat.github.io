@@ -1,5 +1,6 @@
 .footer {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--edge);
+    font-family: var(--mono);
     margin-top: 2rem;
     padding: 2rem 0 2.5rem;
 }
@@ -13,7 +14,7 @@
 }
 
 .footer-name {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--ink-soft);
 }
 
@@ -25,8 +26,7 @@
 }
 
 .footer-email {
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.8rem;
     color: var(--ink-soft);
     text-decoration: underline wavy;
     text-decoration-color: var(--ink-soft);
