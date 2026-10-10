@@ -39,7 +39,10 @@ const ProjectCard = ({ project }) => (
         />
 
         <p className="card-line">{project.line}</p>
-        <p className="card-stack">{project.stack.join(', ')}</p>
+        <p className="card-foot">
+            <span>{project.stack.join(', ')}</span>
+            {project.when && <time dateTime={project.date}>{project.when}</time>}
+        </p>
     </article>
 );
 

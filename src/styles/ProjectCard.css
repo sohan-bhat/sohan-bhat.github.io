@@ -80,7 +80,10 @@
 }
 
 /* Pinned to the bottom, so the stacks line up across the row. */
-.card-stack {
+.card-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
     margin-top: auto;
     padding: 0.8rem 0.3rem 0;
     font-size: 0.78rem;
