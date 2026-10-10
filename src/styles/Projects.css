@@ -2,11 +2,10 @@
    corners, a hard drop shadow, a pinstriped title bar, a
    compact list in monospace, and a status bar along the bottom. */
 .finder {
-    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     background: var(--surface);
-    border: 1px solid #5a5148;
+    border: 1px solid var(--edge);
     border-radius: 3px;
-    box-shadow: 6px 6px 0 rgb(0 0 0 / 0.55);
+    box-shadow: var(--shadow-hard);
 }
 
 .finder-bar {
@@ -15,7 +14,7 @@
     justify-content: center;
     height: 28px;
     padding: 0 10px;
-    border-bottom: 1px solid #5a5148;
+    border-bottom: 1px solid var(--edge);
     background: repeating-linear-gradient(to bottom, #3b352e 0 1px, var(--raised) 1px 3px);
 }
 
@@ -34,7 +33,7 @@
 }
 
 .finder-list {
-    border-right: 1px solid #5a5148;
+    border-right: 1px solid var(--edge);
     font-family: var(--mono);
     font-size: 0.8rem;
 }
@@ -54,7 +53,7 @@
 
 .finder-head {
     padding: 0.35rem 0.75rem;
-    border-bottom: 1px solid #5a5148;
+    border-bottom: 1px solid var(--edge);
     background: var(--raised);
     font-size: 0.7rem;
     letter-spacing: 0.06em;
@@ -178,7 +177,7 @@
 
 .finder-status {
     padding: 0.3rem 0.75rem;
-    border-top: 1px solid #5a5148;
+    border-top: 1px solid var(--edge);
     background: var(--raised);
     font-family: var(--mono);
     font-size: 0.72rem;
@@ -193,7 +192,7 @@
 
     .finder-list {
         border-right: 0;
-        border-bottom: 1px solid #5a5148;
+        border-bottom: 1px solid var(--edge);
     }
 
     .finder-head,
