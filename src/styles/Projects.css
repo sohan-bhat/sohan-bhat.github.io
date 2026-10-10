@@ -1,177 +1,170 @@
-/* The projects carousel. The track runs the full width of the window, but
-   its first card lines up with the page's text (--edge). Sizes in cqw are
-   relative to this section's width. */
-.projects {
-    container-type: inline-size;
-    --edge: max(1.5rem, calc((100cqw - 1000px) / 2 + 1.5rem));
-    --gap: 1.25rem;
-    --card: 340px;
+/* The projects window: a title bar with the three window dots and the path,
+   then three columns (year folders, files, preview), like a laptop's file
+   browser in column view. On phones the columns stack. */
+.finder {
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 24px 48px -24px rgb(0 0 0 / 0.6);
 }
 
-.projects-head {
+.finder-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
-    margin-bottom: 1.25rem;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--raised);
 }
 
-.projects-head .section-title {
-    margin-bottom: 0;
-}
-
-.projects-arrows {
+.finder-lights {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
-.arrow {
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border: 1px solid var(--line);
+.finder-lights i {
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
-    background: var(--surface);
+    background: #4a433b;
+}
+
+.finder-lights i:first-child {
+    background: var(--accent);
+}
+
+.finder-path {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.finder-path strong {
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.finder-count {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+}
+
+.finder-body {
+    display: grid;
+    grid-template-columns: 9.5rem 13rem minmax(0, 1fr);
+    min-height: 26rem;
+}
+
+.finder-years,
+.finder-files {
+    list-style: none;
+    padding: 0.6rem;
+    border-right: 1px solid var(--line);
+}
+
+.finder-years button,
+.finder-files button {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    border: 0;
+    border-radius: 7px;
+    background: none;
     color: var(--ink);
     font: inherit;
-    font-size: 1.05rem;
+    font-size: 0.92rem;
+    text-align: left;
     cursor: pointer;
 }
 
-.arrow:hover:not(:disabled) {
-    border-color: var(--accent);
-    color: var(--accent);
+.finder-years button:hover,
+.finder-files button:hover {
+    background: rgb(255 255 255 / 0.04);
 }
 
-.arrow:disabled {
-    opacity: 0.35;
-    cursor: default;
+.finder-years button[aria-pressed='true'],
+.finder-files button[aria-pressed='true'] {
+    background: rgb(226 119 74 / 0.16);
 }
 
-/* Cards, months, and years are cut off just before the page's left margin
-   (with a short fade), so a year pushed out by the next one disappears there
-   instead of drifting into the margin, and nothing runs under the dial. The
-   fade is on a still frame around the track, not on the track itself, so
-   scrolling stays smooth. */
-.track-frame {
-    -webkit-mask-image: linear-gradient(to right, transparent calc(var(--edge) - 40px), #000 var(--edge));
-    mask-image: linear-gradient(to right, transparent calc(var(--edge) - 40px), #000 var(--edge));
-}
-
-.project-track {
-    position: relative;
-    display: flex;
-    gap: var(--gap);
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--edge);
-    padding: 0 var(--edge) 0.5rem;
-    scrollbar-width: none;
-}
-
-.project-track::-webkit-scrollbar {
-    display: none;
-}
-
-.project-track:focus-visible {
+.finder-years button:focus-visible,
+.finder-files button:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: -2px;
 }
 
-.year-group {
+.icon-folder,
+.icon-file {
     flex: none;
-    display: flex;
-    flex-direction: column;
+    width: 18px;
+    height: 16px;
 }
 
-/* The year sticks to the left edge while its projects are in view, and the
-   next year pushes it out. */
-.year-row {
-    height: 2rem;
+.icon-folder path {
+    fill: var(--accent);
+    opacity: 0.85;
 }
 
-/* Sticky offsets count from inside the track's padding, so 0 is the edge
-   the cards line up with. */
-.year-label {
-    position: sticky;
-    left: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding-right: 0.75rem;
-    background: var(--bg);
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    line-height: 2rem;
+.icon-file path {
+    fill: none;
+    stroke: var(--ink-soft);
+    stroke-width: 1.2;
+    stroke-linejoin: round;
 }
 
-.year-label::before {
-    content: '';
-    width: 12px;
-    height: 12px;
-    border: 2px solid var(--accent);
-    border-radius: 50%;
-}
-
-.year-projects {
-    display: flex;
-    gap: var(--gap);
-}
-
-.project-slot {
-    flex: none;
-    display: flex;
-    flex-direction: column;
-    width: var(--card);
-    scroll-snap-align: start;
-}
-
-/* Each project's month, on a line that runs from one project to the next. */
-.project-month {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    height: 2rem;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+.finder-n,
+.finder-date {
+    margin-left: auto;
+    font-size: 0.78rem;
     color: var(--ink-soft);
 }
 
-.project-month::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    margin-left: 3px;
-    border-radius: 50%;
-    background: var(--ink-soft);
+.finder-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.project-month::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    margin-right: calc(-1 * var(--gap));
-    background: var(--line);
+.finder-preview {
+    display: flex;
+    padding: 0.9rem;
 }
 
-.year-group:last-child .project-slot:last-child .project-month::after {
-    visibility: hidden;
-}
-
-@media (max-width: 640px) {
-    .projects {
-        --gap: 1rem;
-        --card: min(84cqw, 340px);
+/* Phones and narrow tablets: years as a row of tabs, then the files, then
+   the open project. */
+@media (max-width: 760px) {
+    .finder-body {
+        grid-template-columns: 1fr;
+        min-height: 0;
     }
 
-    .arrow {
-        width: 38px;
-        height: 38px;
+    .finder-years {
+        display: flex;
+        gap: 0.4rem;
+        overflow-x: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .finder-years button {
+        width: auto;
+        white-space: nowrap;
+    }
+
+    .finder-files {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .finder-count {
+        display: none;
     }
 }
