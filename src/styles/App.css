@@ -14,6 +14,11 @@
     /* Fraunces, a warm soft serif, for names and headings; Figtree for text. */
     --font-display: 'Fraunces', Georgia, serif;
     --font-body: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Retro details shared across the page: monospace labels, a crisp
+       hairline edge, and a hard offset shadow instead of a soft blur. */
+    --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    --edge: #5a5148;
+    --shadow-hard: 6px 6px 0 rgb(0 0 0 / 0.55);
 }
 
 * {
