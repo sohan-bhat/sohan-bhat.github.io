@@ -57,7 +57,7 @@ const Robotics = () => (
             </div>
 
             <a
-                className="tba-link"
+                className="tba-link retro-button"
                 href="https://www.thebluealliance.com/team/2714"
                 target="_blank"
                 rel="noreferrer"
