@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import projects from '../data/projects';
 import '../styles/Projects.css';
@@ -9,31 +9,28 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 const sorted = [...projects].sort((a, b) => b.date.localeCompare(a.date));
 const years = [...new Set(sorted.map((p) => p.date.slice(0, 4)))];
 const monthOf = (p) => MONTHS[Number(p.date.slice(5, 7)) - 1];
+const shortDate = (p) => `${monthOf(p)} ${p.date.slice(0, 4)}`;
 
-const Folder = () => (
-    <svg className="icon-folder" viewBox="0 0 20 16" aria-hidden="true">
-        <path d="M1 3a2 2 0 0 1 2-2h4.2l2 2H17a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2z" />
-    </svg>
-);
-
-const File = () => (
-    <svg className="icon-file" viewBox="0 0 14 16" aria-hidden="true">
-        <path d="M2 1h6.5L12 4.5V14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
-        <path d="M8.5 1v3.5H12" />
-    </svg>
-);
-
-// The projects in a window like a laptop's file browser: year folders on the
-// left, that year's projects in the middle, and the open project on the right.
+// The projects in an old-school file window: a list of year folders that open
+// and close, each project a row with its kind and date, and the selected
+// project shown on the right. Arrow keys move through the open rows.
 const Projects = () => {
-    const [year, setYear] = useState(years[0]);
+    const [closed, setClosed] = useState([]);
     const [openId, setOpenId] = useState(sorted[0].id);
-    const files = sorted.filter((p) => p.date.startsWith(year));
+    const rows = useRef({});
     const open = sorted.find((p) => p.id === openId);
+    const visible = sorted.filter((p) => !closed.includes(p.date.slice(0, 4)));
 
-    const chooseYear = (y) => {
-        setYear(y);
-        setOpenId(sorted.find((p) => p.date.startsWith(y)).id);
+    const toggle = (year) => setClosed((c) => (c.includes(year) ? c.filter((y) => y !== year) : [...c, year]));
+
+    const onKeyDown = (event) => {
+        if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+        const i = visible.findIndex((p) => p.id === openId);
+        const next = visible[i + (event.key === 'ArrowDown' ? 1 : -1)];
+        if (!next) return;
+        event.preventDefault();
+        setOpenId(next.id);
+        rows.current[next.id].focus();
     };
 
     return (
@@ -43,46 +40,69 @@ const Projects = () => {
 
                 <div className="finder">
                     <div className="finder-bar">
-                        <span className="finder-lights" aria-hidden="true">
-                            <i />
-                            <i />
-                            <i />
-                        </span>
-                        <p className="finder-path">
-                            projects / {year} / <strong>{open.title}</strong>
-                        </p>
-                        <span className="finder-count">{sorted.length} items</span>
+                        <span className="finder-close" aria-hidden="true" />
+                        <p className="finder-title">Projects</p>
                     </div>
 
                     <div className="finder-body">
-                        <ul className="finder-years" aria-label="Years">
-                            {years.map((y) => (
-                                <li key={y}>
-                                    <button type="button" aria-pressed={y === year} onClick={() => chooseYear(y)}>
-                                        <Folder />
-                                        <span>{y}</span>
-                                        <span className="finder-n">{sorted.filter((p) => p.date.startsWith(y)).length}</span>
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-
-                        <ul className="finder-files" aria-label={`Projects from ${year}`}>
-                            {files.map((p) => (
-                                <li key={p.id}>
-                                    <button type="button" aria-pressed={p.id === openId} onClick={() => setOpenId(p.id)}>
-                                        <File />
-                                        <span className="finder-name">{p.title}</span>
-                                        <span className="finder-date">{monthOf(p)}</span>
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="finder-list" onKeyDown={onKeyDown}>
+                            <div className="finder-head" aria-hidden="true">
+                                <span>Name</span>
+                                <span>Kind</span>
+                                <span>Date</span>
+                            </div>
+                            <ul>
+                                {years.map((year) => {
+                                    const isOpen = !closed.includes(year);
+                                    const items = sorted.filter((p) => p.date.startsWith(year));
+                                    return (
+                                        <li key={year}>
+                                            <button type="button" className="finder-folder" aria-expanded={isOpen} onClick={() => toggle(year)}>
+                                                <span className="finder-arrow" aria-hidden="true">
+                                                    {isOpen ? '▾' : '▸'}
+                                                </span>
+                                                <span className="finder-icon finder-icon-folder" aria-hidden="true" />
+                                                {year}
+                                                <span className="finder-count">{items.length}</span>
+                                            </button>
+                                            {isOpen && (
+                                                <ul>
+                                                    {items.map((p) => (
+                                                        <li key={p.id}>
+                                                            <button
+                                                                type="button"
+                                                                className="finder-file"
+                                                                aria-pressed={p.id === openId}
+                                                                ref={(el) => {
+                                                                    rows.current[p.id] = el;
+                                                                }}
+                                                                onClick={() => setOpenId(p.id)}
+                                                            >
+                                                                <span className="finder-name">
+                                                                    <span className="finder-icon finder-icon-file" aria-hidden="true" />
+                                                                    {p.title}
+                                                                </span>
+                                                                <span className="finder-kind">{p.kind}</span>
+                                                                <span className="finder-date">{shortDate(p)}</span>
+                                                            </button>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
 
                         <div className="finder-preview" aria-live="polite">
-                            <ProjectCard key={open.id} project={{ ...open, when: `${monthOf(open)} ${open.date.slice(0, 4)}` }} />
+                            <ProjectCard key={open.id} project={{ ...open, when: shortDate(open) }} />
                         </div>
                     </div>
+
+                    <p className="finder-status">
+                        {sorted.length} items, {years.length} folders
+                    </p>
                 </div>
             </div>
         </section>
