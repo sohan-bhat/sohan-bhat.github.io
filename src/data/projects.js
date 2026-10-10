@@ -2,7 +2,30 @@
 // -1120 screenshots in public/imgs, cropped to 16:10.
 const projects = [
     {
+        id: 'halt',
+        title: 'HALT',
+        kind: 'Paper',
+        date: '2026-09-06',
+        line: 'The network trains, the loss falls, and the model is still wrong. A paper on catching silent training failures early.',
+        stack: ['Python', 'NumPy'],
+        links: [{ label: 'Preprint', url: '/halt-preprint.pdf' }],
+        image: 'halt',
+        alt: 'The first page of the HALT preprint.',
+    },
+    {
+        id: 'frc-2714',
+        title: 'FRC 2714',
+        kind: 'Robot',
+        date: '2025-01-04',
+        line: 'Java for Team 2714’s robot: autonomous routines and Limelight vision. Fort Worth District winners in 2025 and 2026.',
+        stack: ['Java', 'WPILib', 'Limelight'],
+        links: [{ label: 'Team', url: 'https://www.thebluealliance.com/team/2714' }],
+        image: 'frc',
+        alt: 'Team 2714’s 2026 robot.',
+    },
+    {
         id: 'taro',
+        kind: 'Agent',
         title: 'Taro',
         date: '2026-08-29',
         line: 'A voice assistant for Google Meet. Say “Hey Taro” and it posts to Slack, files GitHub issues, or adds to a to-do list.',
@@ -16,6 +39,7 @@ const projects = [
     },
     {
         id: 'signnet',
+        kind: 'Neural net',
         title: 'SignNet',
         date: '2026-06-12',
         line: 'Sorts German traffic signs with 90% accuracy. Built from scratch in NumPy: no PyTorch, no autograd.',
@@ -29,6 +53,7 @@ const projects = [
     },
     {
         id: 'ensemble',
+        kind: 'Web app',
         title: 'Ensemble',
         date: '2026-02-08',
         line: 'An r/place for music: one orchestral score the whole world writes, note by note.',
@@ -42,6 +67,7 @@ const projects = [
     },
     {
         id: 'vacantcourt',
+        kind: 'Android + web',
         title: 'VacantCourt',
         date: '2025-03-17',
         line: 'A phone at the court spots players with an on-device model, and the website shows which courts are free.',
@@ -56,6 +82,7 @@ const projects = [
     },
     {
         id: 'mochi',
+        kind: 'Web app',
         title: 'Mochi',
         date: '2024-07-25',
         line: 'Recipes from just the ingredients you already have.',
@@ -69,6 +96,7 @@ const projects = [
     },
     {
         id: 'career-ai',
+        kind: 'Web app',
         title: 'Career AI',
         date: '2024-06-21',
         retired: true,
