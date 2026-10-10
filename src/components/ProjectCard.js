@@ -6,10 +6,10 @@ import '../styles/ProjectCard.css';
 const ProjectCard = ({ project }) => (
     <article className="project-card">
         <header className="card-head">
-            <h4 className="card-title">
+            <h3 className="card-title">
                 {project.title}
                 {project.retired && <span className="card-note">Retired</span>}
-            </h4>
+            </h3>
             <div className="card-links">
                 {project.links.map((link) => (
                     <a
