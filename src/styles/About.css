@@ -29,8 +29,8 @@
 }
 
 .research-meta {
-    font-size: 0.85rem;
-    font-style: italic;
+    font-family: var(--mono);
+    font-size: 0.78rem;
     color: var(--ink-soft);
     margin-bottom: 0.65rem;
 }
@@ -43,16 +43,7 @@
 
 .research-link {
     display: inline-block;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--accent);
-    text-decoration: none;
-}
-
-.research-link:hover {
-    text-decoration: underline wavy;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
+    margin-top: 0.25rem;
 }
 
 @media (max-width: 768px) {

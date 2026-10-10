@@ -101,3 +101,25 @@ section {
         scrollbar-color: #5a5148 var(--bg);
     }
 }
+
+/* A retro push button for the page's main links (the preprint and the
+   team page): a hairline box with a hard shadow that presses in on click. */
+.retro-button {
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--edge);
+    background: var(--raised);
+    box-shadow: 3px 3px 0 rgb(0 0 0 / 0.55);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    text-decoration: none;
+}
+
+.retro-button:hover {
+    border-color: var(--accent);
+}
+
+.retro-button:active {
+    box-shadow: none;
+    transform: translate(3px, 3px);
+}
