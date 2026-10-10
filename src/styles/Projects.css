@@ -1,5 +1,5 @@
 /* The projects window, styled after an old desktop file manager: square
-   corners, a hard drop shadow, a pinstriped title bar with a close box, a
+   corners, a hard drop shadow, a pinstriped title bar, a
    compact list in monospace, and a status bar along the bottom. */
 .finder {
     --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
@@ -10,7 +10,6 @@
 }
 
 .finder-bar {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,15 +17,6 @@
     padding: 0 10px;
     border-bottom: 1px solid #5a5148;
     background: repeating-linear-gradient(to bottom, #3b352e 0 1px, var(--raised) 1px 3px);
-}
-
-.finder-close {
-    position: absolute;
-    left: 10px;
-    width: 12px;
-    height: 12px;
-    border: 1px solid #8a8075;
-    background: var(--raised);
 }
 
 .finder-title {
@@ -146,26 +136,35 @@
     white-space: nowrap;
 }
 
-/* Tiny pixel-style icons: a tabbed folder and a page with a folded corner. */
+/* Folder and file icons. */
 .finder-icon {
     flex: none;
-    display: inline-block;
-    width: 14px;
-    height: 11px;
+    width: 16px;
+    height: 14px;
 }
 
-.finder-icon-folder {
-    border: 1px solid var(--accent);
-    background: rgb(226 119 74 / 0.35);
-    clip-path: polygon(0 0, 45% 0, 55% 18%, 100% 18%, 100% 100%, 0 100%);
+.folder-back {
+    fill: #9a5032;
 }
 
-.finder-icon-file {
-    width: 11px;
-    height: 13px;
-    border: 1px solid currentColor;
-    clip-path: polygon(0 0, 70% 0, 100% 30%, 100% 100%, 0 100%);
-    opacity: 0.8;
+.folder-front {
+    fill: var(--accent);
+}
+
+.file-page {
+    fill: #efe8dc;
+}
+
+.file-fold {
+    fill: none;
+    stroke: #8a8075;
+    stroke-width: 1;
+}
+
+.file-lines {
+    stroke: #8a8075;
+    stroke-width: 1;
+    stroke-linecap: round;
 }
 
 .finder-preview {
