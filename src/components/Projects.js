@@ -1,108 +1,88 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import ProjectCard from './ProjectCard';
 import projects from '../data/projects';
 import '../styles/Projects.css';
 
-
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-// Newest first, in runs of one year each.
-const groupByYear = (list) => {
-    const sorted = [...list].sort((a, b) => b.date.localeCompare(a.date));
-    const groups = [];
-    sorted.forEach((project) => {
-        const year = project.date.slice(0, 4);
-        const last = groups[groups.length - 1];
-        if (last && last[0] === year) last[1].push(project);
-        else groups.push([year, [project]]);
-    });
-    return groups;
-};
+// Newest first, in folders by year.
+const sorted = [...projects].sort((a, b) => b.date.localeCompare(a.date));
+const years = [...new Set(sorted.map((p) => p.date.slice(0, 4)))];
+const monthOf = (p) => MONTHS[Number(p.date.slice(5, 7)) - 1];
 
-const yearGroups = groupByYear(projects);
+const Folder = () => (
+    <svg className="icon-folder" viewBox="0 0 20 16" aria-hidden="true">
+        <path d="M1 3a2 2 0 0 1 2-2h4.2l2 2H17a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2z" />
+    </svg>
+);
 
-const prefersLessMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const File = () => (
+    <svg className="icon-file" viewBox="0 0 14 16" aria-hidden="true">
+        <path d="M2 1h6.5L12 4.5V14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+        <path d="M8.5 1v3.5H12" />
+    </svg>
+);
 
-// The projects as a sideways timeline: one card per project, newest first,
-// under a line with each project's month. The year sticks to the left edge
-// until the next year pushes it out. It stays one height however many
-// projects there are; the arrows move a screenful at a time.
+// The projects in a window like a laptop's file browser: year folders on the
+// left, that year's projects in the middle, and the open project on the right.
 const Projects = () => {
-    const track = useRef(null);
-    const [ends, setEnds] = useState({ start: true, end: false });
+    const [year, setYear] = useState(years[0]);
+    const [openId, setOpenId] = useState(sorted[0].id);
+    const files = sorted.filter((p) => p.date.startsWith(year));
+    const open = sorted.find((p) => p.id === openId);
 
-    // Whether the track is at either end, which turns the arrows off. Checked
-    // on every scroll and whenever the track or its contents change size (Safari
-    // can run the first check before the cards are laid out).
-    useEffect(() => {
-        const element = track.current;
-        const update = () => {
-            const max = element.scrollWidth - element.clientWidth;
-            const start = element.scrollLeft <= 1;
-            const end = element.scrollLeft >= max - 1;
-            setEnds((previous) => (previous.start === start && previous.end === end ? previous : { start, end }));
-        };
-        update();
-        element.addEventListener('scroll', update, { passive: true });
-        const observer = new ResizeObserver(update);
-        observer.observe(element);
-        [...element.children].forEach((group) => observer.observe(group));
-        return () => {
-            element.removeEventListener('scroll', update);
-            observer.disconnect();
-        };
-    }, []);
-
-    // Moves a screenful of cards, landing exactly where a card rests, so the
-    // snapping never pulls it back.
-    const move = (direction) => {
-        const element = track.current;
-        const slots = [...element.querySelectorAll('.project-slot')];
-        const stops = slots.map((slot) => slot.offsetLeft - slots[0].offsetLeft);
-        const max = element.scrollWidth - element.clientWidth;
-        let current = 0;
-        stops.forEach((stop, i) => {
-            if (Math.abs(stop - element.scrollLeft) < Math.abs(stops[current] - element.scrollLeft)) current = i;
-        });
-        const step = stops.length > 1 ? stops[1] : element.clientWidth;
-        const perScreen = Math.max(1, Math.floor((element.clientWidth - slots[0].offsetLeft) / step));
-        const target = Math.min(stops.length - 1, Math.max(0, current + direction * perScreen));
-        element.scrollTo({ left: Math.min(max, stops[target]), behavior: prefersLessMotion() ? 'auto' : 'smooth' });
+    const chooseYear = (y) => {
+        setYear(y);
+        setOpenId(sorted.find((p) => p.date.startsWith(y)).id);
     };
 
     return (
         <section className="projects" id="projects">
-            <div className="container projects-head">
+            <div className="container">
                 <h2 className="section-title">Projects<span className="title-period">.</span></h2>
-                <div className="projects-arrows">
-                    <button type="button" className="arrow" onClick={() => move(-1)} disabled={ends.start} aria-label="Newer projects">
-                        ←
-                    </button>
-                    <button type="button" className="arrow" onClick={() => move(1)} disabled={ends.end} aria-label="Older projects">
-                        →
-                    </button>
-                </div>
-            </div>
 
-            <div className="track-frame">
-                <div className="project-track" ref={track} role="region" aria-label="Projects, newest first" tabIndex={0}>
-                    {yearGroups.map(([year, items]) => (
-                        <div className="year-group" key={year}>
-                            <div className="year-row">
-                                <h3 className="year-label">{year}</h3>
-                            </div>
-                            <div className="year-projects">
-                                {items.map((project) => (
-                                    <div className="project-slot" key={project.id}>
-                                        <p className="project-month">
-                                            <time dateTime={project.date}>{MONTHS[Number(project.date.slice(5, 7)) - 1]}</time>
-                                        </p>
-                                        <ProjectCard project={project} />
-                                    </div>
-                                ))}
-                            </div>
+                <div className="finder">
+                    <div className="finder-bar">
+                        <span className="finder-lights" aria-hidden="true">
+                            <i />
+                            <i />
+                            <i />
+                        </span>
+                        <p className="finder-path">
+                            projects / {year} / <strong>{open.title}</strong>
+                        </p>
+                        <span className="finder-count">{sorted.length} items</span>
+                    </div>
+
+                    <div className="finder-body">
+                        <ul className="finder-years" aria-label="Years">
+                            {years.map((y) => (
+                                <li key={y}>
+                                    <button type="button" aria-pressed={y === year} onClick={() => chooseYear(y)}>
+                                        <Folder />
+                                        <span>{y}</span>
+                                        <span className="finder-n">{sorted.filter((p) => p.date.startsWith(y)).length}</span>
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <ul className="finder-files" aria-label={`Projects from ${year}`}>
+                            {files.map((p) => (
+                                <li key={p.id}>
+                                    <button type="button" aria-pressed={p.id === openId} onClick={() => setOpenId(p.id)}>
+                                        <File />
+                                        <span className="finder-name">{p.title}</span>
+                                        <span className="finder-date">{monthOf(p)}</span>
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <div className="finder-preview" aria-live="polite">
+                            <ProjectCard key={open.id} project={{ ...open, when: `${monthOf(open)} ${open.date.slice(0, 4)}` }} />
                         </div>
-                    ))}
+                    </div>
                 </div>
             </div>
         </section>
