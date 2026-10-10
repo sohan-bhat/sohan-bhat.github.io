@@ -11,6 +11,23 @@ const years = [...new Set(sorted.map((p) => p.date.slice(0, 4)))];
 const monthOf = (p) => MONTHS[Number(p.date.slice(5, 7)) - 1];
 const shortDate = (p) => `${monthOf(p)} ${p.date.slice(0, 4)}`;
 
+// A tabbed folder, open or closed.
+const FolderIcon = ({ open }) => (
+    <svg className="finder-icon" viewBox="0 0 16 13" aria-hidden="true">
+        <path className="folder-back" d="M1 2.5A1 1 0 0 1 2 1.5h4l1.5 1.5H14a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
+        <path className="folder-front" d={open ? 'M2.6 5.5h12.2L13.6 12H1.4z' : 'M1 5h14v6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z'} />
+    </svg>
+);
+
+// A page with a folded corner and a few lines of text.
+const FileIcon = () => (
+    <svg className="finder-icon" viewBox="0 0 13 15" aria-hidden="true">
+        <path className="file-page" d="M1.5 1h6.5l3.5 3.5V13a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+        <path className="file-fold" d="M8 1v3.5h3.5" />
+        <path className="file-lines" d="M3.5 7.5h6M3.5 9.5h6M3.5 11.5h4" />
+    </svg>
+);
+
 // The projects in an old-school file window: a list of year folders that open
 // and close, each project a row with its kind and date, and the selected
 // project shown on the right. Arrow keys move through the open rows.
@@ -40,7 +57,6 @@ const Projects = () => {
 
                 <div className="finder">
                     <div className="finder-bar">
-                        <span className="finder-close" aria-hidden="true" />
                         <p className="finder-title">Projects</p>
                     </div>
 
@@ -61,7 +77,7 @@ const Projects = () => {
                                                 <span className="finder-arrow" aria-hidden="true">
                                                     {isOpen ? '▾' : '▸'}
                                                 </span>
-                                                <span className="finder-icon finder-icon-folder" aria-hidden="true" />
+                                                <FolderIcon open={isOpen} />
                                                 {year}
                                                 <span className="finder-count">{items.length}</span>
                                             </button>
@@ -79,7 +95,7 @@ const Projects = () => {
                                                                 onClick={() => setOpenId(p.id)}
                                                             >
                                                                 <span className="finder-name">
-                                                                    <span className="finder-icon finder-icon-file" aria-hidden="true" />
+                                                                    <FileIcon />
                                                                     {p.title}
                                                                 </span>
                                                                 <span className="finder-kind">{p.kind}</span>
