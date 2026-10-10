@@ -38,7 +38,7 @@ const About = () => (
                             target="_blank"
                             rel="noreferrer"
                         >
-                            Read the preprint ↗
+                            Read the preprint
                         </a>
                     </article>
                 </aside>
