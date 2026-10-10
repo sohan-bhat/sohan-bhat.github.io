@@ -2,17 +2,6 @@
 // -1120 screenshots in public/imgs, cropped to 16:10.
 const projects = [
     {
-        id: 'halt',
-        title: 'HALT',
-        kind: 'Paper',
-        date: '2026-09-06',
-        line: 'The network trains, the loss falls, and the model is still wrong. A paper on catching silent training failures early.',
-        stack: ['Python', 'NumPy'],
-        links: [{ label: 'Preprint', url: '/halt-preprint.pdf' }],
-        image: 'halt',
-        alt: 'The first page of the HALT preprint.',
-    },
-    {
         id: 'frc-2714',
         title: 'FRC 2714',
         kind: 'Robot',
