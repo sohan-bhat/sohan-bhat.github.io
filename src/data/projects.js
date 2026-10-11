@@ -33,7 +33,7 @@ const projects = [
     {
         id: 'signnet',
         kind: 'Neural net',
-        title: 'SignNet',
+        title: 'signnet',
         date: '2026-06-12',
         line: 'Sorts German traffic signs with 90% accuracy. Built from scratch in NumPy: no PyTorch, no autograd.',
         stack: ['Python', 'NumPy', 'React'],
@@ -42,7 +42,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/signnet' },
         ],
         image: 'signnet',
-        alt: 'SignNet’s demo page, “Traffic sign classification, built from scratch,” with its test accuracy.',
+        alt: 'signnet’s demo page, “Traffic sign classification, built from scratch,” with its test accuracy.',
     },
     {
         id: 'ensemble',
@@ -90,7 +90,7 @@ const projects = [
     {
         id: 'career-ai',
         kind: 'Web app',
-        title: 'Career AI',
+        title: 'CareerAI',
         date: '2024-06-21',
         retired: true,
         line: 'Career ideas from your interests, suggested by AI.',
@@ -100,7 +100,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/CareerAI' },
         ],
         image: 'careerai',
-        alt: 'Career AI suggesting careers from a list of interests.',
+        alt: 'CareerAI suggesting careers from a list of interests.',
     },
 ];
 
