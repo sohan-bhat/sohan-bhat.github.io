@@ -24,8 +24,9 @@ const projects = [
         line: 'A voice assistant for Google Meet. Say “Hey Taro” and it posts to Slack, files GitHub issues, or adds to a to-do list.',
         stack: ['TypeScript', 'Next.js', 'Gemini'],
         links: [
-            { label: 'Site', url: 'https://trytaro.vercel.app/demo' },
-            { label: 'Code', url: 'https://github.com/sohan-bhat/Taro' },
+            { label: 'Site', url: 'https://trytaro.vercel.app' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/taro' },
+            { label: 'Video', url: 'https://youtu.be/8_FzNl4uwyY' },
         ],
         image: 'taro',
         alt: 'Taro’s activation page: “Say it in the meeting. Done before you hang up.”',
