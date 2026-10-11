@@ -2,17 +2,6 @@
 // -1120 screenshots in public/imgs, cropped to 16:10.
 const projects = [
     {
-        id: 'frc-2714',
-        title: 'FRC 2714',
-        kind: 'Robot',
-        date: '2025-01-04',
-        line: 'Java for Team 2714’s robot: autonomous routines and Limelight vision. Fort Worth District winners in 2025 and 2026.',
-        stack: ['Java', 'WPILib', 'Limelight'],
-        links: [{ label: 'Team', url: 'https://www.thebluealliance.com/team/2714' }],
-        image: 'frc',
-        alt: 'Team 2714’s 2026 robot.',
-    },
-    {
         id: 'oopsy',
         kind: 'CLI',
         title: 'Oopsy',
