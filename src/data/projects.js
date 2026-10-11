@@ -11,6 +11,7 @@ const projects = [
         links: [
             { label: 'Site', url: 'https://sohan-bhat.github.io/oopsy' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/oopsy' },
+            { label: 'Video', url: 'https://youtu.be/Krh9cU08rIg' },
         ],
         image: 'oopsy',
         alt: 'Oopsy’s site: “Undo for rm -rf.” beside a terminal you can try in the browser.',
