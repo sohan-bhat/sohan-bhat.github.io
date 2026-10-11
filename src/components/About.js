@@ -12,7 +12,10 @@ const About = () => (
                             I'm 15 and a sophomore at Heritage High School in Frisco, Texas.
                         </p>
                         <p>
-                            I build barebones machine learning models to understand why they work. One of them, SignNet, became a research topic on silent training failures.
+                            I like taking machine learning apart. Writing a network from scratch in
+                            NumPy is the best way I've found to see what's really happening inside,
+                            and one of those, SignNet, turned into my research on silent training
+                            failures.
                         </p>
                         <p>
                             I also program for FRC Team 2714 and train for USACO Gold. Away from
