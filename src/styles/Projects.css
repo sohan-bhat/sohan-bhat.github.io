@@ -1,6 +1,6 @@
 /* The projects window, styled after an old desktop file manager: square
    corners, a hard drop shadow, a pinstriped title bar, a
-   compact list in a pixel font, and a status bar along the bottom. */
+   compact list in monospace, and a status bar along the bottom. */
 .finder {
     background: var(--surface);
     border: 1px solid var(--edge);
@@ -34,10 +34,8 @@
 
 .finder-list {
     border-right: 1px solid var(--edge);
-    font-family: 'VT323', var(--mono);
-    font-size: 1.15rem;
-    line-height: 1.1;
-    font-synthesis: none;
+    font-family: var(--mono);
+    font-size: 0.8rem;
 }
 
 .finder-list ul {
@@ -57,7 +55,7 @@
     padding: 0.35rem 0.75rem;
     border-bottom: 1px solid var(--edge);
     background: var(--raised);
-    font-size: 0.95rem;
+    font-size: 0.7rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink-soft);
@@ -81,6 +79,7 @@
     display: flex;
     align-items: center;
     gap: 0.45rem;
+    font-weight: 600;
 }
 
 .finder-file {
@@ -115,6 +114,7 @@
 
 .finder-count {
     margin-left: auto;
+    font-weight: 400;
     color: var(--ink-soft);
 }
 
