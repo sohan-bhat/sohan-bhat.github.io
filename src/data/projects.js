@@ -4,7 +4,7 @@ const projects = [
     {
         id: 'oopsy',
         kind: 'CLI',
-        title: 'Oopsy',
+        title: 'oopsy',
         date: '2026-10-09',
         line: 'Undo for rm -rf. It snapshots your files, git and Postgres right before a destructive command runs. Type oops to get it back.',
         stack: ['Go', 'Postgres', 'JavaScript'],
@@ -19,7 +19,7 @@ const projects = [
     {
         id: 'taro',
         kind: 'Agent',
-        title: 'Taro',
+        title: 'taro',
         date: '2026-08-29',
         line: 'A voice assistant for Google Meet. Say “Hey Taro” and it posts to Slack, files GitHub issues, or adds to a to-do list.',
         stack: ['TypeScript', 'Next.js', 'Gemini'],
@@ -48,7 +48,7 @@ const projects = [
     {
         id: 'ensemble',
         kind: 'Web app',
-        title: 'Ensemble',
+        title: 'ensemble',
         date: '2026-02-08',
         line: 'An r/place for music: one orchestral score the whole world writes, note by note.',
         stack: ['React', 'Express', 'VexFlow'],
@@ -77,7 +77,7 @@ const projects = [
     {
         id: 'mochi',
         kind: 'Web app',
-        title: 'Mochi',
+        title: 'mochi',
         date: '2024-07-25',
         line: 'Recipes from just the ingredients you already have.',
         stack: ['React', 'Node.js', 'Groq'],

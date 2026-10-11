@@ -29,9 +29,6 @@ const FileIcon = () => (
     </svg>
 );
 
-// The projects in an old-school file window: a list of year folders that open
-// and close, each project a row with its kind and date, and the selected
-// project shown on the right. Arrow keys move through the open rows.
 const Projects = () => {
     const [closed, setClosed] = useState([]);
     const [openId, setOpenId] = useState(sorted[0].id);
