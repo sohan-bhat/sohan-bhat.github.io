@@ -23,7 +23,7 @@ const projects = [
         line: 'A voice assistant for Google Meet. Say “Hey Taro” and it posts to Slack, files GitHub issues, or adds to a to-do list.',
         stack: ['TypeScript', 'Next.js', 'Gemini'],
         links: [
-            { label: 'Demo', url: 'https://trytaro.vercel.app/demo' },
+            { label: 'Site', url: 'https://trytaro.vercel.app/demo' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/Taro' },
         ],
         image: 'taro',
@@ -37,7 +37,7 @@ const projects = [
         line: 'Sorts German traffic signs with 90% accuracy. Built from scratch in NumPy: no PyTorch, no autograd.',
         stack: ['Python', 'NumPy', 'React'],
         links: [
-            { label: 'Live', url: 'https://signnet-cnn.netlify.app' },
+            { label: 'Site', url: 'https://signnet-cnn.netlify.app' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/signnet' },
         ],
         image: 'signnet',
@@ -51,7 +51,7 @@ const projects = [
         line: 'An r/place for music: one orchestral score the whole world writes, note by note.',
         stack: ['React', 'Express', 'VexFlow'],
         links: [
-            { label: 'Live', url: 'https://ensemble-qnd2.onrender.com' },
+            { label: 'Site', url: 'https://ensemble-qnd2.onrender.com' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/ensemble' },
         ],
         image: 'ensemble',
@@ -65,7 +65,7 @@ const projects = [
         line: 'A phone at the court spots players with an on-device model, and the website shows which courts are free.',
         stack: ['Kotlin', 'TensorFlow Lite', 'React'],
         links: [
-            { label: 'Live', url: 'https://vacantcourt.netlify.app' },
+            { label: 'Site', url: 'https://vacantcourt.netlify.app' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/VacantCourt', title: 'Website code' },
             { label: 'App', url: 'https://github.com/sohan-bhat/VacantCourtApp', title: 'Android app code' },
         ],
@@ -80,7 +80,7 @@ const projects = [
         line: 'Recipes from just the ingredients you already have.',
         stack: ['React', 'Node.js', 'Groq'],
         links: [
-            { label: 'Live', url: 'https://trymochi.netlify.app' },
+            { label: 'Site', url: 'https://trymochi.netlify.app' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/Mochi' },
         ],
         image: 'mochi',
@@ -95,7 +95,7 @@ const projects = [
         line: 'Career ideas from your interests, suggested by AI.',
         stack: ['React', 'Node.js', 'Groq'],
         links: [
-            { label: 'Live', url: 'https://careerai.netlify.app' },
+            { label: 'Site', url: 'https://careerai.netlify.app' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/CareerAI' },
         ],
         image: 'careerai',
