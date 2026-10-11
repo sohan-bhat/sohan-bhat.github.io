@@ -150,6 +150,10 @@
     fill: var(--accent);
 }
 
+.folder-sheet {
+    fill: #efe8dc;
+}
+
 .file-page {
     fill: #efe8dc;
 }

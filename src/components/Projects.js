@@ -15,7 +15,8 @@ const shortDate = (p) => `${monthOf(p)} ${p.date.slice(0, 4)}`;
 const FolderIcon = ({ open }) => (
     <svg className="finder-icon" viewBox="0 0 16 13" aria-hidden="true">
         <path className="folder-back" d="M1 2.5A1 1 0 0 1 2 1.5h4l1.5 1.5H14a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
-        <path className="folder-front" d={open ? 'M2.6 5.5h12.2L13.6 12H1.4z' : 'M1 5h14v6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z'} />
+        {open && <rect className="folder-sheet" x="2.5" y="3.5" width="11" height="6" />}
+        <path className="folder-front" d={open ? 'M1 7h14v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z' : 'M1 5h14v6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z'} />
     </svg>
 );
 
