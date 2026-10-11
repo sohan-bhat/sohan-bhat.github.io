@@ -13,6 +13,20 @@ const projects = [
         alt: 'Team 2714’s 2026 robot.',
     },
     {
+        id: 'oopsy',
+        kind: 'CLI',
+        title: 'Oopsy',
+        date: '2026-10-09',
+        line: 'Undo for rm -rf. It snapshots your files, git and Postgres right before a destructive command runs. Type oops to get it back.',
+        stack: ['Go', 'Postgres', 'JavaScript'],
+        links: [
+            { label: 'Site', url: 'https://sohan-bhat.github.io/oopsy' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/oopsy' },
+        ],
+        image: 'oopsy',
+        alt: 'Oopsy’s site: “Undo for rm -rf.” beside a terminal you can try in the browser.',
+    },
+    {
         id: 'taro',
         kind: 'Agent',
         title: 'Taro',
