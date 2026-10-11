@@ -14,7 +14,7 @@ const About = () => (
                         <p>
                             I like taking machine learning apart. Writing a network from scratch in
                             NumPy is the best way I've found to see what's really happening inside,
-                            and one of those, SignNet, turned into my research on silent training
+                            and one of those, signnet, turned into my research on silent training
                             failures.
                         </p>
                         <p>
