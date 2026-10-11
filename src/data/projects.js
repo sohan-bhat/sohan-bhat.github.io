@@ -72,7 +72,7 @@ const projects = [
             { label: 'App', url: 'https://github.com/sohan-bhat/VacantCourtApp', title: 'Android app code' },
         ],
         image: 'vacantcourt',
-        alt: 'VacantCourt’s home page above a camera feed that boxes each player on the court.',
+        alt: 'VacantCourt’s home page, “Skip the drive to a full court,” beside a court camera that boxes each player.',
     },
     {
         id: 'mochi',
