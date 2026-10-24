@@ -102,8 +102,8 @@ section {
     }
 }
 
-/* A retro push button for the page's main links (the proposal and the
-   team page): a hairline box with a hard shadow that presses in on click. */
+/* A retro push button for the page's main links (the CV, the proposal
+   and the team page): a hairline box with a hard shadow that presses in on click. */
 .retro-button {
     padding: 0.45rem 0.85rem;
     border: 1px solid var(--edge);
