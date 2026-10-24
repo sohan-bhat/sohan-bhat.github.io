@@ -102,7 +102,7 @@ section {
     }
 }
 
-/* A retro push button for the page's main links (the preprint and the
+/* A retro push button for the page's main links (the proposal and the
    team page): a hairline box with a hard shadow that presses in on click. */
 .retro-button {
     padding: 0.45rem 0.85rem;
