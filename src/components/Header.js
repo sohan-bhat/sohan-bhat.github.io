@@ -20,14 +20,6 @@ const Header = () => (
                         sohanrambhat@gmail.com
                     </a>
                     <a
-                        href="/sohan-bhat-cv.pdf"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="social-cv"
-                    >
-                        CV
-                    </a>
-                    <a
                         href="https://github.com/sohan-bhat"
                         target="_blank"
                         rel="noreferrer"
@@ -55,6 +47,15 @@ const Header = () => (
                         <FaInstagram />
                     </a>
                 </div>
+
+                <a
+                    className="hero-cv retro-button"
+                    href="/sohan-bhat-cv.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    View my CV
+                </a>
             </div>
 
             <img
