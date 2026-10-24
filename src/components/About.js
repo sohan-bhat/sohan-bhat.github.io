@@ -37,11 +37,11 @@ const About = () => (
                         </p>
                         <a
                             className="research-link retro-button"
-                            href="/halt-preprint.pdf"
+                            href="/halt-proposal.pdf"
                             target="_blank"
                             rel="noreferrer"
                         >
-                            Read the preprint
+                            Read the proposal
                         </a>
                     </article>
                 </aside>
