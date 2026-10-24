@@ -73,7 +73,8 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M0 3 Q 2 1 4 3 T 8 3' fill='none' stroke='%23e2774a' stroke-width='1'/%3E%3C/svg%3E");
 }
 
-.social-email {
+.social-email,
+.social-cv {
     font-family: var(--mono);
     font-size: 0.85rem;
     color: var(--ink-soft);
@@ -83,7 +84,8 @@
     text-underline-offset: 5px;
 }
 
-.social-email:hover {
+.social-email:hover,
+.social-cv:hover {
     color: var(--accent);
     text-decoration-color: var(--accent);
 }
@@ -97,6 +99,10 @@
         flex-direction: column-reverse;
         align-items: flex-start;
         gap: 1.75rem;
+    }
+
+    .social-links {
+        gap: 0.8rem;
     }
 
     .hero-photo {
