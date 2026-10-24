@@ -2,6 +2,21 @@
 // -1120 screenshots in public/imgs, cropped to 16:10.
 const projects = [
     {
+        id: 'wobbl',
+        kind: 'Simulator',
+        title: 'wobbl',
+        date: '2026-10-13',
+        line: 'Ask your coding agent if a part will crack, a circuit will burn, or a rocket will fly. Wobbl works out the physics, runs a real solver, and checks the answer before you see it.',
+        stack: ['Python', 'SciPy', 'Three.js'],
+        links: [
+            { label: 'Site', url: 'https://sohan-bhat.github.io/wobbl' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/wobbl' },
+            { label: 'Video', url: 'https://www.youtube.com/watch?v=RtCNKbhABqE' },
+        ],
+        image: 'wobbl',
+        alt: 'Wobbl’s site: “Simulate anything before you build it.” beside a 3D bracket colored by stress.',
+    },
+    {
         id: 'oopsy',
         kind: 'CLI',
         title: 'oopsy',
