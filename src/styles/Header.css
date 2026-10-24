@@ -104,6 +104,10 @@
         gap: 1.75rem;
     }
 
+    .social-links {
+        gap: 1.1rem;
+    }
+
     .hero-photo {
         width: 150px;
         height: 150px;
