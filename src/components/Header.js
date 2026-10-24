@@ -20,6 +20,14 @@ const Header = () => (
                         sohanrambhat@gmail.com
                     </a>
                     <a
+                        href="/sohan-bhat-cv.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="social-cv"
+                    >
+                        CV
+                    </a>
+                    <a
                         href="https://github.com/sohan-bhat"
                         target="_blank"
                         rel="noreferrer"
