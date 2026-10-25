@@ -1,6 +1,6 @@
 // `date` is when each project started. `kind` says what it is. `image` names
-// the card-<image>-560 and -1120 pictures in public/imgs: a 16:10 crop of the
-// moment the project does its thing, not its whole landing page.
+// the card-<image>-560 and -1120 screenshots in public/imgs: an overview of
+// each project's site, 16:10.
 const projects = [
     {
         id: 'wobbl',
@@ -15,7 +15,7 @@ const projects = [
             { label: 'Video', url: 'https://www.youtube.com/watch?v=RtCNKbhABqE' },
         ],
         image: 'wobbl',
-        alt: 'A bracket under a 2,700 N load, colored by stress, with its failure point marked at 167.0 MPa.',
+        alt: 'Wobbl’s site: “Simulate anything before you build it.” beside a 3D bracket colored by stress.',
     },
     {
         id: 'oopsy',
@@ -30,7 +30,7 @@ const projects = [
             { label: 'Video', url: 'https://youtu.be/Krh9cU08rIg' },
         ],
         image: 'oopsy',
-        alt: 'A terminal: rm -rf src, then oops restores the folder from snapshot 42.',
+        alt: 'Oopsy’s site: “Undo for rm -rf.” beside a terminal you can try in the browser.',
     },
     {
         id: 'taro',
@@ -45,7 +45,7 @@ const projects = [
             { label: 'Video', url: 'https://youtu.be/8_FzNl4uwyY' },
         ],
         image: 'taro',
-        alt: 'A meeting transcript: “Hey Taro, file an issue about that.” Taro: “Opened issue #142 in acme/web.”',
+        alt: 'Taro’s site: “Meeting follow-ups get lost. Taro does them before you hang up.”',
     },
     {
         id: 'signnet',
@@ -59,7 +59,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/signnet' },
         ],
         image: 'signnet',
-        alt: 'signnet classifying a stop sign as Stop with 100.0% confidence.',
+        alt: 'signnet’s site, “Traffic sign classification, built from scratch,” with its test accuracy.',
     },
     {
         id: 'ensemble',
@@ -73,7 +73,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/ensemble' },
         ],
         image: 'ensemble',
-        alt: 'The opening bars of Ensemble’s shared score, with the first notes in the violins.',
+        alt: 'Ensemble’s shared score for violins, viola, cello, and bass.',
     },
     {
         id: 'vacantcourt',
@@ -88,7 +88,7 @@ const projects = [
             { label: 'App', url: 'https://github.com/sohan-bhat/VacantCourtApp', title: 'Android app code' },
         ],
         image: 'vacantcourt',
-        alt: 'VacantCourt’s court camera boxing each player inside the outlines of Court 1 and Court 2.',
+        alt: 'VacantCourt’s site, “Skip the drive to a full court,” beside a court camera that boxes each player.',
     },
     {
         id: 'mochi',
@@ -102,7 +102,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/Mochi' },
         ],
         image: 'mochi',
-        alt: 'Mochi’s first suggestion: a spinach and tomato frittata with onion and garlic.',
+        alt: 'Mochi’s site: “Turn what you have into what you’ll cook tonight.”',
     },
     {
         id: 'career-ai',
@@ -117,7 +117,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/CareerAI' },
         ],
         image: 'careerai',
-        alt: 'CareerAI turning “I love coding and tennis” into a career idea: sports-tech software engineer.',
+        alt: 'CareerAI suggesting careers from a list of interests.',
     },
 ];
 

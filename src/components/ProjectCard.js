@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/ProjectCard.css';
 
-// One project: the title and its links across the top, a picture of the
-// moment it does its thing, one sentence, and what it's built with.
+// One project: the title and its links across the top, a screenshot of its
+// site, one sentence, and what it's built with.
 const ProjectCard = ({ project }) => (
     <article className="project-card">
         <header className="card-head">
