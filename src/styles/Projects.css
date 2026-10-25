@@ -194,9 +194,9 @@
     color: var(--ink-soft);
 }
 
-/* Phones: one column. The open project expands in place under its row,
-   and the kind column is dropped. */
-@media (max-width: 760px) {
+/* Tablets and phones: one column, and the open project expands in place
+   under its row. */
+@media (max-width: 960px) {
     .finder-body {
         grid-template-columns: 1fr;
     }
@@ -236,6 +236,10 @@
         margin-right: 0.9rem;
     }
 
+}
+
+/* Phones: no room for the kind column. */
+@media (max-width: 600px) {
     .finder-head,
     .finder-file {
         grid-template-columns: minmax(0, 1fr) 5.5rem;
