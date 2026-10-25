@@ -15,7 +15,7 @@ const Header = () => (
                 <div className="social-links">
                     <a
                         href="mailto:sohanrambhat@gmail.com"
-                        className="social-email"
+                        className="social-email text-link"
                     >
                         sohanrambhat@gmail.com
                     </a>
@@ -24,7 +24,7 @@ const Header = () => (
                         target="_blank"
                         rel="noreferrer"
                         className="social-link"
-                        aria-label="GitHub"
+                        aria-label="Sohan on GitHub"
                     >
                         <FaGithub />
                     </a>
@@ -33,7 +33,7 @@ const Header = () => (
                         target="_blank"
                         rel="noreferrer"
                         className="social-link"
-                        aria-label="X"
+                        aria-label="Sohan on X"
                     >
                         <FaXTwitter />
                     </a>
@@ -42,7 +42,7 @@ const Header = () => (
                         target="_blank"
                         rel="noreferrer"
                         className="social-link"
-                        aria-label="Instagram"
+                        aria-label="Sohan on Instagram"
                     >
                         <FaInstagram />
                     </a>
@@ -62,9 +62,10 @@ const Header = () => (
                 className="hero-photo"
                 src="/imgs/sohan-320.webp"
                 srcSet="/imgs/sohan-320.webp 320w, /imgs/sohan-600.webp 600w"
-                sizes="(max-width: 600px) 150px, 230px"
+                sizes="(max-width: 600px) 112px, 230px"
                 width="230"
                 height="230"
+                fetchPriority="high"
                 alt="Sohan Bhat in the Rocky Mountains"
             />
         </div>
