@@ -43,7 +43,7 @@ const Robotics = () => (
                     <img
                         className="robotics-photo"
                         src="/imgs/robot-field-480.webp"
-                        srcSet="/imgs/robot-field-480.webp 480w, /imgs/robot-field-800.webp 800w"
+                        srcSet="/imgs/robot-field-480.webp 480w, /imgs/robot-field-640.webp 640w, /imgs/robot-field-800.webp 800w"
                         sizes="(max-width: 768px) calc(100vw - 3rem), 400px"
                         width="480"
                         height="600"
