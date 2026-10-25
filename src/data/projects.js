@@ -1,5 +1,6 @@
-// `date` is when each project started. `image` names the card-<image>-560 and
-// -1120 screenshots in public/imgs, cropped to 16:10.
+// `date` is when each project started. `kind` says what it is. `image` names
+// the card-<image>-560 and -1120 pictures in public/imgs: a 16:10 crop of the
+// moment the project does its thing, not its whole landing page.
 const projects = [
     {
         id: 'wobbl',
@@ -14,11 +15,11 @@ const projects = [
             { label: 'Video', url: 'https://www.youtube.com/watch?v=RtCNKbhABqE' },
         ],
         image: 'wobbl',
-        alt: 'Wobbl’s site: “Simulate anything before you build it.” beside a 3D bracket colored by stress.',
+        alt: 'A bracket under a 2,700 N load, colored by stress, with its failure point marked at 167.0 MPa.',
     },
     {
         id: 'oopsy',
-        kind: 'CLI',
+        kind: 'CLI tool',
         title: 'oopsy',
         date: '2026-10-09',
         line: 'Undo for rm -rf. It snapshots your files, git and Postgres right before a destructive command runs. Type oops to get it back.',
@@ -29,11 +30,11 @@ const projects = [
             { label: 'Video', url: 'https://youtu.be/Krh9cU08rIg' },
         ],
         image: 'oopsy',
-        alt: 'Oopsy’s site: “Undo for rm -rf.” beside a terminal you can try in the browser.',
+        alt: 'A terminal: rm -rf src, then oops restores the folder from snapshot 42.',
     },
     {
         id: 'taro',
-        kind: 'Agent',
+        kind: 'AI agent',
         title: 'taro',
         date: '2026-08-29',
         line: 'A voice assistant for Google Meet. Say “Hey Taro” and it posts to Slack, files GitHub issues, or adds to a to-do list.',
@@ -44,11 +45,11 @@ const projects = [
             { label: 'Video', url: 'https://youtu.be/8_FzNl4uwyY' },
         ],
         image: 'taro',
-        alt: 'Taro’s activation page: “Say it in the meeting. Done before you hang up.”',
+        alt: 'A meeting transcript: “Hey Taro, file an issue about that.” Taro: “Opened issue #142 in acme/web.”',
     },
     {
         id: 'signnet',
-        kind: 'Neural net',
+        kind: 'Neural network',
         title: 'signnet',
         date: '2026-06-12',
         line: 'Sorts German traffic signs with 90% accuracy. Built from scratch in NumPy: no PyTorch, no autograd.',
@@ -58,7 +59,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/signnet' },
         ],
         image: 'signnet',
-        alt: 'signnet’s demo page, “Traffic sign classification, built from scratch,” with its test accuracy.',
+        alt: 'signnet classifying a stop sign as Stop with 100.0% confidence.',
     },
     {
         id: 'ensemble',
@@ -72,11 +73,11 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/ensemble' },
         ],
         image: 'ensemble',
-        alt: 'Ensemble’s shared score for violins, viola, cello, and bass.',
+        alt: 'The opening bars of Ensemble’s shared score, with the first notes in the violins.',
     },
     {
         id: 'vacantcourt',
-        kind: 'Android + web',
+        kind: 'Mobile + web app',
         title: 'VacantCourt',
         date: '2025-03-17',
         line: 'A phone at the court spots players with an on-device model, and the website shows which courts are free.',
@@ -87,7 +88,7 @@ const projects = [
             { label: 'App', url: 'https://github.com/sohan-bhat/VacantCourtApp', title: 'Android app code' },
         ],
         image: 'vacantcourt',
-        alt: 'VacantCourt’s home page, “Skip the drive to a full court,” beside a court camera that boxes each player.',
+        alt: 'VacantCourt’s court camera boxing each player inside the outlines of Court 1 and Court 2.',
     },
     {
         id: 'mochi',
@@ -101,7 +102,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/Mochi' },
         ],
         image: 'mochi',
-        alt: 'Mochi’s home page: “Turn what you have into what you’ll cook tonight.”',
+        alt: 'Mochi’s first suggestion: a spinach and tomato frittata with onion and garlic.',
     },
     {
         id: 'career-ai',
@@ -116,7 +117,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/CareerAI' },
         ],
         image: 'careerai',
-        alt: 'CareerAI suggesting careers from a list of interests.',
+        alt: 'CareerAI turning “I love coding and tennis” into a career idea: sports-tech software engineer.',
     },
 ];
 
