@@ -44,7 +44,7 @@ const Robotics = () => (
                         className="robotics-photo"
                         src="/imgs/robot-field-480.webp"
                         srcSet="/imgs/robot-field-480.webp 480w, /imgs/robot-field-640.webp 640w, /imgs/robot-field-800.webp 800w"
-                        sizes="(max-width: 768px) calc(100vw - 3rem), 400px"
+                        sizes="(max-width: 600px) calc(100vw - 3rem), (max-width: 768px) 300px, 400px"
                         width="480"
                         height="600"
                         alt="Team 2714’s 2026 robot on the REBUILT field, with its Limelight camera at the front."

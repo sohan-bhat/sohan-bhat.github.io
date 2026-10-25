@@ -83,6 +83,12 @@
 
 @media (max-width: 768px) {
     .robotics-layout {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .robotics-layout {
         grid-template-columns: 1fr;
         gap: 2.25rem;
     }
