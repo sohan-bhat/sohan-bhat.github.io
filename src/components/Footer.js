@@ -5,7 +5,7 @@ import '../styles/Footer.css';
 const Footer = () => (
     <footer className="footer">
         <div className="container footer-inner">
-            <p className="footer-name">© {new Date().getFullYear()} Sohan Bhat</p>
+            <p className="footer-name" suppressHydrationWarning>© {new Date().getFullYear()} Sohan Bhat</p>
             <div className="footer-links">
                 <a href="mailto:sohanrambhat@gmail.com" className="footer-email text-link">
                     sohanrambhat@gmail.com
