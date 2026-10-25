@@ -31,7 +31,7 @@ const ProjectCard = ({ project }) => (
             className="card-image"
             src={`/imgs/card-${project.image}-560.webp`}
             srcSet={`/imgs/card-${project.image}-560.webp 560w, /imgs/card-${project.image}-1120.webp 1120w`}
-            sizes="(max-width: 760px) calc(100vw - 4.5rem), 420px"
+            sizes="(max-width: 960px) calc(100vw - 4.5rem), 420px"
             width="560"
             height="350"
             alt={project.alt}

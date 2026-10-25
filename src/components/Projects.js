@@ -29,9 +29,9 @@ const FileIcon = () => (
     </svg>
 );
 
-// On phones the window is one column, and the open project expands in place
-// under its row instead of in a preview pane.
-const NARROW = '(max-width: 760px)';
+// On tablets and phones the window is one column, and the open project
+// expands in place under its row instead of in a preview pane.
+const NARROW = '(max-width: 960px)';
 
 const Projects = () => {
     const [closed, setClosed] = useState([]);
@@ -42,8 +42,8 @@ const Projects = () => {
 
     const toggle = (year) => setClosed((c) => (c.includes(year) ? c.filter((y) => y !== year) : [...c, year]));
 
-    // Tapping the open row on a phone folds it back up; on wider screens the
-    // preview pane always shows something.
+    // Tapping the open row on a narrow screen folds it back up; on wider
+    // screens the preview pane always shows something.
     const select = (id) => setOpenId(id === openId && window.matchMedia(NARROW).matches ? null : id);
 
     const onKeyDown = (event) => {
