@@ -17,7 +17,7 @@
     width: 230px;
     height: 230px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: var(--radius);
     border: 1px solid var(--edge);
     box-shadow: var(--shadow-hard);
     flex-shrink: 0;
@@ -27,7 +27,7 @@
 .hero-hi {
     font-family: var(--mono);
     font-size: 0.95rem;
-    color: var(--accent);
+    color: var(--ink-soft);
     margin-bottom: 0.4rem;
 }
 
@@ -54,38 +54,22 @@
     flex-wrap: wrap;
 }
 
-/* Icon-only links carry a drawn wavy underline (text-decoration is not
-   rendered under a bare svg glyph): gray at rest, accent on hover. */
+/* Icon links: gray at rest, orange on hover and focus, no underline. */
 .social-link {
     display: inline-flex;
+    padding: 2px;
     font-size: 1.3rem;
     color: var(--ink-soft);
-    text-decoration: none;
-    padding-bottom: 7px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M0 3 Q 2 1 4 3 T 8 3' fill='none' stroke='%23a69d90' stroke-width='1'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-position: 0 100%;
-    background-size: 8px 4px;
 }
 
-.social-link:hover {
+.social-link:hover,
+.social-link:focus-visible {
     color: var(--accent);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M0 3 Q 2 1 4 3 T 8 3' fill='none' stroke='%23e2774a' stroke-width='1'/%3E%3C/svg%3E");
 }
 
 .social-email {
     font-family: var(--mono);
     font-size: 0.85rem;
-    color: var(--ink-soft);
-    text-decoration: underline wavy;
-    text-decoration-color: var(--ink-soft);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 5px;
-}
-
-.social-email:hover {
-    color: var(--accent);
-    text-decoration-color: var(--accent);
 }
 
 .hero-cv {
@@ -108,10 +92,10 @@
         gap: 1.1rem;
     }
 
+    /* Above the name, and smaller. */
     .hero-photo {
-        width: 150px;
-        height: 150px;
-        border-radius: 4px;
+        width: 112px;
+        height: 112px;
         margin-right: 0;
     }
 }

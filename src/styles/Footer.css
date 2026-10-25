@@ -27,16 +27,6 @@
 
 .footer-email {
     font-size: 0.8rem;
-    color: var(--ink-soft);
-    text-decoration: underline wavy;
-    text-decoration-color: var(--ink-soft);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 5px;
-}
-
-.footer-email:hover {
-    color: var(--accent);
-    text-decoration-color: var(--accent);
 }
 
 .footer-icons {
@@ -45,19 +35,15 @@
     gap: 1.1rem;
 }
 
+/* Icon links: gray at rest, orange on hover and focus, no underline. */
 .footer-icon {
     display: inline-flex;
+    padding: 4px;
     font-size: 1.05rem;
     color: var(--ink-soft);
-    text-decoration: none;
-    padding-bottom: 6px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M0 3 Q 2 1 4 3 T 8 3' fill='none' stroke='%23a69d90' stroke-width='1'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-position: 0 100%;
-    background-size: 8px 4px;
 }
 
-.footer-icon:hover {
+.footer-icon:hover,
+.footer-icon:focus-visible {
     color: var(--accent);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath d='M0 3 Q 2 1 4 3 T 8 3' fill='none' stroke='%23e2774a' stroke-width='1'/%3E%3C/svg%3E");
 }

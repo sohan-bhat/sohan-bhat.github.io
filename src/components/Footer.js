@@ -7,7 +7,7 @@ const Footer = () => (
         <div className="container footer-inner">
             <p className="footer-name">© {new Date().getFullYear()} Sohan Bhat</p>
             <div className="footer-links">
-                <a href="mailto:sohanrambhat@gmail.com" className="footer-email">
+                <a href="mailto:sohanrambhat@gmail.com" className="footer-email text-link">
                     sohanrambhat@gmail.com
                 </a>
                 <div className="footer-icons">
@@ -16,7 +16,7 @@ const Footer = () => (
                         target="_blank"
                         rel="noreferrer"
                         className="footer-icon"
-                        aria-label="GitHub"
+                        aria-label="Sohan on GitHub"
                     >
                         <FaGithub />
                     </a>
@@ -25,7 +25,7 @@ const Footer = () => (
                         target="_blank"
                         rel="noreferrer"
                         className="footer-icon"
-                        aria-label="X"
+                        aria-label="Sohan on X"
                     >
                         <FaXTwitter />
                     </a>
@@ -34,7 +34,7 @@ const Footer = () => (
                         target="_blank"
                         rel="noreferrer"
                         className="footer-icon"
-                        aria-label="Instagram"
+                        aria-label="Sohan on Instagram"
                     >
                         <FaInstagram />
                     </a>
