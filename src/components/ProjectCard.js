@@ -1,13 +1,13 @@
 import React from 'react';
 import '../styles/ProjectCard.css';
 
-// One project: the title and its links across the top, the screenshot, one
-// sentence, and what it's built with.
+// One project: the title and its links across the top, a picture of the
+// moment it does its thing, one sentence, and what it's built with.
 const ProjectCard = ({ project }) => (
     <article className="project-card">
         <header className="card-head">
             <h3 className="card-title">
-                {project.title}
+                <span className="card-name">{project.title}</span>
                 {project.retired && <span className="card-note">Retired</span>}
             </h3>
             <div className="card-links">
@@ -17,7 +17,7 @@ const ProjectCard = ({ project }) => (
                         href={link.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="card-link"
+                        className="card-link text-link"
                         title={link.title}
                         aria-label={`${project.title} ${link.title || link.label}`}
                     >
@@ -31,7 +31,7 @@ const ProjectCard = ({ project }) => (
             className="card-image"
             src={`/imgs/card-${project.image}-560.webp`}
             srcSet={`/imgs/card-${project.image}-560.webp 560w, /imgs/card-${project.image}-1120.webp 1120w`}
-            sizes="(max-width: 640px) 84vw, 340px"
+            sizes="(max-width: 760px) calc(100vw - 4.5rem), 420px"
             width="560"
             height="350"
             alt={project.alt}
