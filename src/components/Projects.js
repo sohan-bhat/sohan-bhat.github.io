@@ -29,6 +29,10 @@ const FileIcon = () => (
     </svg>
 );
 
+// On phones the window is one column, and the open project expands in place
+// under its row instead of in a preview pane.
+const NARROW = '(max-width: 760px)';
+
 const Projects = () => {
     const [closed, setClosed] = useState([]);
     const [openId, setOpenId] = useState(sorted[0].id);
@@ -37,6 +41,10 @@ const Projects = () => {
     const visible = sorted.filter((p) => !closed.includes(p.date.slice(0, 4)));
 
     const toggle = (year) => setClosed((c) => (c.includes(year) ? c.filter((y) => y !== year) : [...c, year]));
+
+    // Tapping the open row on a phone folds it back up; on wider screens the
+    // preview pane always shows something.
+    const select = (id) => setOpenId(id === openId && window.matchMedia(NARROW).matches ? null : id);
 
     const onKeyDown = (event) => {
         if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
@@ -55,7 +63,7 @@ const Projects = () => {
 
                 <div className="finder">
                     <div className="finder-bar">
-                        <p className="finder-title">Projects</p>
+                        <p className="finder-title">~/sohan/projects</p>
                     </div>
 
                     <div className="finder-body">
@@ -86,11 +94,12 @@ const Projects = () => {
                                                             <button
                                                                 type="button"
                                                                 className="finder-file"
-                                                                aria-pressed={p.id === openId}
+                                                                aria-expanded={p.id === openId}
+                                                                aria-controls={`project-${p.id} finder-preview`}
                                                                 ref={(el) => {
                                                                     rows.current[p.id] = el;
                                                                 }}
-                                                                onClick={() => setOpenId(p.id)}
+                                                                onClick={() => select(p.id)}
                                                             >
                                                                 <span className="finder-name">
                                                                     <FileIcon />
@@ -99,6 +108,11 @@ const Projects = () => {
                                                                 <span className="finder-kind">{p.kind}</span>
                                                                 <span className="finder-date">{shortDate(p)}</span>
                                                             </button>
+                                                            {p.id === openId && (
+                                                                <div className="finder-inline" id={`project-${p.id}`}>
+                                                                    <ProjectCard project={{ ...p, when: shortDate(p) }} />
+                                                                </div>
+                                                            )}
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -109,8 +123,12 @@ const Projects = () => {
                             </ul>
                         </div>
 
-                        <div className="finder-preview" aria-live="polite">
-                            <ProjectCard key={open.id} project={{ ...open, when: shortDate(open) }} />
+                        <div className="finder-preview" id="finder-preview" aria-live="polite">
+                            {open ? (
+                                <ProjectCard key={open.id} project={{ ...open, when: shortDate(open) }} />
+                            ) : (
+                                <p className="finder-empty">Pick a project to see it here.</p>
+                            )}
                         </div>
                     </div>
 

@@ -1,13 +1,16 @@
-/* A project card: a soft raised surface with no border, the title and its
-   links across the top, the screenshot with rounded corners, then one
-   sentence and the stack. */
+/* A project card: a raised surface with no border, the title and its
+   links across the top, the picture, then one sentence and the stack. */
 .project-card {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     padding: 0.7rem 0.7rem 0.95rem;
     background: var(--raised);
-    border-radius: 12px;
+    border-radius: var(--radius);
+    /* It also sits inside the window's monospace list on phones. */
+    font-family: var(--font-body);
+    font-size: 1rem;
 }
 
 .card-head {
@@ -45,19 +48,9 @@
 }
 
 .card-link {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--ink);
-    text-decoration: underline;
-    text-decoration-color: rgb(239 232 220 / 0.35);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
     white-space: nowrap;
-}
-
-.card-link:hover {
-    text-decoration-style: wavy;
-    text-decoration-color: var(--accent);
 }
 
 .card-image {
@@ -66,8 +59,7 @@
     height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
-    object-position: top;
-    border-radius: 8px;
+    border-radius: var(--radius);
     background: var(--sand);
 }
 

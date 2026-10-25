@@ -4,7 +4,7 @@
 .finder {
     background: var(--surface);
     border: 1px solid var(--edge);
-    border-radius: 3px;
+    border-radius: var(--radius);
     box-shadow: var(--shadow-hard);
 }
 
@@ -46,7 +46,7 @@
 .finder-head,
 .finder-file {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 7.5rem 5.5rem;
+    grid-template-columns: minmax(0, 1fr) 8.5rem 5.5rem;
     gap: 0.5rem;
     align-items: center;
 }
@@ -55,9 +55,7 @@
     padding: 0.35rem 0.75rem;
     border-bottom: 1px solid var(--edge);
     background: var(--raised);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-size: 0.75rem;
     color: var(--ink-soft);
 }
 
@@ -91,14 +89,14 @@
     background: rgb(255 255 255 / 0.04);
 }
 
-.finder-file[aria-pressed='true'] {
-    background: var(--accent);
-    color: #13110f;
+.finder-file[aria-expanded='true'] {
+    background: var(--accent-muted);
+    color: var(--ink);
 }
 
-.finder-file[aria-pressed='true'] .finder-kind,
-.finder-file[aria-pressed='true'] .finder-date {
-    color: #13110f;
+.finder-file[aria-expanded='true'] .finder-kind,
+.finder-file[aria-expanded='true'] .finder-date {
+    color: #ddd2c4;
 }
 
 .finder-folder:focus-visible,
@@ -135,7 +133,7 @@
     white-space: nowrap;
 }
 
-/* Folder and file icons. */
+/* Folder and file icons, in the window's grays and creams. */
 .finder-icon {
     flex: none;
     width: 16px;
@@ -143,11 +141,11 @@
 }
 
 .folder-back {
-    fill: #9a5032;
+    fill: #6f665b;
 }
 
 .folder-front {
-    fill: var(--accent);
+    fill: #a69d90;
 }
 
 .folder-sheet {
@@ -175,8 +173,16 @@
     padding: 0.75rem;
 }
 
-.finder-preview .project-card {
-    border-radius: 3px;
+.finder-empty {
+    margin: auto;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+}
+
+/* The open project under its row, shown only on phones. */
+.finder-inline {
+    display: none;
 }
 
 .finder-status {
@@ -188,7 +194,8 @@
     color: var(--ink-soft);
 }
 
-/* Narrow screens: the list above the open project, without the kind column. */
+/* Phones: one column. The open project expands in place under its row,
+   and the kind column is dropped. */
 @media (max-width: 760px) {
     .finder-body {
         grid-template-columns: 1fr;
@@ -196,7 +203,37 @@
 
     .finder-list {
         border-right: 0;
+    }
+
+    .finder-preview {
+        display: none;
+    }
+
+    .finder-inline {
+        display: flex;
+        padding: 0.6rem 0.6rem 0.75rem;
         border-bottom: 1px solid var(--edge);
+        background: var(--bg);
+    }
+
+    /* The row above already shows the name, so it's kept for screen
+       readers only. */
+    .finder-inline .card-name {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    .finder-inline .card-head {
+        justify-content: flex-start;
+        gap: 0;
+    }
+
+    .finder-inline .card-note {
+        margin-right: 0.9rem;
     }
 
     .finder-head,
@@ -207,9 +244,5 @@
     .finder-head span:nth-child(2),
     .finder-kind {
         display: none;
-    }
-
-    .finder {
-        box-shadow: 4px 4px 0 rgb(0 0 0 / 0.55);
     }
 }
