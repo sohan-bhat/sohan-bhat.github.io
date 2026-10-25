@@ -11,14 +11,26 @@
       content="Sohan Bhat's Portfolio"
     />
     <title>Sohan Bhat</title>
-    <!-- Linked here rather than imported from the CSS, so the browser
-         requests the fonts right away. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Figtree:ital,wght@0,400..600;1,400&display=swap" />
+    <!-- Self-hosted, so no other server has to answer before the page can
+         paint. Preloaded so the files start downloading right away. -->
+    <link rel="preload" href="%PUBLIC_URL%/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Fraunces';
+        font-weight: 500 700;
+        font-display: swap;
+        src: url('%PUBLIC_URL%/fonts/fraunces-latin.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Figtree';
+        font-weight: 400 600;
+        font-display: swap;
+        src: url('%PUBLIC_URL%/fonts/figtree-latin.woff2') format('woff2');
+      }
+    </style>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
 </html>
