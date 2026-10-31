@@ -64,7 +64,44 @@ const Projects = () => {
 
                 <div className="finder">
                     <div className="finder-bar">
-                        <p className="finder-title">~/sohan/projects</p>
+                        <p className="finder-title">
+                            <FolderIcon />
+                            projects
+                        </p>
+                        {/* Minimize, maximize and close, for the look only. */}
+                        <span className="finder-controls" aria-hidden="true">
+                            <svg viewBox="0 0 10 10">
+                                <path d="M0 5.5h10" />
+                            </svg>
+                            <svg viewBox="0 0 10 10">
+                                <rect x="0.5" y="0.5" width="9" height="9" rx="1.5" />
+                            </svg>
+                            <svg viewBox="0 0 10 10">
+                                <path d="M0.5 0.5l9 9M9.5 0.5l-9 9" />
+                            </svg>
+                        </span>
+                    </div>
+
+                    {/* Back, forward and up, then the path, as in File Explorer. */}
+                    <div className="finder-nav">
+                        <span className="finder-arrows" aria-hidden="true">
+                            <svg viewBox="0 0 16 16">
+                                <path d="M13 8H3M7.5 3.5L3 8l4.5 4.5" />
+                            </svg>
+                            <svg viewBox="0 0 16 16">
+                                <path d="M3 8h10M8.5 3.5L13 8l-4.5 4.5" />
+                            </svg>
+                            <svg viewBox="0 0 16 16">
+                                <path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" />
+                            </svg>
+                        </span>
+                        <p className="finder-path">
+                            <FolderIcon />
+                            <span className="finder-sep" aria-hidden="true">›</span>
+                            sohan
+                            <span className="finder-sep" aria-hidden="true">›</span>
+                            projects
+                        </p>
                     </div>
 
                     <div className="finder-body">

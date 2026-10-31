@@ -1,30 +1,93 @@
-/* The projects window, styled after an old desktop file manager: square
-   corners, a hard drop shadow, a pinstriped title bar, a
-   compact list in monospace, and a status bar along the bottom. */
+/* The projects window, styled after Windows 11's File Explorer in dark mode,
+   in the site's colors: 8px corners, a title bar with the window buttons on
+   the right, an address bar, a Details list grouped by year, and a status
+   bar along the bottom. It keeps the site's hard shadow. */
 .finder {
+    overflow: hidden;
     background: var(--surface);
     border: 1px solid var(--edge);
-    border-radius: var(--radius);
+    border-radius: 8px;
     box-shadow: var(--shadow-hard);
 }
 
 .finder-bar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 28px;
-    padding: 0 10px;
-    border-bottom: 1px solid var(--edge);
-    background: repeating-linear-gradient(to bottom, #3b352e 0 1px, var(--raised) 1px 3px);
+    justify-content: space-between;
+    height: 36px;
+    padding-left: 12px;
+    background: var(--raised);
 }
 
 .finder-title {
-    padding: 0 10px;
-    background: var(--raised);
-    font-family: var(--mono);
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+}
+
+/* Each button is 46px wide, as in Windows; the glyph is 10px. */
+.finder-controls {
+    display: flex;
+    align-self: stretch;
+}
+
+.finder-controls svg {
+    width: 46px;
+    height: 100%;
+    padding: 0 18px;
+    fill: none;
+    stroke: var(--ink-soft);
+    stroke-width: 1;
+}
+
+.finder-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px 8px;
+    border-bottom: 1px solid var(--line);
+    background: var(--raised);
+}
+
+.finder-arrows {
+    display: flex;
+    flex: none;
+}
+
+.finder-arrows svg {
+    width: 30px;
+    height: 28px;
+    padding: 6px 7px;
+    fill: none;
+    stroke: var(--ink-soft);
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* There's nowhere to go back or forward to, so those two are dimmed. */
+.finder-arrows svg:not(:last-child) {
+    opacity: 0.45;
+}
+
+.finder-path {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    height: 30px;
+    padding: 0 10px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: rgb(255 255 255 / 0.05);
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+.finder-sep {
+    color: var(--ink-soft);
 }
 
 .finder-body {
