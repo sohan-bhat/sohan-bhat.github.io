@@ -4,12 +4,15 @@
      1. Editorial, for everything except Projects: Fraunces headings that end
         in an orange period, Figtree body text, and mono for small labels,
         metadata and buttons.
-     2. The retro Mac window, used only for the Projects browser.
-   - Orange (--accent) is for heading periods, links, button text and the
-     research border. The selected row in the window is a muted orange
-     (--accent-muted). Nothing else is orange.
+     2. A Windows 11 File Explorer window, used only for the Projects
+        browser, in the site's colors and body font.
+   - Orange (--accent) is for heading periods, links, button text, the
+     research border and the selected row's marker in the window. The
+     selected row is filled with a faint orange (--accent-muted). Nothing
+     else is orange.
    - One shadow, --shadow-hard, for buttons, photos and the window. No soft
-     shadows anywhere. One corner radius, --radius.
+     shadows anywhere. One corner radius, --radius, except the window, which
+     has Windows 11's rounder corners.
    - No all-caps headings, and no italics except in quotes.
    - The wavy underline is only for text links. Icons get a hover and a
      focus state instead.
@@ -26,9 +29,9 @@
     --ink-soft: #a69d90;
     --line: #2f2a24;
     --accent: #e2774a;
-    /* The accent with less saturation and light, for the selected row;
-       cream text on it passes AA. */
-    --accent-muted: #784d3a;
+    /* The accent at 16%, for the selected row's fill; all of the row's
+       text passes AA on it. */
+    --accent-muted: rgb(226 119 74 / 0.16);
     /* Fraunces, a warm soft serif, for names and headings; Figtree for text. */
     --font-display: 'Fraunces', Georgia, serif;
     --font-body: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;

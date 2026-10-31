@@ -11,12 +11,11 @@ const years = [...new Set(sorted.map((p) => p.date.slice(0, 4)))];
 const monthOf = (p) => MONTHS[Number(p.date.slice(5, 7)) - 1];
 const shortDate = (p) => `${monthOf(p)} ${p.date.slice(0, 4)}`;
 
-// A tabbed folder, open or closed.
-const FolderIcon = ({ open }) => (
+// A tabbed folder.
+const FolderIcon = () => (
     <svg className="finder-icon" viewBox="0 0 16 13" aria-hidden="true">
         <path className="folder-back" d="M1 2.5A1 1 0 0 1 2 1.5h4l1.5 1.5H14a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
-        {open && <rect className="folder-sheet" x="2.5" y="3.5" width="11" height="6" />}
-        <path className="folder-front" d={open ? 'M1 7h14v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z' : 'M1 5h14v6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z'} />
+        <path className="folder-front" d="M1 5h14v6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
     </svg>
 );
 
@@ -108,7 +107,7 @@ const Projects = () => {
                         <div className="finder-list" onKeyDown={onKeyDown}>
                             <div className="finder-head" aria-hidden="true">
                                 <span>Name</span>
-                                <span>Kind</span>
+                                <span>Type</span>
                                 <span>Date</span>
                             </div>
                             <ul>
@@ -117,13 +116,12 @@ const Projects = () => {
                                     const items = sorted.filter((p) => p.date.startsWith(year));
                                     return (
                                         <li key={year}>
-                                            <button type="button" className="finder-folder" aria-expanded={isOpen} onClick={() => toggle(year)}>
-                                                <span className="finder-arrow" aria-hidden="true">
-                                                    {isOpen ? '▾' : '▸'}
-                                                </span>
-                                                <FolderIcon open={isOpen} />
+                                            <button type="button" className="finder-group" aria-expanded={isOpen} onClick={() => toggle(year)}>
+                                                <svg className="finder-chevron" viewBox="0 0 10 10" aria-hidden="true">
+                                                    <path d="M2 3.5l3 3 3-3" />
+                                                </svg>
                                                 {year}
-                                                <span className="finder-count">{items.length}</span>
+                                                <span className="finder-count">({items.length})</span>
                                             </button>
                                             {isOpen && (
                                                 <ul>
@@ -183,7 +181,8 @@ const Projects = () => {
                     </div>
 
                     <p className="finder-status">
-                        {sorted.length} items, {years.length} folders
+                        <span>{sorted.length} items</span>
+                        {open && <span>1 item selected</span>}
                     </p>
                 </div>
             </div>

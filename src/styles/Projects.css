@@ -96,16 +96,18 @@
 }
 
 .finder-list {
-    border-right: 1px solid var(--edge);
-    font-family: var(--mono);
-    font-size: 0.8rem;
+    padding-bottom: 6px;
+    border-right: 1px solid var(--line);
+    font-size: 0.84rem;
 }
 
 .finder-list ul {
     list-style: none;
 }
 
-/* Name, kind, and date columns, shared by the header and every row. */
+/* Name, type, and date columns, shared by the header and every row. The
+   header starts where the row icons do: 4px of margin, 8px of padding, and
+   18px for a group's chevron. */
 .finder-head,
 .finder-file {
     display: grid;
@@ -115,20 +117,36 @@
 }
 
 .finder-head {
-    padding: 0.35rem 0.75rem;
-    border-bottom: 1px solid var(--edge);
-    background: var(--raised);
+    padding: 0.4rem 12px 0.3rem 30px;
     font-size: 0.75rem;
     color: var(--ink-soft);
 }
 
-.finder-folder,
+/* The thin dividers between column headings. */
+.finder-head span + span {
+    position: relative;
+}
+
+.finder-head span + span::before {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: -0.3rem;
+    width: 1px;
+    background: var(--line);
+    content: '';
+}
+
+/* Rows are inset with rounded corners, as in Windows 11. */
+.finder-group,
 .finder-file {
-    width: 100%;
+    position: relative;
+    width: calc(100% - 8px);
     min-height: 30px;
-    padding: 0.25rem 0.75rem;
+    margin: 0 4px;
+    padding: 0.25rem 8px;
     border: 0;
-    border-bottom: 1px solid rgb(255 255 255 / 0.04);
+    border-radius: 4px;
     background: none;
     color: var(--ink);
     font: inherit;
@@ -136,53 +154,78 @@
     cursor: pointer;
 }
 
-.finder-folder {
+.finder-file {
+    padding-left: 26px;
+}
+
+/* A year group: chevron, year and count, then a rule to the edge. */
+.finder-group {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 8px;
+    margin-top: 4px;
     font-weight: 600;
 }
 
-.finder-file {
-    padding-left: 2.1rem;
+.finder-group::after {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    content: '';
 }
 
-.finder-folder:hover,
+.finder-chevron {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    fill: none;
+    stroke: var(--ink-soft);
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.finder-group[aria-expanded='false'] .finder-chevron {
+    transform: rotate(-90deg);
+}
+
+.finder-count {
+    font-weight: 400;
+    color: var(--ink-soft);
+}
+
+.finder-group:hover,
 .finder-file:hover {
-    background: rgb(255 255 255 / 0.04);
+    background: rgb(255 255 255 / 0.05);
 }
 
+/* The open project: a faint orange fill and an orange marker on the left. */
 .finder-file[aria-expanded='true'] {
     background: var(--accent-muted);
-    color: var(--ink);
 }
 
-.finder-file[aria-expanded='true'] .finder-kind,
-.finder-file[aria-expanded='true'] .finder-date {
-    color: #ddd2c4;
+.finder-file[aria-expanded='true']::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 3px;
+    height: 16px;
+    margin-top: -8px;
+    border-radius: 2px;
+    background: var(--accent);
+    content: '';
 }
 
-.finder-folder:focus-visible,
+.finder-group:focus-visible,
 .finder-file:focus-visible {
     outline: 2px solid var(--ink);
     outline-offset: -2px;
 }
 
-.finder-arrow {
-    width: 0.8rem;
-    color: var(--ink-soft);
-}
-
-.finder-count {
-    margin-left: auto;
-    font-weight: 400;
-    color: var(--ink-soft);
-}
-
 .finder-name {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.5rem;
     min-width: 0;
     overflow: hidden;
     white-space: nowrap;
@@ -218,10 +261,6 @@
     fill: #a69d90;
 }
 
-.folder-sheet {
-    fill: #efe8dc;
-}
-
 .file-page {
     fill: #efe8dc;
 }
@@ -245,8 +284,7 @@
 
 .finder-empty {
     margin: auto;
-    font-family: var(--mono);
-    font-size: 0.78rem;
+    font-size: 0.84rem;
     color: var(--ink-soft);
 }
 
@@ -256,12 +294,17 @@
 }
 
 .finder-status {
-    padding: 0.3rem 0.75rem;
-    border-top: 1px solid var(--edge);
-    background: var(--raised);
-    font-family: var(--mono);
-    font-size: 0.72rem;
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.35rem 12px;
+    border-top: 1px solid var(--line);
+    font-size: 0.75rem;
     color: var(--ink-soft);
+}
+
+.finder-status span + span {
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--line);
 }
 
 /* Tablets and phones: one column, and the open project expands in place
@@ -281,9 +324,7 @@
 
     .finder-inline {
         display: flex;
-        padding: 0.6rem 0.6rem 0.75rem;
-        border-bottom: 1px solid var(--edge);
-        background: var(--bg);
+        padding: 4px 4px 8px;
     }
 
     /* The row above already shows the name, so it's kept for screen
