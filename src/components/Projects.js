@@ -20,7 +20,8 @@ const FolderIcon = ({ open }) => (
     </svg>
 );
 
-// A page with a folded corner and a few lines of text.
+// A page with a folded corner and a few lines of text, for a project whose
+// site has no logo of its own.
 const FileIcon = () => (
     <svg className="finder-icon" viewBox="0 0 13 15" aria-hidden="true">
         <path className="file-page" d="M1.5 1h6.5l3.5 3.5V13a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
@@ -102,7 +103,19 @@ const Projects = () => {
                                                                 onClick={() => select(p.id)}
                                                             >
                                                                 <span className="finder-name">
-                                                                    <FileIcon />
+                                                                    {p.icon ? (
+                                                                        <img
+                                                                            className="finder-icon finder-logo"
+                                                                            src={p.icon}
+                                                                            alt=""
+                                                                            width="16"
+                                                                            height="16"
+                                                                            loading="lazy"
+                                                                            decoding="async"
+                                                                        />
+                                                                    ) : (
+                                                                        <FileIcon />
+                                                                    )}
                                                                     {p.title}
                                                                 </span>
                                                                 <span className="finder-kind">{p.kind}</span>

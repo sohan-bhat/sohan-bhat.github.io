@@ -1,6 +1,7 @@
 // `date` is when each project started. `kind` says what it is. `image` names
 // the card-<image>-560 and -1120 screenshots in public/imgs: an overview of
-// each project's site, 16:10.
+// each project's site, 16:10. `icon` is the site's own logo, shown in the
+// project's row; a project without one gets a plain page icon.
 const projects = [
     {
         id: 'wobbl',
@@ -15,6 +16,7 @@ const projects = [
             { label: 'Video', url: 'https://www.youtube.com/watch?v=RtCNKbhABqE' },
         ],
         image: 'wobbl',
+        icon: '/imgs/icons/wobbl.svg',
         alt: 'Wobbl’s site: “Simulate anything before you build it.” beside a 3D bracket colored by stress.',
     },
     {
@@ -30,6 +32,7 @@ const projects = [
             { label: 'Video', url: 'https://youtu.be/Krh9cU08rIg' },
         ],
         image: 'oopsy',
+        icon: '/imgs/icons/oopsy.svg',
         alt: 'Oopsy’s site: “Undo for rm -rf.” beside a terminal you can try in the browser.',
     },
     {
@@ -45,6 +48,7 @@ const projects = [
             { label: 'Video', url: 'https://youtu.be/8_FzNl4uwyY' },
         ],
         image: 'taro',
+        icon: '/imgs/icons/taro.svg',
         alt: 'Taro’s site: “Meeting follow-ups get lost. Taro does them before you hang up.”',
     },
     {
@@ -59,6 +63,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/signnet' },
         ],
         image: 'signnet',
+        icon: '/imgs/icons/signnet.svg',
         alt: 'signnet’s site, “Traffic sign classification, built from scratch,” with its test accuracy.',
     },
     {
@@ -73,6 +78,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/ensemble' },
         ],
         image: 'ensemble',
+        icon: '/imgs/icons/ensemble.png',
         alt: 'Ensemble’s shared score for violins, viola, cello, and bass.',
     },
     {
@@ -88,6 +94,7 @@ const projects = [
             { label: 'App', url: 'https://github.com/sohan-bhat/VacantCourtApp', title: 'Android app code' },
         ],
         image: 'vacantcourt',
+        icon: '/imgs/icons/vacantcourt.png',
         alt: 'VacantCourt’s site, “Skip the drive to a full court,” beside a court camera that boxes each player.',
     },
     {
@@ -102,6 +109,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/Mochi' },
         ],
         image: 'mochi',
+        icon: '/imgs/icons/mochi.png',
         alt: 'Mochi’s site: “Turn what you have into what you’ll cook tonight.”',
     },
     {
@@ -117,6 +125,7 @@ const projects = [
             { label: 'Code', url: 'https://github.com/sohan-bhat/CareerAI' },
         ],
         image: 'careerai',
+        icon: '/imgs/icons/career-ai.png',
         alt: 'CareerAI suggesting careers from a list of interests.',
     },
 ];

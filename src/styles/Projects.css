@@ -140,6 +140,13 @@
     height: 14px;
 }
 
+/* A project's own logo, rounded like an app icon since some are opaque
+   squares. */
+.finder-logo {
+    height: 16px;
+    border-radius: 3px;
+}
+
 .folder-back {
     fill: #6f665b;
 }
