@@ -8,7 +8,7 @@ const projects = [
         kind: 'Simulator',
         title: 'wobbl',
         date: '2026-10-13',
-        line: 'Ask your coding agent if a part will crack, a circuit will burn, or a rocket will fly. Wobbl works out the physics, runs a real solver, and checks the answer before you see it.',
+        line: 'Ask your coding agent if a part will crack, a circuit will burn, or a rocket will fly. Wobbl works out the physics and runs a real solver, then checks the answer before you see it.',
         stack: ['Python', 'SciPy', 'Three.js'],
         links: [
             { label: 'Site', url: 'https://sohan-bhat.github.io/wobbl' },
@@ -17,7 +17,7 @@ const projects = [
         ],
         image: 'wobbl',
         icon: '/imgs/icons/wobbl.svg',
-        alt: 'Wobbl’s site: “Simulate anything before you build it.” beside a 3D bracket colored by stress.',
+        alt: 'Wobbl’s site, “Simulate anything before you build it,” beside a 3D bracket colored by stress.',
     },
     {
         id: 'oopsy',
@@ -33,7 +33,7 @@ const projects = [
         ],
         image: 'oopsy',
         icon: '/imgs/icons/oopsy.svg',
-        alt: 'Oopsy’s site: “Undo for rm -rf.” beside a terminal you can try in the browser.',
+        alt: 'Oopsy’s site, “Undo for rm -rf,” beside a terminal you can try in the browser.',
     },
     {
         id: 'taro',
@@ -49,14 +49,14 @@ const projects = [
         ],
         image: 'taro',
         icon: '/imgs/icons/taro.svg',
-        alt: 'Taro’s site: “Meeting follow-ups get lost. Taro does them before you hang up.”',
+        alt: 'Taro’s site, which says “Meeting follow-ups get lost. Taro does them before you hang up.”',
     },
     {
         id: 'signnet',
         kind: 'Neural network',
         title: 'signnet',
         date: '2026-06-12',
-        line: 'Sorts German traffic signs with 90% accuracy. Built from scratch in NumPy: no PyTorch, no autograd.',
+        line: 'Sorts German traffic signs with 90% accuracy. I wrote it from scratch in NumPy, without PyTorch or autograd.',
         stack: ['Python', 'NumPy', 'React'],
         links: [
             { label: 'Site', url: 'https://signnet-cnn.netlify.app' },
@@ -71,7 +71,7 @@ const projects = [
         kind: 'Web app',
         title: 'ensemble',
         date: '2026-02-08',
-        line: 'An r/place for music: one orchestral score the whole world writes, note by note.',
+        line: 'An r/place for music, where the whole world writes one orchestral score note by note.',
         stack: ['React', 'Express', 'VexFlow'],
         links: [
             { label: 'Site', url: 'https://ensemble-qnd2.onrender.com' },
@@ -110,7 +110,7 @@ const projects = [
         ],
         image: 'mochi',
         icon: '/imgs/icons/mochi.png',
-        alt: 'Mochi’s site: “Turn what you have into what you’ll cook tonight.”',
+        alt: 'Mochi’s site, which says “Turn what you have into what you’ll cook tonight.”',
     },
     {
         id: 'career-ai',

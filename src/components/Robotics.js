@@ -29,7 +29,7 @@ const seasons = [
             {
                 title: 'Airstrike targeting app',
                 meta: '2026, Team 2714',
-                detail: 'A tablet app for the drive team: tap anywhere on the field to set a passing target, and the robot aims there instead of using auto-aim.',
+                detail: 'A tablet app that lets the drive team tap anywhere on the field to set a passing target. The robot then aims there instead of using auto-aim.',
                 code: 'https://github.com/FRC2714/Airstrike-2026',
             },
         ],
@@ -99,7 +99,7 @@ const Robotics = () => (
                 </div>
             ))}
 
-            <p className="robotics-results">Team results: Winner, Fort Worth District 2025 and 2026</p>
+            <p className="robotics-results">Team 2714 won the Fort Worth District event in 2025 and 2026.</p>
             <a
                 className="tba-link retro-button"
                 href="https://www.thebluealliance.com/team/2714"
