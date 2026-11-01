@@ -29,6 +29,14 @@ const FileIcon = () => (
     </svg>
 );
 
+// The project's own logo, or the page icon if its site has none.
+const ItemIcon = ({ project }) =>
+    project.icon ? (
+        <img className="finder-icon finder-logo" src={project.icon} alt="" width="16" height="16" loading="lazy" decoding="async" />
+    ) : (
+        <FileIcon />
+    );
+
 // On tablets and phones the window is one column, and the open project
 // expands in place under its row instead of in a preview pane.
 const NARROW = '(max-width: 960px)';
@@ -144,19 +152,7 @@ const Projects = () => {
                                                                     onClick={() => select(p.id)}
                                                                 >
                                                                     <span className="finder-name">
-                                                                        {p.icon ? (
-                                                                            <img
-                                                                                className="finder-icon finder-logo"
-                                                                                src={p.icon}
-                                                                                alt=""
-                                                                                width="16"
-                                                                                height="16"
-                                                                                loading="lazy"
-                                                                                decoding="async"
-                                                                            />
-                                                                        ) : (
-                                                                            <FileIcon />
-                                                                        )}
+                                                                        <ItemIcon project={p} />
                                                                         {p.title}
                                                                     </span>
                                                                     <span className="finder-kind">{p.kind}</span>
@@ -186,10 +182,26 @@ const Projects = () => {
                             </div>
                         </div>
 
-                        <p className="finder-status">
-                            <span>{sorted.length} items</span>
-                            {open && <span>1 item selected</span>}
-                        </p>
+                        {/* The details pane along the bottom, as in Windows 7. */}
+                        <div className="finder-details">
+                            {open ? (
+                                <>
+                                    <ItemIcon project={open} />
+                                    <p>
+                                        <span className="finder-details-name">{open.title}</span>
+                                        {open.kind}
+                                    </p>
+                                    <p className="finder-details-date">
+                                        Date: <span>{shortDate(open)}</span>
+                                    </p>
+                                </>
+                            ) : (
+                                <>
+                                    <FolderIcon />
+                                    <p>{sorted.length} items</p>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
