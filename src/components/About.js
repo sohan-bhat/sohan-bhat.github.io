@@ -30,14 +30,14 @@ const About = () => (
                         <h3 className="research-paper-title">
                             Early detection of silent training failures in neural networks
                         </h3>
-                        <p className="research-meta">Research proposal, 2026</p>
+                        <p className="research-meta">Research paper, 2026</p>
                         <a
                             className="research-link retro-button"
-                            href="/lhd-proposal.pdf"
+                            href="/lhd-paper.pdf"
                             target="_blank"
                             rel="noreferrer"
                         >
-                            Read the proposal
+                            Read the paper
                         </a>
                     </article>
                 </aside>
