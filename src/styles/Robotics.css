@@ -13,6 +13,11 @@
     align-items: start;
 }
 
+/* One row per season, newest first. */
+.robotics-layout + .robotics-layout {
+    margin-top: 3.5rem;
+}
+
 .robotics-photo {
     display: block;
     width: 100%;
