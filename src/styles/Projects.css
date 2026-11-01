@@ -1,12 +1,8 @@
-/* The projects window, laid out like Windows 7's Explorer but built from
-   the site's own materials, so it sits with the rest of the page: a flat
-   raised frame with a hairline edge and the hard shadow, window buttons
-   hanging from its top edge, round back and forward buttons beside the
-   path, a Details list grouped by year, and a details pane along the
-   bottom. Labels and metadata are in mono, as elsewhere. */
+/* The projects window, styled after an old desktop file manager: square
+   corners, a hard drop shadow, a pinstriped title bar, a
+   compact list in monospace, and a status bar along the bottom. */
 .finder {
-    padding: 0 7px 7px;
-    background: var(--raised);
+    background: var(--surface);
     border: 1px solid var(--edge);
     border-radius: var(--radius);
     box-shadow: var(--shadow-hard);
@@ -14,111 +10,21 @@
 
 .finder-bar {
     display: flex;
-    justify-content: flex-end;
-    height: 24px;
-}
-
-.finder-controls {
-    display: flex;
-    align-self: flex-start;
-    margin-top: -1px;
-    overflow: hidden;
-    border: 1px solid var(--edge);
-    border-top: 0;
-    border-radius: 0 0 var(--radius) var(--radius);
-}
-
-.finder-btn {
-    display: grid;
-    place-items: center;
-    width: 26px;
-    height: 19px;
-    background: var(--sand);
-}
-
-.finder-btn + .finder-btn {
-    border-left: 1px solid var(--edge);
-}
-
-/* Windows 7's close button was wider and red; here it's a faint orange. */
-.finder-close {
-    width: 43px;
-    background: var(--accent-muted);
-}
-
-.finder-btn svg {
-    width: 10px;
-    height: 10px;
-    fill: none;
-    stroke: var(--ink-soft);
-    stroke-width: 1.5;
-}
-
-.finder-nav {
-    display: flex;
     align-items: center;
-    gap: 8px;
-    padding-bottom: 7px;
+    justify-content: center;
+    height: 28px;
+    padding: 0 10px;
+    border-bottom: 1px solid var(--edge);
+    background: repeating-linear-gradient(to bottom, #3b352e 0 1px, var(--raised) 1px 3px);
 }
 
-.finder-orbs {
-    display: flex;
-    flex: none;
-}
-
-/* There's nowhere to go back or forward to, so both are dimmed, as Windows
-   does. */
-.finder-orb {
-    display: grid;
-    place-items: center;
-    width: 26px;
-    height: 26px;
-    border: 1px solid var(--edge);
-    border-radius: 50%;
-    background: var(--sand);
-    opacity: 0.6;
-}
-
-.finder-orb + .finder-orb {
-    margin-left: -2px;
-}
-
-.finder-orb svg {
-    width: 14px;
-    height: 14px;
-    fill: none;
-    stroke: var(--ink-soft);
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.finder-path {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    gap: 6px;
-    min-width: 0;
-    height: 26px;
-    padding: 0 8px;
-    overflow: hidden;
-    border: 1px solid var(--edge);
-    border-radius: var(--radius);
-    background: var(--surface);
+.finder-title {
+    padding: 0 10px;
+    background: var(--raised);
     font-family: var(--mono);
-    font-size: 0.75rem;
-    white-space: nowrap;
-}
-
-.finder-sep {
-    font-size: 0.6rem;
-    color: var(--ink-soft);
-}
-
-/* The window's contents, set into the frame. */
-.finder-pane {
-    border: 1px solid var(--edge);
-    background: var(--surface);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
 }
 
 .finder-body {
@@ -127,18 +33,16 @@
 }
 
 .finder-list {
-    padding-bottom: 6px;
-    border-right: 1px solid var(--line);
-    font-size: 0.84rem;
+    border-right: 1px solid var(--edge);
+    font-family: var(--mono);
+    font-size: 0.8rem;
 }
 
 .finder-list ul {
     list-style: none;
 }
 
-/* Name, type, and date columns, shared by the header and every row. The
-   header starts where the row icons do: 4px of margin, 8px of padding, and
-   18px for a group's chevron. */
+/* Name, kind, and date columns, shared by the header and every row. */
 .finder-head,
 .finder-file {
     display: grid;
@@ -148,52 +52,20 @@
 }
 
 .finder-head {
-    padding: 0 12px 0 30px;
-    border-bottom: 1px solid var(--line);
-    font-family: var(--mono);
-    font-size: 0.72rem;
+    padding: 0.35rem 0.75rem;
+    border-bottom: 1px solid var(--edge);
+    background: var(--raised);
+    font-size: 0.75rem;
     color: var(--ink-soft);
 }
 
-.finder-head span {
-    position: relative;
-    padding: 0.35rem 0;
-}
-
-/* Dividers between the column headings, full height as in Windows 7. */
-.finder-head span + span::before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -0.3rem;
-    width: 1px;
-    background: var(--line);
-    content: '';
-}
-
-/* The list is sorted by date, newest first, so Date gets the small sort
-   chevron at the top of its heading. */
-.finder-head span:last-child::after {
-    position: absolute;
-    top: 1px;
-    left: 50%;
-    width: 8px;
-    height: 4px;
-    margin-left: -4px;
-    background: var(--ink-soft);
-    clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 35%, 50% 100%, 0 35%);
-    content: '';
-}
-
-/* Rows are inset a little, so the highlight's border shows on both sides. */
-.finder-group,
+.finder-folder,
 .finder-file {
-    width: calc(100% - 8px);
+    width: 100%;
     min-height: 30px;
-    margin: 0 4px;
-    padding: 0.25rem 8px;
+    padding: 0.25rem 0.75rem;
     border: 0;
-    border-radius: 3px;
+    border-bottom: 1px solid rgb(255 255 255 / 0.04);
     background: none;
     color: var(--ink);
     font: inherit;
@@ -201,67 +73,53 @@
     cursor: pointer;
 }
 
-.finder-file {
-    padding-left: 26px;
-}
-
-/* A year group: chevron, year and count, then a rule that fades out. */
-.finder-group {
+.finder-folder {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 4px;
+    gap: 0.45rem;
+    font-weight: 600;
 }
 
-.finder-group::after {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, var(--edge), transparent);
-    content: '';
+.finder-file {
+    padding-left: 2.1rem;
 }
 
-.finder-chevron {
-    flex: none;
-    width: 10px;
-    height: 10px;
-    fill: none;
-    stroke: var(--ink-soft);
-    stroke-width: 1.25;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.finder-group[aria-expanded='false'] .finder-chevron {
-    transform: rotate(-90deg);
-}
-
-.finder-count {
-    color: var(--ink-soft);
-}
-
-/* Windows 7's highlight, a fill with a thin border, kept flat: faint on
-   hover and a faint orange for the open project. */
-.finder-group:hover,
+.finder-folder:hover,
 .finder-file:hover {
     background: rgb(255 255 255 / 0.04);
-    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
 }
 
 .finder-file[aria-expanded='true'] {
     background: var(--accent-muted);
-    box-shadow: inset 0 0 0 1px rgb(226 119 74 / 0.4);
+    color: var(--ink);
 }
 
-.finder-group:focus-visible,
+.finder-file[aria-expanded='true'] .finder-kind,
+.finder-file[aria-expanded='true'] .finder-date {
+    color: #ddd2c4;
+}
+
+.finder-folder:focus-visible,
 .finder-file:focus-visible {
     outline: 2px solid var(--ink);
     outline-offset: -2px;
 }
 
+.finder-arrow {
+    width: 0.8rem;
+    color: var(--ink-soft);
+}
+
+.finder-count {
+    margin-left: auto;
+    font-weight: 400;
+    color: var(--ink-soft);
+}
+
 .finder-name {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
     min-width: 0;
     overflow: hidden;
     white-space: nowrap;
@@ -270,8 +128,6 @@
 .finder-kind,
 .finder-date {
     overflow: hidden;
-    font-family: var(--mono);
-    font-size: 0.75rem;
     color: var(--ink-soft);
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -299,6 +155,10 @@
     fill: #a69d90;
 }
 
+.folder-sheet {
+    fill: #efe8dc;
+}
+
 .file-page {
     fill: #efe8dc;
 }
@@ -322,7 +182,8 @@
 
 .finder-empty {
     margin: auto;
-    font-size: 0.84rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
     color: var(--ink-soft);
 }
 
@@ -331,40 +192,13 @@
     display: none;
 }
 
-/* The details pane: the open project's logo, name, type and date, or the
-   item count when nothing is open. */
-.finder-details {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 12px;
-    border-top: 1px solid var(--line);
+.finder-status {
+    padding: 0.3rem 0.75rem;
+    border-top: 1px solid var(--edge);
     background: var(--raised);
     font-family: var(--mono);
     font-size: 0.72rem;
-    line-height: 1.5;
     color: var(--ink-soft);
-}
-
-.finder-details .finder-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 5px;
-}
-
-.finder-details-name {
-    display: block;
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    color: var(--ink);
-}
-
-.finder-details-date {
-    margin-left: 1.5rem;
-}
-
-.finder-details-date span {
-    color: var(--ink);
 }
 
 /* Tablets and phones: one column, and the open project expands in place
@@ -384,7 +218,9 @@
 
     .finder-inline {
         display: flex;
-        padding: 4px 4px 8px;
+        padding: 0.6rem 0.6rem 0.75rem;
+        border-bottom: 1px solid var(--edge);
+        background: var(--bg);
     }
 
     /* The row above already shows the name, so it's kept for screen

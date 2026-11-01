@@ -11,11 +11,12 @@ const years = [...new Set(sorted.map((p) => p.date.slice(0, 4)))];
 const monthOf = (p) => MONTHS[Number(p.date.slice(5, 7)) - 1];
 const shortDate = (p) => `${monthOf(p)} ${p.date.slice(0, 4)}`;
 
-// A tabbed folder.
-const FolderIcon = () => (
+// A tabbed folder, open or closed.
+const FolderIcon = ({ open }) => (
     <svg className="finder-icon" viewBox="0 0 16 13" aria-hidden="true">
         <path className="folder-back" d="M1 2.5A1 1 0 0 1 2 1.5h4l1.5 1.5H14a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
-        <path className="folder-front" d="M1 5h14v6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
+        {open && <rect className="folder-sheet" x="2.5" y="3.5" width="11" height="6" />}
+        <path className="folder-front" d={open ? 'M1 7h14v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z' : 'M1 5h14v6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z'} />
     </svg>
 );
 
@@ -28,14 +29,6 @@ const FileIcon = () => (
         <path className="file-lines" d="M3.5 7.5h6M3.5 9.5h6M3.5 11.5h4" />
     </svg>
 );
-
-// The project's own logo, or the page icon if its site has none.
-const ItemIcon = ({ project }) =>
-    project.icon ? (
-        <img className="finder-icon finder-logo" src={project.icon} alt="" width="16" height="16" loading="lazy" decoding="async" />
-    ) : (
-        <FileIcon />
-    );
 
 // On tablets and phones the window is one column, and the open project
 // expands in place under its row instead of in a preview pane.
@@ -70,139 +63,91 @@ const Projects = () => {
                 <h2 className="section-title">Projects<span className="title-period">.</span></h2>
 
                 <div className="finder">
-                    {/* Minimize, maximize and close hang from the top edge of
-                        the glass, as in Windows 7. They're for the look only. */}
                     <div className="finder-bar">
-                        <span className="finder-controls" aria-hidden="true">
-                            <span className="finder-btn">
-                                <svg viewBox="0 0 10 10">
-                                    <path d="M1.5 7.5h6" />
-                                </svg>
-                            </span>
-                            <span className="finder-btn">
-                                <svg viewBox="0 0 10 10">
-                                    <path d="M1.5 2.5h7v5.5h-7zM1.5 3.25h7" />
-                                </svg>
-                            </span>
-                            <span className="finder-btn finder-close">
-                                <svg viewBox="0 0 10 10">
-                                    <path d="M2 2l6 6M8 2l-6 6" />
-                                </svg>
-                            </span>
-                        </span>
+                        <p className="finder-title">~/sohan/projects</p>
                     </div>
 
-                    {/* The round back and forward buttons, then the path. */}
-                    <div className="finder-nav">
-                        <span className="finder-orbs" aria-hidden="true">
-                            <span className="finder-orb">
-                                <svg viewBox="0 0 16 16">
-                                    <path d="M12 8H4.5M8 4.5L4.5 8 8 11.5" />
-                                </svg>
-                            </span>
-                            <span className="finder-orb">
-                                <svg viewBox="0 0 16 16">
-                                    <path d="M4 8h7.5M8 4.5L11.5 8 8 11.5" />
-                                </svg>
-                            </span>
-                        </span>
-                        <p className="finder-path">
-                            <FolderIcon />
-                            <span className="finder-sep" aria-hidden="true">▸</span>
-                            sohan
-                            <span className="finder-sep" aria-hidden="true">▸</span>
-                            projects
-                            <span className="finder-sep" aria-hidden="true">▸</span>
-                        </p>
-                    </div>
-
-                    <div className="finder-pane">
-                        <div className="finder-body">
-                            <div className="finder-list" onKeyDown={onKeyDown}>
-                                <div className="finder-head" aria-hidden="true">
-                                    <span>Name</span>
-                                    <span>Type</span>
-                                    <span>Date</span>
-                                </div>
-                                <ul>
-                                    {years.map((year) => {
-                                        const isOpen = !closed.includes(year);
-                                        const items = sorted.filter((p) => p.date.startsWith(year));
-                                        return (
-                                            <li key={year}>
-                                                <button type="button" className="finder-group" aria-expanded={isOpen} onClick={() => toggle(year)}>
-                                                    <svg className="finder-chevron" viewBox="0 0 10 10" aria-hidden="true">
-                                                        <path d="M2 3.5l3 3 3-3" />
-                                                    </svg>
-                                                    {year}
-                                                    <span className="finder-count">({items.length})</span>
-                                                </button>
-                                                {isOpen && (
-                                                    <ul>
-                                                        {items.map((p) => (
-                                                            <li key={p.id}>
-                                                                <button
-                                                                    type="button"
-                                                                    className="finder-file"
-                                                                    aria-expanded={p.id === openId}
-                                                                    aria-controls={`project-${p.id} finder-preview`}
-                                                                    ref={(el) => {
-                                                                        rows.current[p.id] = el;
-                                                                    }}
-                                                                    onClick={() => select(p.id)}
-                                                                >
-                                                                    <span className="finder-name">
-                                                                        <ItemIcon project={p} />
-                                                                        {p.title}
-                                                                    </span>
-                                                                    <span className="finder-kind">{p.kind}</span>
-                                                                    <span className="finder-date">{shortDate(p)}</span>
-                                                                </button>
-                                                                {p.id === openId && (
-                                                                    <div className="finder-inline" id={`project-${p.id}`}>
-                                                                        <ProjectCard project={{ ...p, when: shortDate(p) }} />
-                                                                    </div>
-                                                                )}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                )}
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
+                    <div className="finder-body">
+                        <div className="finder-list" onKeyDown={onKeyDown}>
+                            <div className="finder-head" aria-hidden="true">
+                                <span>Name</span>
+                                <span>Kind</span>
+                                <span>Date</span>
                             </div>
-
-                            <div className="finder-preview" id="finder-preview" aria-live="polite">
-                                {open ? (
-                                    <ProjectCard key={open.id} project={{ ...open, when: shortDate(open) }} />
-                                ) : (
-                                    <p className="finder-empty">Pick a project to see it here.</p>
-                                )}
-                            </div>
+                            <ul>
+                                {years.map((year) => {
+                                    const isOpen = !closed.includes(year);
+                                    const items = sorted.filter((p) => p.date.startsWith(year));
+                                    return (
+                                        <li key={year}>
+                                            <button type="button" className="finder-folder" aria-expanded={isOpen} onClick={() => toggle(year)}>
+                                                <span className="finder-arrow" aria-hidden="true">
+                                                    {isOpen ? '▾' : '▸'}
+                                                </span>
+                                                <FolderIcon open={isOpen} />
+                                                {year}
+                                                <span className="finder-count">{items.length}</span>
+                                            </button>
+                                            {isOpen && (
+                                                <ul>
+                                                    {items.map((p) => (
+                                                        <li key={p.id}>
+                                                            <button
+                                                                type="button"
+                                                                className="finder-file"
+                                                                aria-expanded={p.id === openId}
+                                                                aria-controls={`project-${p.id} finder-preview`}
+                                                                ref={(el) => {
+                                                                    rows.current[p.id] = el;
+                                                                }}
+                                                                onClick={() => select(p.id)}
+                                                            >
+                                                                <span className="finder-name">
+                                                                    {p.icon ? (
+                                                                        <img
+                                                                            className="finder-icon finder-logo"
+                                                                            src={p.icon}
+                                                                            alt=""
+                                                                            width="16"
+                                                                            height="16"
+                                                                            loading="lazy"
+                                                                            decoding="async"
+                                                                        />
+                                                                    ) : (
+                                                                        <FileIcon />
+                                                                    )}
+                                                                    {p.title}
+                                                                </span>
+                                                                <span className="finder-kind">{p.kind}</span>
+                                                                <span className="finder-date">{shortDate(p)}</span>
+                                                            </button>
+                                                            {p.id === openId && (
+                                                                <div className="finder-inline" id={`project-${p.id}`}>
+                                                                    <ProjectCard project={{ ...p, when: shortDate(p) }} />
+                                                                </div>
+                                                            )}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
 
-                        {/* The details pane along the bottom, as in Windows 7. */}
-                        <div className="finder-details">
+                        <div className="finder-preview" id="finder-preview" aria-live="polite">
                             {open ? (
-                                <>
-                                    <ItemIcon project={open} />
-                                    <p>
-                                        <span className="finder-details-name">{open.title}</span>
-                                        {open.kind}
-                                    </p>
-                                    <p className="finder-details-date">
-                                        Date: <span>{shortDate(open)}</span>
-                                    </p>
-                                </>
+                                <ProjectCard key={open.id} project={{ ...open, when: shortDate(open) }} />
                             ) : (
-                                <>
-                                    <FolderIcon />
-                                    <p>{sorted.length} items</p>
-                                </>
+                                <p className="finder-empty">Pick a project to see it here.</p>
                             )}
                         </div>
                     </div>
+
+                    <p className="finder-status">
+                        {sorted.length} items, {years.length} folders
+                    </p>
                 </div>
             </div>
         </section>
