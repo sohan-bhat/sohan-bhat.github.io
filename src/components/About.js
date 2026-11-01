@@ -32,8 +32,9 @@ const About = () => (
                         </h3>
                         <p className="research-meta">Research proposal, 2026</p>
                         <p className="research-description">
-                            The network trains, the loss falls, and the model is still wrong.
-                            A proposal on catching that early.
+                            LHD checks each layer's weights, gradients and dead units against healthy
+                            training runs and stops a broken run around epoch 3, usually before the
+                            accuracy curve shows anything wrong.
                         </p>
                         <a
                             className="research-link retro-button"
