@@ -24,7 +24,7 @@ const builds = [
     {
         title: 'Driver heads-up display',
         meta: '2025, Team 2714',
-        detail: 'It lights up which of the reef’s 12 stalks the operator picked, and the match clock changes color with 30 and 15 seconds left.',
+        detail: 'It lights up which of the reef’s 12 stalks the operator picked, and the match clock changes color with 30 and 15 seconds left. It won the team the Innovation in Control Award, sponsored by nVent, at the Texas state championship.',
         code: 'https://github.com/FRC2714/bbq-hud/blob/1b67b4cf1a9ff527c1c5e01da16b8309465ed436/src/NetworkTablesHUD.tsx',
     },
 ];
