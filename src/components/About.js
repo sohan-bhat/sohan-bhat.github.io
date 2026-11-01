@@ -31,11 +31,6 @@ const About = () => (
                             Early detection of silent training failures in neural networks
                         </h3>
                         <p className="research-meta">Research proposal, 2026</p>
-                        <p className="research-description">
-                            LHD checks each layer's weights, gradients and dead units against healthy
-                            training runs and stops a broken run around epoch 3, usually before the
-                            accuracy curve shows anything wrong.
-                        </p>
                         <a
                             className="research-link retro-button"
                             href="/lhd-proposal.pdf"

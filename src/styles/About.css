@@ -35,12 +35,6 @@
     margin-bottom: 0.65rem;
 }
 
-.research-description {
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    margin-bottom: 0.75rem;
-}
-
 .research-link {
     display: inline-block;
     margin-top: 0.25rem;
