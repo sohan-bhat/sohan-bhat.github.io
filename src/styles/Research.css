@@ -1,6 +1,9 @@
-/* On the left of its row, where About used to sit. */
-.research-col {
+.hero-research {
     max-width: 30rem;
+}
+
+.hero-research .section-title {
+    margin-bottom: 1rem;
 }
 
 .research-entry {
