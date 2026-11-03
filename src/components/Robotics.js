@@ -17,7 +17,7 @@ const seasons = [
             {
                 title: 'Autonomous routines',
                 meta: '2026, Team 2728',
-                detail: 'PathPlanner autos from three starting spots that shoot the preload, then make one or two trips to the neutral zone to pick up more and shoot again. I made 11 of the robot’s 12.',
+                detail: 'PathPlanner autos from three starting spots that shoot the preload, then make one or two trips to the neutral zone to pick up more and shoot again. I wrote 11 of the robot’s 12 autonomous routines.',
                 code: 'https://github.com/FRC2714/TACO-Rebuilt-2026/tree/847a62c7e399331f45e12266f7274c0170c1b470/src/main/deploy/pathplanner/autos',
             },
             {
