@@ -30,4 +30,6 @@
 .research-link {
     display: inline-block;
     margin-top: 0.25rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
 }

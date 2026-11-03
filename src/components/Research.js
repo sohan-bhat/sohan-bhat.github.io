@@ -11,7 +11,7 @@ const Research = () => (
             </h3>
             <p className="research-meta">2026</p>
             <a
-                className="research-link retro-button"
+                className="research-link text-link focus-link"
                 href="/lhd-paper.pdf"
                 target="_blank"
                 rel="noreferrer"

@@ -51,7 +51,7 @@ const Header = () => (
                 </div>
 
                 <a
-                    className="hero-cv retro-button"
+                    className="hero-cv text-link focus-link"
                     href="/sohan-bhat-cv.pdf"
                     target="_blank"
                     rel="noreferrer"
