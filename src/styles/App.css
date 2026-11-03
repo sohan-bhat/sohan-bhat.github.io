@@ -143,7 +143,8 @@ section {
 /* A retro push button for the page's main links (the CV, the paper
    and the team page): a hairline box with a hard shadow that presses in on click. */
 .retro-button {
-    padding: 0.45rem 0.85rem;
+    padding: 0.25rem 0.8rem;
+    line-height: 1.5;
     border: 1px solid var(--edge);
     border-radius: var(--radius);
     background: var(--raised);
