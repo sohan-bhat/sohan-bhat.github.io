@@ -51,12 +51,12 @@ const Header = () => (
                 </div>
 
                 <a
-                    className="hero-cv text-link"
+                    className="hero-cv retro-button"
                     href="/sohan-bhat-cv.pdf"
                     target="_blank"
                     rel="noreferrer"
                 >
-                    View my CV<span className="link-arrow" aria-hidden="true">↗</span>
+                    View my CV
                 </a>
             </div>
 

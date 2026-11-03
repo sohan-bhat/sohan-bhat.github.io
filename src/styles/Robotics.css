@@ -83,9 +83,7 @@
 
 .tba-link {
     display: inline-block;
-    margin-top: 0.75rem;
-    font-family: var(--mono);
-    font-size: 0.85rem;
+    margin-top: 1.25rem;
 }
 
 @media (max-width: 768px) {

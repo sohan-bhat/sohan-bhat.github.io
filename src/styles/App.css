@@ -3,16 +3,16 @@
    - Two languages only:
      1. Editorial, for everything except Projects: Fraunces headings that end
         in an orange period, Figtree body text, and mono for small labels,
-        metadata and links.
+        metadata and buttons.
      2. The retro Mac window, used only for the Projects browser.
-   - Orange (--accent) is for heading periods, links and the research
-     border. The selected row in the window is a muted orange
+   - Orange (--accent) is for heading periods, links, button text and the
+     research border. The selected row in the window is a muted orange
      (--accent-muted). Nothing else is orange.
-   - One shadow, --shadow-hard, for the photos and the window. No soft
+   - One shadow, --shadow-hard, for buttons, photos and the window. No soft
      shadows anywhere. One corner radius, --radius.
    - No all-caps headings, and no italics except in quotes.
-   - Text links are underlined hyperlinks. Icons get a hover and a focus
-     state instead. No buttons dressed up as links.
+   - The wavy underline is only for text links. Icons get a hover and a
+     focus state instead.
 
    A dark theme in the original's warm hues: near-black paper, cream ink, and
    the logo's terracotta, lightened so it reads on dark backgrounds. */
@@ -73,34 +73,17 @@ body {
     outline-offset: 3px;
 }
 
-/* Text links are classic hyperlinks, underlined in the link color, with
-   two twists: the underline sits a little below the text, and on hover the
-   link flips to orange paper with dark ink, like text selected in an old
-   browser. The padding and matching negative margin give that block room
-   without moving anything. */
+/* Text links: orange, with the wavy underline. */
 .text-link {
-    padding-inline: 0.2em;
-    margin-inline: -0.2em;
     color: var(--accent);
-    text-decoration: underline;
-    text-decoration-color: rgb(226 119 74 / 0.55);
+    text-decoration: underline wavy;
+    text-decoration-color: rgb(226 119 74 / 0.5);
     text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
+    text-underline-offset: 5px;
 }
 
-@media (hover: hover) {
-    .text-link:hover {
-        background: var(--accent);
-        color: var(--bg);
-        text-decoration-color: transparent;
-    }
-}
-
-/* The arrow after a link that opens a new tab; inline-block keeps the
-   underline off it. */
-.link-arrow {
-    display: inline-block;
-    margin-left: 0.35em;
+.text-link:hover {
+    text-decoration-color: var(--accent);
 }
 
 .container {
@@ -155,4 +138,28 @@ section {
     html {
         scrollbar-color: #5a5148 var(--bg);
     }
+}
+
+/* A retro push button for the page's main links (the CV, the paper
+   and the team page): a hairline box with a hard shadow that presses in on click. */
+.retro-button {
+    padding: 0.25rem 0.8rem;
+    line-height: 1.5;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius);
+    background: var(--raised);
+    box-shadow: var(--shadow-hard);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    text-decoration: none;
+}
+
+.retro-button:hover {
+    border-color: var(--ink-soft);
+}
+
+.retro-button:active {
+    box-shadow: none;
+    transform: translate(var(--shadow-offset), var(--shadow-offset));
 }

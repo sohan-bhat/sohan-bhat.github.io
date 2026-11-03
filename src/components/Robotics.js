@@ -101,12 +101,12 @@ const Robotics = () => (
 
             <p className="robotics-results">Team 2714 won the Fort Worth District event in 2025 and 2026.</p>
             <a
-                className="tba-link text-link"
+                className="tba-link retro-button"
                 href="https://www.thebluealliance.com/team/2714"
                 target="_blank"
                 rel="noreferrer"
             >
-                Team 2714 on The Blue Alliance<span className="link-arrow" aria-hidden="true">↗</span>
+                Team 2714 on The Blue Alliance ↗
             </a>
         </div>
     </section>
