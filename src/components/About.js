@@ -6,11 +6,8 @@ const About = () => (
     <div className="hero-about" id="about">
         <h2 className="section-title">About<span className="title-period">.</span></h2>
         <div className="about-prose">
-            <p>I'm 15 and a sophomore at Heritage High School in Frisco, Texas.</p>
-            <p>
-                I write neural networks from scratch in NumPy, and one of them, signnet, led to
-                my research.
-            </p>
+            <p>I'm 15 and a sophomore in Frisco, Texas.</p>
+            <p>I'm interested in machine learning and NLP.</p>
             <p>I also code for FRC Team 2714 and play soccer and tennis.</p>
         </div>
     </div>
