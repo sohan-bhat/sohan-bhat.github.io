@@ -56,7 +56,7 @@ const Header = () => (
                     target="_blank"
                     rel="noreferrer"
                 >
-                    View my CV
+                    CV
                 </a>
             </div>
 
