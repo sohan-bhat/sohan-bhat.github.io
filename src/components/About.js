@@ -12,15 +12,10 @@ const About = () => (
                             I'm 15 and a sophomore at Heritage High School in Frisco, Texas.
                         </p>
                         <p>
-                            I like taking machine learning apart. Writing a network from scratch in
-                            NumPy is the best way I've found to see what's really happening inside,
-                            and one of those, signnet, turned into my research on silent training
-                            failures.
+                            I write neural networks from scratch in NumPy, and one of them,
+                            signnet, led to my research.
                         </p>
-                        <p>
-                            I also program for FRC Team 2714 and train for USACO Gold. Away from
-                            the screen, I play soccer and tennis and go hiking with my family.
-                        </p>
+                        <p>I also code for FRC Team 2714 and play soccer and tennis.</p>
                     </div>
                 </div>
 
