@@ -1,7 +1,7 @@
 /* THE SYSTEM. Every section follows these rules.
 
    - Two languages only:
-     1. Editorial, for everything except Projects: Fraunces headings that end
+     1. Editorial, for everything except Projects: Schibsted Grotesk headings that end
         in an orange period, Figtree body text, and mono for small labels,
         metadata and buttons.
      2. The retro Mac window, used only for the Projects browser.
@@ -29,8 +29,8 @@
     /* The accent with less saturation and light, for the selected row;
        cream text on it passes AA. */
     --accent-muted: #784d3a;
-    /* Fraunces, a warm soft serif, for names and headings; Figtree for text. */
-    --font-display: 'Fraunces', Georgia, serif;
+    /* Schibsted Grotesk, a sturdy newspaper grotesk, for names and headings; Figtree for text. */
+    --font-display: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-body: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
     /* Retro details shared across the page: monospace labels, a crisp
        hairline edge, and a hard offset shadow instead of a soft blur. */
