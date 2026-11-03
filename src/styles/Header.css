@@ -2,15 +2,27 @@
     padding: 6.5rem 0 2rem;
 }
 
+/* Text on the left; the photo on the right with About under it. The right
+   column is wider than the photo so About wraps less, and narrower on
+   tablets so the name still fits. */
 .hero-layout {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 3rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(260px, 30vw, 340px);
+    grid-template-areas:
+        'text photo'
+        'text about';
+    column-gap: 3rem;
+    row-gap: 2rem;
+    align-items: start;
 }
 
 .hero-text {
+    grid-area: text;
     min-width: 0;
+}
+
+.hero-about {
+    grid-area: about;
 }
 
 .hero-photo {
@@ -20,8 +32,7 @@
     border-radius: var(--radius);
     border: 1px solid var(--edge);
     box-shadow: var(--shadow-hard);
-    flex-shrink: 0;
-    margin-right: 4.5rem;
+    grid-area: photo;
 }
 
 .hero-hi {
@@ -83,9 +94,12 @@
     }
 
     .hero-layout {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-        gap: 1.75rem;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            'photo'
+            'text'
+            'about';
+        row-gap: 1.75rem;
     }
 
     .social-links {
@@ -96,6 +110,5 @@
     .hero-photo {
         width: 112px;
         height: 112px;
-        margin-right: 0;
     }
 }

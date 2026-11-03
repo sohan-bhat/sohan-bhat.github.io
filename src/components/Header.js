@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaGithub, FaXTwitter, FaInstagram } from 'react-icons/fa6';
+import About from './About';
 import '../styles/Header.css';
 
 const Header = () => (
@@ -68,6 +69,8 @@ const Header = () => (
                 fetchPriority="high"
                 alt="Sohan Bhat in the Rocky Mountains"
             />
+
+            <About />
         </div>
     </header>
 );
