@@ -11,12 +11,12 @@ const Research = () => (
             </h3>
             <p className="research-meta">2026</p>
             <a
-                className="research-link retro-button"
+                className="research-link text-link"
                 href="/lhd-paper.pdf"
                 target="_blank"
                 rel="noreferrer"
             >
-                Read the paper
+                Read the paper<span className="link-arrow" aria-hidden="true">↗</span>
             </a>
         </article>
     </div>
