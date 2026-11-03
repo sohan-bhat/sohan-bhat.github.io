@@ -69,7 +69,7 @@ const Robotics = () => (
                             className="robotics-photo"
                             src={`/imgs/${photo.name}-480.webp`}
                             srcSet={photo.widths.map((w) => `/imgs/${photo.name}-${w}.webp ${w}w`).join(', ')}
-                            sizes="(max-width: 600px) calc(100vw - 3rem), (max-width: 768px) 300px, 400px"
+                            sizes="(max-width: 600px) calc(100vw - 3rem), (max-width: 768px) 300px, 500px"
                             width="480"
                             height={photo.height}
                             alt={photo.alt}
