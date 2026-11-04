@@ -12,7 +12,7 @@
 }
 
 .research-paper-title {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: 1.1rem;
     font-weight: 600;
     line-height: 1.35;

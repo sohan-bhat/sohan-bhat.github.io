@@ -1,9 +1,9 @@
 /* THE SYSTEM. Every section follows these rules.
 
    - Two languages only:
-     1. Editorial, for everything except Projects: bold Satoshi headings
-        that end in an orange period, Satoshi body text, and mono for small
-        labels, metadata and links.
+     1. Editorial, for everything except Projects: the name and section
+        headings in Tanker, ending in an orange period; smaller titles and
+        body text in Satoshi; and mono for small labels, metadata and links.
      2. The retro Mac window, used only for the Projects browser.
    - Orange (--accent) is for heading periods, links and the research
      border. The selected row in the window is a muted orange
@@ -12,7 +12,8 @@
      the team page, so they stand out as the places to look.
    - One shadow, --shadow-hard, for the photos and the window. No soft
      shadows anywhere. One corner radius, --radius.
-   - No all-caps headings, and no italics except in quotes.
+   - No all-caps text except Tanker, which only has capitals, and no
+     italics except in quotes.
    - The wavy underline is only for text links. Icons get a hover and a
      focus state instead.
 
@@ -33,10 +34,12 @@
     --accent-muted: #784d3a;
     /* A classic link blue, lightened for the dark paper; 6.8:1 on --bg. */
     --blue: #5b9bff;
-    /* Satoshi from Fontshare for everything, a clean geometric sans; the
-       system font stands in while it loads. */
+    /* Satoshi from Fontshare for text and smaller titles, a clean geometric
+       sans; the system font stands in while it loads. Tanker, a heavy
+       caps-only poster face, for the name and section headings. It has one
+       weight, so anything set in it uses 400 to avoid a faked bold. */
     --font-body: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-display: var(--font-body);
+    --font-display: 'Tanker', var(--font-body);
     /* Retro details shared across the page: monospace labels, a crisp
        hairline edge, and a hard offset shadow instead of a soft blur. */
     --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
@@ -114,7 +117,7 @@ section {
 .section-title {
     font-family: var(--font-display);
     font-size: 1.75rem;
-    font-weight: 700;
+    font-weight: 400;
     margin-bottom: 1.75rem;
 }
 
