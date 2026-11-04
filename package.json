@@ -13,7 +13,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "prestart": "node scripts/fetch-fonts.js",
     "start": "react-scripts start",
+    "prebuild": "node scripts/fetch-fonts.js",
     "build": "react-scripts build",
     "postbuild": "node scripts/prerender.js",
     "test": "react-scripts test",

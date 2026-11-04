@@ -13,6 +13,10 @@
 # production
 /build
 
+# fonts the license forbids sharing in a repository; scripts/fetch-fonts.js
+# downloads them before each build
+/public/fonts
+
 # misc
 .DS_Store
 .env.local
