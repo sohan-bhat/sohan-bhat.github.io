@@ -1,5 +1,5 @@
 // Downloads the site's fonts into public/fonts before a build, so the site
-// serves them itself. Satoshi and Tanker are free from Fontshare under the
+// serves them itself. Excon and Erode are free from Fontshare under the
 // ITF Free Font License, which allows self-hosting on your own site but not
 // sharing the files through a repository, so they are gitignored and fetched
 // here instead. They are the official files, unchanged (the license forbids
@@ -8,8 +8,8 @@ const fs = require('fs');
 const path = require('path');
 
 const fonts = {
-    'satoshi-variable.woff2': 'satoshi@1',
-    'tanker.woff2': 'tanker@400',
+    'excon-variable.woff2': 'excon@1',
+    'erode-variable.woff2': 'erode@1',
 };
 const dir = path.join(__dirname, '..', 'public', 'fonts');
 
