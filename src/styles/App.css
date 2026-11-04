@@ -1,9 +1,9 @@
 /* THE SYSTEM. Every section follows these rules.
 
    - Two languages only:
-     1. Editorial, for everything except Projects: bold system-font headings
-        that end in an orange period, system-font body text, and mono for
-        small labels, metadata and links.
+     1. Editorial, for everything except Projects: bold Satoshi headings
+        that end in an orange period, Satoshi body text, and mono for small
+        labels, metadata and links.
      2. The retro Mac window, used only for the Projects browser.
    - Orange (--accent) is for heading periods, links and the research
      border. The selected row in the window is a muted orange
@@ -33,9 +33,9 @@
     --accent-muted: #784d3a;
     /* A classic link blue, lightened for the dark paper; 6.8:1 on --bg. */
     --blue: #5b9bff;
-    /* The system font for everything: San Francisco on Apple devices,
-       Segoe UI on Windows, Roboto on Android. Nothing to download. */
-    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    /* Satoshi from Fontshare for everything, a clean geometric sans; the
+       system font stands in while it loads. */
+    --font-body: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-display: var(--font-body);
     /* Retro details shared across the page: monospace labels, a crisp
        hairline edge, and a hard offset shadow instead of a soft blur. */
