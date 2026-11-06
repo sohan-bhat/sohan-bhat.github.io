@@ -11,7 +11,7 @@ const projects = [
         line: 'Lets AI agents control real hardware through one protocol. Any command outside a device’s limits is blocked, like a 300\u00a0°C nozzle on a printer capped at 260\u00a0°C.',
         stack: ['Python', 'MCP', 'Svelte'],
         links: [
-            { label: 'Site', url: 'https://sohan-bhat.github.io/OpenHAL' },
+            { label: 'Site', url: 'https://sohanbhat.me/OpenHAL' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/OpenHAL' },
         ],
         image: 'openhal',
@@ -26,7 +26,7 @@ const projects = [
         line: 'Ask your coding agent if a part will crack, a circuit will burn, or a rocket will fly. Wobbl works out the physics and runs a real solver, then checks the answer before you see it.',
         stack: ['Python', 'SciPy', 'Three.js'],
         links: [
-            { label: 'Site', url: 'https://sohan-bhat.github.io/wobbl' },
+            { label: 'Site', url: 'https://sohanbhat.me/wobbl' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/wobbl' },
             { label: 'Video', url: 'https://www.youtube.com/watch?v=RtCNKbhABqE' },
         ],
@@ -42,7 +42,7 @@ const projects = [
         line: 'Undo for rm -rf. It snapshots your files, git and Postgres right before a destructive command runs. Type oops to get it back.',
         stack: ['Go', 'Postgres', 'JavaScript'],
         links: [
-            { label: 'Site', url: 'https://sohan-bhat.github.io/oopsy' },
+            { label: 'Site', url: 'https://sohanbhat.me/oopsy' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/oopsy' },
             { label: 'Video', url: 'https://youtu.be/Krh9cU08rIg' },
         ],
