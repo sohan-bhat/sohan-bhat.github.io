@@ -4,6 +4,21 @@
 // project's row; a project without one gets a plain page icon.
 const projects = [
     {
+        id: 'openhal',
+        kind: 'Protocol',
+        title: 'OpenHAL',
+        date: '2026-10-17',
+        line: 'Lets AI agents control real hardware through one protocol. Any command outside a device’s limits is blocked, like a 300\u00a0°C nozzle on a printer capped at 260\u00a0°C.',
+        stack: ['Python', 'MCP', 'Svelte'],
+        links: [
+            { label: 'Site', url: 'https://sohan-bhat.github.io/OpenHAL' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/OpenHAL' },
+        ],
+        image: 'openhal',
+        icon: '/imgs/icons/openhal.svg',
+        alt: 'OpenHAL’s site, its name above a one-line install command.',
+    },
+    {
         id: 'wobbl',
         kind: 'Simulator',
         title: 'wobbl',
