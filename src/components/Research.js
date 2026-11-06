@@ -5,7 +5,7 @@ import '../styles/Research.css';
 // result line quotes the paper's numbers, so update it with the paper.
 const Research = () => (
     <div className="hero-research" id="research">
-        <h2 className="section-title">Research<span className="title-period">.</span></h2>
+        <h2 className="section-title">Writing<span className="title-period">.</span></h2>
         <article className="research-entry">
             <h3 className="research-paper-title">
                 LHD, early detection of silent training failures in neural networks
