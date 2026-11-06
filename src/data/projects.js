@@ -55,7 +55,7 @@ const projects = [
         kind: 'AI agent',
         title: 'taro',
         date: '2026-08-29',
-        line: 'A voice assistant for Google Meet. Say “Hey Taro” and it posts to Slack, files GitHub issues, or adds to a to-do list.',
+        line: 'A voice assistant that handles your meeting follow-ups.',
         stack: ['TypeScript', 'Next.js', 'Gemini'],
         links: [
             { label: 'Site', url: 'https://trytaro.vercel.app' },
@@ -71,7 +71,7 @@ const projects = [
         kind: 'Neural network',
         title: 'signnet',
         date: '2026-06-12',
-        line: 'Sorts German traffic signs with 90% accuracy. I wrote it from scratch in NumPy, without PyTorch or autograd.',
+        line: 'A traffic sign classifier built from scratch in NumPy.',
         stack: ['Python', 'NumPy', 'React'],
         links: [
             { label: 'Site', url: 'https://signnet-cnn.netlify.app' },
@@ -86,7 +86,7 @@ const projects = [
         kind: 'Web app',
         title: 'ensemble',
         date: '2026-02-08',
-        line: 'An r/place for music, where the whole world writes one orchestral score note by note.',
+        line: 'An r/place for music, where everyone writes one shared score.',
         stack: ['React', 'Express', 'VexFlow'],
         links: [
             { label: 'Site', url: 'https://ensemble-qnd2.onrender.com' },
@@ -101,7 +101,7 @@ const projects = [
         kind: 'Mobile + web app',
         title: 'VacantCourt',
         date: '2025-03-17',
-        line: 'A phone at the court spots players with an on-device model, and the website shows which courts are free.',
+        line: 'Shows which courts and fields near you are free.',
         stack: ['Kotlin', 'TensorFlow Lite', 'React'],
         links: [
             { label: 'Site', url: 'https://vacantcourt.netlify.app' },
