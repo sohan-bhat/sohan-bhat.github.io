@@ -8,7 +8,7 @@ const projects = [
         kind: 'Protocol',
         title: 'OpenHAL',
         date: '2026-10-17',
-        line: 'Lets AI agents control real hardware through one protocol. Any command outside a device’s limits is blocked, like a 300\u00a0°C nozzle on a printer capped at 260\u00a0°C.',
+        line: 'Lets AI agents control real hardware through one protocol.',
         stack: ['Python', 'MCP', 'Svelte'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/OpenHAL' },
@@ -23,7 +23,7 @@ const projects = [
         kind: 'Simulator',
         title: 'wobbl',
         date: '2026-10-13',
-        line: 'Ask your coding agent if a part will crack, a circuit will burn, or a rocket will fly. Wobbl works out the physics and runs a real solver, then checks the answer before you see it.',
+        line: 'Wobbl is a physics simulator for hobbyists up to elite engineers.',
         stack: ['Python', 'SciPy', 'Three.js'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/wobbl' },
@@ -39,7 +39,7 @@ const projects = [
         kind: 'CLI tool',
         title: 'oopsy',
         date: '2026-10-09',
-        line: 'Undo for rm -rf. It snapshots your files, git and Postgres right before a destructive command runs. Type oops to get it back.',
+        line: 'Undo for rm -rf. It snapshots your files, git and database before any destructive command. Utilizes barely any storage for saving large amounts of data.',
         stack: ['Go', 'Postgres', 'JavaScript'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/oopsy' },
