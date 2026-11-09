@@ -40,7 +40,7 @@ function App() {
             <main key={page ? page.path : 'missing'} ref={main} className={classes.join(' ')} tabIndex={-1}>
                 <Content />
             </main>
-            {page && <Footer />}
+            {page && <Footer links={page.path !== '/'} />}
         </div>
     );
 }
