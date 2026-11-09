@@ -60,7 +60,7 @@ const Projects = () => {
     return (
         <section className="projects" id="projects">
             <div className="container">
-                <h2 className="section-title">Projects<span className="title-period">.</span></h2>
+                <h1 className="section-title">Projects<span className="title-period">.</span></h1>
 
                 <div className="finder">
                     <div className="finder-bar">
