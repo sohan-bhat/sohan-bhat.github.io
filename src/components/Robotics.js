@@ -61,7 +61,7 @@ const builds = [
 const Robotics = () => (
     <section className="robotics" id="robotics">
         <div className="container">
-            <h1 className="section-title">Robotics<span className="title-period">.</span></h1>
+            <h2 className="section-title">Robotics<span className="title-period">.</span></h2>
             <p className="robotics-prose">
                 I write Java for FRC Team 2714 and Team 2728.
             </p>
