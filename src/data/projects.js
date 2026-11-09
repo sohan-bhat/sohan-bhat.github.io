@@ -79,7 +79,7 @@ const projects = [
         ],
         image: 'signnet',
         icon: '/imgs/icons/signnet.svg',
-        alt: 'signnet’s site, “Traffic sign classification, built from scratch,” with its test accuracy.',
+        alt: 'signnet’s site, “Traffic sign classification, built from scratch,” beside the model classifying a stop sign.',
     },
     {
         id: 'ensemble',
