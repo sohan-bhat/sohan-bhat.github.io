@@ -32,7 +32,6 @@ function App() {
     const Content = page ? page.Content : Missing;
     const classes = ['page'];
     if (!page || page.path === '/') classes.push('page-center');
-    if (moved) classes.push('page-enter');
 
     return (
         <div className="App">
