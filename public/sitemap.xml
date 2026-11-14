@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- The portfolio, the paper, and the project sites under sohanbhat.me that
      have no sitemap of their own. OpenHAL and wobbl have theirs, listed in
-     robots.txt. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://sohanbhat.me/</loc></url>
+     robots.txt. The image entry points image search at the portrait. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://sohanbhat.me/</loc>
+    <image:image><image:loc>https://sohanbhat.me/imgs/sohan-1200.webp</image:loc></image:image>
+  </url>
   <url><loc>https://sohanbhat.me/lhd-paper.pdf</loc></url>
   <url><loc>https://sohanbhat.me/oopsy/</loc></url>
   <url><loc>https://sohanbhat.me/scooch/</loc></url>

@@ -20,6 +20,8 @@
          sohan-bhat.github.io all redirect here), and who it's by. -->
     <link rel="canonical" href="https://sohanbhat.me/" />
     <meta name="author" content="Sohan Bhat" />
+    <!-- Lets search results show the portrait at full size. -->
+    <meta name="robots" content="max-image-preview:large" />
     <!-- Structured data, so search engines connect this page, the paper and
          the profiles below to one person. Only facts already on the page. -->
     <script type="application/ld+json">
@@ -31,7 +33,7 @@
             "@id": "https://sohanbhat.me/#website",
             "url": "https://sohanbhat.me/",
             "name": "Sohan Bhat",
-            "alternateName": "sohanbhat.me",
+            "alternateName": ["Sohan", "sohanbhat.me"],
             "inLanguage": "en",
             "publisher": { "@id": "https://sohanbhat.me/#person" }
           },
@@ -42,7 +44,8 @@
             "name": "Sohan Bhat",
             "inLanguage": "en",
             "isPartOf": { "@id": "https://sohanbhat.me/#website" },
-            "mainEntity": { "@id": "https://sohanbhat.me/#person" }
+            "mainEntity": { "@id": "https://sohanbhat.me/#person" },
+            "primaryImageOfPage": { "@id": "https://sohanbhat.me/#portrait" }
           },
           {
             "@type": "Person",
@@ -55,9 +58,11 @@
             "description": "Sohan Bhat builds neural networks from scratch, web apps, and robots.",
             "image": {
               "@type": "ImageObject",
-              "url": "https://sohanbhat.me/imgs/sohan-600.webp",
-              "width": 600,
-              "height": 600,
+              "@id": "https://sohanbhat.me/#portrait",
+              "url": "https://sohanbhat.me/imgs/sohan-1200.webp",
+              "contentUrl": "https://sohanbhat.me/imgs/sohan-1200.webp",
+              "width": 1200,
+              "height": 1200,
               "caption": "Sohan Bhat in the Rocky Mountains"
             },
             "address": {
