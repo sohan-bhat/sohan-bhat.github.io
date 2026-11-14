@@ -192,6 +192,12 @@
     display: none;
 }
 
+/* Closed rows keep their card in the page but hidden, even where the
+   narrow layout shows the open one. */
+.finder-inline[hidden] {
+    display: none !important;
+}
+
 .finder-status {
     padding: 0.3rem 0.75rem;
     border-top: 1px solid var(--edge);

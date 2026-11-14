@@ -121,11 +121,11 @@ const Projects = () => {
                                                                 <span className="finder-kind">{p.kind}</span>
                                                                 <span className="finder-date">{shortDate(p)}</span>
                                                             </button>
-                                                            {p.id === openId && (
-                                                                <div className="finder-inline" id={`project-${p.id}`}>
-                                                                    <ProjectCard project={{ ...p, when: shortDate(p) }} />
-                                                                </div>
-                                                            )}
+                                                            {/* Every card is in the page, so search engines
+                                                                see each project. Only the open one shows. */}
+                                                            <div className="finder-inline" id={`project-${p.id}`} hidden={p.id !== openId}>
+                                                                <ProjectCard project={{ ...p, when: shortDate(p) }} />
+                                                            </div>
                                                         </li>
                                                     ))}
                                                 </ul>
