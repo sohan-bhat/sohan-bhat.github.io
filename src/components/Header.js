@@ -24,7 +24,7 @@ const Header = () => (
                     <a
                         href="https://github.com/sohan-bhat"
                         target="_blank"
-                        rel="noreferrer"
+                        rel="me noreferrer"
                         className="social-link"
                         aria-label="Sohan on GitHub"
                     >
@@ -33,7 +33,7 @@ const Header = () => (
                     <a
                         href="https://x.com/The_Sohan_Bhat"
                         target="_blank"
-                        rel="noreferrer"
+                        rel="me noreferrer"
                         className="social-link"
                         aria-label="Sohan on X"
                     >
@@ -42,7 +42,7 @@ const Header = () => (
                     <a
                         href="https://www.instagram.com/thesohanbhat"
                         target="_blank"
-                        rel="noreferrer"
+                        rel="me noreferrer"
                         className="social-link"
                         aria-label="Sohan on Instagram"
                     >

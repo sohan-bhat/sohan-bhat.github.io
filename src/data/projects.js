@@ -11,7 +11,7 @@ const projects = [
         line: 'Lets AI agents control real hardware through one protocol.',
         stack: ['Python', 'MCP', 'Svelte'],
         links: [
-            { label: 'Site', url: 'https://sohanbhat.me/OpenHAL' },
+            { label: 'Site', url: 'https://sohanbhat.me/OpenHAL/' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/OpenHAL' },
         ],
         image: 'openhal',
@@ -26,7 +26,7 @@ const projects = [
         line: 'Wobbl is a physics simulator for hobbyists up to elite engineers.',
         stack: ['Python', 'SciPy', 'Three.js'],
         links: [
-            { label: 'Site', url: 'https://sohanbhat.me/wobbl' },
+            { label: 'Site', url: 'https://sohanbhat.me/wobbl/' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/wobbl' },
             { label: 'Video', url: 'https://www.youtube.com/watch?v=RtCNKbhABqE' },
         ],
@@ -42,7 +42,7 @@ const projects = [
         line: 'Undo for rm -rf. It snapshots your files, git and database before any destructive command. Utilizes barely any storage for saving large amounts of data.',
         stack: ['Go', 'Postgres', 'JavaScript'],
         links: [
-            { label: 'Site', url: 'https://sohanbhat.me/oopsy' },
+            { label: 'Site', url: 'https://sohanbhat.me/oopsy/' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/oopsy' },
             { label: 'Video', url: 'https://youtu.be/Krh9cU08rIg' },
         ],

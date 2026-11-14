@@ -14,7 +14,7 @@ const Footer = () => (
                     <a
                         href="https://github.com/sohan-bhat"
                         target="_blank"
-                        rel="noreferrer"
+                        rel="me noreferrer"
                         className="footer-icon"
                         aria-label="Sohan on GitHub"
                     >
@@ -23,7 +23,7 @@ const Footer = () => (
                     <a
                         href="https://x.com/The_Sohan_Bhat"
                         target="_blank"
-                        rel="noreferrer"
+                        rel="me noreferrer"
                         className="footer-icon"
                         aria-label="Sohan on X"
                     >
@@ -32,7 +32,7 @@ const Footer = () => (
                     <a
                         href="https://www.instagram.com/thesohanbhat"
                         target="_blank"
-                        rel="noreferrer"
+                        rel="me noreferrer"
                         className="footer-icon"
                         aria-label="Sohan on Instagram"
                     >
