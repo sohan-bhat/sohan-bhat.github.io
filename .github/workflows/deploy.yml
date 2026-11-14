@@ -32,3 +32,13 @@ jobs:
     steps:
       - uses: actions/deploy-pages@v4
         id: deployment
+
+      # Tells Bing, Yandex and the other IndexNow engines the site changed, so
+      # they recrawl it soon. The key file is public/dc7828849bc47bc7731955a8327a394d.txt. Google
+      # doesn't use IndexNow, and a failure here never fails the deploy.
+      - name: Tell IndexNow the site changed
+        continue-on-error: true
+        run: |
+          curl -sS -o /dev/null -w '%{http_code}\n' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            -d '{"host":"sohanbhat.me","key":"dc7828849bc47bc7731955a8327a394d","keyLocation":"https://sohanbhat.me/dc7828849bc47bc7731955a8327a394d.txt","urlList":["https://sohanbhat.me/","https://sohanbhat.me/lhd-paper.pdf"]}'
