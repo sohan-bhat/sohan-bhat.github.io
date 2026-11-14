@@ -53,6 +53,18 @@ expect(robots.includes(`Sitemap: ${HOME}sitemap.xml`), 'robots.txt pointing at t
 expect(!/^Disallow:\s*\/\s*$/m.test(robots), 'robots.txt not blocking the site');
 expect(sitemap.includes(`<loc>${HOME}</loc>`), 'the home page in the sitemap');
 
+// The paper's own page, public/write-ups/lhd/index.html.
+const PAPER = `${HOME}write-ups/lhd/`;
+const paperFile = path.join(BUILD, 'write-ups/lhd/index.html');
+const paper = fs.existsSync(paperFile) ? fs.readFileSync(paperFile, 'utf8') : '';
+expect(paper, 'the paper page at write-ups/lhd/');
+expect(paper.includes(`<link rel="canonical" href="${PAPER}"`), `the paper page's canonical link to ${PAPER}`);
+expect(paper.includes('<meta name="citation_author" content="Bhat, Sohan"'), 'the paper page credits Bhat, Sohan for Google Scholar');
+expect(paper.includes('<meta name="citation_pdf_url"'), 'the paper page links its PDF for Google Scholar');
+expect(paper.includes('<a class="home text-link" href="/">Sohan Bhat</a>'), 'the paper page links home as Sohan Bhat');
+expect(!/noindex/i.test(paper), 'no noindex on the paper page');
+expect(sitemap.includes(`<loc>${PAPER}</loc>`), 'the paper page in the sitemap');
+
 if (problems.length) {
     console.error(`SEO check failed. Expected:\n${problems.map((p) => `  - ${p}`).join('\n')}`);
     process.exit(1);
