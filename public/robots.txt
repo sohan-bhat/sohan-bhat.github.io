@@ -1,6 +1,10 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+# Old test pages that GitHub Pages still serves under this domain. They're
+# blank or boilerplate, so search engines skip them.
+Disallow: /testwebsite/
+Disallow: /fitness-website/
+Disallow: /task-app/
 
 # This file covers all of sohanbhat.me, so it also lists the sitemaps of the
 # project sites that live under it.
