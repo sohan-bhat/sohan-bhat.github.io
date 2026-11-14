@@ -8,9 +8,89 @@
     <meta name="color-scheme" content="dark" />
     <meta
       name="description"
-      content="15-year-old building ML research, agent tools and FRC robots."
+      content="I'm Sohan Bhat, a 15-year-old in Frisco, Texas. I do machine learning research and build agent tools and FRC robots."
     />
     <title>Sohan Bhat</title>
+    <!-- For search engines. One address for the page (www, http and the old
+         sohan-bhat.github.io all redirect here), and who it's by. -->
+    <link rel="canonical" href="https://sohanbhat.me/" />
+    <meta name="author" content="Sohan Bhat" />
+    <!-- Structured data, so search engines connect this page, the paper and
+         the profiles below to one person. Only facts already on the page. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://sohanbhat.me/#website",
+            "url": "https://sohanbhat.me/",
+            "name": "Sohan Bhat",
+            "alternateName": "sohanbhat.me",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://sohanbhat.me/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://sohanbhat.me/#profilepage",
+            "url": "https://sohanbhat.me/",
+            "name": "Sohan Bhat",
+            "inLanguage": "en",
+            "isPartOf": { "@id": "https://sohanbhat.me/#website" },
+            "mainEntity": { "@id": "https://sohanbhat.me/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://sohanbhat.me/#person",
+            "name": "Sohan Bhat",
+            "givenName": "Sohan",
+            "familyName": "Bhat",
+            "alternateName": ["Sohan", "sohan-bhat"],
+            "url": "https://sohanbhat.me/",
+            "description": "Sohan Bhat builds neural networks from scratch, web apps, and robots.",
+            "image": {
+              "@type": "ImageObject",
+              "url": "https://sohanbhat.me/imgs/sohan-600.webp",
+              "width": 600,
+              "height": 600,
+              "caption": "Sohan Bhat in the Rocky Mountains"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Frisco",
+              "addressRegion": "TX",
+              "addressCountry": "US"
+            },
+            "knowsAbout": ["Machine learning", "Neural networks", "Robotics", "Web development"],
+            "memberOf": {
+              "@type": "Organization",
+              "name": "FRC Team 2714",
+              "url": "https://www.thebluealliance.com/team/2714"
+            },
+            "sameAs": [
+              "https://github.com/sohan-bhat",
+              "https://x.com/The_Sohan_Bhat",
+              "https://www.instagram.com/thesohanbhat"
+            ]
+          },
+          {
+            "@type": "ScholarlyArticle",
+            "@id": "https://sohanbhat.me/#lhd-paper",
+            "headline": "Early Detection of Silent Training Failures in Neural Networks",
+            "alternateName": "LHD",
+            "url": "https://sohanbhat.me/lhd-paper.pdf",
+            "inLanguage": "en",
+            "isAccessibleForFree": true,
+            "author": { "@id": "https://sohanbhat.me/#person" },
+            "encoding": {
+              "@type": "MediaObject",
+              "contentUrl": "https://sohanbhat.me/lhd-paper.pdf",
+              "encodingFormat": "application/pdf"
+            }
+          }
+        ]
+      }
+    </script>
     <!-- The link preview in iMessage, Slack, X, Discord and email. The image
          is public/og-image.jpg at 1200 by 630, and it needs a full URL. -->
     <meta property="og:type" content="website" />
@@ -21,7 +101,10 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Sohan Bhat beside his photo, with the line I build neural networks from scratch, web apps, and robots." />
+    <meta property="og:site_name" content="Sohan Bhat" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@The_Sohan_Bhat" />
     <!-- Excon and Erode, self-hosted and preloaded so they start
          downloading right away. scripts/fetch-fonts.js puts the files in
          public/fonts. -->
