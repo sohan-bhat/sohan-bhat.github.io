@@ -1,3 +1,9 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
+
+# This file covers all of sohanbhat.me, so it also lists the sitemaps of the
+# project sites that live under it.
+Sitemap: https://sohanbhat.me/sitemap.xml
+Sitemap: https://sohanbhat.me/OpenHAL/sitemap-index.xml
+Sitemap: https://sohanbhat.me/wobbl/sitemap.xml
