@@ -64,6 +64,7 @@ expect(paper.includes('<meta name="citation_pdf_url"'), 'the paper page links it
 expect(paper.includes('<a class="home text-link" href="/">Sohan Bhat</a>'), 'the paper page links home as Sohan Bhat');
 expect(!/noindex/i.test(paper), 'no noindex on the paper page');
 expect(sitemap.includes(`<loc>${PAPER}</loc>`), 'the paper page in the sitemap');
+expect(html.includes('<a href="/write-ups/lhd/">'), 'a link from the home page to the paper page');
 
 if (problems.length) {
     console.error(`SEO check failed. Expected:\n${problems.map((p) => `  - ${p}`).join('\n')}`);
