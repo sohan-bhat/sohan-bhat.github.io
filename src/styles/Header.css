@@ -2,15 +2,15 @@
     padding: 6.5rem 0 2rem;
 }
 
-/* The name and links beside the photo, then Research beside About. The
-   right column is wider than the photo so About wraps less, and narrower
-   on tablets so the name still fits. */
+/* The name and links beside the photo, then the write-ups beside
+   Certificates. The right column is wider than the photo so a certificate's
+   name wraps less, and narrower on tablets so the name still fits. */
 .hero-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) clamp(260px, 30vw, 340px);
     grid-template-areas:
         'text photo'
-        'research about';
+        'research certs';
     column-gap: 3rem;
     row-gap: 2rem;
     align-items: start;
@@ -21,8 +21,8 @@
     min-width: 0;
 }
 
-.hero-about {
-    grid-area: about;
+.hero-certs {
+    grid-area: certs;
 }
 
 .hero-research {
@@ -103,7 +103,7 @@
         grid-template-areas:
             'photo'
             'text'
-            'about'
+            'certs'
             'research';
         row-gap: 1.75rem;
     }

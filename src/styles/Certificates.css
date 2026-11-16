@@ -1,9 +1,12 @@
-/* As many columns as fit, so a long list stays a few rows tall. */
+.hero-certs .section-title {
+    margin-bottom: 1rem;
+}
+
+/* One under the next, in the column under the photo. */
 .cert-list {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-    gap: 1.5rem 2.5rem;
+    gap: 1.25rem;
 }
 
 /* The same marked entry as the write-up, a size smaller. */

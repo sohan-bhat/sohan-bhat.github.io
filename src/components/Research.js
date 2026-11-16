@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Research.css';
 
-// The research, in the intro under the name and links, beside About. The
+// The research, in the intro under the name and links, beside Certificates. The
 // result line quotes the paper's numbers, so update it with the paper.
 const Research = () => (
     <div className="hero-research" id="research">
