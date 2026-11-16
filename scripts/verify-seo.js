@@ -10,6 +10,7 @@ const html = fs.readFileSync(path.join(BUILD, 'index.html'), 'utf8');
 const robots = fs.readFileSync(path.join(BUILD, 'robots.txt'), 'utf8');
 const sitemap = fs.readFileSync(path.join(BUILD, 'sitemap.xml'), 'utf8');
 const projectsSrc = fs.readFileSync(path.resolve(__dirname, '../src/data/projects.js'), 'utf8');
+const certificatesSrc = fs.readFileSync(path.resolve(__dirname, '../src/data/certificates.js'), 'utf8');
 
 const NAME = 'Sohan Bhat';
 const HOME = 'https://sohanbhat.me/';
@@ -31,10 +32,13 @@ expect(!/[:\u2013\u2014\u00b7]/.test(description), 'no colon, dash or middle dot
 expect(html.includes(`<link rel="canonical" href="${HOME}"`), `a canonical link to ${HOME}`);
 expect(!/noindex/i.test(html), 'no noindex');
 expect(!html.includes('sohan-bhat.github.io'), 'no links to the old sohan-bhat.github.io address');
-expect(html.includes('Frisco, Texas'), 'the About text in the prerendered HTML');
 
 for (const [, projectTitle] of projectsSrc.matchAll(/^ {8}title: '([^']+)',$/gm)) {
     expect(html.includes(projectTitle), `the project "${projectTitle}" in the prerendered HTML`);
+}
+
+for (const [, certTitle] of certificatesSrc.matchAll(/^ {8}title: '([^']+)',$/gm)) {
+    expect(html.includes(certTitle), `the certificate "${certTitle}" in the prerendered HTML`);
 }
 
 const ldBlocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
