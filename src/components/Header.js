@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaGithub, FaXTwitter, FaInstagram } from 'react-icons/fa6';
 import About from './About';
+import Certificates from './Certificates';
 import Research from './Research';
 import '../styles/Header.css';
 
@@ -73,6 +74,7 @@ const Header = () => (
 
             <About />
             <Research />
+            <Certificates />
         </div>
     </header>
 );
