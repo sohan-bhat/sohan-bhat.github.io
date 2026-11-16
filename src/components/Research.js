@@ -8,7 +8,9 @@ const Research = () => (
         <h2 className="section-title">Write-ups<span className="title-period">.</span></h2>
         <article className="research-entry">
             <h3 className="research-paper-title">
-                LHD, early detection of silent training failures in neural networks
+                <a href="/write-ups/lhd/">
+                    LHD, early detection of silent training failures in neural networks
+                </a>
             </h3>
             <p className="research-meta">2026</p>
             <p className="research-result">
