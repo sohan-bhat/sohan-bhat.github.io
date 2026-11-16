@@ -11,7 +11,8 @@ const Header = () => (
                 <p className="hero-hi">hey, I'm</p>
                 <h1 className="title">Sohan Bhat</h1>
                 <p className="subtitle">
-                    I build neural networks, web apps, and robots.
+                    I'm 15 and a sophomore in Frisco, Texas. I build neural networks,
+                    web apps, and robots.
                 </p>
 
                 <div className="social-links">
