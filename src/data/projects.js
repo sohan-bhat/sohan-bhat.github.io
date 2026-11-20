@@ -8,7 +8,7 @@ const projects = [
         kind: 'Protocol',
         title: 'OpenHAL',
         date: '2026-10-17',
-        line: 'Lets AI agents control real hardware through one protocol.',
+        line: 'Lets AI agents control hardware',
         stack: ['Python', 'MCP', 'Svelte'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/OpenHAL/' },
@@ -23,7 +23,7 @@ const projects = [
         kind: 'Simulator',
         title: 'wobbl',
         date: '2026-10-13',
-        line: 'Wobbl is a physics simulator for hobbyists up to elite engineers.',
+        line: 'Physics simulation for hobbyists up to elite engineers',
         stack: ['Python', 'SciPy', 'Three.js'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/wobbl/' },
@@ -39,7 +39,7 @@ const projects = [
         kind: 'CLI tool',
         title: 'oopsy',
         date: '2026-10-09',
-        line: 'Undo for rm -rf. It snapshots your files, git and database before any destructive command. Utilizes barely any storage for saving large amounts of data.',
+        line: 'Undo for rm -rf, git and database mistakes',
         stack: ['Go', 'Postgres', 'JavaScript'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/oopsy/' },
@@ -55,7 +55,7 @@ const projects = [
         kind: 'AI agent',
         title: 'taro',
         date: '2026-08-29',
-        line: 'A voice assistant that handles your meeting follow-ups.',
+        line: 'Voice assistant for meeting follow-ups',
         stack: ['TypeScript', 'Next.js', 'Gemini'],
         links: [
             { label: 'Site', url: 'https://trytaro.vercel.app' },
@@ -71,7 +71,7 @@ const projects = [
         kind: 'Neural network',
         title: 'signnet',
         date: '2026-06-12',
-        line: 'A traffic sign classifier built from scratch in NumPy.',
+        line: 'Classifies traffic signs',
         stack: ['Python', 'NumPy', 'React'],
         links: [
             { label: 'Site', url: 'https://signnet-cnn.netlify.app' },
@@ -86,7 +86,7 @@ const projects = [
         kind: 'Web app',
         title: 'ensemble',
         date: '2026-02-08',
-        line: 'An r/place for music, where everyone writes one shared score.',
+        line: 'r/place for music, where everyone writes one score',
         stack: ['React', 'Express', 'VexFlow'],
         links: [
             { label: 'Site', url: 'https://ensemble-qnd2.onrender.com' },
@@ -101,7 +101,7 @@ const projects = [
         kind: 'Mobile + web app',
         title: 'VacantCourt',
         date: '2025-03-17',
-        line: 'Shows which courts and fields near you are free.',
+        line: 'Shows which nearby courts and fields are free',
         stack: ['Kotlin', 'TensorFlow Lite', 'React'],
         links: [
             { label: 'Site', url: 'https://vacantcourt.netlify.app' },
@@ -117,7 +117,7 @@ const projects = [
         kind: 'Web app',
         title: 'mochi',
         date: '2024-07-25',
-        line: 'Recipes from just the ingredients you already have.',
+        line: 'Recipes from the ingredients you have',
         stack: ['React', 'Node.js', 'Groq'],
         links: [
             { label: 'Site', url: 'https://trymochi.netlify.app' },
@@ -133,7 +133,7 @@ const projects = [
         title: 'CareerAI',
         date: '2024-06-21',
         retired: true,
-        line: 'Career ideas from your interests, suggested by AI.',
+        line: 'Career ideas from your interests',
         stack: ['React', 'Node.js', 'Groq'],
         links: [
             { label: 'Site', url: 'https://careerai.netlify.app' },

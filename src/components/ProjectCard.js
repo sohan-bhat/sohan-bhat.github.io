@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/ProjectCard.css';
 
 // One project: the title and its links across the top, a screenshot of its
-// site, one sentence, and what it's built with.
+// site, one short line with no period, and what it's built with.
 const ProjectCard = ({ project }) => (
     <article className="project-card">
         <header className="card-head">
