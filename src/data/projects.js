@@ -100,7 +100,7 @@ const projects = [
         line: 'Classifies traffic signs',
         stack: ['Python', 'NumPy', 'React'],
         links: [
-            { label: 'Site', url: 'https://signnet-cnn.netlify.app' },
+            { label: 'Site', url: 'https://sohanbhat.me/signnet/' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/signnet' },
         ],
         image: 'signnet',
