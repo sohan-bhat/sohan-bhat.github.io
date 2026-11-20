@@ -1,379 +1,256 @@
-/* Projects, as a git graph. On the left, the graph: one commit per project,
-   newest on top, with only its name beside it. Main is the bright line down
-   the left, for the projects to look at first; each side branch is a kind,
-   in its own muted hue. On the right, the one project picked, in full.
-   Nothing is boxed, and everything about a project but its name waits until
-   it is picked. */
-.git {
-    --row: 44px;
-    --root: 30px;
-    --years: 3.25rem;
-    --tint: var(--ink);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 40rem);
-    column-gap: 3.5rem;
-    align-items: start;
-}
-
-/* The command the graph answers to. The branch names are switches, each
-   with a dot in its branch's hue: a name in cream is on show, and one struck
-   through, its dot hollow, is folded away. */
-.git-command {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.1rem 0.9rem;
-    margin-bottom: 1rem;
-    padding-left: var(--years);
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    color: var(--ink-soft);
-}
-
-.git-branch {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.4rem;
-    padding: 0.25rem 0;
-    border: 0;
-    background: none;
-    color: var(--ink);
-    font: inherit;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.git-swatch {
-    align-self: center;
-    width: 9px;
-    height: 9px;
-    border: 1.5px solid var(--tint);
-    border-radius: 50%;
-    background: var(--tint);
-}
-
-.git-branch[aria-pressed='false'] {
-    color: var(--ink-soft);
-    font-weight: 400;
-    text-decoration: line-through;
-}
-
-.git-branch[aria-pressed='false'] .git-swatch {
-    background: none;
-}
-
-.git-branch:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-
-.git-branch[aria-pressed='false']:hover {
-    text-decoration: line-through underline;
-}
-
-/* The log: the years down the left edge, the drawn graph, then the names. */
-.git-log {
-    position: relative;
-}
-
-.git-lines {
-    position: absolute;
-    top: 0;
-    left: var(--years);
-    overflow: visible;
-    pointer-events: none;
-}
-
-/* A side branch is drawn in its hue, held back until its branch is the one
-   in play. Main is always full cream, and a little heavier. */
-.git-line {
-    fill: none;
-    stroke: var(--tint);
-    stroke-width: 2;
-    stroke-opacity: 0.5;
-    transition: stroke-opacity 0.15s ease-out;
-}
-
-.git-line.is-lit {
-    stroke-opacity: 1;
-}
-
-.git-main {
-    stroke-width: 2.5;
-    stroke-opacity: 1;
-}
-
-.git-root {
-    fill: var(--ink);
-}
-
-/* A commit on main is a filled dot. One on a side branch is an open ring,
-   which fills when it is the project on show. The commit checked out is the
-   orange one. */
-.git-commit {
-    fill: var(--bg);
-    stroke: var(--tint);
-    stroke-width: 2;
-    transform-box: fill-box;
-    transform-origin: center;
-    transition:
-        transform 0.15s ease-out,
-        fill 0.15s ease-out;
-}
-
-.git-commit.is-main {
-    fill: var(--ink);
-    stroke: var(--bg);
-}
-
-.git-commit.is-shown {
-    fill: var(--tint);
-    transform: scale(1.2);
-}
-
-.git-commit.is-head {
-    fill: var(--accent);
-    stroke: var(--bg);
-    transform: scale(1.25);
-}
-
-.git-rows {
-    list-style: none;
-    padding-bottom: var(--root);
-}
-
-.git-row {
-    position: relative;
-    height: var(--row);
-}
-
-.git-year {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    line-height: var(--row);
-    font-variant-numeric: tabular-nums;
-    color: var(--ink-soft);
-}
-
-/* The whole row is the button, so a commit is easy to hit. */
-.git-pick {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    width: 100%;
-    height: 100%;
-    padding: 0 0.5rem 0 calc(var(--years) + var(--graph) + 0.4rem);
-    border: 0;
-    background: none;
-    color: var(--ink-soft);
-    font-family: var(--mono);
-    font-size: 0.92rem;
-    text-align: left;
-    cursor: pointer;
-    transition: color 0.15s ease-out;
-}
-
-.git-pick.is-main {
-    color: var(--ink);
-    font-weight: 700;
-}
-
-.git-pick.is-shown,
-.git-pick:hover {
-    color: var(--ink);
-}
-
-.git-pick:focus-visible {
-    outline-offset: -2px;
-}
-
-.git-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* Git's own word for the commit checked out. */
-.git-head {
-    flex: none;
-    font-size: 0.66rem;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    color: var(--accent);
-}
-
-/* The project picked. It stays in view while a long graph scrolls by. */
-.git-pane {
-    position: sticky;
-    top: 1.5rem;
-    min-width: 0;
-}
-
-.detail {
-    animation: detail-in 0.16s ease-out;
-}
-
-@keyframes detail-in {
-    from {
-        opacity: 0;
-    }
-}
-
-.detail-shot {
-    display: block;
-    overflow: hidden;
+/* The projects window, styled after an old desktop file manager: square
+   corners, a hard drop shadow, a pinstriped title bar and a
+   compact list in monospace. */
+.finder {
+    background: var(--surface);
     border: 1px solid var(--edge);
     border-radius: var(--radius);
     box-shadow: var(--shadow-hard);
-    background: var(--sand);
 }
 
-/* The screenshot opens the site, so its edge lightens under the pointer. */
-.detail-shot:hover {
-    border-color: var(--ink-soft);
-}
-
-.detail-shot img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-}
-
-.detail-head {
+.finder-bar {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.75rem;
-    margin-top: 1.2rem;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 10px;
+    border-bottom: 1px solid var(--edge);
+    background: repeating-linear-gradient(to bottom, #3b352e 0 1px, var(--raised) 1px 3px);
 }
 
-.detail-title {
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    min-width: 0;
-    font-family: var(--font-body);
-    font-size: 1.25rem;
+.finder-title {
+    padding: 0 10px;
+    background: var(--raised);
+    font-family: var(--mono);
+    font-size: 0.78rem;
     font-weight: 600;
-    line-height: 1.3;
+    letter-spacing: 0.04em;
 }
 
-.detail-note {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 400;
-    color: var(--ink-soft);
-}
-
-.detail-line {
-    margin-top: 0.3rem;
-    font-size: 1rem;
-    line-height: 1.5;
-}
-
-/* Kind, stack and date on one line, with the date at the right edge. */
-.detail-meta {
+.finder-body {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    column-gap: 1rem;
-    margin-top: 0.7rem;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+}
+
+.finder-list {
+    border-right: 1px solid var(--edge);
     font-family: var(--mono);
+    font-size: 0.8rem;
+}
+
+.finder-list ul {
+    list-style: none;
+}
+
+/* Name, kind, and date columns, shared by the header and every row. */
+.finder-head,
+.finder-file {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 8.5rem 5.5rem;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.finder-head {
+    padding: 0.35rem 0.75rem;
+    border-bottom: 1px solid var(--edge);
+    background: var(--raised);
     font-size: 0.75rem;
     color: var(--ink-soft);
 }
 
-.project-links {
-    flex: none;
-    display: flex;
-    gap: 0.9rem;
+.finder-folder,
+.finder-file {
+    width: 100%;
+    min-height: 30px;
+    padding: 0.25rem 0.75rem;
+    border: 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.04);
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
 }
 
-.project-link {
+.finder-folder {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 600;
+}
+
+.finder-file {
+    padding-left: 2.1rem;
+}
+
+.finder-folder:hover,
+.finder-file:hover {
+    background: rgb(255 255 255 / 0.04);
+}
+
+.finder-file[aria-expanded='true'] {
+    background: var(--accent-muted);
+    color: var(--ink);
+}
+
+.finder-file[aria-expanded='true'] .finder-kind,
+.finder-file[aria-expanded='true'] .finder-date {
+    color: #ddd2c4;
+}
+
+.finder-folder:focus-visible,
+.finder-file:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: -2px;
+}
+
+.finder-arrow {
+    width: 0.8rem;
+    color: var(--ink-soft);
+}
+
+.finder-count {
+    margin-left: auto;
+    font-weight: 400;
+    color: var(--ink-soft);
+}
+
+.finder-name {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.finder-kind,
+.finder-date {
+    overflow: hidden;
+    color: var(--ink-soft);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Folder and file icons, in the window's grays and creams. */
+.finder-icon {
+    flex: none;
+    width: 16px;
+    height: 14px;
+}
+
+/* A project's own logo, rounded like an app icon since some are opaque
+   squares. */
+.finder-logo {
+    height: 16px;
+    border-radius: 3px;
+}
+
+.folder-back {
+    fill: #6f665b;
+}
+
+.folder-front {
+    fill: #a69d90;
+}
+
+.folder-sheet {
+    fill: #efe8dc;
+}
+
+.file-page {
+    fill: #efe8dc;
+}
+
+.file-fold {
+    fill: none;
+    stroke: #8a8075;
+    stroke-width: 1;
+}
+
+.file-lines {
+    stroke: #8a8075;
+    stroke-width: 1;
+    stroke-linecap: round;
+}
+
+.finder-preview {
+    display: flex;
+    padding: 0.75rem;
+}
+
+.finder-empty {
+    margin: auto;
     font-family: var(--mono);
     font-size: 0.78rem;
-    white-space: nowrap;
+    color: var(--ink-soft);
 }
 
-/* A person a project was built with, as @name. A name never breaks across
-   two lines. */
-.project-person {
-    white-space: nowrap;
+/* The open project under its row, shown only on phones. */
+.finder-inline {
+    display: none;
 }
 
-/* Tablets: the graph takes what it needs and the project gets the rest. */
+/* Closed rows keep their card in the page but hidden, even where the
+   narrow layout shows the open one. */
+.finder-inline[hidden] {
+    display: none !important;
+}
+
+/* Tablets and phones: one column, and the open project expands in place
+   under its row. */
 @media (max-width: 960px) {
-    .git {
-        grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
-        column-gap: 2rem;
-    }
-}
-
-/* Phones: the project picked sits on top and stays there while the graph
-   scrolls under it, so a tap on a commit shows its project without a jump. */
-@media (max-width: 760px) {
-    .git {
-        grid-template-columns: minmax(0, 1fr);
+    .finder-body {
+        grid-template-columns: 1fr;
     }
 
-    .git-pane {
-        order: -1;
-        top: 0;
-        z-index: 2;
-        max-width: none;
-        margin: 0 -1.5rem 1.25rem;
-        padding: 0.75rem 1.5rem 0.9rem;
-        border-bottom: 1px solid var(--line);
+    .finder-list {
+        border-right: 0;
+    }
+
+    .finder-preview {
+        display: none;
+    }
+
+    .finder-inline {
+        display: flex;
+        padding: 0.6rem 0.6rem 0.75rem;
+        border-bottom: 1px solid var(--edge);
         background: var(--bg);
     }
 
-    .detail-head {
-        margin-top: 0.9rem;
+    /* The row above already shows the name, so it's kept for screen
+       readers only. */
+    .finder-inline .card-name {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
     }
 
-    .detail-title {
-        font-size: 1.1rem;
+    .finder-inline .card-head {
+        justify-content: flex-start;
+        gap: 0;
     }
 
-    /* The project sits above the graph here, so it keeps one height from
-       pick to pick and the graph never moves under a finger: the facts lose
-       the stack and move up under the name, and the line goes last with
-       room for two lines of text. */
-    .detail:not([hidden]) {
-        display: flex;
-        flex-direction: column;
+    .finder-inline .card-note {
+        margin-right: 0.9rem;
     }
 
-    .detail-meta {
-        order: 1;
-        grid-template-columns: minmax(0, 1fr) auto;
-        margin-top: 0.35rem;
-    }
-
-    .detail-line {
-        order: 2;
-        min-height: 3em;
-        margin-top: 0.55rem;
-        font-size: 0.95rem;
-    }
-
-    .detail-meta span:nth-child(2) {
-        display: none;
-    }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .git-line,
-    .git-commit,
-    .git-pick {
-        transition: none;
+/* Phones: no room for the kind column. */
+@media (max-width: 600px) {
+    .finder-head,
+    .finder-file {
+        grid-template-columns: minmax(0, 1fr) 5.5rem;
     }
 
-    .detail {
-        animation: none;
+    .finder-head span:nth-child(2),
+    .finder-kind {
+        display: none;
     }
 }

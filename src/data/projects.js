@@ -1,17 +1,12 @@
-// `date` is when each project started. `kind` says what it is.
-// Projects is drawn as a git graph. `featured: true` puts a project on main,
-// for the few to look at first. Every other project is a commit on the side
-// branch named in `branch`, which groups projects of a kind (tools, ai, web).
-// A featured project keeps its `branch` for the day it leaves main.
-// `image` names the card-<image>-560 and -1120 screenshots in public/imgs: an
-// overview of each project's site, 16:10, shown when the project is picked.
-// `icon` is the site's own logo.
-// `team` lists the people a project was built with; each is credited as
-// @name, linked to their profile.
+// `date` is when each project started. `kind` says what it is. `image` names
+// the card-<image>-560 and -1120 screenshots in public/imgs: an overview of
+// each project's site, 16:10. `icon` is the site's own logo, shown in the
+// project's row; a project without one gets a plain page icon.
+// `team` lists the people a project was built with; the card credits each
+// as @name, linked to their profile.
 const projects = [
     {
         id: 'hullo',
-        branch: 'web',
         kind: 'Website',
         title: 'hullo',
         date: '2026-11-14',
@@ -28,8 +23,6 @@ const projects = [
     },
     {
         id: 'openhal',
-        branch: 'tools',
-        featured: true,
         kind: 'Protocol',
         title: 'OpenHAL',
         date: '2026-10-17',
@@ -45,8 +38,6 @@ const projects = [
     },
     {
         id: 'wobbl',
-        branch: 'tools',
-        featured: true,
         kind: 'Simulator',
         title: 'wobbl',
         date: '2026-10-13',
@@ -63,8 +54,6 @@ const projects = [
     },
     {
         id: 'oopsy',
-        branch: 'tools',
-        featured: true,
         kind: 'CLI tool',
         title: 'oopsy',
         date: '2026-10-09',
@@ -81,7 +70,6 @@ const projects = [
     },
     {
         id: 'taro',
-        branch: 'ai',
         kind: 'AI agent',
         title: 'taro',
         date: '2026-08-29',
@@ -98,7 +86,6 @@ const projects = [
     },
     {
         id: 'signnet',
-        branch: 'ai',
         kind: 'Neural network',
         title: 'signnet',
         date: '2026-06-12',
@@ -114,7 +101,6 @@ const projects = [
     },
     {
         id: 'ensemble',
-        branch: 'web',
         kind: 'Web app',
         title: 'ensemble',
         date: '2026-02-08',
@@ -130,7 +116,6 @@ const projects = [
     },
     {
         id: 'vacantcourt',
-        branch: 'web',
         kind: 'Mobile + web app',
         title: 'VacantCourt',
         date: '2025-03-17',
@@ -147,7 +132,6 @@ const projects = [
     },
     {
         id: 'mochi',
-        branch: 'web',
         kind: 'Web app',
         title: 'mochi',
         date: '2024-07-25',
@@ -163,7 +147,6 @@ const projects = [
     },
     {
         id: 'career-ai',
-        branch: 'web',
         kind: 'Web app',
         title: 'CareerAI',
         date: '2024-06-21',

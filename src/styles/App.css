@@ -1,18 +1,17 @@
 /* THE SYSTEM. Every section follows these rules.
 
-   - One language, editorial: the name and section headings in Erode,
-     ending in an orange period; smaller titles and body text in Excon; and
-     mono for small labels, metadata and links. Nothing sits in a box. The
-     only framed things are pictures.
-   - Orange (--accent) is for heading periods, links, the research border
-     and the commit checked out in the Projects graph. Nothing else is
-     orange.
-   - The Projects graph is the one place with other hues: each side branch
-     gets a muted tint of its own, so a branch reads as one thing.
+   - Two languages only:
+     1. Editorial, for everything except Projects: the name and section
+        headings in Erode, ending in an orange period; smaller titles and
+        body text in Excon; and mono for small labels, metadata and links.
+     2. The retro Mac window, used only for the Projects browser.
+   - Orange (--accent) is for heading periods, links and the research
+     border. The selected row in the window is a muted orange
+     (--accent-muted). Nothing else is orange.
    - Blue (--blue) is only for the page's main links, the CV, the paper and
      the team page, so they stand out as the places to look.
-   - One shadow, --shadow-hard, for the photos and the project
-     screenshots. No soft shadows anywhere. One corner radius, --radius.
+   - One shadow, --shadow-hard, for the photos and the window. No soft
+     shadows anywhere. One corner radius, --radius.
    - No all-caps headings, and no italics except in quotes.
    - The wavy underline is only for text links. Icons get a hover and a
      focus state instead.
@@ -22,12 +21,16 @@
 :root {
     color-scheme: dark;
     --bg: #13110f;
+    --surface: #1b1815;
     --raised: #211d19;
     --sand: #26221d;
     --ink: #efe8dc;
     --ink-soft: #a69d90;
     --line: #2f2a24;
     --accent: #e2774a;
+    /* The accent with less saturation and light, for the selected row;
+       cream text on it passes AA. */
+    --accent-muted: #784d3a;
     /* A classic link blue, lightened for the dark paper; 6.8:1 on --bg. */
     --blue: #5b9bff;
     /* Two Fontshare faces: Erode, a sharp contemporary serif, for the name
