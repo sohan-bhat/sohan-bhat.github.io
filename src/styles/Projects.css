@@ -1,24 +1,228 @@
-/* Projects, in two tiers. The featured ones are shown large, three across,
-   each under a screenshot of its site. Every other project is a row in the
-   index below, newest first, with the year in the margin and the kind and
-   stack in their own column. Nothing here is boxed: the screenshots are the
-   only framed things, with the same edge and shadow as the portrait. */
-.features {
-    list-style: none;
+/* Projects, as a git graph. On the left, the graph: one commit per project,
+   newest on top, with only its name beside it. Main is the bright line down
+   the left, for the projects to look at first; each side branch is a kind,
+   in its own muted hue. On the right, the one project picked, in full.
+   Nothing is boxed, and everything about a project but its name waits until
+   it is picked. */
+.git {
+    --row: 44px;
+    --root: 30px;
+    --years: 3.25rem;
+    --tint: var(--ink);
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2.75rem 2rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 40rem);
+    column-gap: 3.5rem;
+    align-items: start;
 }
 
-/* A column, so the facts sit along the foot of every feature in a row even
-   when one line of text runs longer than its neighbors. */
-.feature {
+/* The command the graph answers to. The branch names are switches, each
+   with a dot in its branch's hue: a name in cream is on show, and one struck
+   through, its dot hollow, is folded away. */
+.git-command {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.1rem 0.9rem;
+    margin-bottom: 1rem;
+    padding-left: var(--years);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+}
+
+.git-branch {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    padding: 0.25rem 0;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.git-swatch {
+    align-self: center;
+    width: 9px;
+    height: 9px;
+    border: 1.5px solid var(--tint);
+    border-radius: 50%;
+    background: var(--tint);
+}
+
+.git-branch[aria-pressed='false'] {
+    color: var(--ink-soft);
+    font-weight: 400;
+    text-decoration: line-through;
+}
+
+.git-branch[aria-pressed='false'] .git-swatch {
+    background: none;
+}
+
+.git-branch:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.git-branch[aria-pressed='false']:hover {
+    text-decoration: line-through underline;
+}
+
+/* The log: the years down the left edge, the drawn graph, then the names. */
+.git-log {
+    position: relative;
+}
+
+.git-lines {
+    position: absolute;
+    top: 0;
+    left: var(--years);
+    overflow: visible;
+    pointer-events: none;
+}
+
+/* A side branch is drawn in its hue, held back until its branch is the one
+   in play. Main is always full cream, and a little heavier. */
+.git-line {
+    fill: none;
+    stroke: var(--tint);
+    stroke-width: 2;
+    stroke-opacity: 0.5;
+    transition: stroke-opacity 0.15s ease-out;
+}
+
+.git-line.is-lit {
+    stroke-opacity: 1;
+}
+
+.git-main {
+    stroke-width: 2.5;
+    stroke-opacity: 1;
+}
+
+.git-root {
+    fill: var(--ink);
+}
+
+/* A commit on main is a filled dot. One on a side branch is an open ring,
+   which fills when it is the project on show. The commit checked out is the
+   orange one. */
+.git-commit {
+    fill: var(--bg);
+    stroke: var(--tint);
+    stroke-width: 2;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition:
+        transform 0.15s ease-out,
+        fill 0.15s ease-out;
+}
+
+.git-commit.is-main {
+    fill: var(--ink);
+    stroke: var(--bg);
+}
+
+.git-commit.is-shown {
+    fill: var(--tint);
+    transform: scale(1.2);
+}
+
+.git-commit.is-head {
+    fill: var(--accent);
+    stroke: var(--bg);
+    transform: scale(1.25);
+}
+
+.git-rows {
+    list-style: none;
+    padding-bottom: var(--root);
+}
+
+.git-row {
+    position: relative;
+    height: var(--row);
+}
+
+.git-year {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    line-height: var(--row);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-soft);
+}
+
+/* The whole row is the button, so a commit is easy to hit. */
+.git-pick {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    height: 100%;
+    padding: 0 0.5rem 0 calc(var(--years) + var(--graph) + 0.4rem);
+    border: 0;
+    background: none;
+    color: var(--ink-soft);
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.15s ease-out;
+}
+
+.git-pick.is-main {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.git-pick.is-shown,
+.git-pick:hover {
+    color: var(--ink);
+}
+
+.git-pick:focus-visible {
+    outline-offset: -2px;
+}
+
+.git-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Git's own word for the commit checked out. */
+.git-head {
+    flex: none;
+    font-size: 0.66rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+}
+
+/* The project picked. It stays in view while a long graph scrolls by. */
+.git-pane {
+    position: sticky;
+    top: 1.5rem;
     min-width: 0;
 }
 
-.feature-shot {
+.detail {
+    animation: detail-in 0.16s ease-out;
+}
+
+@keyframes detail-in {
+    from {
+        opacity: 0;
+    }
+}
+
+.detail-shot {
     display: block;
     overflow: hidden;
     border: 1px solid var(--edge);
@@ -28,11 +232,11 @@
 }
 
 /* The screenshot opens the site, so its edge lightens under the pointer. */
-.feature-shot:hover {
+.detail-shot:hover {
     border-color: var(--ink-soft);
 }
 
-.feature-shot img {
+.detail-shot img {
     display: block;
     width: 100%;
     height: auto;
@@ -40,41 +244,49 @@
     object-fit: cover;
 }
 
-.feature-head {
+.detail-head {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: 0.75rem;
-    margin-top: 1.1rem;
+    margin-top: 1.2rem;
 }
 
-.feature-title {
+.detail-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
     min-width: 0;
     font-family: var(--font-body);
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 600;
     line-height: 1.3;
 }
 
-.feature-line {
+.detail-note {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+}
+
+.detail-line {
     margin-top: 0.3rem;
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.5;
 }
 
 /* Kind, stack and date on one line, with the date at the right edge. */
-.feature-meta {
+.detail-meta {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     column-gap: 1rem;
-    margin-top: auto;
-    padding-top: 0.7rem;
+    margin-top: 0.7rem;
     font-family: var(--mono);
     font-size: 0.75rem;
     color: var(--ink-soft);
 }
 
-/* Site, Code and Video, shared by both tiers. */
 .project-links {
     flex: none;
     display: flex;
@@ -93,218 +305,75 @@
     white-space: nowrap;
 }
 
-/* The index. Each row is year, month, logo, name over its line, kind over
-   its stack, then the links, lined up on the first line of text. */
-.entries {
-    list-style: none;
-    margin-top: 3.75rem;
-}
-
-/* The kind and the links together are as wide as one featured project, so
-   the kind column starts under the left edge of the third screenshot. On a
-   narrower window it keeps the width a stack needs to stay on one line. */
-.entry {
-    display: grid;
-    grid-template-columns:
-        3rem 2.4rem 18px minmax(0, 1fr)
-        max(13rem, calc((100% - 4rem) / 3 - 9.6rem)) 8.5rem;
-    column-gap: 1.1rem;
-    align-items: baseline;
-    padding: 0.8rem 0 0.85rem;
-    border-top: 1px solid var(--line);
-}
-
-.entry:last-child {
-    border-bottom: 1px solid var(--line);
-}
-
-/* A brighter rule where a new year begins. */
-.entry-starts-year {
-    border-top-color: var(--edge);
-}
-
-.entry-year,
-.entry-date {
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    font-variant-numeric: tabular-nums;
-}
-
-.entry-date {
-    color: var(--ink-soft);
-}
-
-.entry-date-year {
-    display: none;
-}
-
-/* The site's own logo, rounded like an app icon since some are opaque
-   squares. It sits level with the name. */
-.entry-logo {
-    align-self: start;
-    width: 18px;
-    height: 18px;
-    margin-top: 0.2rem;
-    border-radius: 3px;
-}
-
-.entry-main {
-    min-width: 0;
-    grid-column: 4;
-}
-
-.entry-title {
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.4;
-}
-
-.entry-note {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    font-weight: 400;
-    color: var(--ink-soft);
-}
-
-.entry-line {
-    margin-top: 0.1rem;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: var(--ink-soft);
-}
-
-.entry-facts {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    line-height: 1.5;
-}
-
-.entry-stack {
-    font-size: 0.72rem;
-    color: var(--ink-soft);
-}
-
-.entry .project-links {
-    justify-content: flex-end;
-}
-
-/* Tablets: the featured projects stay three across at a smaller size, with
-   their facts on two lines. */
+/* Tablets: the graph takes what it needs and the project gets the rest. */
 @media (max-width: 960px) {
-    .features {
-        gap: 2.25rem 1.25rem;
-    }
-
-    .feature-title {
-        font-size: 1.05rem;
-    }
-
-    .feature-meta {
-        grid-template-columns: minmax(0, 1fr) auto;
-        grid-template-areas:
-            'kind date'
-            'stack stack';
-        row-gap: 0.15rem;
-    }
-
-    .feature-meta span:first-child {
-        grid-area: kind;
-    }
-
-    .feature-meta span:nth-child(2) {
-        grid-area: stack;
-    }
-
-    .feature-meta time {
-        grid-area: date;
+    .git {
+        grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+        column-gap: 2rem;
     }
 }
 
-/* Narrower than the columns need: each row of the index becomes a small
-   block. Logo, name and date, then the line across the full width, then the
-   kind and stack with the links at the right. There is no margin for the
-   year, so each date carries its own. */
-@media (max-width: 900px) {
-    .entry {
-        grid-template-columns: 18px minmax(0, 1fr) auto;
-        grid-template-areas:
-            'logo title date'
-            '. line line'
-            '. facts links';
-        column-gap: 0.7rem;
-        row-gap: 0.3rem;
-    }
-
-    .entry-year {
-        display: none;
-    }
-
-    .entry-date-year {
-        display: inline;
-    }
-
-    /* The date shares its column with the links below it, which are
-       wider, so both are held to the right edge. */
-    .entry-date {
-        grid-area: date;
-        justify-self: end;
-    }
-
-    .entry-logo {
-        grid-area: logo;
-    }
-
-    /* The name and the line become cells of the row themselves. */
-    .entry-main {
-        display: contents;
-    }
-
-    .entry-title {
-        grid-area: title;
-    }
-
-    .entry-line {
-        grid-area: line;
-        margin-top: 0;
-    }
-
-    .entry-facts {
-        grid-area: facts;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: 0.1rem 0.9rem;
-        margin-top: 0.15rem;
-    }
-
-    .entry .project-links {
-        grid-area: links;
-        justify-self: end;
-        margin-top: 0.15rem;
-    }
-}
-
-/* Phones: the featured projects stack, with their facts back on one line,
-   and the index drops the stack so the kind and the links share a line. */
-@media (max-width: 700px) {
-    .features {
+/* Phones: the project picked sits on top and stays there while the graph
+   scrolls under it, so a tap on a commit shows its project without a jump. */
+@media (max-width: 760px) {
+    .git {
         grid-template-columns: minmax(0, 1fr);
-        gap: 2.25rem;
     }
 
-    .feature-meta {
-        grid-template-columns: auto minmax(0, 1fr) auto;
-        grid-template-areas: 'kind stack date';
+    .git-pane {
+        order: -1;
+        top: 0;
+        z-index: 2;
+        max-width: none;
+        margin: 0 -1.5rem 1.25rem;
+        padding: 0.75rem 1.5rem 0.9rem;
+        border-bottom: 1px solid var(--line);
+        background: var(--bg);
     }
 
-    .entry-stack {
+    .detail-head {
+        margin-top: 0.9rem;
+    }
+
+    .detail-title {
+        font-size: 1.1rem;
+    }
+
+    /* The project sits above the graph here, so it keeps one height from
+       pick to pick and the graph never moves under a finger: the facts lose
+       the stack and move up under the name, and the line goes last with
+       room for two lines of text. */
+    .detail:not([hidden]) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .detail-meta {
+        order: 1;
+        grid-template-columns: minmax(0, 1fr) auto;
+        margin-top: 0.35rem;
+    }
+
+    .detail-line {
+        order: 2;
+        min-height: 3em;
+        margin-top: 0.55rem;
+        font-size: 0.95rem;
+    }
+
+    .detail-meta span:nth-child(2) {
         display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .git-line,
+    .git-commit,
+    .git-pick {
+        transition: none;
+    }
+
+    .detail {
+        animation: none;
     }
 }
