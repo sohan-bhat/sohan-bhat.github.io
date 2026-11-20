@@ -8,23 +8,61 @@
     box-shadow: var(--shadow-hard);
 }
 
+/* The title bar holds the window's path and, after it, the sorter. Where
+   the two do not fit on one line, the sorter drops to a second. */
 .finder-bar {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    align-items: stretch;
     justify-content: center;
-    height: 28px;
+    min-height: 28px;
     padding: 0 10px;
     border-bottom: 1px solid var(--edge);
     background: repeating-linear-gradient(to bottom, #3b352e 0 1px, var(--raised) 1px 3px);
 }
 
 .finder-title {
-    padding: 0 10px;
+    padding: 0 0.15rem 0 10px;
     background: var(--raised);
     font-family: var(--mono);
     font-size: 0.78rem;
     font-weight: 600;
+    line-height: 28px;
     letter-spacing: 0.04em;
+}
+
+/* The sorter: one tab for every project, then one for each kind. The tab
+   on show continues the path in the same bold cream, over an orange line. */
+.finder-tabs {
+    display: flex;
+    padding-right: 6px;
+    background: var(--raised);
+}
+
+.finder-tab {
+    height: 28px;
+    padding: 0 0.45rem;
+    border: 0;
+    background: none;
+    color: var(--ink-soft);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+}
+
+.finder-tab:hover {
+    color: var(--ink);
+}
+
+.finder-tab[aria-pressed='true'] {
+    box-shadow: inset 0 -2px 0 var(--accent);
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.finder-tab:focus-visible {
+    outline-offset: -2px;
 }
 
 .finder-body {
@@ -42,21 +80,12 @@
     list-style: none;
 }
 
-/* Name, kind, and date columns, shared by the header and every row. */
-.finder-head,
+/* Name, kind, and date columns, the same in every row. */
 .finder-file {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 8.5rem 5.5rem;
     gap: 0.5rem;
     align-items: center;
-}
-
-.finder-head {
-    padding: 0.35rem 0.75rem;
-    border-bottom: 1px solid var(--edge);
-    background: var(--raised);
-    font-size: 0.75rem;
-    color: var(--ink-soft);
 }
 
 .finder-folder,
@@ -244,12 +273,10 @@
 
 /* Phones: no room for the kind column. */
 @media (max-width: 600px) {
-    .finder-head,
     .finder-file {
         grid-template-columns: minmax(0, 1fr) 5.5rem;
     }
 
-    .finder-head span:nth-child(2),
     .finder-kind {
         display: none;
     }

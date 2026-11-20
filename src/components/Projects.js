@@ -7,7 +7,12 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 
 // Newest first, in folders by year.
 const sorted = [...projects].sort((a, b) => b.date.localeCompare(a.date));
-const years = [...new Set(sorted.map((p) => p.date.slice(0, 4)))];
+const yearOf = (p) => p.date.slice(0, 4);
+
+// The sorter in the title bar. It reads as the end of the window's path, so
+// ~/sohan/projects/ then tools shows only the tools. A group with no project
+// in it gets no tab.
+const TABS = ['all', ...['tools', 'ml', 'apps', 'hardware'].filter((group) => sorted.some((p) => p.groups.includes(group)))];
 const monthOf = (p) => MONTHS[Number(p.date.slice(5, 7)) - 1];
 const shortDate = (p) => `${monthOf(p)} ${p.date.slice(0, 4)}`;
 
@@ -35,11 +40,22 @@ const FileIcon = () => (
 const NARROW = '(max-width: 960px)';
 
 const Projects = () => {
+    const [tab, setTab] = useState('all');
     const [closed, setClosed] = useState([]);
     const [openId, setOpenId] = useState(sorted[0].id);
     const rows = useRef({});
-    const open = sorted.find((p) => p.id === openId);
-    const visible = sorted.filter((p) => !closed.includes(p.date.slice(0, 4)));
+    const listed = sorted.filter((p) => tab === 'all' || p.groups.includes(tab));
+    const years = [...new Set(listed.map(yearOf))];
+    const open = listed.find((p) => p.id === openId);
+    const visible = listed.filter((p) => !closed.includes(yearOf(p)));
+
+    // Switching tabs keeps the open project if it is still listed, and
+    // otherwise opens the newest one that is.
+    const sort = (next) => {
+        setTab(next);
+        const left = sorted.filter((p) => next === 'all' || p.groups.includes(next));
+        if (openId && !left.some((p) => p.id === openId)) setOpenId(left[0].id);
+    };
 
     const toggle = (year) => setClosed((c) => (c.includes(year) ? c.filter((y) => y !== year) : [...c, year]));
 
@@ -64,20 +80,22 @@ const Projects = () => {
 
                 <div className="finder">
                     <div className="finder-bar">
-                        <p className="finder-title">~/sohan/projects</p>
+                        <p className="finder-title">~/sohan/projects/</p>
+                        <div className="finder-tabs" role="group" aria-label="Show one kind of project">
+                            {TABS.map((name) => (
+                                <button key={name} type="button" className="finder-tab" aria-pressed={name === tab} onClick={() => sort(name)}>
+                                    {name}
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
                     <div className="finder-body">
                         <div className="finder-list" onKeyDown={onKeyDown}>
-                            <div className="finder-head" aria-hidden="true">
-                                <span>Name</span>
-                                <span>Kind</span>
-                                <span>Date</span>
-                            </div>
                             <ul>
                                 {years.map((year) => {
                                     const isOpen = !closed.includes(year);
-                                    const items = sorted.filter((p) => p.date.startsWith(year));
+                                    const items = listed.filter((p) => yearOf(p) === year);
                                     return (
                                         <li key={year}>
                                             <button type="button" className="finder-folder" aria-expanded={isOpen} onClick={() => toggle(year)}>
