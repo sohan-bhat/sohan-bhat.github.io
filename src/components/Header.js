@@ -1,12 +1,12 @@
 import React from 'react';
-import { FaGithub, FaXTwitter, FaInstagram } from 'react-icons/fa6';
-import Certificates from './Certificates';
-import Research from './Research';
+import Contact from './Contact';
 import '../styles/Header.css';
 
+// The intro: who I am in one line, the contact links in one row, and the
+// photo beside them (above the name on phones).
 const Header = () => (
     <header className="header" id="intro">
-        <div className="container hero-layout">
+        <div className="container hero">
             <div className="hero-text">
                 <p className="hero-hi">hey, I'm</p>
                 <h1 className="title">Sohan Bhat</h1>
@@ -14,66 +14,19 @@ const Header = () => (
                     I'm 15 and a sophomore in Frisco, Texas. I build neural networks,
                     web apps, and robots.
                 </p>
-
-                <div className="social-links">
-                    <a
-                        href="mailto:sohanrambhat@gmail.com"
-                        className="social-email text-link"
-                    >
-                        sohanrambhat@gmail.com
-                    </a>
-                    <a
-                        href="https://github.com/sohan-bhat"
-                        target="_blank"
-                        rel="me noreferrer"
-                        className="social-link"
-                        aria-label="Sohan on GitHub"
-                    >
-                        <FaGithub />
-                    </a>
-                    <a
-                        href="https://x.com/The_Sohan_Bhat"
-                        target="_blank"
-                        rel="me noreferrer"
-                        className="social-link"
-                        aria-label="Sohan on X"
-                    >
-                        <FaXTwitter />
-                    </a>
-                    <a
-                        href="https://www.instagram.com/thesohanbhat"
-                        target="_blank"
-                        rel="me noreferrer"
-                        className="social-link"
-                        aria-label="Sohan on Instagram"
-                    >
-                        <FaInstagram />
-                    </a>
-                </div>
-
-                <a
-                    className="hero-cv text-link focus-link"
-                    href="/sohan-bhat-cv.pdf"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    CV
-                </a>
+                <Contact cv />
             </div>
 
             <img
                 className="hero-photo"
                 src="/imgs/sohan-320.webp"
                 srcSet="/imgs/sohan-320.webp 320w, /imgs/sohan-600.webp 600w, /imgs/sohan-1200.webp 1200w"
-                sizes="(max-width: 600px) 112px, 230px"
-                width="230"
-                height="230"
+                sizes="(max-width: 640px) 112px, 200px"
+                width="200"
+                height="200"
                 fetchPriority="high"
                 alt="Sohan Bhat in the Rocky Mountains"
             />
-
-            <Certificates />
-            <Research />
         </div>
     </header>
 );

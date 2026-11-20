@@ -1,58 +1,25 @@
-.hero-certs .section-title {
-    margin-bottom: 1rem;
-}
-
-/* One under the next, in the column under the photo. */
+/* One certificate under the next, so the list looks right with one and with
+   several. */
 .cert-list {
     list-style: none;
     display: grid;
-    gap: 1.25rem;
+    row-gap: 2.25rem;
 }
 
-/* The same marked entry as the write-up, a size smaller. */
-.cert-entry {
-    border-left: 2px solid var(--accent);
-    padding-left: 1.25rem;
-}
-
-.cert-title {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.35;
-    margin-bottom: 0.3rem;
-}
-
-/* Who gave it and when, then the link, on one line. */
-.cert-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.25rem 1.1rem;
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-}
-
-.cert-link {
-    font-size: 0.85rem;
-}
-
-/* The PDF download, an icon link like the ones under the name: gray at
-   rest, orange on hover and focus. It is 24px square to be easy to tap, and
-   the negative margins keep it out of the line's height and gap. */
+/* The PDF download, an arrow in the links' orange. It is 24px square to be
+   easy to tap, and the negative margins keep it out of the line's height
+   and gap. */
 .cert-download {
-    align-self: center;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 24px;
     height: 24px;
-    margin: -4px 0 -4px -0.6rem;
-    color: var(--ink-soft);
+    margin: -4px 0 -4px -0.7rem;
+    text-decoration: none;
 }
 
 .cert-download:hover,
 .cert-download:focus-visible {
-    color: var(--accent);
+    color: var(--ink);
 }
