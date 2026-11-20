@@ -1,7 +1,15 @@
 /* The projects window, styled after an old desktop file manager: square
-   corners, a hard drop shadow, a pinstriped title bar, a
-   compact list in monospace, and a status bar along the bottom. */
+   corners, a hard drop shadow, a pinstriped title bar, and a compact list
+   in monospace. The list is drawn as a git graph: the projects to look at
+   first are commits on main, and the rest sit on side branches. */
 .finder {
+    /* The graph's measurements, shared with the drawing in Projects.js. */
+    --row: 34px;
+    --lane-main: 14px;
+    --lane-side: 30.5px;
+    --graph: 44px;
+    --graph-main: var(--ink);
+    --graph-side: #8a8075;
     background: var(--surface);
     border: 1px solid var(--edge);
     border-radius: var(--radius);
@@ -52,18 +60,22 @@
 }
 
 .finder-head {
-    padding: 0.35rem 0.75rem;
+    padding: 0.35rem 0.75rem 0.35rem calc(var(--graph) + 2px);
     border-bottom: 1px solid var(--edge);
     background: var(--raised);
     font-size: 0.75rem;
     color: var(--ink-soft);
 }
 
-.finder-folder,
+/* A row holds the graph, the project's button and, on phones, its card. */
+.finder-row {
+    position: relative;
+}
+
 .finder-file {
     width: 100%;
-    min-height: 30px;
-    padding: 0.25rem 0.75rem;
+    height: var(--row);
+    padding: 0 0.75rem 0 calc(var(--graph) + 2px);
     border: 0;
     border-bottom: 1px solid rgb(255 255 255 / 0.04);
     background: none;
@@ -73,20 +85,110 @@
     cursor: pointer;
 }
 
-.finder-folder {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-weight: 600;
+/* The projects on main are set a little heavier. */
+.finder-file.is-main .finder-name {
+    font-weight: 700;
 }
 
-.finder-file {
-    padding-left: 2.1rem;
-}
-
-.finder-folder:hover,
 .finder-file:hover {
     background: rgb(255 255 255 / 0.04);
+}
+
+/* The graph, drawn over the left edge of the row. Main is a bright line
+   with filled commits; a side branch is a thin gray line with open ones. */
+.graph {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--graph);
+    pointer-events: none;
+}
+
+.graph-marks {
+    display: block;
+    overflow: visible;
+}
+
+.graph-line {
+    position: absolute;
+}
+
+.graph-main {
+    left: calc(var(--lane-main) - 1px);
+    width: 2px;
+    background: var(--graph-main);
+}
+
+.graph-side {
+    left: calc(var(--lane-side) - 0.5px);
+    width: 1px;
+    background: var(--graph-side);
+}
+
+/* From the top of the row to its commit, and from the commit down past
+   the row to the foot of an open card. A side line stops at the rim of
+   its open commit. */
+.graph-above {
+    top: 0;
+    height: calc(var(--row) / 2);
+}
+
+.graph-below {
+    top: calc(var(--row) / 2);
+    bottom: 0;
+}
+
+.graph-tail {
+    top: var(--row);
+    bottom: 0;
+}
+
+.graph-side.graph-above {
+    height: calc(var(--row) / 2 - 3.5px);
+}
+
+.graph-side.graph-below {
+    top: calc(var(--row) / 2 + 3.5px);
+}
+
+.graph-curve {
+    fill: none;
+    stroke: var(--graph-side);
+    stroke-width: 1;
+}
+
+.graph-commit {
+    fill: var(--graph-main);
+}
+
+.graph-commit-side {
+    fill: none;
+    stroke: var(--graph-side);
+    stroke-width: 1.5;
+}
+
+/* On the selected row's muted orange the gray would fade, so it lightens. */
+.finder-row.is-open {
+    --graph-side: #ddd2c4;
+}
+
+/* The branch name beside main's newest commit, like git's own label. */
+.finder-branch {
+    flex: none;
+    padding: 0 0.35rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius);
+    font-size: 0.68rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink-soft);
+}
+
+.finder-file[aria-expanded='true'] .finder-branch {
+    border-color: #a58d7c;
+    color: #ddd2c4;
 }
 
 .finder-file[aria-expanded='true'] {
@@ -99,21 +201,9 @@
     color: #ddd2c4;
 }
 
-.finder-folder:focus-visible,
 .finder-file:focus-visible {
     outline: 2px solid var(--ink);
     outline-offset: -2px;
-}
-
-.finder-arrow {
-    width: 0.8rem;
-    color: var(--ink-soft);
-}
-
-.finder-count {
-    margin-left: auto;
-    font-weight: 400;
-    color: var(--ink-soft);
 }
 
 .finder-name {
@@ -133,7 +223,7 @@
     white-space: nowrap;
 }
 
-/* Folder and file icons, in the window's grays and creams. */
+/* The plain page icon, in the window's grays and creams. */
 .finder-icon {
     flex: none;
     width: 16px;
@@ -145,18 +235,6 @@
 .finder-logo {
     height: 16px;
     border-radius: 3px;
-}
-
-.folder-back {
-    fill: #6f665b;
-}
-
-.folder-front {
-    fill: #a69d90;
-}
-
-.folder-sheet {
-    fill: #efe8dc;
 }
 
 .file-page {
@@ -198,15 +276,6 @@
     display: none !important;
 }
 
-.finder-status {
-    padding: 0.3rem 0.75rem;
-    border-top: 1px solid var(--edge);
-    background: var(--raised);
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--ink-soft);
-}
-
 /* Tablets and phones: one column, and the open project expands in place
    under its row. */
 @media (max-width: 960px) {
@@ -222,9 +291,11 @@
         display: none;
     }
 
+    /* The card sits to the right of the graph, whose lines run on beside
+       it to the next row. */
     .finder-inline {
         display: flex;
-        padding: 0.6rem 0.6rem 0.75rem;
+        padding: 0.6rem 0.6rem 0.75rem var(--graph);
         border-bottom: 1px solid var(--edge);
         background: var(--bg);
     }

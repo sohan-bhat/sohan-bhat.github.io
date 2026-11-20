@@ -4,6 +4,8 @@
 // project's row; a project without one gets a plain page icon.
 // `team` lists the people a project was built with; the card credits each
 // as @name, linked to their profile.
+// `main: true` puts a project on the main branch of the Projects graph, for
+// the ones to look at first. The rest sit on side branches.
 const projects = [
     {
         id: 'hullo',
@@ -23,6 +25,7 @@ const projects = [
     },
     {
         id: 'openhal',
+        main: true,
         kind: 'Protocol',
         title: 'OpenHAL',
         date: '2026-10-17',
@@ -38,6 +41,7 @@ const projects = [
     },
     {
         id: 'wobbl',
+        main: true,
         kind: 'Simulator',
         title: 'wobbl',
         date: '2026-10-13',
@@ -54,6 +58,7 @@ const projects = [
     },
     {
         id: 'oopsy',
+        main: true,
         kind: 'CLI tool',
         title: 'oopsy',
         date: '2026-10-09',

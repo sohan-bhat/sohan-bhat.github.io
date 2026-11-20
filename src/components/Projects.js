@@ -5,19 +5,60 @@ import '../styles/Projects.css';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-// Newest first, in folders by year.
+// Newest first, drawn as a git graph. Projects marked `main` are commits on
+// the main branch, a bright line down the left. Every other project sits on
+// a side branch beside it, which forks from main and merges back in.
 const sorted = [...projects].sort((a, b) => b.date.localeCompare(a.date));
-const years = [...new Set(sorted.map((p) => p.date.slice(0, 4)))];
-const monthOf = (p) => MONTHS[Number(p.date.slice(5, 7)) - 1];
-const shortDate = (p) => `${monthOf(p)} ${p.date.slice(0, 4)}`;
+const shortDate = (p) => `${MONTHS[Number(p.date.slice(5, 7)) - 1]} ${p.date.slice(0, 4)}`;
 
-// A tabbed folder, open or closed.
-const FolderIcon = ({ open }) => (
-    <svg className="finder-icon" viewBox="0 0 16 13" aria-hidden="true">
-        <path className="folder-back" d="M1 2.5A1 1 0 0 1 2 1.5h4l1.5 1.5H14a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
-        {open && <rect className="folder-sheet" x="2.5" y="3.5" width="11" height="6" />}
-        <path className="folder-front" d={open ? 'M1 7h14v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z' : 'M1 5h14v6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z'} />
-    </svg>
+const last = sorted.length - 1;
+const firstMain = sorted.findIndex((p) => p.main);
+const lastMain = sorted.reduce((found, p, i) => (p.main ? i : found), -1);
+const head = sorted[firstMain] || sorted[0];
+
+// What to draw beside each row. Main runs from its newest commit to its
+// oldest. A run of side projects joins main with a curve at each end where
+// there is a main commit to join.
+const rows = sorted.map((project, i) => {
+    const main = Boolean(project.main);
+    const hasMain = firstMain !== -1;
+    const sideAbove = !main && i > 0 && !sorted[i - 1].main;
+    const sideBelow = !main && i < last && !sorted[i + 1].main;
+    return {
+        project,
+        main,
+        mainAbove: hasMain && ((i > firstMain && i <= lastMain) || (i === firstMain && i > 0)),
+        mainBelow: hasMain && ((i >= firstMain && i < lastMain) || (i === lastMain && i < last)),
+        // Under the newest side run, main starts at the foot of the row.
+        mainTail: hasMain && i === firstMain - 1,
+        sideAbove,
+        sideBelow,
+        merge: !main && !sideAbove && hasMain && i > firstMain,
+        fork: !main && !sideBelow && hasMain && i < lastMain,
+    };
+});
+
+// The lines are spans so they can run on past the row, down the side of a
+// card opened under it on a phone. The dot and the curves are drawn in a
+// box the size of the row. The numbers match --row and the lanes in
+// Projects.css: rows 34 tall, main at x 14, the side branch at x 30.5.
+const Graph = ({ row }) => (
+    <span className="graph" aria-hidden="true">
+        {row.mainAbove && <span className="graph-line graph-main graph-above" />}
+        {row.mainBelow && <span className="graph-line graph-main graph-below" />}
+        {row.mainTail && <span className="graph-line graph-main graph-tail" />}
+        {row.sideAbove && <span className="graph-line graph-side graph-above" />}
+        {row.sideBelow && <span className="graph-line graph-side graph-below" />}
+        <svg className="graph-marks" viewBox="0 0 44 34" width="44" height="34">
+            {row.merge && <path className="graph-curve" d="M30.5 13.5C30.5 6 14 8 14 0" />}
+            {row.fork && <path className="graph-curve" d="M30.5 20.5C30.5 28 14 26 14 34" />}
+            {row.main ? (
+                <circle className="graph-commit" cx="14" cy="17" r="4.5" />
+            ) : (
+                <circle className="graph-commit graph-commit-side" cx="30.5" cy="17" r="3.5" />
+            )}
+        </svg>
+    </span>
 );
 
 // A page with a folded corner and a few lines of text, for a project whose
@@ -35,13 +76,10 @@ const FileIcon = () => (
 const NARROW = '(max-width: 960px)';
 
 const Projects = () => {
-    const [closed, setClosed] = useState([]);
-    const [openId, setOpenId] = useState(sorted[0].id);
-    const rows = useRef({});
+    // The newest project on main is open to begin with.
+    const [openId, setOpenId] = useState(head.id);
+    const buttons = useRef({});
     const open = sorted.find((p) => p.id === openId);
-    const visible = sorted.filter((p) => !closed.includes(p.date.slice(0, 4)));
-
-    const toggle = (year) => setClosed((c) => (c.includes(year) ? c.filter((y) => y !== year) : [...c, year]));
 
     // Tapping the open row on a narrow screen folds it back up; on wider
     // screens the preview pane always shows something.
@@ -49,12 +87,12 @@ const Projects = () => {
 
     const onKeyDown = (event) => {
         if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
-        const i = visible.findIndex((p) => p.id === openId);
-        const next = visible[i + (event.key === 'ArrowDown' ? 1 : -1)];
+        const i = sorted.findIndex((p) => p.id === openId);
+        const next = sorted[i + (event.key === 'ArrowDown' ? 1 : -1)];
         if (!next) return;
         event.preventDefault();
         setOpenId(next.id);
-        rows.current[next.id].focus();
+        buttons.current[next.id].focus();
     };
 
     return (
@@ -75,61 +113,46 @@ const Projects = () => {
                                 <span>Date</span>
                             </div>
                             <ul>
-                                {years.map((year) => {
-                                    const isOpen = !closed.includes(year);
-                                    const items = sorted.filter((p) => p.date.startsWith(year));
+                                {rows.map((row) => {
+                                    const p = row.project;
                                     return (
-                                        <li key={year}>
-                                            <button type="button" className="finder-folder" aria-expanded={isOpen} onClick={() => toggle(year)}>
-                                                <span className="finder-arrow" aria-hidden="true">
-                                                    {isOpen ? '▾' : '▸'}
+                                        <li key={p.id} className={`finder-row${p.id === openId ? ' is-open' : ''}`}>
+                                            <Graph row={row} />
+                                            <button
+                                                type="button"
+                                                className={`finder-file${row.main ? ' is-main' : ''}`}
+                                                aria-expanded={p.id === openId}
+                                                aria-controls={`project-${p.id} finder-preview`}
+                                                ref={(el) => {
+                                                    buttons.current[p.id] = el;
+                                                }}
+                                                onClick={() => select(p.id)}
+                                            >
+                                                <span className="finder-name">
+                                                    {p.icon ? (
+                                                        <img
+                                                            className="finder-icon finder-logo"
+                                                            src={p.icon}
+                                                            alt=""
+                                                            width="16"
+                                                            height="16"
+                                                            loading="lazy"
+                                                            decoding="async"
+                                                        />
+                                                    ) : (
+                                                        <FileIcon />
+                                                    )}
+                                                    {p.title}
+                                                    {p === head && row.main && <span className="finder-branch">main</span>}
                                                 </span>
-                                                <FolderIcon open={isOpen} />
-                                                {year}
-                                                <span className="finder-count">{items.length}</span>
+                                                <span className="finder-kind">{p.kind}</span>
+                                                <span className="finder-date">{shortDate(p)}</span>
                                             </button>
-                                            {isOpen && (
-                                                <ul>
-                                                    {items.map((p) => (
-                                                        <li key={p.id}>
-                                                            <button
-                                                                type="button"
-                                                                className="finder-file"
-                                                                aria-expanded={p.id === openId}
-                                                                aria-controls={`project-${p.id} finder-preview`}
-                                                                ref={(el) => {
-                                                                    rows.current[p.id] = el;
-                                                                }}
-                                                                onClick={() => select(p.id)}
-                                                            >
-                                                                <span className="finder-name">
-                                                                    {p.icon ? (
-                                                                        <img
-                                                                            className="finder-icon finder-logo"
-                                                                            src={p.icon}
-                                                                            alt=""
-                                                                            width="16"
-                                                                            height="16"
-                                                                            loading="lazy"
-                                                                            decoding="async"
-                                                                        />
-                                                                    ) : (
-                                                                        <FileIcon />
-                                                                    )}
-                                                                    {p.title}
-                                                                </span>
-                                                                <span className="finder-kind">{p.kind}</span>
-                                                                <span className="finder-date">{shortDate(p)}</span>
-                                                            </button>
-                                                            {/* Every card is in the page, so search engines
-                                                                see each project. Only the open one shows. */}
-                                                            <div className="finder-inline" id={`project-${p.id}`} hidden={p.id !== openId}>
-                                                                <ProjectCard project={{ ...p, when: shortDate(p) }} />
-                                                            </div>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            )}
+                                            {/* Every card is in the page, so search engines
+                                                see each project. Only the open one shows. */}
+                                            <div className="finder-inline" id={`project-${p.id}`} hidden={p.id !== openId}>
+                                                <ProjectCard project={{ ...p, when: shortDate(p) }} />
+                                            </div>
                                         </li>
                                     );
                                 })}
@@ -144,10 +167,6 @@ const Projects = () => {
                             )}
                         </div>
                     </div>
-
-                    <p className="finder-status">
-                        {sorted.length} items, {years.length} folders
-                    </p>
                 </div>
             </div>
         </section>
