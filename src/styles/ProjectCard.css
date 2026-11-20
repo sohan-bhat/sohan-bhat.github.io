@@ -70,6 +70,12 @@
     color: var(--ink);
 }
 
+/* A person the project was built with, as @name. A name never breaks
+   across two lines. */
+.card-line .text-link {
+    white-space: nowrap;
+}
+
 /* Pinned to the bottom, so the stacks line up across the row. */
 .card-foot {
     display: flex;

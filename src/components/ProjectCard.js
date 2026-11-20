@@ -2,7 +2,8 @@ import React from 'react';
 import '../styles/ProjectCard.css';
 
 // One project: the title and its links across the top, a screenshot of its
-// site, one short line with no period, and what it's built with.
+// site, one short line with no period (then who it was built with, if
+// anyone), and what it's built with.
 const ProjectCard = ({ project }) => (
     <article className="project-card">
         <header className="card-head">
@@ -38,7 +39,19 @@ const ProjectCard = ({ project }) => (
             loading="lazy"
         />
 
-        <p className="card-line">{project.line}</p>
+        <p className="card-line">
+            {project.line}
+            {project.team && ', with '}
+            {project.team &&
+                project.team.map((person, i) => (
+                    <React.Fragment key={person.name}>
+                        {i > 0 && ' and '}
+                        <a className="text-link" href={person.url} target="_blank" rel="noreferrer">
+                            @{person.name}
+                        </a>
+                    </React.Fragment>
+                ))}
+        </p>
         <p className="card-foot">
             <span>{project.stack.join(', ')}</span>
             {project.when && <time dateTime={project.date}>{project.when}</time>}

@@ -2,7 +2,25 @@
 // the card-<image>-560 and -1120 screenshots in public/imgs: an overview of
 // each project's site, 16:10. `icon` is the site's own logo, shown in the
 // project's row; a project without one gets a plain page icon.
+// `team` lists the people a project was built with; the card credits each
+// as @name, linked to their profile.
 const projects = [
+    {
+        id: 'hullo',
+        kind: 'Website',
+        title: 'hullo',
+        date: '2026-11-14',
+        line: 'What NASA left in space',
+        team: [
+            { name: 'Manas Agarwal', url: 'https://www.linkedin.com/in/manas-agarwal-610201322' },
+            { name: 'Shiven Garisa', url: 'https://www.linkedin.com/in/shiven-garisa-2b10b0286' },
+        ],
+        stack: ['Astro', 'React', 'Python'],
+        links: [{ label: 'Site', url: 'https://sayhullo.netlify.app/' }],
+        image: 'hullo',
+        icon: '/imgs/icons/hullo.svg',
+        alt: 'Hullo’s site, “NASA left hardware across the solar system,” beside the Earth rising over the Moon.',
+    },
     {
         id: 'openhal',
         kind: 'Protocol',
