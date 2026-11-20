@@ -1,11 +1,12 @@
-// `date` is when each project started. `kind` says what it is. `image` names
-// the card-<image>-560 and -1120 screenshots in public/imgs: an overview of
-// each project's site, 16:10. `icon` is the site's own logo, shown in the
-// project's row; a project without one gets a plain page icon.
-// `team` lists the people a project was built with; the card credits each
-// as @name, linked to their profile.
-// `main: true` puts a project on the main branch of the Projects graph, for
-// the ones to look at first. The rest sit on side branches.
+// `date` is when each project started. `kind` says what it is.
+// `featured: true` shows a project large, at the top of Projects, with its
+// screenshot: keep it for the few to look at first. Every other project is a
+// row in the index below them.
+// `image` names the card-<image>-560 and -1120 screenshots in public/imgs: an
+// overview of each project's site, 16:10, shown when the project is featured.
+// `icon` is the site's own logo, shown beside the project's name in the index.
+// `team` lists the people a project was built with; each is credited as
+// @name, linked to their profile.
 const projects = [
     {
         id: 'hullo',
@@ -25,7 +26,7 @@ const projects = [
     },
     {
         id: 'openhal',
-        main: true,
+        featured: true,
         kind: 'Protocol',
         title: 'OpenHAL',
         date: '2026-10-17',
@@ -41,7 +42,7 @@ const projects = [
     },
     {
         id: 'wobbl',
-        main: true,
+        featured: true,
         kind: 'Simulator',
         title: 'wobbl',
         date: '2026-10-13',
@@ -58,7 +59,7 @@ const projects = [
     },
     {
         id: 'oopsy',
-        main: true,
+        featured: true,
         kind: 'CLI tool',
         title: 'oopsy',
         date: '2026-10-09',

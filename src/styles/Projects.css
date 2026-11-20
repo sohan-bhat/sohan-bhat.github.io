@@ -1,336 +1,310 @@
-/* The projects window, styled after an old desktop file manager: square
-   corners, a hard drop shadow, a pinstriped title bar, and a compact list
-   in monospace. The list is drawn as a git graph: the projects to look at
-   first are commits on main, and the rest sit on side branches. */
-.finder {
-    /* The graph's measurements, shared with the drawing in Projects.js. */
-    --row: 34px;
-    --lane-main: 14px;
-    --lane-side: 30.5px;
-    --graph: 44px;
-    --graph-main: var(--ink);
-    --graph-side: #8a8075;
-    background: var(--surface);
+/* Projects, in two tiers. The featured ones are shown large, three across,
+   each under a screenshot of its site. Every other project is a row in the
+   index below, newest first, with the year in the margin and the kind and
+   stack in their own column. Nothing here is boxed: the screenshots are the
+   only framed things, with the same edge and shadow as the portrait. */
+.features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.75rem 2rem;
+}
+
+/* A column, so the facts sit along the foot of every feature in a row even
+   when one line of text runs longer than its neighbors. */
+.feature {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.feature-shot {
+    display: block;
+    overflow: hidden;
     border: 1px solid var(--edge);
     border-radius: var(--radius);
     box-shadow: var(--shadow-hard);
+    background: var(--sand);
 }
 
-.finder-bar {
+/* The screenshot opens the site, so its edge lightens under the pointer. */
+.feature-shot:hover {
+    border-color: var(--ink-soft);
+}
+
+.feature-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+.feature-head {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 28px;
-    padding: 0 10px;
-    border-bottom: 1px solid var(--edge);
-    background: repeating-linear-gradient(to bottom, #3b352e 0 1px, var(--raised) 1px 3px);
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 1.1rem;
 }
 
-.finder-title {
-    padding: 0 10px;
-    background: var(--raised);
-    font-family: var(--mono);
-    font-size: 0.78rem;
+.feature-title {
+    min-width: 0;
+    font-family: var(--font-body);
+    font-size: 1.15rem;
     font-weight: 600;
-    letter-spacing: 0.04em;
+    line-height: 1.3;
 }
 
-.finder-body {
+.feature-line {
+    margin-top: 0.3rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Kind, stack and date on one line, with the date at the right edge. */
+.feature-meta {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-}
-
-.finder-list {
-    border-right: 1px solid var(--edge);
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: 1rem;
+    margin-top: auto;
+    padding-top: 0.7rem;
     font-family: var(--mono);
-    font-size: 0.8rem;
-}
-
-.finder-list ul {
-    list-style: none;
-}
-
-/* Name, kind, and date columns, shared by the header and every row. */
-.finder-head,
-.finder-file {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 8.5rem 5.5rem;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.finder-head {
-    padding: 0.35rem 0.75rem 0.35rem calc(var(--graph) + 2px);
-    border-bottom: 1px solid var(--edge);
-    background: var(--raised);
     font-size: 0.75rem;
     color: var(--ink-soft);
 }
 
-/* A row holds the graph, the project's button and, on phones, its card. */
-.finder-row {
-    position: relative;
-}
-
-.finder-file {
-    width: 100%;
-    height: var(--row);
-    padding: 0 0.75rem 0 calc(var(--graph) + 2px);
-    border: 0;
-    border-bottom: 1px solid rgb(255 255 255 / 0.04);
-    background: none;
-    color: var(--ink);
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-}
-
-/* The projects on main are set a little heavier. */
-.finder-file.is-main .finder-name {
-    font-weight: 700;
-}
-
-.finder-file:hover {
-    background: rgb(255 255 255 / 0.04);
-}
-
-/* The graph, drawn over the left edge of the row. Main is a bright line
-   with filled commits; a side branch is a thin gray line with open ones. */
-.graph {
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: var(--graph);
-    pointer-events: none;
-}
-
-.graph-marks {
-    display: block;
-    overflow: visible;
-}
-
-.graph-line {
-    position: absolute;
-}
-
-.graph-main {
-    left: calc(var(--lane-main) - 1px);
-    width: 2px;
-    background: var(--graph-main);
-}
-
-.graph-side {
-    left: calc(var(--lane-side) - 0.5px);
-    width: 1px;
-    background: var(--graph-side);
-}
-
-/* From the top of the row to its commit, and from the commit down past
-   the row to the foot of an open card. A side line stops at the rim of
-   its open commit. */
-.graph-above {
-    top: 0;
-    height: calc(var(--row) / 2);
-}
-
-.graph-below {
-    top: calc(var(--row) / 2);
-    bottom: 0;
-}
-
-.graph-tail {
-    top: var(--row);
-    bottom: 0;
-}
-
-.graph-side.graph-above {
-    height: calc(var(--row) / 2 - 3.5px);
-}
-
-.graph-side.graph-below {
-    top: calc(var(--row) / 2 + 3.5px);
-}
-
-.graph-curve {
-    fill: none;
-    stroke: var(--graph-side);
-    stroke-width: 1;
-}
-
-.graph-commit {
-    fill: var(--graph-main);
-}
-
-.graph-commit-side {
-    fill: none;
-    stroke: var(--graph-side);
-    stroke-width: 1.5;
-}
-
-/* On the selected row's muted orange the gray would fade, so it lightens. */
-.finder-row.is-open {
-    --graph-side: #ddd2c4;
-}
-
-/* The branch name beside main's newest commit, like git's own label. */
-.finder-branch {
+/* Site, Code and Video, shared by both tiers. */
+.project-links {
     flex: none;
-    padding: 0 0.35rem;
-    border: 1px solid var(--edge);
-    border-radius: var(--radius);
-    font-size: 0.68rem;
+    display: flex;
+    gap: 0.9rem;
+}
+
+.project-link {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+/* A person a project was built with, as @name. A name never breaks across
+   two lines. */
+.project-person {
+    white-space: nowrap;
+}
+
+/* The index. Each row is year, month, logo, name over its line, kind over
+   its stack, then the links, lined up on the first line of text. */
+.entries {
+    list-style: none;
+    margin-top: 3.75rem;
+}
+
+/* The kind and the links together are as wide as one featured project, so
+   the kind column starts under the left edge of the third screenshot. On a
+   narrower window it keeps the width a stack needs to stay on one line. */
+.entry {
+    display: grid;
+    grid-template-columns:
+        3rem 2.4rem 18px minmax(0, 1fr)
+        max(13rem, calc((100% - 4rem) / 3 - 9.6rem)) 8.5rem;
+    column-gap: 1.1rem;
+    align-items: baseline;
+    padding: 0.8rem 0 0.85rem;
+    border-top: 1px solid var(--line);
+}
+
+.entry:last-child {
+    border-bottom: 1px solid var(--line);
+}
+
+/* A brighter rule where a new year begins. */
+.entry-starts-year {
+    border-top-color: var(--edge);
+}
+
+.entry-year,
+.entry-date {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.entry-date {
+    color: var(--ink-soft);
+}
+
+.entry-date-year {
+    display: none;
+}
+
+/* The site's own logo, rounded like an app icon since some are opaque
+   squares. It sits level with the name. */
+.entry-logo {
+    align-self: start;
+    width: 18px;
+    height: 18px;
+    margin-top: 0.2rem;
+    border-radius: 3px;
+}
+
+.entry-main {
+    min-width: 0;
+    grid-column: 4;
+}
+
+.entry-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.entry-note {
+    font-family: var(--mono);
+    font-size: 0.72rem;
     font-weight: 400;
+    color: var(--ink-soft);
+}
+
+.entry-line {
+    margin-top: 0.1rem;
+    font-size: 0.9rem;
     line-height: 1.5;
     color: var(--ink-soft);
 }
 
-.finder-file[aria-expanded='true'] .finder-branch {
-    border-color: #a58d7c;
-    color: #ddd2c4;
-}
-
-.finder-file[aria-expanded='true'] {
-    background: var(--accent-muted);
-    color: var(--ink);
-}
-
-.finder-file[aria-expanded='true'] .finder-kind,
-.finder-file[aria-expanded='true'] .finder-date {
-    color: #ddd2c4;
-}
-
-.finder-file:focus-visible {
-    outline: 2px solid var(--ink);
-    outline-offset: -2px;
-}
-
-.finder-name {
+.entry-facts {
     display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    min-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.finder-kind,
-.finder-date {
-    overflow: hidden;
-    color: var(--ink-soft);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* The plain page icon, in the window's grays and creams. */
-.finder-icon {
-    flex: none;
-    width: 16px;
-    height: 14px;
-}
-
-/* A project's own logo, rounded like an app icon since some are opaque
-   squares. */
-.finder-logo {
-    height: 16px;
-    border-radius: 3px;
-}
-
-.file-page {
-    fill: #efe8dc;
-}
-
-.file-fold {
-    fill: none;
-    stroke: #8a8075;
-    stroke-width: 1;
-}
-
-.file-lines {
-    stroke: #8a8075;
-    stroke-width: 1;
-    stroke-linecap: round;
-}
-
-.finder-preview {
-    display: flex;
-    padding: 0.75rem;
-}
-
-.finder-empty {
-    margin: auto;
+    flex-direction: column;
+    gap: 0.2rem;
     font-family: var(--mono);
     font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.entry-stack {
+    font-size: 0.72rem;
     color: var(--ink-soft);
 }
 
-/* The open project under its row, shown only on phones. */
-.finder-inline {
-    display: none;
+.entry .project-links {
+    justify-content: flex-end;
 }
 
-/* Closed rows keep their card in the page but hidden, even where the
-   narrow layout shows the open one. */
-.finder-inline[hidden] {
-    display: none !important;
-}
-
-/* Tablets and phones: one column, and the open project expands in place
-   under its row. */
+/* Tablets: the featured projects stay three across at a smaller size, with
+   their facts on two lines. */
 @media (max-width: 960px) {
-    .finder-body {
-        grid-template-columns: 1fr;
+    .features {
+        gap: 2.25rem 1.25rem;
     }
 
-    .finder-list {
-        border-right: 0;
+    .feature-title {
+        font-size: 1.05rem;
     }
 
-    .finder-preview {
+    .feature-meta {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            'kind date'
+            'stack stack';
+        row-gap: 0.15rem;
+    }
+
+    .feature-meta span:first-child {
+        grid-area: kind;
+    }
+
+    .feature-meta span:nth-child(2) {
+        grid-area: stack;
+    }
+
+    .feature-meta time {
+        grid-area: date;
+    }
+}
+
+/* Narrower than the columns need: each row of the index becomes a small
+   block. Logo, name and date, then the line across the full width, then the
+   kind and stack with the links at the right. There is no margin for the
+   year, so each date carries its own. */
+@media (max-width: 900px) {
+    .entry {
+        grid-template-columns: 18px minmax(0, 1fr) auto;
+        grid-template-areas:
+            'logo title date'
+            '. line line'
+            '. facts links';
+        column-gap: 0.7rem;
+        row-gap: 0.3rem;
+    }
+
+    .entry-year {
         display: none;
     }
 
-    /* The card sits to the right of the graph, whose lines run on beside
-       it to the next row. */
-    .finder-inline {
-        display: flex;
-        padding: 0.6rem 0.6rem 0.75rem var(--graph);
-        border-bottom: 1px solid var(--edge);
-        background: var(--bg);
+    .entry-date-year {
+        display: inline;
     }
 
-    /* The row above already shows the name, so it's kept for screen
-       readers only. */
-    .finder-inline .card-name {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip-path: inset(50%);
-        white-space: nowrap;
+    /* The date shares its column with the links below it, which are
+       wider, so both are held to the right edge. */
+    .entry-date {
+        grid-area: date;
+        justify-self: end;
     }
 
-    .finder-inline .card-head {
-        justify-content: flex-start;
-        gap: 0;
+    .entry-logo {
+        grid-area: logo;
     }
 
-    .finder-inline .card-note {
-        margin-right: 0.9rem;
+    /* The name and the line become cells of the row themselves. */
+    .entry-main {
+        display: contents;
     }
 
+    .entry-title {
+        grid-area: title;
+    }
+
+    .entry-line {
+        grid-area: line;
+        margin-top: 0;
+    }
+
+    .entry-facts {
+        grid-area: facts;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.1rem 0.9rem;
+        margin-top: 0.15rem;
+    }
+
+    .entry .project-links {
+        grid-area: links;
+        justify-self: end;
+        margin-top: 0.15rem;
+    }
 }
 
-/* Phones: no room for the kind column. */
-@media (max-width: 600px) {
-    .finder-head,
-    .finder-file {
-        grid-template-columns: minmax(0, 1fr) 5.5rem;
+/* Phones: the featured projects stack, with their facts back on one line,
+   and the index drops the stack so the kind and the links share a line. */
+@media (max-width: 700px) {
+    .features {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.25rem;
     }
 
-    .finder-head span:nth-child(2),
-    .finder-kind {
+    .feature-meta {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-areas: 'kind stack date';
+    }
+
+    .entry-stack {
         display: none;
     }
 }
