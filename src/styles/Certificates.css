@@ -37,3 +37,22 @@
 .cert-link {
     font-size: 0.85rem;
 }
+
+/* The PDF download, an icon link like the ones under the name: gray at
+   rest, orange on hover and focus. It is 24px square to be easy to tap, and
+   the negative margins keep it out of the line's height and gap. */
+.cert-download {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin: -4px 0 -4px -0.6rem;
+    color: var(--ink-soft);
+}
+
+.cert-download:hover,
+.cert-download:focus-visible {
+    color: var(--accent);
+}
