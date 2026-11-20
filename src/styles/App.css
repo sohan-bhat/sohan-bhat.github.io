@@ -4,8 +4,11 @@
      ending in an orange period; smaller titles and body text in Excon; and
      mono for small labels, metadata and links. Nothing sits in a box. The
      only framed things are pictures.
-   - Orange (--accent) is for heading periods, links and the research
-     border. Nothing else is orange.
+   - Orange (--accent) is for heading periods, links, the research border
+     and the commit checked out in the Projects graph. Nothing else is
+     orange.
+   - The Projects graph is the one place with other hues: each side branch
+     gets a muted tint of its own, so a branch reads as one thing.
    - Blue (--blue) is only for the page's main links, the CV, the paper and
      the team page, so they stand out as the places to look.
    - One shadow, --shadow-hard, for the photos and the project
