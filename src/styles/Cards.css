@@ -1,8 +1,9 @@
-/* A card, used by Projects and Robotics so they read as one design: a
-   picture, 16:10 with a thin edge, then the title, a line of text where
-   there is one, and the links. Pictures sit a little dimmed and muted so no
-   bright one shouts, and come to full colour when the card is pointed at or
-   holds the focus. */
+/* A card, used by Projects and Robotics on the home page so they read as
+   one design: a picture, 16:10 with a thin edge, and under it only the
+   title. Pictures sit a little dimmed and muted so no bright one shouts.
+   Pointing at a card, focusing it or tapping its picture brings the picture
+   to full colour and shows the rest, a line of text and the links, over the
+   foot of the picture. */
 .cards {
     list-style: none;
     display: grid;
@@ -13,26 +14,79 @@
     min-width: 0;
 }
 
+.card-frame {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius);
+    background: var(--sand);
+}
+
 .card-shot {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+}
+
+button.card-shot {
+    cursor: pointer;
+}
+
+button.card-shot:focus-visible {
+    outline-offset: -2px;
+}
+
+.card-shot img {
     display: block;
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
-    border: 1px solid var(--edge);
-    border-radius: var(--radius);
-    background: var(--sand);
     filter: brightness(0.8) saturate(0.85);
     transition: filter 0.2s ease-out;
 }
 
-.card:hover .card-shot,
-.card:focus-within .card-shot {
+.card.is-open .card-shot img,
+.card-frame:focus-within .card-shot img {
     filter: none;
 }
 
+.card-about {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0.75rem 0.9rem 0.8rem;
+    border-top: 1px solid var(--edge);
+    background: rgb(19 17 15 / 0.94);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.15s ease-out,
+        visibility 0.15s;
+}
+
+.card.is-open .card-about,
+.card-frame:focus-within .card-about {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (hover: hover) {
+    .card-frame:hover .card-shot img {
+        filter: none;
+    }
+
+    .card-frame:hover .card-about {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 .card-title {
-    margin-top: 0.9rem;
+    margin-top: 0.85rem;
     font-family: var(--font-body);
     font-size: var(--size-title);
     font-weight: 600;
@@ -40,7 +94,6 @@
 }
 
 .card-line {
-    margin-top: 0.3rem;
     font-size: var(--size-body);
     line-height: 1.5;
 }
@@ -55,13 +108,17 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.15rem 1rem;
-    margin-top: 0.55rem;
     font-family: var(--mono);
     font-size: var(--size-small);
 }
 
+.card-line + .card-links {
+    margin-top: 0.4rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .card-shot {
+    .card-shot img,
+    .card-about {
         transition: none;
     }
 }
