@@ -6,7 +6,7 @@ import '../styles/Robotics.css';
 
 // Robotics on the home page: the four builds marked `top`, in a row of the
 // same tiles Projects uses, a picture and a title each. A tile's link
-// slides up when it is pointed at or tapped. The View all robotics link at the
+// slides up when it is pointed at or tapped. The See more link at the
 // end of the heading's row, and the heading itself, open the Robotics page,
 // which has everything.
 const top = builds.filter((build) => build.top);
@@ -24,7 +24,7 @@ const Robotics = () => {
                         <span className="title-period">.</span>
                     </h2>
                     <More href="/robotics/" place="head">
-                        View all robotics
+                        See more
                     </More>
                 </div>
 
@@ -50,7 +50,7 @@ const Robotics = () => {
                 </ul>
 
                 <More href="/robotics/" place="foot">
-                    View all robotics
+                    See more
                 </More>
             </div>
         </section>
