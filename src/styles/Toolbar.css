@@ -23,7 +23,6 @@
 .toolbar-links {
     display: flex;
     gap: 1.6rem;
-    font-family: var(--mono);
     font-size: var(--size-small);
 }
 

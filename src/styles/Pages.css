@@ -86,7 +86,6 @@
 }
 
 .show-note {
-    font-family: var(--mono);
     font-size: var(--size-small);
     font-weight: 400;
     color: var(--ink-soft);
@@ -106,7 +105,6 @@
     flex-wrap: wrap;
     gap: 0.1rem 1.2rem;
     margin-top: 0.55rem;
-    font-family: var(--mono);
     font-size: var(--size-small);
     color: var(--ink-soft);
 }

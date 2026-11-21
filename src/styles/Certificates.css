@@ -29,7 +29,6 @@
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0.25rem 1.1rem;
-    font-family: var(--mono);
     font-size: var(--size-small);
     color: var(--ink-soft);
 }

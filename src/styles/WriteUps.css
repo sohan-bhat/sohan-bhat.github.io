@@ -42,7 +42,6 @@
 }
 
 .write-up-date {
-    font-family: var(--mono);
     font-size: var(--size-small);
     color: var(--ink-soft);
 }

@@ -76,7 +76,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@The_Sohan_Bhat" />
     <link rel="preload" href="/fonts/excon-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/erode-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
     <style>
       @font-face {
         font-family: 'Excon';
@@ -85,23 +85,22 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         src: url('/fonts/excon-variable.woff2') format('woff2');
       }
       @font-face {
-        font-family: 'Erode';
-        font-weight: 300 700;
+        font-family: 'Inter';
+        font-weight: 100 900;
         font-display: swap;
-        src: url('/fonts/erode-variable.woff2') format('woff2');
+        src: url('/fonts/inter-variable.woff2') format('woff2');
       }
       /* The home page's tokens and toolbar, from src/styles/App.css. */
       :root {
-        color-scheme: dark;
-        --bg: #13110f;
-        --ink: #efe8dc;
-        --ink-soft: #a69d90;
-        --line: #2f2a24;
-        --edge: #5a5148;
-        --accent: #e2774a;
-        --font-body: 'Excon', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        --font-display: 'Erode', Georgia, serif;
-        --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        color-scheme: light;
+        --bg: #e9e3d6;
+        --ink: #26211b;
+        --ink-soft: #62594d;
+        --line: #d2c9b7;
+        --edge: #a89c87;
+        --accent: #a4441c;
+        --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        --font-display: 'Excon', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
       * {
         margin: 0;
@@ -141,7 +140,6 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       .toolbar-links {
         display: flex;
         gap: 1.6rem;
-        font-family: var(--mono);
         font-size: 0.875rem;
       }
       .toolbar-links a {
@@ -168,7 +166,6 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       }
       .byline {
         margin: 0.9rem 0 2.5rem;
-        font-family: var(--mono);
         font-size: 0.875rem;
         color: var(--ink-soft);
       }

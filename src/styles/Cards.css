@@ -128,7 +128,6 @@ button.card-shot:focus-visible {
     display: flex;
     flex-wrap: wrap;
     gap: 0.15rem 1rem;
-    font-family: var(--mono);
     font-size: var(--size-small);
 }
 

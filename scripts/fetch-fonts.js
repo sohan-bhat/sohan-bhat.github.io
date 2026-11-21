@@ -1,15 +1,18 @@
-// Downloads the site's fonts into public/fonts before a build, so the site
-// serves them itself. Excon and Erode are free from Fontshare under the
-// ITF Free Font License, which allows self-hosting on your own site but not
-// sharing the files through a repository, so they are gitignored and fetched
-// here instead. They are the official files, unchanged (the license forbids
-// subsetting).
+// Puts the site's two fonts into public/fonts before a build, so the site
+// serves them itself. That folder is gitignored.
+//
+// Excon, for the headings, is free from Fontshare under the ITF Free Font
+// License, which allows self-hosting on your own site but not sharing the
+// file through a repository, so it is downloaded here. It is the official
+// file, unchanged (the license forbids subsetting).
+//
+// Inter, for everything else, is under the SIL Open Font License and comes
+// from the @fontsource-variable/inter package, so it is copied from there.
 const fs = require('fs');
 const path = require('path');
 
 const fonts = {
     'excon-variable.woff2': 'excon@1',
-    'erode-variable.woff2': 'erode@1',
 };
 const dir = path.join(__dirname, '..', 'public', 'fonts');
 
@@ -26,7 +29,15 @@ async function fetchFont(file, family) {
     console.log(`Downloaded ${family} from Fontshare into public/fonts/${file}.`);
 }
 
-Promise.all(Object.entries(fonts).map(([file, family]) => fetchFont(file, family))).catch((err) => {
-    console.error(err.message);
-    process.exit(1);
-});
+function copyInter() {
+    const from = require.resolve('@fontsource-variable/inter/files/inter-latin-wght-normal.woff2');
+    fs.mkdirSync(dir, { recursive: true });
+    fs.copyFileSync(from, path.join(dir, 'inter-variable.woff2'));
+}
+
+Promise.all(Object.entries(fonts).map(([file, family]) => fetchFont(file, family)))
+    .then(copyInter)
+    .catch((err) => {
+        console.error(err.message);
+        process.exit(1);
+    });

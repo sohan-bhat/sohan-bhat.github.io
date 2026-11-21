@@ -44,6 +44,7 @@
     font-size: clamp(2.75rem, 8vw, 4.25rem);
     font-weight: 700;
     line-height: 1.05;
+    letter-spacing: -0.02em;
     margin-bottom: 1rem;
 }
 
@@ -75,14 +76,12 @@
 }
 
 .social-email {
-    font-family: var(--mono);
     font-size: var(--size-small);
 }
 
 .hero-cv {
     display: inline-block;
     margin-top: 0.75rem;
-    font-family: var(--mono);
     font-size: var(--size-small);
 }
 

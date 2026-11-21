@@ -1,6 +1,5 @@
 .footer {
     border-top: 1px solid var(--edge);
-    font-family: var(--mono);
     margin-top: 2rem;
     padding: 2rem 0 2.5rem;
 }
