@@ -23,7 +23,7 @@ const Certificates = () => (
                 <li className="cert-entry" key={c.id}>
                     <h3 className="cert-title">{c.title}</h3>
                     <p className="cert-meta">
-                        <span>{c.issuer}, {c.year}</span>
+                        <span>{[c.issuer, c.year].filter(Boolean).join(', ')}</span>
                         <a className="cert-link text-link" href={c.url} target="_blank" rel="noreferrer">
                             Certificate
                         </a>
