@@ -14,10 +14,9 @@ const slides = [
     {
         ...shot('build-wins'),
         title: 'Fort Worth District wins',
-        meta: '2025 and 2026, Team 2714',
         alt: 'The robots of Team 10032, Team 2714 and Team 2728 behind three blue banners that read Winner 2026, FIRST in Texas District Fort Worth Event.',
         link: {
-            label: 'The Blue Alliance',
+            label: 'TBA',
             name: 'Team 2714 on The Blue Alliance',
             href: 'https://www.thebluealliance.com/team/2714',
         },
@@ -25,8 +24,6 @@ const slides = [
     {
         ...shot('build-autos'),
         title: 'Autonomous routines',
-        meta: '2026, Team 2728',
-        detail: 'Wrote 11 of the robot’s 12',
         alt: 'TACO’s autonomous paths drawn in orange over a top view of the 2026 field.',
         link: {
             label: 'Code',
@@ -37,8 +34,6 @@ const slides = [
     {
         ...shot('build-airstrike'),
         title: 'Airstrike targeting app',
-        meta: '2026, Team 2714',
-        detail: 'Tap the field to set a passing target',
         alt: 'Airstrike showing a top view of the field with a target ring, the target position and a row of zone buttons.',
         link: {
             label: 'Code',
@@ -49,8 +44,6 @@ const slides = [
     {
         ...shot('build-hud'),
         title: 'Driver heads-up display',
-        meta: '2025, Team 2714',
-        detail: 'Innovation in Control Award at state',
         alt: 'The heads-up display, a hexagon labeled Barge and Driver beside the connection status and time left.',
         link: {
             label: 'Code',
@@ -61,8 +54,6 @@ const slides = [
     {
         ...shot('build-limelight'),
         title: 'Limelight vision alignment',
-        meta: '2026, Team 2728',
-        detail: 'Aims the robot at the hub within 0.3°',
         alt: 'The hub and its AprilTags on the Fort Worth field, with Team 2714’s robot in front and TACO behind.',
         link: {
             label: 'Code',
@@ -73,19 +64,16 @@ const slides = [
     {
         ...photo('robot-taco', 1),
         title: 'TACO',
-        meta: '2026, Team 2728',
         alt: 'TACO, Team 2728’s 2026 robot, on red bumpers behind a blue FIRST Robotics Competition winner banner.',
     },
     {
         ...photo('robot-field', 0.8),
         title: 'REBUILT robot',
-        meta: '2026, Team 2714',
         alt: 'Team 2714’s 2026 robot on the REBUILT field, with its Limelight camera at the front.',
     },
     {
         ...photo('robot-2025', 1),
         title: 'Jerk Chicken',
-        meta: '2025, Team 2714',
         alt: 'Jerk Chicken, Team 2714’s 2025 robot, on the field with its blue arm swung out to the side.',
     },
 ];
@@ -156,10 +144,8 @@ const Robotics = () => {
                                     loading="lazy"
                                     draggable="false"
                                 />
-                                <h3 className="build-title">{slide.title}</h3>
-                                {slide.detail && <p className="build-detail">{slide.detail}</p>}
-                                <p className="build-meta">
-                                    <span>{slide.meta}</span>
+                                <div className="build-head">
+                                    <h3 className="build-title">{slide.title}</h3>
                                     {slide.link && (
                                         <a
                                             className="build-code text-link"
@@ -171,7 +157,7 @@ const Robotics = () => {
                                             {slide.link.label}
                                         </a>
                                     )}
-                                </p>
+                                </div>
                             </li>
                         ))}
                     </ul>

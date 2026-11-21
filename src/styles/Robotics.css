@@ -83,27 +83,24 @@
     line-height: 1.35;
 }
 
-/* Under a title: one short fact, where there is one, then a single line
-   with the year and team and, after them, the link. */
-.build-detail {
-    margin-top: 0.15rem;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
+/* Under a picture there is only the title, with its link at the end of the
+   same line. A long title wraps beside the link; the link never drops under
+   it. */
+.build-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.9rem;
 }
 
-.build-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.15rem 0.9rem;
-    margin-top: 0.3rem;
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--ink-soft);
+.build-title {
+    min-width: 0;
 }
 
 .build-code {
+    font-family: var(--mono);
     font-size: 0.78rem;
+    white-space: nowrap;
 }
 
 @media (max-width: 1000px) {
