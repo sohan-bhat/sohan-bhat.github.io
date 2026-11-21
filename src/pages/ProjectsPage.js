@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import Toolbar from '../components/Toolbar';
 import Footer from '../components/Footer';
-import { picture, started, ProjectLine } from '../components/ProjectParts';
+import { picture, ProjectLine } from '../components/ProjectParts';
 import projects from '../data/projects';
 import '../styles/Cards.css';
 import '../styles/Pages.css';
 
-// The Projects page: every project in one compact grid, newest first, so the
-// whole list is a short scroll. Each is its picture, its name with its links
-// right after it, its one line, and what kind of thing it is, what it is
-// built with and when it started. The sorter beside the heading lists one
-// kind of project at a time.
+// The Projects page: every project on a timeline, newest first, each year
+// down a line on the left with its projects beside it. A project is its
+// picture, its name, its one line and its links. The sorter beside the
+// heading lists one kind of project at a time.
 const sorted = [...projects].sort((a, b) => b.date.localeCompare(a.date));
 
 // A group with no project in it gets no tab.
@@ -19,6 +18,7 @@ const TABS = ['all', ...['tools', 'ml', 'apps', 'hardware'].filter((group) => so
 const ProjectsPage = () => {
     const [tab, setTab] = useState('all');
     const listed = sorted.filter((p) => tab === 'all' || p.groups.includes(tab));
+    const years = [...new Set(listed.map((p) => p.date.slice(0, 4)))];
 
     return (
         <>
@@ -36,57 +36,59 @@ const ProjectsPage = () => {
                         </div>
                     </div>
 
-                    <ul className="tiles">
-                        {listed.map((p, i) => {
-                            const image = picture(p, '(max-width: 600px) 38vw, (max-width: 960px) 46vw, 300px');
-                            return (
-                                <li className="tile" key={p.id}>
-                                    {/* The first row of pictures is what the page loads first. */}
-                                    <img
-                                        className="tile-shot"
-                                        src={image.src}
-                                        srcSet={image.srcSet}
-                                        sizes={image.sizes}
-                                        width="560"
-                                        height="350"
-                                        alt={image.alt}
-                                        loading={i < 3 ? 'eager' : 'lazy'}
-                                        fetchPriority={i === 0 ? 'high' : undefined}
-                                        decoding="async"
-                                    />
-                                    <div className="tile-body">
-                                        {/* No space between the name and its first link, so the
-                                            two stay on one line; the links after it may wrap. */}
-                                        <div className="tile-head">
-                                            <h2 className="tile-title">{p.title}</h2>
-                                            {p.links.map((link, n) => (
-                                                <React.Fragment key={link.label}>
-                                                    {n > 0 && ' '}
-                                                    <a
-                                                        className="tile-link text-link"
-                                                        href={link.url}
-                                                        target="_blank"
-                                                        rel="noreferrer"
-                                                        title={link.title}
-                                                        aria-label={`${p.title} ${link.title || link.label}`}
-                                                    >
-                                                        {link.label}
-                                                    </a>
-                                                </React.Fragment>
-                                            ))}
-                                        </div>
-                                        <ProjectLine project={p} className="show-line" />
-                                        <p className="show-facts">
-                                            <span>{p.kind}</span>
-                                            <span>{p.stack.join(', ')}</span>
-                                            <time dateTime={p.date}>{started(p)}</time>
-                                            {p.retired && <span>Retired</span>}
-                                        </p>
-                                    </div>
-                                </li>
-                            );
-                        })}
-                    </ul>
+                    {/* A timeline: each year down a line on the left, with its
+                        projects beside it, newest first. */}
+                    <ol className="timeline">
+                        {years.map((year) => (
+                            <li className="year" key={year}>
+                                <h2 className="year-label">{year}</h2>
+                                <ul className="tiles">
+                                    {listed
+                                        .filter((p) => p.date.startsWith(year))
+                                        .map((p) => {
+                                            const first = p === listed[0];
+                                            const image = picture(p, '(max-width: 600px) 38vw, (max-width: 960px) 40vw, 268px');
+                                            return (
+                                                <li className="tile" key={p.id}>
+                                                    <img
+                                                        className="tile-shot"
+                                                        src={image.src}
+                                                        srcSet={image.srcSet}
+                                                        sizes={image.sizes}
+                                                        width="560"
+                                                        height="350"
+                                                        alt={image.alt}
+                                                        loading={first ? 'eager' : 'lazy'}
+                                                        fetchPriority={first ? 'high' : undefined}
+                                                        decoding="async"
+                                                    />
+                                                    <div className="tile-body">
+                                                        <h3 className="tile-title">{p.title}</h3>
+                                                        <ProjectLine project={p} className="show-line" />
+                                                        <p className="tile-links">
+                                                            {p.links.map((link) => (
+                                                                <a
+                                                                    key={link.label}
+                                                                    className="text-link"
+                                                                    href={link.url}
+                                                                    target="_blank"
+                                                                    rel="noreferrer"
+                                                                    title={link.title}
+                                                                    aria-label={`${p.title} ${link.title || link.label}`}
+                                                                >
+                                                                    {link.label}
+                                                                </a>
+                                                            ))}
+                                                            {p.retired && <span className="tile-note">Retired</span>}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            );
+                                        })}
+                                </ul>
+                            </li>
+                        ))}
+                    </ol>
                 </div>
             </main>
             <Footer />

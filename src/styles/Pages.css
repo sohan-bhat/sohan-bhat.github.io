@@ -176,13 +176,63 @@
     color: var(--ink);
 }
 
-/* Every project, three across. Pictures sit a little faded, like the home
-   page's, and come to full colour when a project is pointed at. */
+/* The timeline: a line down the left, and on it a dot and the year at the
+   top of each year's projects. The year stays in view while its projects
+   scroll by. */
+.timeline {
+    list-style: none;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0.9rem;
+    bottom: 0;
+    left: 0.3rem;
+    width: 1px;
+    background: var(--edge);
+}
+
+.year {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    align-items: start;
+}
+
+.year + .year {
+    margin-top: 3.5rem;
+}
+
+.year-label {
+    position: sticky;
+    top: 1.5rem;
+    padding-left: 1.4rem;
+    font-family: var(--font-display);
+    font-size: var(--size-title);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.year-label::before {
+    content: '';
+    position: absolute;
+    top: 0.35em;
+    left: 0;
+    width: 0.65rem;
+    height: 0.65rem;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    background: var(--bg);
+}
+
+/* A year's projects, three across. Pictures sit a little faded, like the
+   home page's, and come to full colour when a project is pointed at. */
 .tiles {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2.75rem 1.75rem;
+    gap: 2.5rem 1.5rem;
 }
 
 .tile {
@@ -198,36 +248,21 @@
     border: 1px solid var(--edge);
     border-radius: var(--radius);
     background: var(--sand);
-    opacity: 0.86;
-    filter: saturate(0.85);
-    transition:
-        opacity 0.2s ease-out,
-        filter 0.2s ease-out;
+    opacity: 0.9;
+    transition: opacity 0.2s ease-out;
 }
 
 .tile:hover .tile-shot,
 .tile:focus-within .tile-shot {
     opacity: 1;
-    filter: none;
-}
-
-.tile-head {
-    margin-top: 0.85rem;
-    line-height: 1.2;
 }
 
 .tile-title {
-    display: inline;
-    margin-right: 0.7rem;
+    margin-top: 0.85rem;
     font-family: var(--font-body);
     font-size: var(--size-title);
     font-weight: 700;
-}
-
-.tile-link {
-    margin-right: 0.7rem;
-    font-size: var(--size-small);
-    white-space: nowrap;
+    line-height: 1.2;
 }
 
 .tile .show-line {
@@ -235,21 +270,47 @@
     line-height: 1.5;
 }
 
-.tile .show-facts {
-    margin-top: 0.45rem;
+/* The links on a row of their own under the line. */
+.tile-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 1rem;
+    margin-top: 0.5rem;
+    font-size: var(--size-small);
+}
+
+.tile-note {
+    color: var(--ink-soft);
 }
 
 /* Tablets: two across. */
 @media (max-width: 960px) {
+    .year {
+        grid-template-columns: 4.5rem minmax(0, 1fr);
+    }
+
     .tiles {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 2.25rem 1.25rem;
     }
 }
 
-/* Phones: one project per row, a small picture with its text beside it and
-   without the stack, so the list stays short. */
+/* Phones: the year sits above its projects, by its dot on the line, and
+   each project is a small picture with its text beside it. */
 @media (max-width: 600px) {
+    .year {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 1.1rem;
+        padding-left: 1.4rem;
+    }
+
+    .year-label {
+        position: relative;
+        top: 0;
+        margin-left: -1.4rem;
+    }
+
     .tiles {
         grid-template-columns: minmax(0, 1fr);
         gap: 1.6rem;
@@ -262,12 +323,8 @@
         align-items: start;
     }
 
-    .tile-head {
+    .tile-title {
         margin-top: -0.15rem;
-    }
-
-    .tile .show-facts span:nth-child(2) {
-        display: none;
     }
 }
 
