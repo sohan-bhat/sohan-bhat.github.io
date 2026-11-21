@@ -8,11 +8,11 @@ Sohan Bhat
 
 November 2026
 
-**TL;DR** With LHD (Layer Health Diagnostics) I log four signals in every layer and compare each with its range in healthy runs. I caught 411 of 470 broken runs with it and 166 with the accuracy curve. For frozen layers a simpler test is better.
+**TL;DR** I built LHD (Layer Health Diagnostics) to catch neural network training runs that go wrong with no error. I caught 411 of 470 broken runs with it. For one kind of fault a simpler test is better.
 
 I trained SignNet, a small CNN for German traffic signs (GTSRB). I got 76% accuracy and spent weeks tuning it. I had left one convolutional layer out of the optimizer, so it stayed frozen. I fixed that and got 87%.
 
-I finished training with no error and still got a worse model. That is a silent failure, and I built LHD to catch those.
+I finished training with no error and still got a worse model. That is a silent failure.
 
 ## Layer Health Diagnostics
 
