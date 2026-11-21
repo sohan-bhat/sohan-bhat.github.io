@@ -6,16 +6,19 @@
 // as @name, linked to their profile.
 // `groups` says which tabs of the sorter list a project: tools, ml, apps or
 // hardware. A project can be in more than one.
-// `best: true` makes a project stand out in the list by size alone: a taller
-// row with a small picture of it where the others have a logo, and a heavier
-// name. Keep it for the few to look at first.
-// A project with a `longTitle` shows that on its card, and one with a
-// `titleUrl` has its card title link there (the paper links to its own page).
+// `best: N` makes a project one of the large pictures at the top of
+// Projects, in that order: the first two are the largest, the rest of the
+// best a size smaller. Every project without it is a small picture under
+// them, newest first. Size is the only thing that marks the best.
+// A project with a `longTitle` shows that as its name, and one with a
+// `titleUrl` has its name link there (the paper links to its own page).
+// `kind`, `stack`, `icon` and `retired` describe a project but are not shown
+// on the page at the moment.
 const projects = [
     {
         id: 'lhd',
         groups: ['ml'],
-        best: true,
+        best: 1,
         kind: 'Paper',
         title: 'LHD',
         longTitle: 'LHD, early detection of silent training failures in neural networks',
@@ -29,7 +32,7 @@ const projects = [
     },
     {
         id: 'hullo',
-        best: true,
+        best: 5,
         groups: ['apps'],
         kind: 'Website',
         title: 'hullo',
@@ -47,7 +50,7 @@ const projects = [
     },
     {
         id: 'openhal',
-        best: true,
+        best: 2,
         groups: ['tools', 'hardware'],
         kind: 'Protocol',
         title: 'OpenHAL',
@@ -64,7 +67,7 @@ const projects = [
     },
     {
         id: 'wobbl',
-        best: true,
+        best: 3,
         groups: ['tools'],
         kind: 'Simulator',
         title: 'wobbl',
@@ -82,7 +85,7 @@ const projects = [
     },
     {
         id: 'oopsy',
-        best: true,
+        best: 4,
         groups: ['tools'],
         kind: 'CLI tool',
         title: 'oopsy',

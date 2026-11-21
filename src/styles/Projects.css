@@ -1,312 +1,236 @@
-/* The projects window, styled after an old desktop file manager: square
-   corners, a hard drop shadow, a pinstriped title bar and a
-   compact list in monospace. */
-.finder {
-    background: var(--surface);
-    border: 1px solid var(--edge);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-hard);
-}
-
-/* The title bar holds the window's path and, after it, the sorter. Where
-   the two do not fit on one line, the sorter drops to a second. */
-.finder-bar {
+/* Projects, a wall of pictures on a twelve-column grid. Size is the only
+   thing that marks the best: the first two take half the width each, the
+   rest of the best a third, and every other project a sixth. Under a
+   picture there is only the name. The one line and the links sit over the
+   foot of the picture and show when it is pointed at, focused or tapped. */
+.projects-head {
     display: flex;
     flex-wrap: wrap;
-    align-items: stretch;
-    justify-content: center;
-    min-height: 28px;
-    padding: 0 10px;
-    border-bottom: 1px solid var(--edge);
-    background: repeating-linear-gradient(to bottom, #3b352e 0 1px, var(--raised) 1px 3px);
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    margin-bottom: 1.75rem;
 }
 
-.finder-title {
-    padding: 0 0.15rem 0 10px;
-    background: var(--raised);
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: 0.04em;
+.projects-head .section-title {
+    margin-bottom: 0;
 }
 
-/* The sorter: one tab for every project, then one for each kind. The tab
-   on show continues the path in the same bold cream, over an orange line. */
-.finder-tabs {
+/* The sorter: one tab for every project, then one for each kind. The open
+   tab is bold cream over an orange line. */
+.sorter {
     display: flex;
-    padding-right: 6px;
-    background: var(--raised);
+    flex-wrap: wrap;
 }
 
-.finder-tab {
-    height: 28px;
-    padding: 0 0.45rem;
+.sorter-tab {
+    padding: 0.35rem 0.5rem;
     border: 0;
     background: none;
     color: var(--ink-soft);
     font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
+    font-size: 0.8rem;
     cursor: pointer;
 }
 
-.finder-tab:hover {
+.sorter-tab:hover {
     color: var(--ink);
 }
 
-.finder-tab[aria-pressed='true'] {
+.sorter-tab[aria-pressed='true'] {
     box-shadow: inset 0 -2px 0 var(--accent);
     color: var(--ink);
     font-weight: 600;
 }
 
-.finder-tab:focus-visible {
-    outline-offset: -2px;
-}
-
-.finder-body {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-}
-
-.finder-list {
-    border-right: 1px solid var(--edge);
-    font-family: var(--mono);
-    font-size: 0.8rem;
-}
-
-.finder-list ul {
+.tiles {
     list-style: none;
-}
-
-/* Name, kind, and date columns, the same in every row. */
-.finder-file {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 8.5rem 5.5rem;
-    gap: 0.5rem;
-    align-items: center;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 2.25rem 1.5rem;
 }
 
-.finder-folder,
-.finder-file {
-    width: 100%;
-    min-height: 30px;
-    padding: 0.25rem 0.75rem;
-    border: 0;
-    border-bottom: 1px solid rgb(255 255 255 / 0.04);
-    background: none;
-    color: var(--ink);
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
+.tile {
+    min-width: 0;
 }
 
-.finder-folder {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-weight: 600;
+.tile-large {
+    grid-column: span 6;
 }
 
-.finder-file {
-    padding-left: 2.1rem;
+.tile-medium {
+    grid-column: span 4;
 }
 
-/* The paper and the best projects stand out by size alone: a taller row, a
-   small picture where the others have a logo, and a heavier name. There is
-   no badge and no highlight. */
-.finder-file.is-best {
-    min-height: 60px;
+.tile-small {
+    grid-column: span 2;
 }
 
-.finder-file.is-best .finder-name {
-    gap: 0.8rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-}
-
-.finder-thumb {
-    flex: none;
-    width: 72px;
-    height: 45px;
-    object-fit: cover;
+/* The picture, with the portrait's edge and shadow. */
+.tile-frame {
+    position: relative;
+    overflow: hidden;
     border: 1px solid var(--edge);
     border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
     background: var(--sand);
 }
 
-.finder-folder:hover,
-.finder-file:hover {
-    background: rgb(255 255 255 / 0.04);
+.tile-shot {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
 }
 
-.finder-file[aria-expanded='true'] {
-    background: var(--accent-muted);
-    color: var(--ink);
-}
-
-.finder-file[aria-expanded='true'] .finder-kind,
-.finder-file[aria-expanded='true'] .finder-date {
-    color: #ddd2c4;
-}
-
-.finder-folder:focus-visible,
-.finder-file:focus-visible {
-    outline: 2px solid var(--ink);
+.tile-shot:focus-visible {
     outline-offset: -2px;
 }
 
-.finder-arrow {
-    width: 0.8rem;
-    color: var(--ink-soft);
+.tile-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
 }
 
-.finder-count {
-    margin-left: auto;
-    font-weight: 400;
-    color: var(--ink-soft);
+/* The one line and the links, over the foot of the picture. Hidden until
+   the project is pointed at, focused or tapped open. */
+.tile-about {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0.75rem 0.9rem 0.8rem;
+    border-top: 1px solid var(--edge);
+    background: rgb(19 17 15 / 0.94);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.15s ease-out,
+        visibility 0.15s;
 }
 
-.finder-name {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    min-width: 0;
-    overflow: hidden;
+.tile.is-open .tile-about,
+.tile-frame:focus-within .tile-about {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (hover: hover) {
+    .tile-frame:hover .tile-about {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.tile-line {
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+/* A person a project was built with, as @name. A name never breaks across
+   two lines. */
+.tile-person {
     white-space: nowrap;
 }
 
-.finder-kind,
-.finder-date {
-    overflow: hidden;
-    color: var(--ink-soft);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* Folder and file icons, in the window's grays and creams. */
-.finder-icon {
-    flex: none;
-    width: 16px;
-    height: 14px;
-}
-
-/* A project's own logo, rounded like an app icon since some are opaque
-   squares. */
-.finder-logo {
-    height: 16px;
-    border-radius: 3px;
-}
-
-.folder-back {
-    fill: #6f665b;
-}
-
-.folder-front {
-    fill: #a69d90;
-}
-
-.folder-sheet {
-    fill: #efe8dc;
-}
-
-.file-page {
-    fill: #efe8dc;
-}
-
-.file-fold {
-    fill: none;
-    stroke: #8a8075;
-    stroke-width: 1;
-}
-
-.file-lines {
-    stroke: #8a8075;
-    stroke-width: 1;
-    stroke-linecap: round;
-}
-
-.finder-preview {
+.tile-links {
     display: flex;
-    padding: 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.1rem 0.9rem;
+    margin-top: 0.4rem;
 }
 
-.finder-empty {
-    margin: auto;
+.tile-link {
     font-family: var(--mono);
     font-size: 0.78rem;
-    color: var(--ink-soft);
+    white-space: nowrap;
 }
 
-/* The open project under its row, shown only on phones. */
-.finder-inline {
-    display: none;
+/* A small picture has no room for a strip, so its line and links cover it. */
+.tile-small .tile-about {
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem 0.6rem;
+    border-top: 0;
 }
 
-/* Closed rows keep their card in the page but hidden, even where the
-   narrow layout shows the open one. */
-.finder-inline[hidden] {
-    display: none !important;
+.tile-small .tile-line {
+    font-size: 0.75rem;
+    line-height: 1.35;
 }
 
-/* Tablets and phones: one column, and the open project expands in place
-   under its row. */
+.tile-small .tile-links {
+    gap: 0.1rem 0.6rem;
+    margin-top: 0.3rem;
+}
+
+.tile-small .tile-link {
+    font-size: 0.72rem;
+}
+
+/* The name, the only text under a picture. It opens the project, and reads
+   as a title until pointed at. */
+.tile-name {
+    margin-top: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.tile-medium .tile-name {
+    font-size: 1.05rem;
+}
+
+.tile-small .tile-name {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.tile-name a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.tile-name a:hover {
+    text-decoration: underline wavy;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+}
+
+/* Tablets: the small pictures go four across. */
 @media (max-width: 960px) {
-    .finder-body {
-        grid-template-columns: 1fr;
+    .tiles {
+        gap: 2rem 1.1rem;
     }
 
-    .finder-list {
-        border-right: 0;
+    .tile-small {
+        grid-column: span 3;
     }
-
-    .finder-preview {
-        display: none;
-    }
-
-    .finder-inline {
-        display: flex;
-        padding: 0.6rem 0.6rem 0.75rem;
-        border-bottom: 1px solid var(--edge);
-        background: var(--bg);
-    }
-
-    /* The row above already shows the name, so it's kept for screen
-       readers only. The paper's full title is the exception: the row has
-       only its short name, so the card shows it, above the links. */
-    .finder-inline .card-head-long {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .finder-inline .card-name:not(.card-name-long) {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip-path: inset(50%);
-        white-space: nowrap;
-    }
-
-    .finder-inline .card-head {
-        justify-content: flex-start;
-        gap: 0;
-    }
-
-    .finder-inline .card-note {
-        margin-right: 0.9rem;
-    }
-
 }
 
-/* Phones: no room for the kind column. */
+/* Phones: the best one under the next at full width, the rest two across. */
 @media (max-width: 600px) {
-    .finder-file {
-        grid-template-columns: minmax(0, 1fr) 5.5rem;
+    .tile-large,
+    .tile-medium {
+        grid-column: span 12;
     }
 
-    .finder-kind {
-        display: none;
+    .tile-small {
+        grid-column: span 6;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tile-about {
+        transition: none;
     }
 }
