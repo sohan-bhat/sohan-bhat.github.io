@@ -1,13 +1,14 @@
-// `best: N` makes a project one of the large cards in Projects, in that
-// order, each with its picture, its name, its one line and its links. Every
-// project without it is named in the row of links under Earlier, newest
-// first (`date` is when each project started), linked to its first link.
+// `best: N` makes a project one of the large cards on the home page, in that
+// order. Every project, best or not, is on the Projects page, newest first
+// (`date` is when each project started), with its `kind` and `stack`.
+// `groups` says which tabs of that page's sorter list it: tools, ml, apps or
+// hardware. A project can be in more than one.
 // `image` names the card-<image>-560 and -1120 screenshots in public/imgs: an
 // overview of the project's site, 16:10.
 // `team` lists the people a project was built with; each is credited as
 // @name, linked to their profile.
-// `kind`, `stack`, `icon`, `groups` and `retired` describe a project but are
-// not shown on the page at the moment.
+// `retired` marks a project that is no longer kept up. `icon` is its site's
+// logo, not shown on the page at the moment.
 const projects = [
     {
         id: 'hullo',

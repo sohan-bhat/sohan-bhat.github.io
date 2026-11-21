@@ -5,10 +5,9 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 // The pieces of a project that the home page and the Projects page both
 // show, so the two never drift apart.
 
-// The best projects, in their set order, and the rest, newest first.
+// The best projects, in their set order.
 export const split = (projects) => ({
     best: projects.filter((p) => p.best).sort((a, b) => a.best - b.best),
-    earlier: projects.filter((p) => !p.best).sort((a, b) => b.date.localeCompare(a.date)),
 });
 
 export const started = (p) => `${MONTHS[Number(p.date.slice(5, 7)) - 1]} ${p.date.slice(0, 4)}`;

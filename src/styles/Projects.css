@@ -1,23 +1,7 @@
-/* Projects: the best as large cards two across, all one size, then the
-   earlier ones as one row of links under a small label. */
+/* Projects on the home page: the best as large cards two across, all one
+   size, then one link to the rest. */
 .project-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.earlier-label {
-    margin-top: 3rem;
-    font-family: var(--mono);
-    font-size: var(--size-small);
-    font-weight: 400;
-    color: var(--ink-soft);
-}
-
-.earlier-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem 1.6rem;
-    margin-top: 0.5rem;
-    font-size: var(--size-body);
 }
 
 /* Phones: one card under the next. */

@@ -1,15 +1,4 @@
-/* Robotics: the line about the teams close under the heading, then every
-   card at once, four across. */
-.robotics .section-title {
-    margin-bottom: 0.9rem;
-}
-
-.robotics-prose {
-    margin-bottom: 2rem;
-    font-size: var(--size-body);
-    color: var(--ink-soft);
-}
-
+/* Robotics on the home page: four tiles in a row. */
 .robotics-cards {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 2.25rem 1.75rem;

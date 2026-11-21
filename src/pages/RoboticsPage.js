@@ -19,7 +19,7 @@ const Build = ({ build }) => (
             className={`show-shot${build.photo ? ' show-photo' : ''}`}
             src={build.src}
             srcSet={build.srcSet}
-            sizes={build.srcSet ? '(max-width: 760px) calc(100vw - 3rem), (max-width: 1248px) 44vw, 520px' : undefined}
+            sizes={build.srcSet ? '(max-width: 760px) calc(100vw - 3rem), (max-width: 1000px) 44vw, 430px' : undefined}
             width={build.photo ? build.size[0] : 560}
             height={build.photo ? build.size[1] : 350}
             alt={build.alt}
@@ -31,7 +31,7 @@ const Build = ({ build }) => (
             <div className="show-head">
                 <h3 className="show-title">{build.title}</h3>
                 {build.link && (
-                    <a className="card-aside text-link" href={build.link.href} target="_blank" rel="noreferrer" aria-label={build.link.name}>
+                    <a className="show-aside text-link" href={build.link.href} target="_blank" rel="noreferrer" aria-label={build.link.name}>
                         {build.link.label}
                     </a>
                 )}
@@ -50,7 +50,6 @@ const RoboticsPage = () => (
         <main className="page">
             <div className="container">
                 <h1 className="section-title">Robotics<span className="title-period">.</span></h1>
-                <p className="page-lead">I write Java for FRC Team 2714 and Team 2728.</p>
 
                 {teams.map((team) => (
                     <section className="page-group" key={team}>

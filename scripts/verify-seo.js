@@ -33,8 +33,11 @@ expect(html.includes(`<link rel="canonical" href="${HOME}"`), `a canonical link 
 expect(!/noindex/i.test(html), 'no noindex');
 expect(!html.includes('sohan-bhat.github.io'), 'no links to the old sohan-bhat.github.io address');
 
+// Every project is on the Projects page, and the best are on the home page.
+const projectsPageFile = path.join(BUILD, 'projects/index.html');
+const projectsPage = fs.existsSync(projectsPageFile) ? fs.readFileSync(projectsPageFile, 'utf8') : '';
 for (const [, projectTitle] of projectsSrc.matchAll(/^ {8}title: '([^']+)',$/gm)) {
-    expect(html.includes(projectTitle), `the project "${projectTitle}" in the prerendered HTML`);
+    expect(projectsPage.includes(projectTitle), `the project "${projectTitle}" on the Projects page`);
 }
 
 for (const [, certTitle] of certificatesSrc.matchAll(/^ {8}title: '([^']+)',$/gm)) {

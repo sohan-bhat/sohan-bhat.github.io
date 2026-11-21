@@ -1,28 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import Card from './Card';
+import React from 'react';
+import Card, { useOpenCard } from './Card';
 import { split, picture, ProjectLine, ProjectLinks } from './ProjectParts';
 import projects from '../data/projects';
 import '../styles/Projects.css';
 
-// Projects on the home page, in two tiers. The best are large cards, all one
-// size, showing a picture and a name; the line and links slide up when a card
-// is pointed at or tapped. The earlier ones are a row of links, each to its
-// site. The heading opens the Projects page, which shows every one in full.
-const { best, earlier } = split(projects);
+// Projects on the home page: the best ones as large tiles, all one size,
+// showing a picture and a name; the line and links slide up when a tile is
+// pointed at or tapped. One link under them, and the heading, open the
+// Projects page, which has every project.
+const { best } = split(projects);
 
 const Projects = () => {
-    // The one card whose line and links were opened by a tap or a click.
-    const [openId, setOpenId] = useState(null);
-
-    // A tap or click anywhere else closes it.
-    useEffect(() => {
-        if (!openId) return undefined;
-        const close = (event) => {
-            if (!event.target.closest('.card.is-open')) setOpenId(null);
-        };
-        document.addEventListener('pointerdown', close);
-        return () => document.removeEventListener('pointerdown', close);
-    }, [openId]);
+    const { openId, toggle, close } = useOpenCard();
 
     return (
         <section className="projects" id="projects">
@@ -37,7 +26,7 @@ const Projects = () => {
                         <Card
                             key={p.id}
                             id={p.id}
-                            image={picture(p, '(max-width: 600px) calc(100vw - 3rem), (max-width: 1248px) 48vw, 564px')}
+                            image={picture(p, '(max-width: 600px) calc(100vw - 3rem), (max-width: 1000px) 48vw, 462px')}
                             title={p.title}
                             about={
                                 <>
@@ -46,19 +35,16 @@ const Projects = () => {
                                 </>
                             }
                             open={p.id === openId}
-                            onToggle={() => setOpenId(p.id === openId ? null : p.id)}
-                            onClose={() => setOpenId(null)}
+                            onToggle={() => toggle(p.id)}
+                            onClose={close}
                         />
                     ))}
                 </ul>
 
-                <h3 className="earlier-label">Earlier</h3>
-                <p className="earlier-links">
-                    {earlier.map((p) => (
-                        <a key={p.id} className="text-link" href={p.links[0].url} target="_blank" rel="noreferrer">
-                            {p.title}
-                        </a>
-                    ))}
+                <p className="more">
+                    <a className="text-link" href="/projects/">
+                        View others
+                    </a>
                 </p>
             </div>
         </section>

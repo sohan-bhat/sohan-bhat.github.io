@@ -1,9 +1,9 @@
-/* A card, used by Projects and Robotics on the home page so they read as
-   one design: a picture, 16:10 with a thin edge, and under it the title,
-   with a link beside it where there is one. Pictures sit a little dimmed
-   and muted so no bright one shouts. Pointing at a card, or reaching it
-   with the keyboard, brings the picture to full colour, and a project's
-   line and links slide up over the foot of the picture. */
+/* A tile, used by Projects and Robotics on the home page so they read as
+   one design: a picture, 16:10 with a thin edge, and under it only the
+   title. Pictures sit a little faded into the paper so none of them shouts.
+   Pointing at a tile, or reaching it with the keyboard, brings the picture
+   to full colour, and its line and links slide up over the foot of the
+   picture. */
 .cards {
     list-style: none;
     display: grid;
@@ -94,27 +94,18 @@ button.card-shot:focus-visible {
     }
 }
 
-/* The title, and right after it a link where the card has one. The two run
-   on as one line of text with no space between them, so where the line has
-   to break, the title's last word and the link move down together and the
-   link is never left on a line of its own. */
-.card-head {
-    margin-top: 0.85rem;
-    line-height: 1.35;
-}
-
 .card-title {
-    display: inline;
+    margin-top: 0.85rem;
     font-family: var(--font-body);
     font-size: var(--size-title);
     font-weight: 600;
+    line-height: 1.35;
 }
 
-.card-aside {
-    margin-left: 0.7rem;
-    font-family: var(--mono);
+/* The link under a group of tiles, to the page with the rest. */
+.more {
+    margin-top: 2.25rem;
     font-size: var(--size-small);
-    white-space: nowrap;
 }
 
 .card-line {

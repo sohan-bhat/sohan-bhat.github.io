@@ -1,6 +1,7 @@
 // What I built for the robotics teams, and the robots. The home page shows
-// each as a picture and a title; the Robotics page adds the `fact` and the
-// `year`, grouped by `team`. `link` is where the code or the record is.
+// the four marked `top`, each a picture and a title with its `link`, which
+// is where the code or the record is. The Robotics page shows them all,
+// grouped by `team`, with the `fact` and the `year`.
 const shot = (name) => ({
     src: `/imgs/${name}-560.webp`,
     srcSet: `/imgs/${name}-560.webp 560w, /imgs/${name}-1120.webp 1120w`,
@@ -16,6 +17,7 @@ const builds = [
     {
         ...shot('build-wins'),
         title: 'Fort Worth District wins',
+        top: true,
         team: 2714,
         year: '2025 and 2026',
         alt: 'The robots of Team 10032, Team 2714 and Team 2728 behind three blue banners that read Winner 2026, FIRST in Texas District Fort Worth Event.',
@@ -28,6 +30,7 @@ const builds = [
     {
         ...shot('build-autos'),
         title: 'Autonomous routines',
+        top: true,
         team: 2728,
         year: '2026',
         fact: 'I wrote 11 of the robot’s 12 autonomous routines',
@@ -54,6 +57,7 @@ const builds = [
     {
         ...shot('build-hud'),
         title: 'Driver heads-up display',
+        top: true,
         team: 2714,
         year: '2025',
         fact: 'We won the Innovation in Control Award at the Texas state championship with it',
@@ -67,6 +71,7 @@ const builds = [
     {
         ...shot('build-limelight'),
         title: 'Limelight vision alignment',
+        top: true,
         team: 2728,
         year: '2026',
         fact: 'I aim the robot at the hub within 0.3° with two Limelights',
