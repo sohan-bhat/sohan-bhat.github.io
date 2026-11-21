@@ -99,15 +99,16 @@ body {
 /* The main links: the same text link, in blue. */
 .text-link.focus-link {
     color: var(--blue);
-    text-decoration-color: rgb(91 155 255 / 0.5);
+    text-decoration-color: rgb(43 85 173 / 0.5);
 }
 
 .text-link.focus-link:hover {
     text-decoration-color: var(--blue);
 }
 
+/* The page is 1000px wide at most. */
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 1.5rem;
 }

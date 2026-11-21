@@ -128,7 +128,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
-        max-width: 1200px;
+        max-width: 1000px;
         margin: 0 auto;
         padding: 1.1rem 1.5rem;
       }
