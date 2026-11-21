@@ -1,9 +1,9 @@
 /* A card, used by Projects and Robotics on the home page so they read as
-   one design: a picture, 16:10 with a thin edge, and under it only the
-   title. Pictures sit a little dimmed and muted so no bright one shouts.
-   Pointing at a card, focusing it or tapping its picture brings the picture
-   to full colour and shows the rest, a line of text and the links, over the
-   foot of the picture. */
+   one design: a picture, 16:10 with a thin edge, and under it the title,
+   with a link beside it where there is one. Pictures sit a little dimmed
+   and muted so no bright one shouts. Pointing at a card, or reaching it
+   with the keyboard, brings the picture to full colour, and a project's
+   line and links slide up over the foot of the picture. */
 .cards {
     list-style: none;
     display: grid;
@@ -49,10 +49,13 @@ button.card-shot:focus-visible {
 }
 
 .card.is-open .card-shot img,
-.card-frame:focus-within .card-shot img {
+.card-frame:has(:focus-visible) .card-shot img {
     filter: none;
 }
 
+/* The line and links. They wait just under the foot of the picture, out of
+   sight, and slide up into it, quickly and without fading. Hidden, they
+   are also out of the keyboard's reach until the card is. */
 .card-about {
     position: absolute;
     right: 0;
@@ -61,17 +64,20 @@ button.card-shot:focus-visible {
     padding: 0.75rem 0.9rem 0.8rem;
     border-top: 1px solid var(--edge);
     background: rgb(19 17 15 / 0.94);
-    opacity: 0;
+    transform: translateY(calc(100% + 1px));
     visibility: hidden;
     transition:
-        opacity 0.15s ease-out,
-        visibility 0.15s;
+        transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0.16s;
 }
 
 .card.is-open .card-about,
-.card-frame:focus-within .card-about {
-    opacity: 1;
+.card-frame:has(:focus-visible) .card-about {
+    transform: none;
     visibility: visible;
+    transition:
+        transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s;
 }
 
 @media (hover: hover) {
@@ -80,17 +86,35 @@ button.card-shot:focus-visible {
     }
 
     .card-frame:hover .card-about {
-        opacity: 1;
+        transform: none;
         visibility: visible;
+        transition:
+            transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
+            visibility 0s;
     }
 }
 
-.card-title {
+/* The title, and right after it a link where the card has one. The two run
+   on as one line of text with no space between them, so where the line has
+   to break, the title's last word and the link move down together and the
+   link is never left on a line of its own. */
+.card-head {
     margin-top: 0.85rem;
+    line-height: 1.35;
+}
+
+.card-title {
+    display: inline;
     font-family: var(--font-body);
     font-size: var(--size-title);
     font-weight: 600;
-    line-height: 1.35;
+}
+
+.card-aside {
+    margin-left: 0.7rem;
+    font-family: var(--mono);
+    font-size: var(--size-small);
+    white-space: nowrap;
 }
 
 .card-line {
