@@ -1,24 +1,25 @@
-// Builds the blog from the Markdown posts in blog/. For each post it writes a
-// page to public/blog/<name>/ and copies the pictures it uses, and it writes
-// the list the home page's Blogs section reads, src/data/blogs.json. All of
-// that is generated and gitignored, so this runs before every build and
-// every start.
+// Builds the write-ups from the Markdown posts in write-ups/. For each post
+// it writes a page to public/write-ups/<name>/ and copies the pictures it
+// uses, and it writes the list the home page and the Write-ups page read,
+// src/data/write-ups.json. All of that is generated and gitignored, so this
+// runs before every build and every start.
 //
 // A post is written the way blog/lhd.md is in sohan-bhat/lhd, which
-// blog/lhd.md here is a copy of (copy it again when it changes): a `# Title`,
-// then `### Author` and `### Published`, each followed by a line with its
-// value, then the post itself. Pictures sit in blog/img and are linked as
-// img/<file>. A PNG is taken to be a chart on a white page and is shown
-// inverted, so it sits on the dark page; a JPG or WebP is shown as it is.
+// write-ups/lhd.md here began as a copy of and has since been reworded: a
+// `# Title`, then `### Author` and `### Published`, each followed by a line
+// with its value, then the post itself. Pictures sit in write-ups/img and are
+// linked as img/<file>. A PNG is taken to be a chart on a white page and is
+// shown inverted, so it sits on the dark page; a JPG or WebP is shown as it
+// is.
 
 const fs = require('fs');
 const path = require('path');
 const { marked } = require('marked');
 
 const ROOT = path.resolve(__dirname, '..');
-const POSTS = path.join(ROOT, 'blog');
-const OUT = path.join(ROOT, 'public', 'blog');
-const LIST = path.join(ROOT, 'src', 'data', 'blogs.json');
+const POSTS = path.join(ROOT, 'write-ups');
+const OUT = path.join(ROOT, 'public', 'write-ups');
+const LIST = path.join(ROOT, 'src', 'data', 'write-ups.json');
 const SITE = 'https://sohanbhat.me';
 
 const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -42,7 +43,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <!-- Built by scripts/build-blog.js from blog/${name}.md. Edit that file, not this one. -->
+    <!-- Built by scripts/build-write-ups.js from write-ups/${name}.md. Edit that file, not this one. -->
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -52,15 +53,15 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
     <meta name="color-scheme" content="dark" />
     <title>${escape(title)}</title>
     <meta name="description" content="${escape(summary)}" />
-    <link rel="canonical" href="${SITE}/blog/${name}/" />
+    <link rel="canonical" href="${SITE}/write-ups/${name}/" />
     <meta name="author" content="${escape(author)}" />
     <meta name="robots" content="max-image-preview:large" />
     <script type="application/ld+json">
       ${JSON.stringify({
           '@context': 'https://schema.org',
-          '@type': 'BlogPosting',
+          '@type': 'Article',
           headline: title,
-          url: `${SITE}/blog/${name}/`,
+          url: `${SITE}/write-ups/${name}/`,
           datePublished: new Date(`1 ${published} UTC`).toISOString().slice(0, 7),
           inLanguage: 'en',
           author: { '@type': 'Person', '@id': `${SITE}/#person`, name: author, url: `${SITE}/` },
@@ -68,7 +69,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       })}
     </script>
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="${SITE}/blog/${name}/" />
+    <meta property="og:url" content="${SITE}/write-ups/${name}/" />
     <meta property="og:title" content="${escape(title)}" />
     <meta property="og:description" content="${escape(summary)}" />
     <meta property="og:image" content="${SITE}/og-image.jpg" />
@@ -145,6 +146,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         font-size: 0.875rem;
       }
       .toolbar-links a {
+        padding: 0.45rem 0;
         color: var(--ink-soft);
         text-decoration: none;
       }
@@ -252,9 +254,9 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         <img src="/favicon.svg?v=2" alt="" width="26" height="26" />
       </a>
       <div class="toolbar-links">
-        <a href="/#projects">Projects</a>
-        <a href="/#blogs" aria-current="true">Blogs</a>
-        <a href="/#robotics">Robotics</a>
+        <a href="/projects/">Projects</a>
+        <a href="/write-ups/" aria-current="true">Write-ups</a>
+        <a href="/robotics/">Robotics</a>
       </div>
     </nav>
     <main>
@@ -276,7 +278,7 @@ const posts = fs
         let text = fs.readFileSync(path.join(POSTS, file), 'utf8');
 
         const heading = text.match(/^# (.+)\n/m);
-        if (!heading) throw new Error(`No "# Title" in blog/${file}`);
+        if (!heading) throw new Error(`No "# Title" in write-ups/${file}`);
         const title = heading[1].trim();
         text = text.replace(heading[0], '');
         let author;
@@ -318,10 +320,10 @@ const posts = fs
             .replace(/^/gm, '        ');
 
         fs.writeFileSync(path.join(dir, 'index.html'), page({ name, title, author, published, summary, html }));
-        return { name, title, published, url: `/blog/${name}/` };
+        return { name, title, published, url: `/write-ups/${name}/`, opening: first };
     })
     // Newest first.
     .sort((a, b) => new Date(`1 ${b.published} UTC`) - new Date(`1 ${a.published} UTC`));
 
 fs.writeFileSync(LIST, `${JSON.stringify(posts, null, 4)}\n`);
-console.log(`Built ${posts.length} blog post${posts.length === 1 ? '' : 's'} into public/blog.`);
+console.log(`Built ${posts.length} write-up${posts.length === 1 ? '' : 's'} into public/write-ups.`);
