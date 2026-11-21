@@ -15,8 +15,10 @@
     display: flex;
 }
 
+/* The S is on cream, close to the paper, so a thin outline sets it off. */
 .toolbar-home img {
     display: block;
+    border: 1px solid var(--edge);
     border-radius: 5px;
 }
 

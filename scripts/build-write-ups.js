@@ -128,6 +128,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       }
       .toolbar-home img {
         display: block;
+        border: 1px solid var(--edge);
         border-radius: 5px;
       }
       .toolbar-links {
