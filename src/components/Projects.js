@@ -5,8 +5,9 @@ import '../styles/Projects.css';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-// Newest first, in folders by year.
-const sorted = [...projects].sort((a, b) => b.date.localeCompare(a.date));
+// The earlier projects, the ones not shown in Work. Newest first, in folders
+// by year.
+const sorted = projects.filter((p) => !p.best).sort((a, b) => b.date.localeCompare(a.date));
 const yearOf = (p) => p.date.slice(0, 4);
 
 // The sorter in the title bar. It reads as the end of the window's path, so
@@ -76,7 +77,7 @@ const Projects = () => {
     return (
         <section className="projects" id="projects">
             <div className="container">
-                <h2 className="section-title">Projects<span className="title-period">.</span></h2>
+                <h2 className="section-title">Earlier<span className="title-period">.</span></h2>
 
                 <div className="finder">
                     <div className="finder-bar">

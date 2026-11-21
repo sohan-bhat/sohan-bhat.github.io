@@ -6,9 +6,13 @@
 // as @name, linked to their profile.
 // `groups` says which tabs of the sorter list a project: tools, ml, apps or
 // hardware. A project can be in more than one.
+// `best` puts a project in Work, the short list at the top of the page, at
+// that place in its order. Every project without it is listed in the window
+// under Earlier.
 const projects = [
     {
         id: 'hullo',
+        best: 4,
         groups: ['apps'],
         kind: 'Website',
         title: 'hullo',
@@ -26,6 +30,7 @@ const projects = [
     },
     {
         id: 'openhal',
+        best: 1,
         groups: ['tools', 'hardware'],
         kind: 'Protocol',
         title: 'OpenHAL',
@@ -42,6 +47,7 @@ const projects = [
     },
     {
         id: 'wobbl',
+        best: 2,
         groups: ['tools'],
         kind: 'Simulator',
         title: 'wobbl',
@@ -59,6 +65,7 @@ const projects = [
     },
     {
         id: 'oopsy',
+        best: 3,
         groups: ['tools'],
         kind: 'CLI tool',
         title: 'oopsy',
