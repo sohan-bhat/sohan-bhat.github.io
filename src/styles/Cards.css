@@ -3,6 +3,10 @@
    title. Pointing at a tile, or reaching it with the keyboard, fades the
    picture back and slides its line and links up over the foot of it. */
 .cards {
+    /* How long the strip takes to slide and the picture to fade, and the
+       curve they share: a gentle ease out, so the strip glides to a stop. */
+    --slide: 0.3s;
+    --glide: cubic-bezier(0.3, 0.7, 0.25, 1);
     list-style: none;
     display: grid;
     gap: 2.75rem 1.75rem;
@@ -42,11 +46,11 @@ button.card-shot:focus-visible {
     height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
-    opacity: 0.86;
-    filter: saturate(0.85);
-    transition:
-        opacity 0.2s ease-out,
-        filter 0.2s ease-out;
+    opacity: 0.9;
+    /* Only the opacity changes, which the browser can do without
+       redrawing the picture, so the fade stays smooth. */
+    transition: opacity var(--slide) var(--glide);
+    will-change: opacity;
 }
 
 /* Open, the picture fades back into the paper so the eye goes to the strip
@@ -54,12 +58,11 @@ button.card-shot:focus-visible {
 .card.is-open .card-shot img,
 .card-frame:has(:focus-visible) .card-shot img {
     opacity: 0.35;
-    filter: saturate(0.6);
 }
 
 /* The line and links, on a solid strip with a firm top edge. They wait just
-   under the foot of the picture, out of sight, and slide up into it,
-   quickly and without fading. Hidden, they are also out of the keyboard's
+   under the foot of the picture, out of sight, and glide up into it
+   without fading. Hidden, they are also out of the keyboard's
    reach until the card is. */
 .card-about {
     position: absolute;
@@ -71,9 +74,12 @@ button.card-shot:focus-visible {
     background: var(--bg);
     transform: translateY(calc(100% + 2px));
     visibility: hidden;
+    /* Kept on its own layer, so it is drawn once and then only moved; its
+       text does not shimmer on the way up. */
+    will-change: transform;
     transition:
-        transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0s linear 0.16s;
+        transform var(--slide) var(--glide),
+        visibility 0s linear var(--slide);
 }
 
 .card.is-open .card-about,
@@ -81,21 +87,20 @@ button.card-shot:focus-visible {
     transform: none;
     visibility: visible;
     transition:
-        transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
+        transform var(--slide) var(--glide),
         visibility 0s;
 }
 
 @media (hover: hover) {
     .card-frame:hover .card-shot img {
         opacity: 0.35;
-        filter: saturate(0.6);
     }
 
     .card-frame:hover .card-about {
         transform: none;
         visibility: visible;
         transition:
-            transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
+            transform var(--slide) var(--glide),
             visibility 0s;
     }
 }
