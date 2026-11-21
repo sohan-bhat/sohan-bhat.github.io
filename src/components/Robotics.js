@@ -1,5 +1,5 @@
-import React from 'react';
-import '../styles/Rows.css';
+import React, { useCallback, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 import '../styles/Robotics.css';
 
 const shot = (name) => ({
@@ -10,7 +10,7 @@ const shot = (name) => ({
 
 const photo = (name, ratio) => ({ src: `/imgs/${name}-480.webp`, ratio });
 
-const builds = [
+const slides = [
     {
         ...shot('build-wins'),
         title: 'Fort Worth District wins',
@@ -90,46 +90,93 @@ const builds = [
     },
 ];
 
-// Robotics: one line about the teams, then everything I built and the
-// robots themselves, each in a row like the rows of Work. Nothing is hidden.
-const Robotics = () => (
-    <section className="robotics" id="robotics">
-        <div className="container">
-            <h2 className="section-title">Robotics<span className="title-period">.</span></h2>
-            <p className="robotics-prose">I write Java for FRC Team 2714 and Team 2728.</p>
+const still = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            <ul className="rows">
-                {builds.map((build) => (
-                    <li className="row" key={build.title}>
-                        <div className="row-picture" style={{ '--ratio': build.ratio }}>
-                            <img
-                                src={build.src}
-                                srcSet={build.srcSet}
-                                sizes={build.srcSet ? '(max-width: 640px) calc(100vw - 3rem), 304px' : undefined}
-                                width={Math.round(350 * build.ratio)}
-                                height="350"
-                                alt={build.alt}
-                                loading="lazy"
-                                decoding="async"
-                            />
-                        </div>
-                        <div className="row-body">
-                            <h3 className="row-title">{build.title}</h3>
-                            <p className="row-note">{build.meta}</p>
-                            {build.detail && <p className="row-text">{build.detail}</p>}
-                            {build.link && (
-                                <p className="row-links">
-                                    <a href={build.link.href} target="_blank" rel="noreferrer" aria-label={build.link.name}>
-                                        {build.link.label}
+const Robotics = () => {
+    const [viewport, carousel] = useEmblaCarousel({ align: 'start', slidesToScroll: 'auto', containScroll: false });
+    const [canPrev, setCanPrev] = useState(false);
+    const [canNext, setCanNext] = useState(true);
+
+    const sync = useCallback((api) => {
+        setCanPrev(api.canScrollPrev());
+        setCanNext(api.canScrollNext());
+    }, []);
+
+    useEffect(() => {
+        if (!carousel) return undefined;
+        sync(carousel);
+        carousel.on('select', sync).on('reInit', sync);
+        return () => {
+            carousel.off('select', sync).off('reInit', sync);
+        };
+    }, [carousel, sync]);
+
+    return (
+        <section className="robotics" id="robotics">
+            <div className="container">
+                <h2 className="section-title">Robotics<span className="title-period">.</span></h2>
+                <div className="robotics-head">
+                    <p className="robotics-prose">
+                        I write Java for FRC Team 2714 and Team 2728.
+                    </p>
+                    <div className="carousel-controls">
+                        <button
+                            type="button"
+                            className="carousel-button"
+                            aria-controls="robotics-slides"
+                            disabled={!canPrev}
+                            onClick={() => carousel && carousel.scrollPrev(still())}
+                        >
+                            Previous
+                        </button>
+                        <button
+                            type="button"
+                            className="carousel-button"
+                            aria-controls="robotics-slides"
+                            disabled={!canNext}
+                            onClick={() => carousel && carousel.scrollNext(still())}
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
+
+                <div className="carousel" ref={viewport}>
+                    <ul className="build-track" id="robotics-slides">
+                        {slides.map((slide) => (
+                            <li className="build" key={slide.title} style={{ '--ratio': slide.ratio }}>
+                                <img
+                                    className="build-image"
+                                    src={slide.src}
+                                    srcSet={slide.srcSet}
+                                    sizes={slide.srcSet ? '(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 270px' : undefined}
+                                    width={160 * slide.ratio}
+                                    height="160"
+                                    alt={slide.alt}
+                                    loading="lazy"
+                                    draggable="false"
+                                />
+                                <h3 className="build-title">{slide.title}</h3>
+                                <p className="build-meta">{slide.meta}</p>
+                                {slide.detail && <p className="build-detail">{slide.detail}</p>}
+                                {slide.link && (
+                                    <a
+                                        className="build-code text-link"
+                                        href={slide.link.href}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        aria-label={slide.link.name}
+                                    >
+                                        {slide.link.label}
                                     </a>
-                                </p>
-                            )}
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    </section>
-);
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    );
+};
 
 export default Robotics;

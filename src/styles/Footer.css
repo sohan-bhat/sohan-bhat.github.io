@@ -1,19 +1,49 @@
-/* The copyright line and the same contact links as the intro. */
 .footer {
-    margin-top: var(--gap);
-    padding: 2rem 0 3rem;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--edge);
+    font-family: var(--mono);
+    margin-top: 2rem;
+    padding: 2rem 0 2.5rem;
 }
 
 .footer-inner {
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
     justify-content: space-between;
-    gap: 0.75rem 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .footer-name {
-    font-size: var(--small);
+    font-size: 0.8rem;
     color: var(--ink-soft);
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-email {
+    font-size: 0.8rem;
+}
+
+.footer-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+}
+
+/* Icon links: gray at rest, orange on hover and focus, no underline. */
+.footer-icon {
+    display: inline-flex;
+    padding: 4px;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+}
+
+.footer-icon:hover,
+.footer-icon:focus-visible {
+    color: var(--accent);
 }

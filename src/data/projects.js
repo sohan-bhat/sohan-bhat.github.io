@@ -1,94 +1,178 @@
-// What Work shows.
-// `work` is the rows, in the order they appear. Each has a title, one line of
-// text, its links and a picture. A row with a `titleUrl` has its title link
-// there. `team` lists the people a project was built with; each is credited
-// as @name after the line, linked to their profile. `image` names the
-// card-<image>-560 and -1120 pictures in public/imgs, 16:10: an overview of
-// the project's site or, for the paper, a figure from it.
-// `earlier` is the older projects, named in one line under the rows, each
-// linked to its site.
-export const work = [
+// `date` is when each project started. `kind` says what it is. `image` names
+// the card-<image>-560 and -1120 screenshots in public/imgs: an overview of
+// each project's site, 16:10. `icon` is the site's own logo, shown in the
+// project's row; a project without one gets a plain page icon.
+// `team` lists the people a project was built with; the card credits each
+// as @name, linked to their profile.
+// `groups` says which tabs of the sorter list a project: tools, ml, apps or
+// hardware. A project can be in more than one.
+const projects = [
     {
-        id: 'lhd',
-        title: 'LHD, early detection of silent training failures in neural networks',
-        titleUrl: '/write-ups/lhd/',
-        line: 'Caught 87% of broken training runs, usually by epoch 3, with 2% false alarms.',
-        links: [{ label: 'Read the paper', url: '/lhd-paper.pdf' }],
-        image: 'lhd',
-        alt: 'A chart from the paper. LHD has flagged 75% of the broken runs by epoch 3 and 84% by the end, and the accuracy curve 26%.',
+        id: 'hullo',
+        groups: ['apps'],
+        kind: 'Website',
+        title: 'hullo',
+        date: '2026-11-14',
+        line: 'What NASA left in space',
+        team: [
+            { name: 'Manas Agarwal', url: 'https://www.linkedin.com/in/manas-agarwal-610201322' },
+            { name: 'Shiven Garisa', url: 'https://www.linkedin.com/in/shiven-garisa-2b10b0286' },
+        ],
+        stack: ['Astro', 'React', 'Python'],
+        links: [{ label: 'Site', url: 'https://sayhullo.netlify.app/' }],
+        image: 'hullo',
+        icon: '/imgs/icons/hullo.svg',
+        alt: 'Hullo’s site, “NASA left hardware across the solar system,” beside the Earth rising over the Moon.',
     },
     {
         id: 'openhal',
+        groups: ['tools', 'hardware'],
+        kind: 'Protocol',
         title: 'OpenHAL',
+        date: '2026-10-17',
         line: 'Lets AI agents control hardware',
+        stack: ['Python', 'MCP', 'Svelte'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/OpenHAL/' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/OpenHAL' },
         ],
         image: 'openhal',
+        icon: '/imgs/icons/openhal.svg',
         alt: 'OpenHAL’s site, its name above a one-line install command.',
     },
     {
         id: 'wobbl',
+        groups: ['tools'],
+        kind: 'Simulator',
         title: 'wobbl',
+        date: '2026-10-13',
         line: 'Physics simulation for hobbyists up to elite engineers',
+        stack: ['Python', 'SciPy', 'Three.js'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/wobbl/' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/wobbl' },
             { label: 'Video', url: 'https://www.youtube.com/watch?v=RtCNKbhABqE' },
         ],
         image: 'wobbl',
+        icon: '/imgs/icons/wobbl.svg',
         alt: 'Wobbl’s site, “Simulate anything before you build it,” beside a 3D bracket colored by stress.',
     },
     {
         id: 'oopsy',
+        groups: ['tools'],
+        kind: 'CLI tool',
         title: 'oopsy',
+        date: '2026-10-09',
         line: 'Undo for rm -rf, git and database mistakes',
+        stack: ['Go', 'Postgres', 'JavaScript'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/oopsy/' },
             { label: 'Code', url: 'https://github.com/sohan-bhat/oopsy' },
             { label: 'Video', url: 'https://youtu.be/Krh9cU08rIg' },
         ],
         image: 'oopsy',
+        icon: '/imgs/icons/oopsy.svg',
         alt: 'Oopsy’s site, “Undo for rm -rf,” beside a terminal you can try in the browser.',
     },
     {
-        id: 'hullo',
-        title: 'hullo',
-        line: 'What NASA left in space',
-        team: [
-            { name: 'Manas Agarwal', url: 'https://www.linkedin.com/in/manas-agarwal-610201322' },
-            { name: 'Shiven Garisa', url: 'https://www.linkedin.com/in/shiven-garisa-2b10b0286' },
+        id: 'taro',
+        groups: ['apps'],
+        kind: 'AI agent',
+        title: 'taro',
+        date: '2026-08-29',
+        line: 'Voice assistant for meeting follow-ups',
+        stack: ['TypeScript', 'Next.js', 'Gemini'],
+        links: [
+            { label: 'Site', url: 'https://trytaro.vercel.app' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/taro' },
+            { label: 'Video', url: 'https://youtu.be/8_FzNl4uwyY' },
         ],
-        links: [{ label: 'Site', url: 'https://sayhullo.netlify.app/' }],
-        image: 'hullo',
-        alt: 'Hullo’s site, “NASA left hardware across the solar system,” beside the Earth rising over the Moon.',
+        image: 'taro',
+        icon: '/imgs/icons/taro.svg',
+        alt: 'Taro’s site, which says “Meeting follow-ups get lost. Taro does them before you hang up.”',
+    },
+    {
+        id: 'signnet',
+        groups: ['ml'],
+        kind: 'Neural network',
+        title: 'signnet',
+        date: '2026-06-12',
+        line: 'Classifies traffic signs',
+        stack: ['Python', 'NumPy', 'React'],
+        links: [
+            { label: 'Site', url: 'https://sohanbhat.me/signnet/' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/signnet' },
+        ],
+        image: 'signnet',
+        icon: '/imgs/icons/signnet.svg',
+        alt: 'signnet’s site, “Traffic sign classification, built from scratch,” beside the model classifying a stop sign.',
+    },
+    {
+        id: 'ensemble',
+        groups: ['apps'],
+        kind: 'Web app',
+        title: 'ensemble',
+        date: '2026-02-08',
+        line: 'r/place for music, where everyone writes one score',
+        stack: ['React', 'Express', 'VexFlow'],
+        links: [
+            { label: 'Site', url: 'https://ensemble-qnd2.onrender.com' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/ensemble' },
+        ],
+        image: 'ensemble',
+        icon: '/imgs/icons/ensemble.png',
+        alt: 'Ensemble’s shared score for violins, viola, cello, and bass.',
+    },
+    {
+        id: 'vacantcourt',
+        groups: ['apps', 'ml'],
+        kind: 'Mobile + web app',
+        title: 'VacantCourt',
+        date: '2025-03-17',
+        line: 'Shows which nearby courts and fields are free',
+        stack: ['Kotlin', 'TensorFlow Lite', 'React'],
+        links: [
+            { label: 'Site', url: 'https://vacantcourt.netlify.app' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/VacantCourt', title: 'Website code' },
+            { label: 'App', url: 'https://github.com/sohan-bhat/VacantCourtApp', title: 'Android app code' },
+        ],
+        image: 'vacantcourt',
+        icon: '/imgs/icons/vacantcourt.png',
+        alt: 'VacantCourt’s site, “Skip the drive to a full court,” beside a court camera that boxes each player.',
+    },
+    {
+        id: 'mochi',
+        groups: ['apps'],
+        kind: 'Web app',
+        title: 'mochi',
+        date: '2024-07-25',
+        line: 'Recipes from the ingredients you have',
+        stack: ['React', 'Node.js', 'Groq'],
+        links: [
+            { label: 'Site', url: 'https://trymochi.netlify.app' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/Mochi' },
+        ],
+        image: 'mochi',
+        icon: '/imgs/icons/mochi.png',
+        alt: 'Mochi’s site, which says “Turn what you have into what you’ll cook tonight.”',
+    },
+    {
+        id: 'career-ai',
+        groups: ['apps'],
+        kind: 'Web app',
+        title: 'CareerAI',
+        date: '2024-06-21',
+        retired: true,
+        line: 'Career ideas from your interests',
+        stack: ['React', 'Node.js', 'Groq'],
+        links: [
+            { label: 'Site', url: 'https://careerai.netlify.app' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/CareerAI' },
+        ],
+        image: 'careerai',
+        icon: '/imgs/icons/career-ai.png',
+        alt: 'CareerAI suggesting careers from a list of interests.',
     },
 ];
 
-export const earlier = [
-    {
-        title: 'taro',
-        url: 'https://trytaro.vercel.app',
-    },
-    {
-        title: 'signnet',
-        url: 'https://sohanbhat.me/signnet/',
-    },
-    {
-        title: 'ensemble',
-        url: 'https://ensemble-qnd2.onrender.com',
-    },
-    {
-        title: 'VacantCourt',
-        url: 'https://vacantcourt.netlify.app',
-    },
-    {
-        title: 'mochi',
-        url: 'https://trymochi.netlify.app',
-    },
-    {
-        title: 'CareerAI',
-        url: 'https://careerai.netlify.app',
-    },
-];
+export default projects;

@@ -1,56 +1,120 @@
-/* The intro: the text on the left and the photo on the right, centered on
-   each other. On phones the photo goes above the name. */
 .header {
-    padding-top: 6rem;
+    padding: 6.5rem 0 2rem;
 }
 
-.hero {
+/* The name and links beside the photo, then the write-ups beside
+   Certificates. The right column is wider than the photo so a certificate's
+   name wraps less, and narrower on tablets so the name still fits. */
+.hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) clamp(260px, 30vw, 340px);
+    grid-template-areas:
+        'text photo'
+        'research certs';
     column-gap: 3rem;
-    align-items: center;
+    row-gap: 2rem;
+    align-items: start;
+}
+
+.hero-text {
+    grid-area: text;
+    min-width: 0;
+}
+
+.hero-certs {
+    grid-area: certs;
+}
+
+.hero-research {
+    grid-area: research;
+}
+
+.hero-photo {
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--edge);
+    box-shadow: var(--shadow-hard);
+    grid-area: photo;
 }
 
 .hero-hi {
-    font-size: var(--small);
+    font-family: var(--mono);
+    font-size: 0.95rem;
     color: var(--ink-soft);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
 }
 
 .title {
     font-family: var(--font-display);
-    font-size: var(--heading);
+    font-size: clamp(2.75rem, 8vw, 4.25rem);
     font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 0.9rem;
+    line-height: 1.05;
+    margin-bottom: 1rem;
 }
 
 .subtitle {
-    max-width: 30rem;
-    margin-bottom: 1.4rem;
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    max-width: 34rem;
+    margin-bottom: 1.75rem;
 }
 
-.hero-photo {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border: 1px solid var(--edge);
-    border-radius: var(--radius);
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
-@media (max-width: 640px) {
+/* Icon links: gray at rest, orange on hover and focus, no underline. */
+.social-link {
+    display: inline-flex;
+    padding: 2px;
+    font-size: 1.3rem;
+    color: var(--ink-soft);
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+    color: var(--accent);
+}
+
+.social-email {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+}
+
+.hero-cv {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
     .header {
-        padding-top: 4rem;
+        padding-top: 4.5rem;
     }
 
-    .hero {
+    .hero-layout {
         grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            'photo'
+            'text'
+            'certs'
+            'research';
+        row-gap: 1.75rem;
     }
 
+    .social-links {
+        gap: 1.1rem;
+    }
+
+    /* Above the name, and smaller. */
     .hero-photo {
-        order: -1;
         width: 112px;
         height: 112px;
-        margin-bottom: 1.75rem;
     }
 }
