@@ -113,13 +113,14 @@ button.card-shot:focus-visible {
     line-height: 1.2;
 }
 
-/* A section's heading with a View all link right beside it, on the
-   heading's baseline, to the page with everything. */
+/* A section's heading with its View all link at the far end of the same
+   row, on the heading's baseline and in line with the right edge of the
+   tiles. */
 .section-head {
     display: flex;
-    flex-wrap: wrap;
     align-items: baseline;
-    gap: 0.25rem 0.9rem;
+    justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 1.75rem;
 }
 
@@ -127,9 +128,52 @@ button.card-shot:focus-visible {
     margin-bottom: 0;
 }
 
+/* The View all link: accent words with no underline until pointed at, and
+   an arrow that steps 3px to the right then. */
 .more {
-    font-size: var(--size-small);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: var(--size-body);
+    font-weight: 500;
+    white-space: nowrap;
+    color: var(--accent);
+    text-decoration: none;
 }
+
+.more:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+
+.more-arrow {
+    flex: none;
+    transition: transform 0.15s ease-out;
+}
+
+.more:hover .more-arrow {
+    transform: translateX(3px);
+}
+
+/* The longer of the two rows, Robotics, needs 275px, which a screen 323px
+   wide just gives it. On anything narrower the link goes under the tiles,
+   at the left. */
+.more-foot {
+    display: none;
+    margin-top: 1.75rem;
+}
+
+@media (max-width: 322px) {
+    .more-head {
+        display: none;
+    }
+
+    .more-foot {
+        display: inline-flex;
+    }
+}
+
 
 .card-line {
     font-size: var(--size-body);
@@ -192,6 +236,7 @@ button.card-shot:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .more-arrow,
     .card-hint svg {
         transition: none;
     }

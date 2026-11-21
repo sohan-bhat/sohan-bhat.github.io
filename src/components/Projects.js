@@ -1,13 +1,15 @@
 import React from 'react';
 import Card, { useOpenCard } from './Card';
+import More from './More';
 import { split, picture, ProjectLine, ProjectLinks } from './ProjectParts';
 import projects from '../data/projects';
 import '../styles/Projects.css';
 
 // Projects on the home page: the best ones as large tiles, all one size,
 // showing a picture and a name; the line and links slide up when a tile is
-// pointed at or tapped. The View all link beside the heading, and the
-// heading itself, open the Projects page, which has every project.
+// pointed at or tapped. The View all projects link at the end of the
+// heading's row, and the heading itself, open the Projects page, which has
+// every project.
 const { best } = split(projects);
 
 const Projects = () => {
@@ -21,9 +23,9 @@ const Projects = () => {
                         <a href="/projects/">Projects</a>
                         <span className="title-period">.</span>
                     </h2>
-                    <a className="more text-link" href="/projects/" aria-label="View all projects">
-                        View all
-                    </a>
+                    <More href="/projects/" place="head">
+                        View all projects
+                    </More>
                 </div>
 
                 <ul className="cards project-cards">
@@ -45,6 +47,10 @@ const Projects = () => {
                         />
                     ))}
                 </ul>
+
+                <More href="/projects/" place="foot">
+                    View all projects
+                </More>
             </div>
         </section>
     );

@@ -1,13 +1,14 @@
 import React from 'react';
 import Card, { useOpenCard } from './Card';
+import More from './More';
 import builds from '../data/robotics';
 import '../styles/Robotics.css';
 
 // Robotics on the home page: the four builds marked `top`, in a row of the
 // same tiles Projects uses, a picture and a title each. A tile's link
-// slides up when it is pointed at or tapped. The View all link beside the
-// heading, and the heading itself, open the Robotics page, which has
-// everything.
+// slides up when it is pointed at or tapped. The View all robotics link at the
+// end of the heading's row, and the heading itself, open the Robotics page,
+// which has everything.
 const top = builds.filter((build) => build.top);
 const idOf = (build) => build.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
@@ -22,9 +23,9 @@ const Robotics = () => {
                         <a href="/robotics/">Robotics</a>
                         <span className="title-period">.</span>
                     </h2>
-                    <a className="more text-link" href="/robotics/" aria-label="View all robotics">
-                        View all
-                    </a>
+                    <More href="/robotics/" place="head">
+                        View all robotics
+                    </More>
                 </div>
 
                 <ul className="cards robotics-cards">
@@ -47,6 +48,10 @@ const Robotics = () => {
                         />
                     ))}
                 </ul>
+
+                <More href="/robotics/" place="foot">
+                    View all robotics
+                </More>
             </div>
         </section>
     );
