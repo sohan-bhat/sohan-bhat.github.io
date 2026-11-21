@@ -153,7 +153,49 @@ button.card-shot:focus-visible {
     margin-top: 0.4rem;
 }
 
+/* The plus in the corner of a picture, for touch screens only: a small
+   square button that says the tile opens, and turns to a cross while it is
+   open. Where a pointer can hover, hovering is the hint, so it is hidden. */
+.card-hint {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--ink);
+}
+
+.card-hint svg {
+    transition: transform var(--slide) var(--glide);
+}
+
+@media (hover: none) {
+    .card-hint {
+        display: flex;
+    }
+
+    .card.is-open .card-hint svg {
+        transform: rotate(45deg);
+    }
+
+    /* A touch presses the tile in a little, so it feels like a button. */
+    button.card-shot:active img {
+        opacity: 0.7;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
+    .card-hint svg {
+        transition: none;
+    }
+
     .card-shot img,
     .card-about {
         transition: none;

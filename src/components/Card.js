@@ -30,6 +30,14 @@ const Card = ({ id, image, title, about, open, onToggle, onClose }) => (
                     loading="lazy"
                     decoding="async"
                 />
+                {/* On a touch screen nothing hovers, so a small plus in the
+                    corner says the tile opens. It turns to a cross while
+                    the tile is open. */}
+                <span className="card-hint" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                        <path d="M8 2.5v11M2.5 8h11" />
+                    </svg>
+                </span>
             </button>
             <div className="card-about" id={`about-${id}`}>
                 {about}
