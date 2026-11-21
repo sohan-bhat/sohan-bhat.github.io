@@ -7,7 +7,6 @@ const Header = () => (
     <header className="header" id="intro">
         <div className="container hero-layout">
             <div className="hero-text">
-                <p className="hero-hi">hey, I'm</p>
                 <h1 className="title">Sohan Bhat</h1>
                 <p className="subtitle">
                     I'm 15 and a sophomore in Frisco, Texas. I build neural networks,
@@ -58,8 +57,6 @@ const Header = () => (
                 >
                     CV
                 </a>
-
-                <Certificates />
             </div>
 
             <img
@@ -72,6 +69,8 @@ const Header = () => (
                 fetchPriority="high"
                 alt="Sohan Bhat in the Rocky Mountains"
             />
+
+            <Certificates />
 
         </div>
     </header>

@@ -2,13 +2,17 @@
     padding: 3.5rem 0 2rem;
 }
 
-/* The name, the links and then Certificates down the left; the photo on the
-   right. */
+/* The name and links on the left; the photo with Certificates under it on
+   the right. The right column is wider than the photo so a certificate's
+   name wraps less, and narrower on tablets so the name still fits. */
 .hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas: 'text photo';
+    grid-template-columns: minmax(0, 1fr) clamp(260px, 30vw, 340px);
+    grid-template-areas:
+        'text photo'
+        'text certs';
     column-gap: 3rem;
+    row-gap: 2rem;
     align-items: start;
 }
 
@@ -18,7 +22,7 @@
 }
 
 .hero-certs {
-    margin-top: 2.75rem;
+    grid-area: certs;
 }
 
 .hero-photo {
@@ -29,13 +33,6 @@
     border: 1px solid var(--edge);
     box-shadow: var(--shadow-hard);
     grid-area: photo;
-}
-
-.hero-hi {
-    font-family: var(--mono);
-    font-size: var(--size-small);
-    color: var(--ink-soft);
-    margin-bottom: 0.4rem;
 }
 
 .title {
@@ -94,7 +91,8 @@
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
             'photo'
-            'text';
+            'text'
+            'certs';
         row-gap: 1.75rem;
     }
 
