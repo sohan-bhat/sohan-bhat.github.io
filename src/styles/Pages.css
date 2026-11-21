@@ -51,6 +51,15 @@
     aspect-ratio: auto;
 }
 
+/* A title with a link right after it, as on the home page's cards. */
+.show-head {
+    line-height: 1.35;
+}
+
+.show-head .show-title {
+    display: inline;
+}
+
 .show-title {
     display: flex;
     flex-wrap: wrap;
