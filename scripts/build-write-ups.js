@@ -8,9 +8,8 @@
 // write-ups/lhd.md here began as a copy of and has since been reworded: a
 // `# Title`, then `### Author` and `### Published`, each followed by a line
 // with its value, then the post itself. Pictures sit in write-ups/img and are
-// linked as img/<file>. A PNG is taken to be a chart on a white page and is
-// shown inverted, so it sits on the dark page; a JPG or WebP is shown as it
-// is.
+// linked as img/<file>. A PNG is taken to be a chart on a white page, and its
+// white is let through to the site's paper; a JPG or WebP is shown as it is.
 
 const fs = require('fs');
 const path = require('path');
@@ -49,8 +48,8 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#13110f" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#e9e3d6" />
+    <meta name="color-scheme" content="light" />
     <title>${escape(title)}</title>
     <meta name="description" content="${escape(summary)}" />
     <link rel="canonical" href="${SITE}/write-ups/${name}/" />
@@ -117,7 +116,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         overflow-wrap: break-word;
       }
       ::selection {
-        background: rgb(239 232 220 / 0.22);
+        background: rgb(164 68 28 / 0.18);
       }
       :focus-visible {
         outline: 2px solid var(--ink);
@@ -196,7 +195,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       article a {
         color: var(--accent);
         text-decoration: underline wavy;
-        text-decoration-color: rgb(226 119 74 / 0.5);
+        text-decoration-color: rgb(164 68 28 / 0.5);
         text-decoration-thickness: 1px;
         text-underline-offset: 5px;
       }
@@ -209,11 +208,10 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         height: auto;
         margin-top: 1.75rem;
       }
-      /* A chart drawn on a white page: turned light on dark, with its
-         colours kept, and its page left to show the site's own. */
+      /* A chart drawn on a white page: its white is let through, so it
+         sits on the site's own paper. */
       article img.chart {
-        filter: invert(1) hue-rotate(180deg);
-        mix-blend-mode: screen;
+        mix-blend-mode: multiply;
       }
       .caption {
         margin-top: 0.6rem;

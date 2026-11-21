@@ -74,7 +74,7 @@ body {
 }
 
 ::selection {
-    background: rgb(239 232 220 / 0.22);
+    background: rgb(164 68 28 / 0.18);
 }
 
 /* One visible focus ring for every link and button. */
@@ -87,7 +87,7 @@ body {
 .text-link {
     color: var(--accent);
     text-decoration: underline wavy;
-    text-decoration-color: rgb(226 119 74 / 0.5);
+    text-decoration-color: rgb(164 68 28 / 0.5);
     text-decoration-thickness: 1px;
     text-underline-offset: 5px;
 }
@@ -152,7 +152,7 @@ section {
 
 ::-webkit-scrollbar-track {
     border-left: 1px solid var(--line);
-    background: var(--bg) repeating-linear-gradient(45deg, rgb(255 255 255 / 0.03) 0 2px, transparent 2px 4px);
+    background: var(--bg) repeating-linear-gradient(45deg, rgb(38 33 27 / 0.04) 0 2px, transparent 2px 4px);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -170,6 +170,6 @@ section {
 
 @supports not selector(::-webkit-scrollbar) {
     html {
-        scrollbar-color: #5a5148 var(--bg);
+        scrollbar-color: var(--edge) var(--bg);
     }
 }

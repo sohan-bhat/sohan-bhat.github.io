@@ -1,7 +1,7 @@
-/* The three pages that show one part of the work in full: Projects, Blogs
-   and Robotics. Each is the toolbar, a heading, and a list of rows: a
-   picture on the left with its title, a line of text, the small facts and
-   the links beside it. On phones the picture goes on top. */
+/* The three pages that show one part of the work in full: Projects,
+   Write-ups and Robotics. Each is the toolbar, a heading, and its list.
+   Projects is a compact grid, so ten projects are a short scroll. Robotics
+   is a list of rows, a picture with its text beside it. */
 .page {
     padding: 3rem 0 1rem;
 }
@@ -44,7 +44,9 @@
     aspect-ratio: auto;
 }
 
-/* A title with a link right after it, as on the home page's cards. */
+/* A title with a link right after it. The two run on as one line of text
+   with no space between them, so the link is never left on a line of its
+   own. */
 .show-head {
     line-height: 1.35;
 }
