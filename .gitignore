@@ -27,3 +27,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# the blog's pages and the list of posts, built from blog/*.md by
+# scripts/build-blog.js before each build and start
+/public/blog
+/src/data/blogs.json

@@ -1,6 +1,6 @@
 // Runs after the prerender and fails the build if anything search engines
 // rely on goes missing: the title, h1, description, canonical link,
-// structured data, robots.txt and sitemap. It reads the built files only.
+// structured data, robots.txt, the sitemap and the blog's pages. It reads the built files only.
 
 const fs = require('fs');
 const path = require('path');
@@ -57,18 +57,24 @@ expect(robots.includes(`Sitemap: ${HOME}sitemap.xml`), 'robots.txt pointing at t
 expect(!/^Disallow:\s*\/\s*$/m.test(robots), 'robots.txt not blocking the site');
 expect(sitemap.includes(`<loc>${HOME}</loc>`), 'the home page in the sitemap');
 
-// The paper's own page, public/write-ups/lhd/index.html.
-const PAPER = `${HOME}write-ups/lhd/`;
-const paperFile = path.join(BUILD, 'write-ups/lhd/index.html');
-const paper = fs.existsSync(paperFile) ? fs.readFileSync(paperFile, 'utf8') : '';
-expect(paper, 'the paper page at write-ups/lhd/');
-expect(paper.includes(`<link rel="canonical" href="${PAPER}"`), `the paper page's canonical link to ${PAPER}`);
-expect(paper.includes('<meta name="citation_author" content="Bhat, Sohan"'), 'the paper page credits Bhat, Sohan for Google Scholar');
-expect(paper.includes('<meta name="citation_pdf_url"'), 'the paper page links its PDF for Google Scholar');
-expect(paper.includes('<a class="home text-link" href="/">Sohan Bhat</a>'), 'the paper page links home as Sohan Bhat');
-expect(!/noindex/i.test(paper), 'no noindex on the paper page');
-expect(sitemap.includes(`<loc>${PAPER}</loc>`), 'the paper page in the sitemap');
-expect(html.includes('<a href="/write-ups/lhd/">'), 'a link from the home page to the paper page');
+// The blog: every post in blog/ has its page, the page has its canonical
+// link, links home and is in the sitemap, and the home page links to it.
+for (const file of fs.readdirSync(path.resolve(__dirname, '../blog')).filter((f) => f.endsWith('.md'))) {
+    const name = path.basename(file, '.md');
+    const url = `${HOME}blog/${name}/`;
+    const postFile = path.join(BUILD, 'blog', name, 'index.html');
+    const post = fs.existsSync(postFile) ? fs.readFileSync(postFile, 'utf8') : '';
+    expect(post, `the blog post's page at blog/${name}/`);
+    expect(post.includes(`<link rel="canonical" href="${url}"`), `the blog post's canonical link to ${url}`);
+    expect(post.includes('href="/" aria-label="Sohan Bhat, home"'), `a link home from blog/${name}/`);
+    expect(!/noindex/i.test(post), `no noindex on blog/${name}/`);
+    expect(sitemap.includes(`<loc>${url}</loc>`), `blog/${name}/ in the sitemap`);
+    expect(html.includes(`<a href="/blog/${name}/">`), `a link from the home page to blog/${name}/`);
+}
+
+// The paper's old address only sends people on to the blog post.
+const oldPaper = fs.readFileSync(path.join(BUILD, 'write-ups/lhd/index.html'), 'utf8');
+expect(oldPaper.includes('<link rel="canonical" href="https://sohanbhat.me/blog/lhd/"'), 'the old paper address pointing at the blog post');
 
 if (problems.length) {
     console.error(`SEO check failed. Expected:\n${problems.map((p) => `  - ${p}`).join('\n')}`);
