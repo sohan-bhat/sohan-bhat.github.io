@@ -1,0 +1,67 @@
+/* A card, used by Projects and Robotics so they read as one design: a
+   picture, 16:10 with a thin edge, then the title, a line of text where
+   there is one, and the links. Pictures sit a little dimmed and muted so no
+   bright one shouts, and come to full colour when the card is pointed at or
+   holds the focus. */
+.cards {
+    list-style: none;
+    display: grid;
+    gap: 2.75rem 1.75rem;
+}
+
+.card {
+    min-width: 0;
+}
+
+.card-shot {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius);
+    background: var(--sand);
+    filter: brightness(0.8) saturate(0.85);
+    transition: filter 0.2s ease-out;
+}
+
+.card:hover .card-shot,
+.card:focus-within .card-shot {
+    filter: none;
+}
+
+.card-title {
+    margin-top: 0.9rem;
+    font-family: var(--font-body);
+    font-size: var(--size-title);
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.card-line {
+    margin-top: 0.3rem;
+    font-size: var(--size-body);
+    line-height: 1.5;
+}
+
+/* A person a project was built with, as @name. A name never breaks across
+   two lines. */
+.card-person {
+    white-space: nowrap;
+}
+
+.card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 1rem;
+    margin-top: 0.55rem;
+    font-family: var(--mono);
+    font-size: var(--size-small);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card-shot {
+        transition: none;
+    }
+}

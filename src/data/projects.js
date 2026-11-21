@@ -1,38 +1,17 @@
-// `date` is when each project started. `kind` says what it is. `image` names
-// the card-<image>-560 and -1120 screenshots in public/imgs: an overview of
-// each project's site, 16:10. `icon` is the site's own logo, shown in the
-// project's row; a project without one gets a plain page icon.
-// `team` lists the people a project was built with; the card credits each
-// as @name, linked to their profile.
-// `groups` says which tabs of the sorter list a project: tools, ml, apps or
-// hardware. A project can be in more than one.
-// `best: N` makes a project one of the large pictures at the top of
-// Projects, in that order: the first two are the largest, the rest of the
-// best a size smaller. Every project without it is a small picture under
-// them, newest first. Size is the only thing that marks the best.
-// A project with a `longTitle` shows that as its name, and one with a
-// `titleUrl` has its name link there (the paper links to its own page).
-// `kind`, `stack`, `icon` and `retired` describe a project but are not shown
-// on the page at the moment.
+// `best: N` makes a project one of the large cards in Projects, in that
+// order, each with its picture, its name, its one line and its links. Every
+// project without it is named in the row of links under Earlier, newest
+// first (`date` is when each project started), linked to its first link.
+// `image` names the card-<image>-560 and -1120 screenshots in public/imgs: an
+// overview of the project's site, 16:10.
+// `team` lists the people a project was built with; each is credited as
+// @name, linked to their profile.
+// `kind`, `stack`, `icon`, `groups` and `retired` describe a project but are
+// not shown on the page at the moment.
 const projects = [
     {
-        id: 'lhd',
-        groups: ['ml'],
-        best: 1,
-        kind: 'Paper',
-        title: 'LHD',
-        longTitle: 'LHD, early detection of silent training failures in neural networks',
-        titleUrl: '/write-ups/lhd/',
-        date: '2026-11-01',
-        line: 'Caught 87% of broken training runs, usually by epoch 3, with 2% false alarms.',
-        stack: ['Python', 'PyTorch', 'NumPy'],
-        links: [{ label: 'Read the paper', url: '/lhd-paper.pdf' }],
-        image: 'lhd',
-        alt: 'A chart from the paper. LHD has flagged 75% of the broken runs by epoch 3 and 84% by the end, and the accuracy curve 26%.',
-    },
-    {
         id: 'hullo',
-        best: 5,
+        best: 4,
         groups: ['apps'],
         kind: 'Website',
         title: 'hullo',
@@ -50,7 +29,7 @@ const projects = [
     },
     {
         id: 'openhal',
-        best: 2,
+        best: 1,
         groups: ['tools', 'hardware'],
         kind: 'Protocol',
         title: 'OpenHAL',
@@ -67,7 +46,7 @@ const projects = [
     },
     {
         id: 'wobbl',
-        best: 3,
+        best: 2,
         groups: ['tools'],
         kind: 'Simulator',
         title: 'wobbl',
@@ -85,7 +64,7 @@ const projects = [
     },
     {
         id: 'oopsy',
-        best: 4,
+        best: 3,
         groups: ['tools'],
         kind: 'CLI tool',
         title: 'oopsy',
