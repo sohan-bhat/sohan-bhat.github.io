@@ -1,8 +1,11 @@
-// Certificates, newest first. `url` is the issuer's own page for the
-// certificate, so the link is the proof. `file` is a copy of the PDF in
-// public/certificates, offered as a download in case the issuer's page goes
-// away. `issuer` is left out where the title already names it. To add one,
-// add an entry here and a hasCredential item in public/index.html.
+// Certificates, newest first. `file` is a copy of the PDF in
+// public/certificates. A certificate is shown one of two ways.
+// With `verify`: the Certificate link opens the PDF, and a Verify link opens
+// `verify`, the issuer's own page that proves it.
+// With `url`: the Certificate link opens `url`, the issuer's own page, and a
+// small arrow beside it downloads the PDF, in case that page goes away.
+// `issuer` is left out where the title already names it. To add one, add an
+// entry here and a hasCredential item in public/index.html.
 const certificates = [
     {
         // The short link printed on the PDF, credly.com/go/hd9cOLz8, opens
@@ -10,7 +13,7 @@ const certificates = [
         id: 'mongodb-associate-developer',
         title: 'MongoDB Associate Developer',
         year: '2026',
-        url: 'https://www.credly.com/badges/df80f06d-b947-453b-a4fd-e84cfaaa677a',
+        verify: 'https://www.credly.com/badges/df80f06d-b947-453b-a4fd-e84cfaaa677a',
         file: '/certificates/mongodb-associate-developer.pdf',
     },
     {

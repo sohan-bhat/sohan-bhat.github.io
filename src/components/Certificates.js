@@ -24,10 +24,21 @@ const Certificates = () => (
                     <h3 className="cert-title">{c.title}</h3>
                     <p className="cert-meta">
                         <span>{[c.issuer, c.year].filter(Boolean).join(', ')}</span>
-                        <a className="cert-link text-link" href={c.url} target="_blank" rel="noreferrer">
+                        <a className="cert-link text-link" href={c.verify ? c.file : c.url} target="_blank" rel="noreferrer">
                             Certificate
                         </a>
-                        {c.file && (
+                        {c.verify && (
+                            <a
+                                className="cert-link text-link"
+                                href={c.verify}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label={`Verify the ${c.title} certificate`}
+                            >
+                                Verify
+                            </a>
+                        )}
+                        {c.file && !c.verify && (
                             <a
                                 className="cert-download"
                                 href={c.file}
