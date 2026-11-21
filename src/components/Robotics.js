@@ -26,7 +26,7 @@ const slides = [
         ...shot('build-autos'),
         title: 'Autonomous routines',
         meta: '2026, Team 2728',
-        detail: 'I wrote 11 of the robot’s 12 autonomous routines.',
+        detail: 'Wrote 11 of the robot’s 12',
         alt: 'TACO’s autonomous paths drawn in orange over a top view of the 2026 field.',
         link: {
             label: 'Code',
@@ -38,7 +38,7 @@ const slides = [
         ...shot('build-airstrike'),
         title: 'Airstrike targeting app',
         meta: '2026, Team 2714',
-        detail: 'The drive team taps the field to set a passing target.',
+        detail: 'Tap the field to set a passing target',
         alt: 'Airstrike showing a top view of the field with a target ring, the target position and a row of zone buttons.',
         link: {
             label: 'Code',
@@ -50,7 +50,7 @@ const slides = [
         ...shot('build-hud'),
         title: 'Driver heads-up display',
         meta: '2025, Team 2714',
-        detail: 'Won the Innovation in Control Award at the Texas state championship.',
+        detail: 'Innovation in Control Award at state',
         alt: 'The heads-up display, a hexagon labeled Barge and Driver beside the connection status and time left.',
         link: {
             label: 'Code',
@@ -62,7 +62,7 @@ const slides = [
         ...shot('build-limelight'),
         title: 'Limelight vision alignment',
         meta: '2026, Team 2728',
-        detail: 'Two Limelights aim the robot at the hub within 0.3°.',
+        detail: 'Aims the robot at the hub within 0.3°',
         alt: 'The hub and its AprilTags on the Fort Worth field, with Team 2714’s robot in front and TACO behind.',
         link: {
             label: 'Code',
@@ -157,19 +157,21 @@ const Robotics = () => {
                                     draggable="false"
                                 />
                                 <h3 className="build-title">{slide.title}</h3>
-                                <p className="build-meta">{slide.meta}</p>
                                 {slide.detail && <p className="build-detail">{slide.detail}</p>}
-                                {slide.link && (
-                                    <a
-                                        className="build-code text-link"
-                                        href={slide.link.href}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        aria-label={slide.link.name}
-                                    >
-                                        {slide.link.label}
-                                    </a>
-                                )}
+                                <p className="build-meta">
+                                    <span>{slide.meta}</span>
+                                    {slide.link && (
+                                        <a
+                                            className="build-code text-link"
+                                            href={slide.link.href}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            aria-label={slide.link.name}
+                                        >
+                                            {slide.link.label}
+                                        </a>
+                                    )}
+                                </p>
                             </li>
                         ))}
                     </ul>

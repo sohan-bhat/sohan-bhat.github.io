@@ -83,21 +83,26 @@
     line-height: 1.35;
 }
 
+/* Under a title: one short fact, where there is one, then a single line
+   with the year and team and, after them, the link. */
+.build-detail {
+    margin-top: 0.15rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+}
+
 .build-meta {
-    margin: 0.15rem 0 0.45rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.15rem 0.9rem;
+    margin-top: 0.3rem;
     font-family: var(--mono);
     font-size: 0.75rem;
     color: var(--ink-soft);
 }
 
-.build-detail {
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    margin-bottom: 0.4rem;
-}
-
 .build-code {
-    font-family: var(--mono);
     font-size: 0.78rem;
 }
 
