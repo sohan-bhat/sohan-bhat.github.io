@@ -79,21 +79,30 @@
     font-size: var(--size-small);
 }
 
-/* The CV, the one filled button on the page, small, at the end of the row
-   of links. */
+/* The CV, the one button on the page, small, at the end of the row of
+   links. It is the retro push button the site once used for its main links,
+   filled blue: a hard shadow gives it depth, and a click presses it in. */
 .hero-cv {
-    padding: 0.3rem 0.8rem;
+    --press: 3px;
+    padding: 0.25rem 0.8rem;
+    border: 1px solid #1c3a7e;
     border-radius: var(--radius);
     background: var(--blue);
+    box-shadow: var(--press) var(--press) 0 #1c3a7e;
     color: var(--bg);
     font-size: var(--size-small);
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.5;
     text-decoration: none;
 }
 
 .hero-cv:hover {
-    background: #234892;
+    background: #25499a;
+}
+
+.hero-cv:active {
+    box-shadow: none;
+    transform: translate(var(--press), var(--press));
 }
 
 @media (max-width: 600px) {
