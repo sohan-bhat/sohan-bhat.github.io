@@ -13,8 +13,8 @@
 # production
 /build
 
-# the web font, copied from its package by scripts/fetch-fonts.js before
-# each build
+# fonts the license forbids sharing in a repository; scripts/fetch-fonts.js
+# downloads them before each build
 /public/fonts
 
 # misc
