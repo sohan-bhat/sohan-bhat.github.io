@@ -1,19 +1,28 @@
 import React from 'react';
 import '../styles/Toolbar.css';
 
-// The bar across the top: the S on the left, back to the top of the page,
-// and one link to each section on the right. The blog's pages carry the same
-// bar (see scripts/build-blog.js).
-const Toolbar = () => (
+// The bar across the top of every page: the S on the left, back to the home
+// page, and on the right one link to each of the three pages. `current`
+// names the page being shown. Each write-up carries the same bar (see
+// scripts/build-write-ups.js).
+const LINKS = [
+    ['projects', 'Projects', '/projects/'],
+    ['write-ups', 'Write-ups', '/write-ups/'],
+    ['robotics', 'Robotics', '/robotics/'],
+];
+
+const Toolbar = ({ current }) => (
     <nav className="toolbar" aria-label="Site">
         <div className="container toolbar-inner">
             <a className="toolbar-home" href="/" aria-label="Sohan Bhat, home">
                 <img src="/favicon.svg?v=2" alt="" width="26" height="26" />
             </a>
             <div className="toolbar-links">
-                <a href="#projects">Projects</a>
-                <a href="#blogs">Blogs</a>
-                <a href="#robotics">Robotics</a>
+                {LINKS.map(([name, label, url]) => (
+                    <a key={name} href={url} aria-current={name === current ? 'page' : undefined}>
+                        {label}
+                    </a>
+                ))}
             </div>
         </div>
     </nav>

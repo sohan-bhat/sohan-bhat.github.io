@@ -1,6 +1,6 @@
 // Runs after the prerender and fails the build if anything search engines
 // rely on goes missing: the title, h1, description, canonical link,
-// structured data, robots.txt, the sitemap and the blog's pages. It reads the built files only.
+// structured data, robots.txt, the sitemap, the write-ups and the three pages. It reads the built files only.
 
 const fs = require('fs');
 const path = require('path');
@@ -57,24 +57,40 @@ expect(robots.includes(`Sitemap: ${HOME}sitemap.xml`), 'robots.txt pointing at t
 expect(!/^Disallow:\s*\/\s*$/m.test(robots), 'robots.txt not blocking the site');
 expect(sitemap.includes(`<loc>${HOME}</loc>`), 'the home page in the sitemap');
 
-// The blog: every post in blog/ has its page, the page has its canonical
-// link, links home and is in the sitemap, and the home page links to it.
-for (const file of fs.readdirSync(path.resolve(__dirname, '../blog')).filter((f) => f.endsWith('.md'))) {
+// The write-ups: every post in write-ups/ has its page, the page has its
+// canonical link, links home and is in the sitemap, and the home page links
+// to it.
+for (const file of fs.readdirSync(path.resolve(__dirname, '../write-ups')).filter((f) => f.endsWith('.md'))) {
     const name = path.basename(file, '.md');
-    const url = `${HOME}blog/${name}/`;
-    const postFile = path.join(BUILD, 'blog', name, 'index.html');
+    const url = `${HOME}write-ups/${name}/`;
+    const postFile = path.join(BUILD, 'write-ups', name, 'index.html');
     const post = fs.existsSync(postFile) ? fs.readFileSync(postFile, 'utf8') : '';
-    expect(post, `the blog post's page at blog/${name}/`);
-    expect(post.includes(`<link rel="canonical" href="${url}"`), `the blog post's canonical link to ${url}`);
-    expect(post.includes('href="/" aria-label="Sohan Bhat, home"'), `a link home from blog/${name}/`);
-    expect(!/noindex/i.test(post), `no noindex on blog/${name}/`);
-    expect(sitemap.includes(`<loc>${url}</loc>`), `blog/${name}/ in the sitemap`);
-    expect(html.includes(`<a href="/blog/${name}/">`), `a link from the home page to blog/${name}/`);
+    expect(post, `the write-up's page at write-ups/${name}/`);
+    expect(post.includes(`<link rel="canonical" href="${url}"`), `the write-up's canonical link to ${url}`);
+    expect(post.includes('href="/" aria-label="Sohan Bhat, home"'), `a link home from write-ups/${name}/`);
+    expect(!/noindex/i.test(post), `no noindex on write-ups/${name}/`);
+    expect(sitemap.includes(`<loc>${url}</loc>`), `write-ups/${name}/ in the sitemap`);
+    expect(html.includes(`<a href="/write-ups/${name}/">`), `a link from the home page to write-ups/${name}/`);
 }
 
-// The paper's old address only sends people on to the blog post.
-const oldPaper = fs.readFileSync(path.join(BUILD, 'write-ups/lhd/index.html'), 'utf8');
-expect(oldPaper.includes('<link rel="canonical" href="https://sohanbhat.me/blog/lhd/"'), 'the old paper address pointing at the blog post');
+// The pages for Projects, Write-ups and Robotics: each has its own file with
+// one h1, its own description and canonical link, is in the sitemap and is
+// linked from the home page.
+for (const name of ['projects', 'write-ups', 'robotics']) {
+    const url = `${HOME}${name}/`;
+    const file = path.join(BUILD, name, 'index.html');
+    const page = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : '';
+    expect(page, `the page at ${name}/`);
+    expect((page.match(/<h1[ >]/g) || []).length === 1, `one h1 on ${name}/`);
+    expect(page.includes(`<link rel="canonical" href="${url}"`), `the canonical link to ${url}`);
+    const pageDescription = (page.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '';
+    expect(pageDescription.length >= 50 && pageDescription.length <= 160, `a description of 50 to 160 characters on ${name}/, found ${pageDescription.length}`);
+    expect(pageDescription !== description, `a description of its own on ${name}/`);
+    expect(!/[:\u2013\u2014\u00b7]/.test(pageDescription), `no colon, dash or middle dot in the description on ${name}/`);
+    expect(!/noindex/i.test(page), `no noindex on ${name}/`);
+    expect(sitemap.includes(`<loc>${url}</loc>`), `${name}/ in the sitemap`);
+    expect(html.includes(`href="/${name}/"`), `a link from the home page to ${name}/`);
+}
 
 if (problems.length) {
     console.error(`SEO check failed. Expected:\n${problems.map((p) => `  - ${p}`).join('\n')}`);

@@ -127,6 +127,20 @@ section {
     color: var(--accent);
 }
 
+/* A section heading on the home page opens that section's own page. It
+   reads as a heading until pointed at. */
+.section-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.section-title a:hover {
+    text-decoration: underline wavy;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+}
+
 /* A retro scrollbar to match: a square thumb with a hairline edge on a
    finely hatched track. Chrome and Safari use the ::-webkit rules; Firefox,
    which has no such selectors, gets matching colors. */

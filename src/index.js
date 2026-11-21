@@ -5,7 +5,7 @@ import App from './App';
 const container = document.getElementById('root');
 const app = (
   <React.StrictMode>
-    <App />
+    <App path={window.location.pathname} />
   </React.StrictMode>
 );
 

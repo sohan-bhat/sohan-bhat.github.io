@@ -28,10 +28,13 @@
 }
 
 .toolbar-links a {
+    padding: 0.45rem 0;
     color: var(--ink-soft);
     text-decoration: none;
 }
 
-.toolbar-links a:hover {
+/* The link to the page being shown is the bright one. */
+.toolbar-links a:hover,
+.toolbar-links a[aria-current] {
     color: var(--ink);
 }

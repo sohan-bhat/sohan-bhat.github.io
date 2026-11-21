@@ -1,21 +1,15 @@
 import React from 'react';
-import Toolbar from './components/Toolbar';
-import Header from './components/Header';
-import Projects from './components/Projects';
-import Blogs from './components/Blogs';
-import Robotics from './components/Robotics';
-import Footer from './components/Footer';
+import { pageFor } from './pages';
 import './styles/App.css';
 
-function App() {
+// `path` is the address being shown. The browser passes its own
+// (src/index.js) and the build passes each page's in turn
+// (scripts/prerender.js).
+function App({ path = '/' }) {
+    const Page = pageFor(path);
     return (
         <div className="App">
-            <Toolbar />
-            <Header />
-            <Projects />
-            <Blogs />
-            <Robotics />
-            <Footer />
+            <Page />
         </div>
     );
 }
