@@ -76,7 +76,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@The_Sohan_Bhat" />
     <link rel="preload" href="/fonts/excon-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-sans-3-variable.woff2" as="font" type="font/woff2" crossorigin />
     <style>
       @font-face {
         font-family: 'Excon';
@@ -85,10 +85,10 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         src: url('/fonts/excon-variable.woff2') format('woff2');
       }
       @font-face {
-        font-family: 'Inter';
-        font-weight: 100 900;
+        font-family: 'Source Sans 3';
+        font-weight: 200 900;
         font-display: swap;
-        src: url('/fonts/inter-variable.woff2') format('woff2');
+        src: url('/fonts/source-sans-3-variable.woff2') format('woff2');
       }
       /* The home page's tokens and toolbar, from src/styles/App.css. */
       :root {
@@ -99,7 +99,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         --line: #d2c9b7;
         --edge: #a89c87;
         --accent: #a4441c;
-        --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         --font-display: 'Excon', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
       * {
@@ -140,7 +140,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       .toolbar-links {
         display: flex;
         gap: 1.6rem;
-        font-size: 0.875rem;
+        font-size: 0.9375rem;
       }
       .toolbar-links a {
         padding: 0.45rem 0;
@@ -166,7 +166,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       }
       .byline {
         margin: 0.9rem 0 2.5rem;
-        font-size: 0.875rem;
+        font-size: 0.9375rem;
         color: var(--ink-soft);
       }
       article h2 {
@@ -180,7 +180,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       article ul,
       article ol {
         margin-top: 1rem;
-        font-size: 1.05rem;
+        font-size: 1.125rem;
       }
       article ul,
       article ol {
@@ -212,7 +212,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       }
       .caption {
         margin-top: 0.6rem;
-        font-size: 0.875rem;
+        font-size: 0.9375rem;
         color: var(--ink-soft);
       }
       .table {
@@ -222,7 +222,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 0.95rem;
+        font-size: 1.0625rem;
         font-variant-numeric: tabular-nums;
       }
       th,

@@ -6,8 +6,9 @@
 // file through a repository, so it is downloaded here. It is the official
 // file, unchanged (the license forbids subsetting).
 //
-// Inter, for everything else, is under the SIL Open Font License and comes
-// from the @fontsource-variable/inter package, so it is copied from there.
+// Source Sans 3, for everything else, is under the SIL Open Font License and
+// comes from the @fontsource-variable/source-sans-3 package, so it is copied
+// from there.
 const fs = require('fs');
 const path = require('path');
 
@@ -29,14 +30,14 @@ async function fetchFont(file, family) {
     console.log(`Downloaded ${family} from Fontshare into public/fonts/${file}.`);
 }
 
-function copyInter() {
-    const from = require.resolve('@fontsource-variable/inter/files/inter-latin-wght-normal.woff2');
+function copySourceSans() {
+    const from = require.resolve('@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2');
     fs.mkdirSync(dir, { recursive: true });
-    fs.copyFileSync(from, path.join(dir, 'inter-variable.woff2'));
+    fs.copyFileSync(from, path.join(dir, 'source-sans-3-variable.woff2'));
 }
 
 Promise.all(Object.entries(fonts).map(([file, family]) => fetchFont(file, family)))
-    .then(copyInter)
+    .then(copySourceSans)
     .catch((err) => {
         console.error(err.message);
         process.exit(1);

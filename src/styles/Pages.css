@@ -48,7 +48,7 @@
    with no space between them, so the link is never left on a line of its
    own. */
 .show-head {
-    line-height: 1.35;
+    line-height: 1.2;
 }
 
 .show-head .show-title {
@@ -68,8 +68,8 @@
     gap: 0.1rem 0.6rem;
     font-family: var(--font-body);
     font-size: var(--size-title);
-    font-weight: 600;
-    line-height: 1.35;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 /* A post's title opens the post. It reads as a title until pointed at. */
@@ -213,7 +213,7 @@
 
 .tile-head {
     margin-top: 0.85rem;
-    line-height: 1.35;
+    line-height: 1.2;
 }
 
 .tile-title {
@@ -221,7 +221,7 @@
     margin-right: 0.7rem;
     font-family: var(--font-body);
     font-size: var(--size-title);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .tile-link {
