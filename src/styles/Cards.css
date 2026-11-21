@@ -1,9 +1,7 @@
 /* A tile, used by Projects and Robotics on the home page so they read as
    one design: a picture, 16:10 with a thin edge, and under it only the
-   title. Pictures sit a little faded into the paper so none of them shouts.
-   Pointing at a tile, or reaching it with the keyboard, brings the picture
-   to full colour, and its line and links slide up over the foot of the
-   picture. */
+   title. Pointing at a tile, or reaching it with the keyboard, fades the
+   picture back and slides its line and links up over the foot of it. */
 .cards {
     list-style: none;
     display: grid;
@@ -51,24 +49,27 @@ button.card-shot:focus-visible {
         filter 0.2s ease-out;
 }
 
+/* Open, the picture fades back into the paper so the eye goes to the strip
+   that slides up over it. */
 .card.is-open .card-shot img,
 .card-frame:has(:focus-visible) .card-shot img {
-    opacity: 1;
-    filter: none;
+    opacity: 0.35;
+    filter: saturate(0.6);
 }
 
-/* The line and links. They wait just under the foot of the picture, out of
-   sight, and slide up into it, quickly and without fading. Hidden, they
-   are also out of the keyboard's reach until the card is. */
+/* The line and links, on a solid strip with a firm top edge. They wait just
+   under the foot of the picture, out of sight, and slide up into it,
+   quickly and without fading. Hidden, they are also out of the keyboard's
+   reach until the card is. */
 .card-about {
     position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
-    padding: 0.75rem 0.9rem 0.8rem;
-    border-top: 1px solid var(--edge);
-    background: var(--veil);
-    transform: translateY(calc(100% + 1px));
+    padding: 0.9rem 1rem 0.95rem;
+    border-top: 2px solid var(--ink);
+    background: var(--bg);
+    transform: translateY(calc(100% + 2px));
     visibility: hidden;
     transition:
         transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
@@ -86,8 +87,8 @@ button.card-shot:focus-visible {
 
 @media (hover: hover) {
     .card-frame:hover .card-shot img {
-        opacity: 1;
-        filter: none;
+        opacity: 0.35;
+        filter: saturate(0.6);
     }
 
     .card-frame:hover .card-about {

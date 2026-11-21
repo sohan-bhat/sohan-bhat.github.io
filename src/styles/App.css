@@ -11,8 +11,8 @@
      card is pointed at.
    - Orange (--accent) is for heading periods, links and the line beside a
      write-up or a certificate. Nothing else is orange.
-   - Blue (--blue) is only for the page's main link, the CV, so it stands
-     out as the place to look.
+   - Blue (--blue) is only for the CV button in the intro, the one filled
+     button on the page, so it stands out as the place to look.
    - One shadow, --shadow-hard, for the portrait. No soft shadows anywhere.
      One corner radius, --radius.
    - No all-caps headings, and no italics except in quotes.
@@ -35,8 +35,6 @@
     --accent: #a4441c;
     /* A classic link blue, darkened for the paper; 5.5:1 on --bg. */
     --blue: #2b55ad;
-    /* The paper, a little see-through, behind text laid over a picture. */
-    --veil: rgb(233 227 214 / 0.95);
     /* Two clean sans faces and nothing else: Excon for the name and the
        section headings, and Inter, plain and easy to read, for everything
        else. There is no serif and no monospace on the site. The system
@@ -99,16 +97,6 @@ body {
 
 .text-link:hover {
     text-decoration-color: var(--accent);
-}
-
-/* The main links: the same text link, in blue. */
-.text-link.focus-link {
-    color: var(--blue);
-    text-decoration-color: rgb(43 85 173 / 0.5);
-}
-
-.text-link.focus-link:hover {
-    text-decoration-color: var(--blue);
 }
 
 /* The page is 1000px wide at most. */
