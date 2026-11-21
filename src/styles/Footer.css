@@ -14,7 +14,7 @@
 }
 
 .footer-name {
-    font-size: 0.8rem;
+    font-size: var(--size-small);
     color: var(--ink-soft);
 }
 
@@ -26,7 +26,7 @@
 }
 
 .footer-email {
-    font-size: 0.8rem;
+    font-size: var(--size-small);
 }
 
 .footer-icons {

@@ -1,0 +1,37 @@
+/* The bar across the top, as plain as it can be: the S, and three quiet
+   links that brighten when pointed at. */
+.toolbar {
+    padding: 1.1rem 0;
+}
+
+.toolbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.toolbar-home {
+    display: flex;
+}
+
+.toolbar-home img {
+    display: block;
+    border-radius: 5px;
+}
+
+.toolbar-links {
+    display: flex;
+    gap: 1.6rem;
+    font-family: var(--mono);
+    font-size: var(--size-small);
+}
+
+.toolbar-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+}
+
+.toolbar-links a:hover {
+    color: var(--ink);
+}

@@ -1,18 +1,14 @@
 .header {
-    padding: 6.5rem 0 2rem;
+    padding: 3.5rem 0 2rem;
 }
 
-/* The name and links on the left; the photo with Certificates under it on
-   the right. The right column is wider than the photo so a certificate's
-   name wraps less, and narrower on tablets so the name still fits. */
+/* The name, the links and then Certificates down the left; the photo on the
+   right. */
 .hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(260px, 30vw, 340px);
-    grid-template-areas:
-        'text photo'
-        'text certs';
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'text photo';
     column-gap: 3rem;
-    row-gap: 2rem;
     align-items: start;
 }
 
@@ -22,7 +18,7 @@
 }
 
 .hero-certs {
-    grid-area: certs;
+    margin-top: 2.75rem;
 }
 
 .hero-photo {
@@ -37,7 +33,7 @@
 
 .hero-hi {
     font-family: var(--mono);
-    font-size: 0.95rem;
+    font-size: var(--size-small);
     color: var(--ink-soft);
     margin-bottom: 0.4rem;
 }
@@ -51,7 +47,7 @@
 }
 
 .subtitle {
-    font-size: 1.2rem;
+    font-size: var(--size-body);
     color: var(--ink-soft);
     max-width: 34rem;
     margin-bottom: 1.75rem;
@@ -79,27 +75,26 @@
 
 .social-email {
     font-family: var(--mono);
-    font-size: 0.85rem;
+    font-size: var(--size-small);
 }
 
 .hero-cv {
     display: inline-block;
     margin-top: 0.75rem;
     font-family: var(--mono);
-    font-size: 0.85rem;
+    font-size: var(--size-small);
 }
 
 @media (max-width: 600px) {
     .header {
-        padding-top: 4.5rem;
+        padding-top: 2.5rem;
     }
 
     .hero-layout {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
             'photo'
-            'text'
-            'certs';
+            'text';
         row-gap: 1.75rem;
     }
 

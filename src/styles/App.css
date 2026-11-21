@@ -1,19 +1,20 @@
 /* THE SYSTEM. Every section follows these rules.
 
    - One language, editorial: the name and section headings in Erode,
-     ending in an orange period; smaller titles and body text in Excon; and
-     mono for small labels and links.
-   - As little text as possible. Under a title or a picture, nothing that
-     can wait: details show when asked for, as in Projects, where a picture
-     carries only its name.
-   - Size says what matters. The best projects are bigger pictures, never
-     marked with a badge, a tag or a highlight.
-   - Orange (--accent) is for heading periods, links, the certificate border
-     and the line under the sorter's open tab. Nothing else is orange.
+     ending in an orange period; titles and body text in Excon; and mono for
+     small labels and links.
+   - Four text styles and no others: the section heading, the card title,
+     body text and one small style, set as --size-heading, --size-title,
+     --size-body and --size-small. The name alone is larger.
+   - Projects and Robotics share one card (Cards.css), so every picture has
+     the same shape, edge and corner, and sits a little dimmed until its
+     card is pointed at.
+   - Orange (--accent) is for heading periods, links and the certificate
+     border. Nothing else is orange.
    - Blue (--blue) is only for the page's main link, the CV, so it stands
      out as the place to look.
-   - One shadow, --shadow-hard, for the photos and the project pictures. No
-     soft shadows anywhere. One corner radius, --radius.
+   - One shadow, --shadow-hard, for the portrait. No soft shadows anywhere.
+     One corner radius, --radius.
    - No all-caps headings, and no italics except in quotes.
    - The wavy underline is only for text links. Icons get a hover and a
      focus state instead.
@@ -43,6 +44,11 @@
     --shadow-offset: 4px;
     --shadow-hard: var(--shadow-offset) var(--shadow-offset) 0 rgb(0 0 0 / 0.55);
     --radius: 3px;
+    /* The four text styles' sizes. */
+    --size-heading: 1.75rem;
+    --size-title: 1.1rem;
+    --size-body: 1rem;
+    --size-small: 0.875rem;
 }
 
 * {
@@ -112,7 +118,7 @@ section {
 
 .section-title {
     font-family: var(--font-display);
-    font-size: 1.75rem;
+    font-size: var(--size-heading);
     font-weight: 700;
     margin-bottom: 1.75rem;
 }

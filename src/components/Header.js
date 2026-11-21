@@ -58,6 +58,8 @@ const Header = () => (
                 >
                     CV
                 </a>
+
+                <Certificates />
             </div>
 
             <img
@@ -71,7 +73,6 @@ const Header = () => (
                 alt="Sohan Bhat in the Rocky Mountains"
             />
 
-            <Certificates />
         </div>
     </header>
 );
