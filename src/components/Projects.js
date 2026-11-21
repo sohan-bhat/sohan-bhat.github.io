@@ -5,9 +5,10 @@ import '../styles/Projects.css';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-// The earlier projects, the ones not shown in Work. Newest first, in folders
-// by year.
-const sorted = projects.filter((p) => !p.best).sort((a, b) => b.date.localeCompare(a.date));
+// Newest first, in folders by year. The paper and the best projects sit in
+// the same list as the rest and stand out by size alone: a taller row with a
+// small picture where the others have a logo.
+const sorted = [...projects].sort((a, b) => b.date.localeCompare(a.date));
 const yearOf = (p) => p.date.slice(0, 4);
 
 // The sorter in the title bar. It reads as the end of the window's path, so
@@ -77,7 +78,7 @@ const Projects = () => {
     return (
         <section className="projects" id="projects">
             <div className="container">
-                <h2 className="section-title">Earlier<span className="title-period">.</span></h2>
+                <h2 className="section-title">Projects<span className="title-period">.</span></h2>
 
                 <div className="finder">
                     <div className="finder-bar">
@@ -113,7 +114,7 @@ const Projects = () => {
                                                         <li key={p.id}>
                                                             <button
                                                                 type="button"
-                                                                className="finder-file"
+                                                                className={`finder-file${p.best ? ' is-best' : ''}`}
                                                                 aria-expanded={p.id === openId}
                                                                 aria-controls={`project-${p.id} finder-preview`}
                                                                 ref={(el) => {
@@ -122,7 +123,17 @@ const Projects = () => {
                                                                 onClick={() => select(p.id)}
                                                             >
                                                                 <span className="finder-name">
-                                                                    {p.icon ? (
+                                                                    {p.best ? (
+                                                                        <img
+                                                                            className="finder-thumb"
+                                                                            src={`/imgs/card-${p.image}-560.webp`}
+                                                                            alt=""
+                                                                            width="72"
+                                                                            height="45"
+                                                                            loading="lazy"
+                                                                            decoding="async"
+                                                                        />
+                                                                    ) : p.icon ? (
                                                                         <img
                                                                             className="finder-icon finder-logo"
                                                                             src={p.icon}

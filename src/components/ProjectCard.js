@@ -1,14 +1,17 @@
 import React from 'react';
 import '../styles/ProjectCard.css';
 
-// One project: the title and its links across the top, a screenshot of its
+// One project: the title and its links across the top (the paper's title is
+// its full name, linked to its own page), a screenshot of its
 // site, one short line with no period (then who it was built with, if
 // anyone), and what it's built with.
 const ProjectCard = ({ project }) => (
     <article className="project-card">
-        <header className="card-head">
+        <header className={`card-head${project.longTitle ? ' card-head-long' : ''}`}>
             <h3 className="card-title">
-                <span className="card-name">{project.title}</span>
+                <span className={`card-name${project.longTitle ? ' card-name-long' : ''}`}>
+                    {project.titleUrl ? <a href={project.titleUrl}>{project.longTitle || project.title}</a> : project.title}
+                </span>
                 {project.retired && <span className="card-note">Retired</span>}
             </h3>
             <div className="card-links">

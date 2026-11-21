@@ -113,6 +113,29 @@
     padding-left: 2.1rem;
 }
 
+/* The paper and the best projects stand out by size alone: a taller row, a
+   small picture where the others have a logo, and a heavier name. There is
+   no badge and no highlight. */
+.finder-file.is-best {
+    min-height: 60px;
+}
+
+.finder-file.is-best .finder-name {
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.finder-thumb {
+    flex: none;
+    width: 72px;
+    height: 45px;
+    object-fit: cover;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius);
+    background: var(--sand);
+}
+
 .finder-folder:hover,
 .finder-file:hover {
     background: rgb(255 255 255 / 0.04);
@@ -250,8 +273,14 @@
     }
 
     /* The row above already shows the name, so it's kept for screen
-       readers only. */
-    .finder-inline .card-name {
+       readers only. The paper's full title is the exception: the row has
+       only its short name, so the card shows it, above the links. */
+    .finder-inline .card-head-long {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .finder-inline .card-name:not(.card-name-long) {
         position: absolute;
         width: 1px;
         height: 1px;

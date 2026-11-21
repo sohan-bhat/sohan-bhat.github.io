@@ -8,8 +8,8 @@
    - Orange (--accent) is for heading periods, links, the certificate border
      and the line under the sorter's open tab. The selected row in the
      window is a muted orange (--accent-muted). Nothing else is orange.
-   - Blue (--blue) is only for the page's main links, the CV, the paper and
-     the team page, so they stand out as the places to look.
+   - Blue (--blue) is only for the page's main link, the CV, so it stands
+     out as the place to look.
    - One shadow, --shadow-hard, for the photos and the window. No soft
      shadows anywhere. One corner radius, --radius.
    - No all-caps headings, and no italics except in quotes.

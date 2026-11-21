@@ -6,13 +6,30 @@
 // as @name, linked to their profile.
 // `groups` says which tabs of the sorter list a project: tools, ml, apps or
 // hardware. A project can be in more than one.
-// `best` puts a project in Work, the short list at the top of the page, at
-// that place in its order. Every project without it is listed in the window
-// under Earlier.
+// `best: true` makes a project stand out in the list by size alone: a taller
+// row with a small picture of it where the others have a logo, and a heavier
+// name. Keep it for the few to look at first.
+// A project with a `longTitle` shows that on its card, and one with a
+// `titleUrl` has its card title link there (the paper links to its own page).
 const projects = [
     {
+        id: 'lhd',
+        groups: ['ml'],
+        best: true,
+        kind: 'Paper',
+        title: 'LHD',
+        longTitle: 'LHD, early detection of silent training failures in neural networks',
+        titleUrl: '/write-ups/lhd/',
+        date: '2026-11-01',
+        line: 'Caught 87% of broken training runs, usually by epoch 3, with 2% false alarms.',
+        stack: ['Python', 'PyTorch', 'NumPy'],
+        links: [{ label: 'Read the paper', url: '/lhd-paper.pdf' }],
+        image: 'lhd',
+        alt: 'A chart from the paper. LHD has flagged 75% of the broken runs by epoch 3 and 84% by the end, and the accuracy curve 26%.',
+    },
+    {
         id: 'hullo',
-        best: 4,
+        best: true,
         groups: ['apps'],
         kind: 'Website',
         title: 'hullo',
@@ -30,7 +47,7 @@ const projects = [
     },
     {
         id: 'openhal',
-        best: 1,
+        best: true,
         groups: ['tools', 'hardware'],
         kind: 'Protocol',
         title: 'OpenHAL',
@@ -47,7 +64,7 @@ const projects = [
     },
     {
         id: 'wobbl',
-        best: 2,
+        best: true,
         groups: ['tools'],
         kind: 'Simulator',
         title: 'wobbl',
@@ -65,7 +82,7 @@ const projects = [
     },
     {
         id: 'oopsy',
-        best: 3,
+        best: true,
         groups: ['tools'],
         kind: 'CLI tool',
         title: 'oopsy',
