@@ -59,7 +59,7 @@ const Header = () => (
                 className="hero-photo"
                 src="/imgs/sohan-320.webp"
                 srcSet="/imgs/sohan-320.webp 320w, /imgs/sohan-600.webp 600w, /imgs/sohan-1200.webp 1200w"
-                sizes="(max-width: 600px) 112px, 230px"
+                sizes="(max-width: 600px) 112px, 300px"
                 width="230"
                 height="230"
                 fetchPriority="high"

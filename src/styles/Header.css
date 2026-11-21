@@ -3,11 +3,12 @@
 }
 
 /* The name and links beside the photo, then Write-ups beside Certificates.
-   The right column is wider than the photo so a certificate's name wraps
-   less, and narrower on tablets so the name still fits. */
+   The photo fills the right column, so its right edge, the certificates'
+   and the toolbar's all line up with the right edge of the page, as the
+   left edges line up with the name. */
 .hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(260px, 30vw, 340px);
+    grid-template-columns: minmax(0, 1fr) clamp(240px, 28vw, 300px);
     grid-template-areas:
         'text photo'
         'writeups certs';
@@ -34,8 +35,9 @@
 }
 
 .hero-photo {
-    width: 230px;
-    height: 230px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
     object-fit: cover;
     border-radius: var(--radius);
     border: 1px solid var(--edge);
