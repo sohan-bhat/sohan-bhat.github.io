@@ -2,8 +2,8 @@
 // public/certificates. A certificate is shown one of two ways.
 // With `verify`: the Certificate link opens the PDF, and a Verify link opens
 // `verify`, the issuer's own page that proves it.
-// With `url`: the Certificate link opens `url`, the issuer's own page, and a
-// small arrow beside it downloads the PDF, in case that page goes away.
+// With `url`: the Certificate link opens `url`, the issuer's own page.
+// Either way a small arrow at the end downloads the PDF.
 // `issuer` is left out where the title already names it. To add one, add an
 // entry here and a hasCredential item in public/index.html.
 const certificates = [

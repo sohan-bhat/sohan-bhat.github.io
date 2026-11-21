@@ -38,7 +38,7 @@ const Certificates = () => (
                                 Verify
                             </a>
                         )}
-                        {c.file && !c.verify && (
+                        {c.file && (
                             <a
                                 className="cert-download"
                                 href={c.file}
