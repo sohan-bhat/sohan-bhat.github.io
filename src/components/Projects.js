@@ -6,8 +6,8 @@ import '../styles/Projects.css';
 
 // Projects on the home page: the best ones as large tiles, all one size,
 // showing a picture and a name; the line and links slide up when a tile is
-// pointed at or tapped. One link under them, and the heading, open the
-// Projects page, which has every project.
+// pointed at or tapped. The View all link beside the heading, and the
+// heading itself, open the Projects page, which has every project.
 const { best } = split(projects);
 
 const Projects = () => {
@@ -16,10 +16,15 @@ const Projects = () => {
     return (
         <section className="projects" id="projects">
             <div className="container">
-                <h2 className="section-title">
-                    <a href="/projects/">Projects</a>
-                    <span className="title-period">.</span>
-                </h2>
+                <div className="section-head">
+                    <h2 className="section-title">
+                        <a href="/projects/">Projects</a>
+                        <span className="title-period">.</span>
+                    </h2>
+                    <a className="more text-link" href="/projects/" aria-label="View all projects">
+                        View all
+                    </a>
+                </div>
 
                 <ul className="cards project-cards">
                     {best.map((p) => (
@@ -40,12 +45,6 @@ const Projects = () => {
                         />
                     ))}
                 </ul>
-
-                <p className="more">
-                    <a className="text-link" href="/projects/">
-                        View others
-                    </a>
-                </p>
             </div>
         </section>
     );

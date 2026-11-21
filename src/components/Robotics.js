@@ -5,8 +5,9 @@ import '../styles/Robotics.css';
 
 // Robotics on the home page: the four builds marked `top`, in a row of the
 // same tiles Projects uses, a picture and a title each. A tile's link
-// slides up when it is pointed at or tapped. One link under them, and the
-// heading, open the Robotics page, which has everything.
+// slides up when it is pointed at or tapped. The View all link beside the
+// heading, and the heading itself, open the Robotics page, which has
+// everything.
 const top = builds.filter((build) => build.top);
 const idOf = (build) => build.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
@@ -16,10 +17,15 @@ const Robotics = () => {
     return (
         <section className="robotics" id="robotics">
             <div className="container">
-                <h2 className="section-title">
-                    <a href="/robotics/">Robotics</a>
-                    <span className="title-period">.</span>
-                </h2>
+                <div className="section-head">
+                    <h2 className="section-title">
+                        <a href="/robotics/">Robotics</a>
+                        <span className="title-period">.</span>
+                    </h2>
+                    <a className="more text-link" href="/robotics/" aria-label="View all robotics">
+                        View all
+                    </a>
+                </div>
 
                 <ul className="cards robotics-cards">
                     {top.map((build) => (
@@ -41,12 +47,6 @@ const Robotics = () => {
                         />
                     ))}
                 </ul>
-
-                <p className="more">
-                    <a className="text-link" href="/robotics/">
-                        View others
-                    </a>
-                </p>
             </div>
         </section>
     );

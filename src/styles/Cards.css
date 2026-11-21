@@ -107,9 +107,21 @@ button.card-shot:focus-visible {
     line-height: 1.35;
 }
 
-/* The link under a group of tiles, to the page with the rest. */
+/* A section's heading with a View all link right beside it, on the
+   heading's baseline, to the page with everything. */
+.section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.9rem;
+    margin-bottom: 1.75rem;
+}
+
+.section-head .section-title {
+    margin-bottom: 0;
+}
+
 .more {
-    margin-top: 2.25rem;
     font-size: var(--size-small);
 }
 
