@@ -75,15 +75,8 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
     <meta property="og:site_name" content="Sohan Bhat" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@The_Sohan_Bhat" />
-    <link rel="preload" href="/fonts/excon-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-sans-3-variable.woff2" as="font" type="font/woff2" crossorigin />
     <style>
-      @font-face {
-        font-family: 'Excon';
-        font-weight: 100 900;
-        font-display: swap;
-        src: url('/fonts/excon-variable.woff2') format('woff2');
-      }
       @font-face {
         font-family: 'Source Sans 3';
         font-weight: 200 900;
@@ -100,7 +93,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         --edge: #a89c87;
         --accent: #a4441c;
         --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        --font-display: 'Excon', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-display: var(--font-body);
       }
       * {
         margin: 0;

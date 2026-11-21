@@ -1,8 +1,8 @@
 /* THE SYSTEM. Every section follows these rules.
 
-   - One language, plain and clean: the name and section headings in Excon,
-     ending in an orange period, and everything else in Source Sans 3. No serif and
-     no monospace anywhere.
+   - One language, plain and clean, in one face, Source Sans 3. The name and
+     the section headings are bold and end in an orange period. No serif
+     and no monospace anywhere.
    - Four text styles and no others: the section heading, the card title,
      body text and one small style, set as --size-heading, --size-title,
      --size-body and --size-small. The name alone is larger.
@@ -11,7 +11,8 @@
      card is pointed at.
    - Orange (--accent) is for heading periods, links and the line beside a
      write-up or a certificate. Nothing else is orange.
-   - Blue (--blue) is only for the CV button in the intro, the one filled
+   - Blue (--blue) is only for the CV button in the intro, a retro push
+     button with a hard shadow that presses in on a click. It is the one
      button on the page, so it stands out as the place to look.
    - One shadow, --shadow-hard, for the portrait. No soft shadows anywhere.
      One corner radius, --radius.
@@ -35,12 +36,12 @@
     --accent: #a4441c;
     /* A classic link blue, darkened for the paper; 5.5:1 on --bg. */
     --blue: #2b55ad;
-    /* Two clean sans faces and nothing else: Excon for the name and the
-       section headings, and Source Sans 3, plain and easy to read, for everything
-       else. There is no serif and no monospace on the site. The system
-       font stands in while they load. */
+    /* One face for the whole site, Source Sans 3, plain and easy to read:
+       bold for the name, the section headings and the item titles, regular
+       for everything else. No serif and no monospace. The system font
+       stands in while it loads. */
     --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-display: 'Excon', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: var(--font-body);
     /* A crisp hairline edge, and a hard offset shadow instead of a soft
        blur. */
     --edge: #a89c87;
