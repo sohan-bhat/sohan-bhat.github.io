@@ -1,8 +1,9 @@
 /* THE SYSTEM. Every section follows these rules.
 
-   - One language, plain and clean: the name and section headings in Excon,
-     ending in an orange period, and everything else in Inter. No serif and
-     no monospace anywhere.
+   - One language, plain and clean: the name and section headings in Apple's
+     San Francisco (Inter where a device has none), ending in an orange
+     period, and everything else in Inter. No serif and no monospace
+     anywhere.
    - Four text styles and no others: the section heading, the card title,
      body text and one small style, set as --size-heading, --size-title,
      --size-body and --size-small. The name alone is larger.
@@ -37,12 +38,14 @@
     --blue: #2b55ad;
     /* The paper, a little see-through, behind text laid over a picture. */
     --veil: rgb(233 227 214 / 0.95);
-    /* Two clean sans faces and nothing else: Excon for the name and the
-       section headings, and Inter, plain and easy to read, for everything
-       else. There is no serif and no monospace on the site. The system
-       font stands in while they load. */
+    /* The name and the section headings are in Apple's San Francisco. Apple
+       does not license it for websites to serve, so the headings ask each
+       device for its own: a Mac, an iPhone or an iPad draws them in San
+       Francisco, and anything else draws them in Inter, which is close.
+       Everything else is in Inter, plain and easy to read. There is no
+       serif and no monospace on the site. */
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-display: 'Excon', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     /* A crisp hairline edge, and a hard offset shadow instead of a soft
        blur. */
     --edge: #a89c87;
