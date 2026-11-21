@@ -9,7 +9,7 @@
     gap: 1.25rem;
 }
 
-/* The same marked entry as the write-up, a size smaller. */
+/* The same marked entry as a write-up. */
 .cert-entry {
     border-left: 2px solid var(--accent);
     padding-left: 1.25rem;

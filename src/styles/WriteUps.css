@@ -1,27 +1,30 @@
-/* One write-up per line: the title on the left, the date at the end. */
+/* Write-ups in the intro, the twin of Certificates beside it: each entry is
+   marked with the orange line, its title over its date. */
+.hero-write-ups {
+    max-width: 30rem;
+}
+
+.hero-write-ups .section-title {
+    margin-bottom: 1rem;
+}
+
 .write-up-list {
     list-style: none;
+    display: grid;
+    gap: 1.25rem;
 }
 
 .write-up {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.25rem 2rem;
-    padding: 0.9rem 0;
-    border-top: 1px solid var(--line);
-}
-
-.write-up:last-child {
-    border-bottom: 1px solid var(--line);
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25rem;
 }
 
 .write-up-title {
-    min-width: 0;
     font-family: var(--font-body);
     font-size: var(--size-title);
     font-weight: 600;
     line-height: 1.35;
+    margin-bottom: 0.3rem;
 }
 
 /* The title opens the write-up. It reads as a title until pointed at, then
@@ -39,14 +42,7 @@
 }
 
 .write-up-date {
-    flex: none;
     font-family: var(--mono);
     font-size: var(--size-small);
     color: var(--ink-soft);
-}
-
-@media (max-width: 600px) {
-    .write-up {
-        flex-direction: column;
-    }
 }

@@ -9,8 +9,8 @@
    - Projects and Robotics share one card (Cards.css), so every picture has
      the same shape, edge and corner, and sits a little dimmed until its
      card is pointed at.
-   - Orange (--accent) is for heading periods, links and the certificate
-     border. Nothing else is orange.
+   - Orange (--accent) is for heading periods, links and the line beside a
+     write-up or a certificate. Nothing else is orange.
    - Blue (--blue) is only for the page's main link, the CV, so it stands
      out as the place to look.
    - One shadow, --shadow-hard, for the portrait. No soft shadows anywhere.
