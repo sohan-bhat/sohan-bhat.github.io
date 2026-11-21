@@ -41,7 +41,13 @@
     text-underline-offset: 5px;
 }
 
-.write-up-date {
+/* When it was published, then the Read link, on one line, as under a
+   certificate. */
+.write-up-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 1.1rem;
     font-size: var(--size-small);
     color: var(--ink-soft);
 }

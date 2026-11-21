@@ -3,7 +3,8 @@ import writeUps from '../data/write-ups.json';
 import '../styles/WriteUps.css';
 
 // Write-ups, in the intro under the name and links, beside Certificates.
-// Each is its title, which opens it, and when it was published. The heading
+// Each is its title and when it was published, with a Read link beside the
+// date like a certificate's Certificate link. The title opens it too. The heading
 // opens the Write-ups page. The list is built from the Markdown files in
 // write-ups/ by scripts/build-write-ups.js, newest first.
 const WriteUps = () => (
@@ -18,7 +19,12 @@ const WriteUps = () => (
                     <h3 className="write-up-title">
                         <a href={post.url}>{post.title}</a>
                     </h3>
-                    <p className="write-up-date">{post.published}</p>
+                    <p className="write-up-meta">
+                        <span>{post.published}</span>
+                        <a className="text-link" href={post.url} aria-label={`Read ${post.title}`}>
+                            Read
+                        </a>
+                    </p>
                 </li>
             ))}
         </ul>
