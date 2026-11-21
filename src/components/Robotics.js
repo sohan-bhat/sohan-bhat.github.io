@@ -1,22 +1,23 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
+import React from 'react';
+import '../styles/Cards.css';
 import '../styles/Robotics.css';
 
 const shot = (name) => ({
     src: `/imgs/${name}-560.webp`,
     srcSet: `/imgs/${name}-560.webp 560w, /imgs/${name}-1120.webp 1120w`,
-    ratio: 1.6,
 });
 
-const photo = (name, ratio) => ({ src: `/imgs/${name}-480.webp`, ratio });
+// A robot photo. They are square or upright, so a card shows the band of the
+// photo around `focus`, which is where the robot is.
+const photo = (name, focus) => ({ src: `/imgs/${name}-480.webp`, focus });
 
-const slides = [
+const builds = [
     {
         ...shot('build-wins'),
         title: 'Fort Worth District wins',
         alt: 'The robots of Team 10032, Team 2714 and Team 2728 behind three blue banners that read Winner 2026, FIRST in Texas District Fort Worth Event.',
         link: {
-            label: 'TBA',
+            label: 'The Blue Alliance',
             name: 'Team 2714 on The Blue Alliance',
             href: 'https://www.thebluealliance.com/team/2714',
         },
@@ -62,109 +63,59 @@ const slides = [
         },
     },
     {
-        ...photo('robot-taco', 1),
+        ...photo('robot-taco', '50% 0%'),
         title: 'TACO',
         alt: 'TACO, Team 2728’s 2026 robot, on red bumpers behind a blue FIRST Robotics Competition winner banner.',
     },
     {
-        ...photo('robot-field', 0.8),
+        ...photo('robot-field', '50% 78%'),
         title: 'REBUILT robot',
         alt: 'Team 2714’s 2026 robot on the REBUILT field, with its Limelight camera at the front.',
     },
     {
-        ...photo('robot-2025', 1),
+        ...photo('robot-2025', '50% 40%'),
         title: 'Jerk Chicken',
         alt: 'Jerk Chicken, Team 2714’s 2025 robot, on the field with its blue arm swung out to the side.',
     },
 ];
 
-const still = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Robotics: one line about the teams, then everything at once in a grid of
+// the same cards Projects uses. A card is its picture and its title, with
+// its link under it where it has one.
+const Robotics = () => (
+    <section className="robotics" id="robotics">
+        <div className="container">
+            <h2 className="section-title">Robotics<span className="title-period">.</span></h2>
+            <p className="robotics-prose">I write Java for FRC Team 2714 and Team 2728.</p>
 
-const Robotics = () => {
-    const [viewport, carousel] = useEmblaCarousel({ align: 'start', slidesToScroll: 'auto', containScroll: false });
-    const [canPrev, setCanPrev] = useState(false);
-    const [canNext, setCanNext] = useState(true);
-
-    const sync = useCallback((api) => {
-        setCanPrev(api.canScrollPrev());
-        setCanNext(api.canScrollNext());
-    }, []);
-
-    useEffect(() => {
-        if (!carousel) return undefined;
-        sync(carousel);
-        carousel.on('select', sync).on('reInit', sync);
-        return () => {
-            carousel.off('select', sync).off('reInit', sync);
-        };
-    }, [carousel, sync]);
-
-    return (
-        <section className="robotics" id="robotics">
-            <div className="container">
-                <h2 className="section-title">Robotics<span className="title-period">.</span></h2>
-                <div className="robotics-head">
-                    <p className="robotics-prose">
-                        I write Java for FRC Team 2714 and Team 2728.
-                    </p>
-                    <div className="carousel-controls">
-                        <button
-                            type="button"
-                            className="carousel-button"
-                            aria-controls="robotics-slides"
-                            disabled={!canPrev}
-                            onClick={() => carousel && carousel.scrollPrev(still())}
-                        >
-                            Previous
-                        </button>
-                        <button
-                            type="button"
-                            className="carousel-button"
-                            aria-controls="robotics-slides"
-                            disabled={!canNext}
-                            onClick={() => carousel && carousel.scrollNext(still())}
-                        >
-                            Next
-                        </button>
-                    </div>
-                </div>
-
-                <div className="carousel" ref={viewport}>
-                    <ul className="build-track" id="robotics-slides">
-                        {slides.map((slide) => (
-                            <li className="build" key={slide.title} style={{ '--ratio': slide.ratio }}>
-                                <img
-                                    className="build-image"
-                                    src={slide.src}
-                                    srcSet={slide.srcSet}
-                                    sizes={slide.srcSet ? '(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 270px' : undefined}
-                                    width={160 * slide.ratio}
-                                    height="160"
-                                    alt={slide.alt}
-                                    loading="lazy"
-                                    draggable="false"
-                                />
-                                <div className="build-head">
-                                    <h3 className="build-title">{slide.title}</h3>
-                                    {slide.link && (
-                                        <a
-                                            className="build-code text-link"
-                                            href={slide.link.href}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            aria-label={slide.link.name}
-                                        >
-                                            {slide.link.label}
-                                        </a>
-                                    )}
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-        </section>
-    );
-};
+            <ul className="cards robotics-cards">
+                {builds.map((build) => (
+                    <li className="card" key={build.title}>
+                        <img
+                            className="card-shot"
+                            src={build.src}
+                            srcSet={build.srcSet}
+                            sizes={build.srcSet ? '(max-width: 960px) 46vw, 270px' : undefined}
+                            style={build.focus ? { objectPosition: build.focus } : undefined}
+                            width="560"
+                            height="350"
+                            alt={build.alt}
+                            loading="lazy"
+                            decoding="async"
+                        />
+                        <h3 className="card-title">{build.title}</h3>
+                        {build.link && (
+                            <p className="card-links">
+                                <a className="text-link" href={build.link.href} target="_blank" rel="noreferrer" aria-label={build.link.name}>
+                                    {build.link.label}
+                                </a>
+                            </p>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </section>
+);
 
 export default Robotics;
