@@ -2,6 +2,7 @@ import React from 'react';
 import { FaGithub, FaXTwitter, FaInstagram } from 'react-icons/fa6';
 import Certificates from './Certificates';
 import WriteUps from './WriteUps';
+import Skills from './Skills';
 import '../styles/Header.css';
 
 const Header = () => (
@@ -66,7 +67,10 @@ const Header = () => (
             />
 
             <Certificates />
-            <WriteUps />
+            <div className="hero-left">
+                <WriteUps />
+                <Skills />
+            </div>
 
         </div>
     </header>

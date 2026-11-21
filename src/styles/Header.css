@@ -25,8 +25,12 @@
     grid-area: certs;
 }
 
-.hero-write-ups {
+/* Write-ups, then Skills under them. */
+.hero-left {
     grid-area: writeups;
+    display: grid;
+    row-gap: 2.5rem;
+    min-width: 0;
 }
 
 .hero-photo {
