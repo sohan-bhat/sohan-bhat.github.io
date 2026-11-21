@@ -79,10 +79,21 @@
     font-size: var(--size-small);
 }
 
+/* The CV, the one filled button on the page, small, at the end of the row
+   of links. */
 .hero-cv {
-    display: inline-block;
-    margin-top: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius);
+    background: var(--blue);
+    color: var(--bg);
     font-size: var(--size-small);
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+}
+
+.hero-cv:hover {
+    background: #234892;
 }
 
 @media (max-width: 600px) {
@@ -100,8 +111,9 @@
         row-gap: 1.75rem;
     }
 
+    /* Tighter, so the email, the icons and the CV button fit on one line. */
     .social-links {
-        gap: 1.1rem;
+        gap: 0.6rem;
     }
 
     /* Above the name, and smaller. */

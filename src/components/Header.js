@@ -48,16 +48,10 @@ const Header = () => (
                     >
                         <FaInstagram />
                     </a>
+                    <a className="hero-cv" href="/sohan-bhat-cv.pdf" target="_blank" rel="noreferrer">
+                        CV
+                    </a>
                 </div>
-
-                <a
-                    className="hero-cv text-link focus-link"
-                    href="/sohan-bhat-cv.pdf"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    CV
-                </a>
             </div>
 
             <img
