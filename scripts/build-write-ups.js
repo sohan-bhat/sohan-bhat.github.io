@@ -136,6 +136,13 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         gap: 1.6rem;
         font-size: 0.9375rem;
       }
+      @media (min-width: 601px) {
+        .toolbar-links {
+          justify-content: space-between;
+          gap: 0;
+          width: clamp(240px, 28vw, 300px);
+        }
+      }
       .toolbar-links a {
         padding: 0.45rem 0;
         color: var(--ink-soft);

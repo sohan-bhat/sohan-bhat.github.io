@@ -48,6 +48,10 @@
     --shadow-offset: 4px;
     --shadow-hard: var(--shadow-offset) var(--shadow-offset) 0 rgb(38 33 27 / 0.2);
     --radius: 3px;
+    /* The width of the home page's right column, which holds the photo and
+       the certificates. The toolbar's links span the same width, so the
+       links, the photo and the certificates share both their edges. */
+    --side: clamp(240px, 28vw, 300px);
     /* The four text styles' sizes: section headings 28px, item titles
        22px, body text 18px, and dates, issuers and labels 15px. */
     --size-heading: 1.75rem;

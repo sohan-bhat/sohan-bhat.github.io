@@ -28,6 +28,17 @@
     font-size: var(--size-small);
 }
 
+/* Wider than a phone, the links spread across the width of the home page's
+   right column: the first starts where the photo starts and the last ends
+   where it ends. They sit there on every page. */
+@media (min-width: 601px) {
+    .toolbar-links {
+        justify-content: space-between;
+        gap: 0;
+        width: var(--side);
+    }
+}
+
 .toolbar-links a {
     padding: 0.45rem 0;
     color: var(--ink-soft);

@@ -8,7 +8,7 @@
    left edges line up with the name. */
 .hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(240px, 28vw, 300px);
+    grid-template-columns: minmax(0, 1fr) var(--side);
     grid-template-areas:
         'text photo'
         'writeups certs';
