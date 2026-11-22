@@ -1,25 +1,36 @@
-/* Skills: one wall of badges. A badge is the paper raised a
-   little, with a hairline edge and the same small hard shadow as the CV
-   button, in gray. */
+/* Skills: four rows of plain text behind the same orange line as a write-up
+   or a certificate. Each row is its group's name in gray, at a fixed width,
+   then the list in ink. No badges, boxes or dividers. */
 .hero-skills .section-title {
     margin-bottom: 1rem;
 }
 
-.skill-wall {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+.skill-rows {
+    display: grid;
+    row-gap: 0.35rem;
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25rem;
 }
 
-.skill {
-    padding: 0.15rem 0.6rem;
-    border: 1px solid var(--edge);
-    border-radius: var(--radius);
-    background: var(--raised);
-    box-shadow: 2px 2px 0 var(--line);
-    font-size: var(--size-small);
-    font-weight: 600;
-    line-height: 1.5;
-    white-space: nowrap;
+.skill-row {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    column-gap: 1rem;
+    font-size: var(--size-body);
+    line-height: 1.6;
+}
+
+.skill-label {
+    color: var(--ink-soft);
+}
+
+/* Phones: each name above its list. */
+@media (max-width: 600px) {
+    .skill-rows {
+        row-gap: 0.8rem;
+    }
+
+    .skill-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
