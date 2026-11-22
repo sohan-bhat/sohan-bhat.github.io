@@ -24,6 +24,9 @@ const Certificates = () => (
                     <h3 className="cert-title">{c.title}</h3>
                     <p className="cert-meta">
                         <span>{[c.issuer, c.year].filter(Boolean).join(', ')}</span>
+                        {/* The links stay together: where the row has no room
+                            for them, all of them go to the next line. */}
+                        <span className="cert-links">
                         <a className="cert-link text-link" href={c.verify ? c.file : c.url} target="_blank" rel="noreferrer">
                             Certificate
                         </a>
@@ -49,6 +52,7 @@ const Certificates = () => (
                                 <DownloadIcon />
                             </a>
                         )}
+                        </span>
                     </p>
                 </li>
             ))}

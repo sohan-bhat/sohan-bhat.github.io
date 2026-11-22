@@ -23,14 +23,22 @@
     margin-bottom: 0.3rem;
 }
 
-/* Who gave it and when, then the link, on one line. */
+/* Who gave it and when, then the links, on one line where they fit. */
 .cert-meta {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 0.25rem 1.1rem;
+    gap: 0.15rem 1.1rem;
     font-size: var(--size-small);
     color: var(--ink-soft);
+}
+
+/* The links, kept on one line as a group. */
+.cert-links {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 1.1rem;
+    white-space: nowrap;
 }
 
 .cert-link {
