@@ -113,19 +113,33 @@ button.card-shot:focus-visible {
     line-height: 1.2;
 }
 
-/* A section's heading with its View all link at the far end of the same
-   row, on the heading's baseline and in line with the right edge of the
-   tiles. */
+/* A section's heading with its View all link on the same row, on the
+   heading's baseline. The row has the intro's two columns, and the link
+   starts at the left edge of the right one, on the same line as the photo
+   and the certificates above it. */
 .section-head {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--side);
+    column-gap: 3rem;
     align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
     margin-bottom: 1.75rem;
 }
 
 .section-head .section-title {
     margin-bottom: 0;
+}
+
+.section-head .more {
+    justify-self: start;
+}
+
+/* Phones have no right column, so the link goes to the end of the row. */
+@media (max-width: 600px) {
+    .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
 }
 
 /* The View all link: accent words with no underline until pointed at, and

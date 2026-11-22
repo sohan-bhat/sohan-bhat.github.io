@@ -140,7 +140,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         .toolbar-links {
           justify-content: space-between;
           gap: 0;
-          width: clamp(240px, 28vw, 300px);
+          width: clamp(240px, 26vw, 270px);
         }
       }
       .toolbar-links a {
