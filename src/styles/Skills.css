@@ -14,7 +14,8 @@
 
 .skill-row {
     display: grid;
-    grid-template-columns: 170px minmax(0, 1fr);
+    /* Wide enough for the longest name on one line. */
+    grid-template-columns: 200px minmax(0, 1fr);
     column-gap: 1rem;
     font-size: var(--size-body);
     line-height: 1.6;
