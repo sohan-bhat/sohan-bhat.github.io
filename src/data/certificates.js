@@ -8,6 +8,13 @@
 // entry here and a hasCredential item in public/index.html.
 const certificates = [
     {
+        id: 'neo4j-certified-professional',
+        title: 'Neo4j Certified Professional',
+        year: '2026',
+        verify: 'https://graphacademy.neo4j.com/c/1304f850-b3ee-4c30-a534-5a1ef7956841',
+        file: '/certificates/neo4j-certified-professional.pdf',
+    },
+    {
         // The short link printed on the PDF, credly.com/go/hd9cOLz8, opens
         // this badge's print view. This is the badge's public page.
         id: 'mongodb-associate-developer',
