@@ -106,6 +106,16 @@ body {
     text-decoration-color: var(--accent);
 }
 
+/* Words that are read out and indexed but not shown. */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
 /* The page is 1000px wide at most. */
 .container {
     max-width: 1000px;

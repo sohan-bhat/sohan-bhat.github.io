@@ -40,8 +40,11 @@ for (const [, projectTitle] of projectsSrc.matchAll(/^ {8}title: '([^']+)',$/gm)
     expect(projectsPage.includes(projectTitle), `the project "${projectTitle}" on the Projects page`);
 }
 
+// Every certificate is on the Certificates page.
+const certificatesPageFile = path.join(BUILD, 'certificates/index.html');
+const certificatesPage = fs.existsSync(certificatesPageFile) ? fs.readFileSync(certificatesPageFile, 'utf8') : '';
 for (const [, certTitle] of certificatesSrc.matchAll(/^ {8}title: '([^']+)',$/gm)) {
-    expect(html.includes(certTitle), `the certificate "${certTitle}" in the prerendered HTML`);
+    expect(certificatesPage.includes(certTitle), `the certificate "${certTitle}" on the Certificates page`);
 }
 
 const ldBlocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
@@ -76,10 +79,10 @@ for (const file of fs.readdirSync(path.resolve(__dirname, '../write-ups')).filte
     expect(html.includes(`<a href="/write-ups/${name}/">`), `a link from the home page to write-ups/${name}/`);
 }
 
-// The pages for Projects, Write-ups and Robotics: each has its own file with
+// The pages for Projects, Write-ups, Robotics and Certificates: each has its own file with
 // one h1, its own description and canonical link, is in the sitemap and is
 // linked from the home page.
-for (const name of ['projects', 'write-ups', 'robotics']) {
+for (const name of ['projects', 'write-ups', 'robotics', 'certificates']) {
     const url = `${HOME}${name}/`;
     const file = path.join(BUILD, name, 'index.html');
     const page = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : '';

@@ -1,24 +1,26 @@
-// Certificates, newest first. `file` is a copy of the PDF in
-// public/certificates. A certificate is shown one of two ways.
-// With `verify`: the Certificate link opens the PDF, and a Verify link opens
-// `verify`, the issuer's own page that proves it.
-// With `url`: the Certificate link opens `url`, the issuer's own page.
-// Either way a small arrow at the end downloads the PDF.
-// `issuer` is left out where the title already names it. To add one, add an
-// entry here and a hasCredential item in public/index.html.
+// Certificates. `earned` is when each was earned, and lists are newest
+// first, so a new one slots in by its date. The three with `home: true` are
+// the ones the home page shows; the Certificates page shows them all.
+// `verify` is the issuer's own page that proves a certificate. One without
+// it has `url`, the issuer's page for it, shown as a Certificate link.
+// `file` is a copy of the PDF in public/certificates, offered as a download
+// on the Certificates page. To add one, add an entry here and a
+// hasCredential item in public/index.html.
 const certificates = [
     {
         id: 'neo4j-certified-professional',
+        home: true,
         title: 'Neo4j Certified Professional',
-        year: '2026',
+        issuer: 'Neo4j',
+        earned: '2026-11-22',
         verify: 'https://graphacademy.neo4j.com/c/1304f850-b3ee-4c30-a534-5a1ef7956841',
         file: '/certificates/neo4j-certified-professional.pdf',
     },
     {
         id: 'hackerrank-software-engineer',
-        title: 'Software Engineer',
+        title: 'HackerRank Software Engineer certificate',
         issuer: 'HackerRank',
-        year: '2026',
+        earned: '2026-11-21',
         verify: 'https://www.hackerrank.com/certificates/afa5ebe6b947',
         file: '/certificates/hackerrank-software-engineer.pdf',
     },
@@ -26,7 +28,7 @@ const certificates = [
         id: 'hackerrank-problem-solving-intermediate',
         title: 'Problem Solving (Intermediate)',
         issuer: 'HackerRank',
-        year: '2026',
+        earned: '2026-11-21',
         verify: 'https://www.hackerrank.com/certificates/ed6512f46484',
         file: '/certificates/hackerrank-problem-solving-intermediate.pdf',
     },
@@ -34,19 +36,23 @@ const certificates = [
         // The short link printed on the PDF, credly.com/go/hd9cOLz8, opens
         // this badge's print view. This is the badge's public page.
         id: 'mongodb-associate-developer',
+        home: true,
         title: 'MongoDB Associate Developer',
-        year: '2026',
+        issuer: 'MongoDB',
+        earned: '2026-11-20',
         verify: 'https://www.credly.com/badges/df80f06d-b947-453b-a4fd-e84cfaaa677a',
         file: '/certificates/mongodb-associate-developer.pdf',
     },
     {
         id: 'cs50x',
+        home: true,
         title: 'CS50x, Introduction to Computer Science',
         issuer: 'Harvard',
-        year: '2026',
+        earned: '2026-11-15',
         url: 'https://cs50.harvard.edu/certificates/c745d590-91f5-4cb1-8738-9e5aeda49f3b',
         file: '/certificates/cs50x.pdf',
     },
 ];
 
-export default certificates;
+// Newest first.
+export default [...certificates].sort((a, b) => b.earned.localeCompare(a.earned));

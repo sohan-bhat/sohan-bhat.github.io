@@ -4,9 +4,14 @@ import React from 'react';
 // it: its words, then an arrow that steps to the right when the link is
 // pointed at. `place` is `head`, at the end of the heading's row, or `foot`,
 // under the tiles; only one shows, depending on the width of the screen.
-const More = ({ href, place, children }) => (
+// `rest` finishes the link's words where there is only room to show the
+// start of them: it is read out and seen by search engines, but not shown.
+const More = ({ href, place, rest, children }) => (
     <a className={`more more-${place}`} href={href}>
-        {children}
+        <span>
+            {children}
+            {rest && <span className="visually-hidden"> {rest}</span>}
+        </span>
         <svg
             className="more-arrow"
             viewBox="0 0 16 16"

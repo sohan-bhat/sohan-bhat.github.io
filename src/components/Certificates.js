@@ -1,10 +1,7 @@
 import React from 'react';
+import More from './More';
 import certificates from '../data/certificates';
 import '../styles/Certificates.css';
-
-// Certificates, in the intro under my photo, beside the write-ups. Each one
-// links to the issuer's own page for it, and the small arrow beside the link
-// downloads our own copy of the PDF. The list is src/data/certificates.js.
 
 // An arrow dropping into a tray.
 const DownloadIcon = () => (
@@ -15,48 +12,60 @@ const DownloadIcon = () => (
     </svg>
 );
 
+// One certificate, a compact row: its title, then one line with who gave it
+// and the year and a Verify link to the issuer's page that proves it (a
+// Certificate link where the issuer has only a page for it). `download` adds
+// the small arrow that downloads our own copy of the PDF.
+export const Certificate = ({ certificate: c, download, Title = 'h3' }) => (
+    <li className="cert-entry">
+        <Title className="cert-title">{c.title}</Title>
+        <p className="cert-meta">
+            <span>
+                {c.issuer}, {c.earned.slice(0, 4)}
+            </span>
+            <a
+                className="cert-link text-link"
+                href={c.verify || c.url}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={c.verify ? `Verify the ${c.title} certificate` : `The ${c.title} certificate`}
+            >
+                {c.verify ? 'Verify' : 'Certificate'}
+            </a>
+            {download && c.file && (
+                <a className="cert-download" href={c.file} download title="Download the PDF" aria-label={`Download the ${c.title} certificate as a PDF`}>
+                    <DownloadIcon />
+                </a>
+            )}
+        </p>
+    </li>
+);
+
+// Certificates on the home page, in the intro under my photo: the three
+// marked `home`, newest first. The View all link at the end of the heading's
+// row, and the heading itself, open the Certificates page, which has every
+// one. The list is src/data/certificates.js.
 const Certificates = () => (
     <div className="hero-certs" id="certificates">
-        <h2 className="section-title">Certificates<span className="title-period">.</span></h2>
+        <div className="section-head">
+            <h2 className="section-title">
+                <a href="/certificates/">Certificates</a>
+                <span className="title-period">.</span>
+            </h2>
+            <More href="/certificates/" place="head" rest="certificates">
+                View all
+            </More>
+        </div>
         <ul className="cert-list">
-            {certificates.map((c) => (
-                <li className="cert-entry" key={c.id}>
-                    <h3 className="cert-title">{c.title}</h3>
-                    <p className="cert-meta">
-                        <span>{[c.issuer, c.year].filter(Boolean).join(', ')}</span>
-                        {/* The links stay together: where the row has no room
-                            for them, all of them go to the next line. */}
-                        <span className="cert-links">
-                        <a className="cert-link text-link" href={c.verify ? c.file : c.url} target="_blank" rel="noreferrer">
-                            Certificate
-                        </a>
-                        {c.verify && (
-                            <a
-                                className="cert-link text-link"
-                                href={c.verify}
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label={`Verify the ${c.title} certificate`}
-                            >
-                                Verify
-                            </a>
-                        )}
-                        {c.file && (
-                            <a
-                                className="cert-download"
-                                href={c.file}
-                                download
-                                title="Download the PDF"
-                                aria-label={`Download the ${c.title} certificate as a PDF`}
-                            >
-                                <DownloadIcon />
-                            </a>
-                        )}
-                        </span>
-                    </p>
-                </li>
-            ))}
+            {certificates
+                .filter((c) => c.home)
+                .map((c) => (
+                    <Certificate key={c.id} certificate={c} />
+                ))}
         </ul>
+        <More href="/certificates/" place="foot" rest="certificates">
+            View all
+        </More>
     </div>
 );
 

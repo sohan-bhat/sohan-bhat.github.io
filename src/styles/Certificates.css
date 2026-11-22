@@ -1,7 +1,3 @@
-.hero-certs .section-title {
-    margin-bottom: 1rem;
-}
-
 /* One under the next, in the column under the photo. */
 .cert-list {
     list-style: none;
@@ -23,7 +19,7 @@
     margin-bottom: 0.3rem;
 }
 
-/* Who gave it and when, then the links, on one line where they fit. */
+/* Who gave it and when, then the link, on one line. */
 .cert-meta {
     display: flex;
     flex-wrap: wrap;
@@ -33,16 +29,22 @@
     color: var(--ink-soft);
 }
 
-/* The links, kept on one line as a group. */
-.cert-links {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 1.1rem;
-    white-space: nowrap;
-}
-
 .cert-link {
     font-size: var(--size-small);
+}
+
+/* The heading's row in the intro: the View all link at its far end, under
+   the photo's right edge. */
+.hero-certs .section-head {
+    /* A smaller gap than elsewhere, so the two fit the column on tablets. */
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* The Certificates page: the rows at a width that reads well. */
+.cert-page {
+    max-width: 34rem;
+    gap: 1.75rem;
 }
 
 /* The PDF download, an icon link like the ones under the name: gray at
