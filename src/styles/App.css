@@ -184,3 +184,17 @@ section {
         scrollbar-color: var(--edge) var(--bg);
     }
 }
+
+/* A page is at least as tall as the window, and its main part takes the
+   room left over, so on a short page the footer sits at the bottom of the
+   window with no empty space under it. */
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.App > main {
+    flex: 1 0 auto;
+}
