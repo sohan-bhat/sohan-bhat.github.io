@@ -13,8 +13,15 @@
 }
 
 .footer-name {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
     font-size: var(--size-small);
     color: var(--ink-soft);
+}
+
+.footer-mark {
+    flex: none;
 }
 
 .footer-links {
@@ -24,7 +31,8 @@
     flex-wrap: wrap;
 }
 
-.footer-email {
+.footer-email,
+.footer-cv {
     font-size: var(--size-small);
 }
 
@@ -45,4 +53,16 @@
 .footer-icon:hover,
 .footer-icon:focus-visible {
     color: var(--accent);
+}
+
+/* Closer together on phones, so the email, the CV and the icons stay on
+   one line. */
+@media (max-width: 600px) {
+    .footer-links {
+        gap: 1rem;
+    }
+
+    .footer-icons {
+        gap: 0.5rem;
+    }
 }
