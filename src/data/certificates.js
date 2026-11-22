@@ -15,6 +15,22 @@ const certificates = [
         file: '/certificates/neo4j-certified-professional.pdf',
     },
     {
+        id: 'hackerrank-software-engineer',
+        title: 'Software Engineer',
+        issuer: 'HackerRank',
+        year: '2026',
+        verify: 'https://www.hackerrank.com/certificates/afa5ebe6b947',
+        file: '/certificates/hackerrank-software-engineer.pdf',
+    },
+    {
+        id: 'hackerrank-problem-solving-intermediate',
+        title: 'Problem Solving (Intermediate)',
+        issuer: 'HackerRank',
+        year: '2026',
+        verify: 'https://www.hackerrank.com/certificates/ed6512f46484',
+        file: '/certificates/hackerrank-problem-solving-intermediate.pdf',
+    },
+    {
         // The short link printed on the PDF, credly.com/go/hd9cOLz8, opens
         // this badge's print view. This is the badge's public page.
         id: 'mongodb-associate-developer',
