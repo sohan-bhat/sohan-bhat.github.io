@@ -4,9 +4,10 @@
    picture back and slides its line and links up over the foot of it. */
 .cards {
     /* How long the strip takes to slide and the picture to fade, and the
-       curve they share: a gentle ease out, so the strip glides to a stop. */
-    --slide: 0.3s;
-    --glide: cubic-bezier(0.3, 0.7, 0.25, 1);
+       curve they share: it starts at an even pace and eases to a stop, with
+       no lurch at the start. */
+    --slide: 0.45s;
+    --glide: cubic-bezier(0.33, 0.6, 0.3, 1);
     list-style: none;
     display: grid;
     gap: 2.75rem 1.75rem;
@@ -72,7 +73,8 @@ button.card-shot:focus-visible {
     padding: 0.9rem 1rem 0.95rem;
     border-top: 2px solid var(--ink);
     background: var(--bg);
-    transform: translateY(calc(100% + 2px));
+    transform: translate3d(0, calc(100% + 2px), 0);
+    backface-visibility: hidden;
     visibility: hidden;
     /* Kept on its own layer, so it is drawn once and then only moved; its
        text does not shimmer on the way up. */
@@ -84,7 +86,7 @@ button.card-shot:focus-visible {
 
 .card.is-open .card-about,
 .card-frame:has(:focus-visible) .card-about {
-    transform: none;
+    transform: translate3d(0, 0, 0);
     visibility: visible;
     transition:
         transform var(--slide) var(--glide),
@@ -97,7 +99,7 @@ button.card-shot:focus-visible {
     }
 
     .card-frame:hover .card-about {
-        transform: none;
+        transform: translate3d(0, 0, 0);
         visibility: visible;
         transition:
             transform var(--slide) var(--glide),
