@@ -23,7 +23,7 @@ const Robotics = () => {
                         <a href="/robotics/">Robotics</a>
                         <span className="title-period">.</span>
                     </h2>
-                    <More href="/robotics/" place="head">
+                    <More href="/robotics/" place="head" rest="robotics">
                         See more
                     </More>
                 </div>
@@ -49,7 +49,7 @@ const Robotics = () => {
                     ))}
                 </ul>
 
-                <More href="/robotics/" place="foot">
+                <More href="/robotics/" place="foot" rest="robotics">
                     See more
                 </More>
             </div>
