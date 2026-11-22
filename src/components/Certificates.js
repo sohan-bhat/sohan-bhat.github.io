@@ -15,10 +15,11 @@ const DownloadIcon = () => (
 // One certificate, a compact row: its title, then one line with who gave it
 // and the year and a Verify link to the issuer's page that proves it (a
 // Certificate link where the issuer has only a page for it). `download` adds
-// the small arrow that downloads our own copy of the PDF.
-export const Certificate = ({ certificate: c, download, Title = 'h3' }) => (
+// the small arrow that downloads our own copy of the PDF. `short` shows the
+// short title where a certificate has one, to stay on one line.
+export const Certificate = ({ certificate: c, download, short, Title = 'h3' }) => (
     <li className="cert-entry">
-        <Title className="cert-title">{c.title}</Title>
+        <Title className="cert-title">{(short && c.short) || c.title}</Title>
         <p className="cert-meta">
             <span>
                 {c.issuer}, {c.earned.slice(0, 4)}
@@ -60,7 +61,7 @@ const Certificates = () => (
             {certificates
                 .filter((c) => c.home)
                 .map((c) => (
-                    <Certificate key={c.id} certificate={c} />
+                    <Certificate key={c.id} certificate={c} short />
                 ))}
         </ul>
         <More href="/certificates/" place="foot" rest="certificates">

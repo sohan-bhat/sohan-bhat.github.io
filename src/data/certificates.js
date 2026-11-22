@@ -47,6 +47,8 @@ const certificates = [
         id: 'cs50x',
         home: true,
         title: 'CS50x, Introduction to Computer Science',
+        // The home page's column fits this on one line; Harvard is under it.
+        short: 'CS50x',
         issuer: 'Harvard',
         earned: '2026-11-15',
         url: 'https://cs50.harvard.edu/certificates/c745d590-91f5-4cb1-8738-9e5aeda49f3b',
