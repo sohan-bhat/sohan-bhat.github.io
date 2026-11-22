@@ -43,7 +43,7 @@ export const Certificate = ({ certificate: c, download, short, Title = 'h3' }) =
 );
 
 // Certificates on the home page, in the intro under my photo: the three
-// marked `home`, newest first. The View all link at the end of the heading's
+// marked `home`, newest first, each with its download arrow. The View all link at the end of the heading's
 // row, and the heading itself, open the Certificates page, which has every
 // one. The list is src/data/certificates.js.
 const Certificates = () => (
@@ -61,7 +61,7 @@ const Certificates = () => (
             {certificates
                 .filter((c) => c.home)
                 .map((c) => (
-                    <Certificate key={c.id} certificate={c} short />
+                    <Certificate key={c.id} certificate={c} short download />
                 ))}
         </ul>
         <More href="/certificates/" place="foot" rest="certificates">
