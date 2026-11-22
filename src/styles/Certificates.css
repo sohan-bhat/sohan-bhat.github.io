@@ -49,10 +49,10 @@
     gap: 1.75rem;
 }
 
-/* The PDF download, an icon link like the ones under the name: gray at
+/* The PDF, an icon link like the ones under the name: gray at
    rest, orange on hover and focus. It is 24px square to be easy to tap, and
    the negative margins keep it out of the line's height and gap. */
-.cert-download {
+.cert-pdf {
     align-self: center;
     display: inline-flex;
     align-items: center;
@@ -63,7 +63,7 @@
     color: var(--ink-soft);
 }
 
-.cert-download:hover,
-.cert-download:focus-visible {
+.cert-pdf:hover,
+.cert-pdf:focus-visible {
     color: var(--accent);
 }

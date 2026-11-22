@@ -3,39 +3,46 @@ import More from './More';
 import certificates from '../data/certificates';
 import '../styles/Certificates.css';
 
-// An arrow dropping into a tray.
-const DownloadIcon = () => (
+// A sheet of paper with a folded corner and two lines of text.
+const PdfIcon = () => (
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M12 3v12" />
-        <path d="M7 10l5 5 5-5" />
-        <path d="M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" />
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+        <path d="M14 3v5h5" />
+        <path d="M9 13h6" />
+        <path d="M9 17h6" />
     </svg>
 );
 
 // One certificate, a compact row: its title, then one line with who gave it
-// and the year and a Verify link to the issuer's page that proves it (a
-// Certificate link where the issuer has only a page for it). `download` adds
-// the small arrow that downloads our own copy of the PDF. `short` shows the
+// and the year and at most two links. Verify opens the issuer's own page
+// for it. The icon opens our copy of the PDF. Both open in a new tab, and a
+// certificate with no issuer page has only the icon. `short` shows the
 // short title where a certificate has one, to stay on one line.
-export const Certificate = ({ certificate: c, download, short, Title = 'h3' }) => (
+export const Certificate = ({ certificate: c, short, Title = 'h3' }) => (
     <li className="cert-entry">
-        <Title className="cert-title">{(short && c.short) || c.title}</Title>
+        <Title className="cert-title" id={`cert-${c.id}`}>
+            {(short && c.short) || c.title}
+        </Title>
         <p className="cert-meta">
             <span>
                 {c.issuer}, {c.earned.slice(0, 4)}
             </span>
-            <a
-                className="cert-link text-link"
-                href={c.verify || c.url}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={c.verify ? `Verify the ${c.title} certificate` : `The ${c.title} certificate`}
-            >
-                {c.verify ? 'Verify' : 'Certificate'}
-            </a>
-            {download && c.file && (
-                <a className="cert-download" href={c.file} download title="Download the PDF" aria-label={`Download the ${c.title} certificate as a PDF`}>
-                    <DownloadIcon />
+            {c.verify && (
+                <a className="cert-link text-link" href={c.verify} target="_blank" rel="noreferrer" aria-label={`Verify the ${c.title.replace(/ certificate$/, '')} certificate`}>
+                    Verify
+                </a>
+            )}
+            {c.file && (
+                <a
+                    className="cert-pdf"
+                    href={c.file}
+                    target="_blank"
+                    rel="noreferrer"
+                    title="View certificate PDF"
+                    aria-label="View certificate PDF"
+                    aria-describedby={`cert-${c.id}`}
+                >
+                    <PdfIcon />
                 </a>
             )}
         </p>
@@ -43,7 +50,7 @@ export const Certificate = ({ certificate: c, download, short, Title = 'h3' }) =
 );
 
 // Certificates on the home page, in the intro under my photo: the three
-// marked `home`, newest first, each with its download arrow. The View all link at the end of the heading's
+// marked `home`, newest first. The View all link at the end of the heading's
 // row, and the heading itself, open the Certificates page, which has every
 // one. The list is src/data/certificates.js.
 const Certificates = () => (
@@ -61,7 +68,7 @@ const Certificates = () => (
             {certificates
                 .filter((c) => c.home)
                 .map((c) => (
-                    <Certificate key={c.id} certificate={c} short download />
+                    <Certificate key={c.id} certificate={c} short />
                 ))}
         </ul>
         <More href="/certificates/" place="foot" rest="certificates">

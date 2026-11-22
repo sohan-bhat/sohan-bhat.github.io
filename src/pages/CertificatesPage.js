@@ -6,7 +6,7 @@ import certificates from '../data/certificates';
 import '../styles/Pages.css';
 
 // The Certificates page: every certificate, newest first, in the same rows
-// as the home page, each with the arrow that downloads its PDF.
+// as the home page.
 const CertificatesPage = () => (
     <>
         <Toolbar />
@@ -15,7 +15,7 @@ const CertificatesPage = () => (
                 <h1 className="section-title">Certificates<span className="title-period">.</span></h1>
                 <ul className="cert-list cert-page">
                     {certificates.map((c) => (
-                        <Certificate key={c.id} certificate={c} download Title="h2" />
+                        <Certificate key={c.id} certificate={c} Title="h2" />
                     ))}
                 </ul>
             </div>

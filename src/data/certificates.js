@@ -1,11 +1,10 @@
 // Certificates. `earned` is when each was earned, and lists are newest
 // first, so a new one slots in by its date. The three with `home: true` are
 // the ones the home page shows; the Certificates page shows them all.
-// `verify` is the issuer's own page that proves a certificate. One without
-// it has `url`, the issuer's page for it, shown as a Certificate link.
-// `file` is a copy of the PDF in public/certificates, offered as a download
-// on the Certificates page. To add one, add an entry here and a
-// hasCredential item in public/index.html.
+// `verify` is the issuer's own page for a certificate, the Verify link.
+// `file` is a copy of the PDF in public/certificates, opened by the icon.
+// One with no issuer page has only the icon. To add one, add an entry here
+// and a hasCredential item in public/index.html.
 const certificates = [
     {
         id: 'neo4j-certified-professional',
@@ -51,7 +50,7 @@ const certificates = [
         short: 'CS50x',
         issuer: 'Harvard',
         earned: '2026-11-15',
-        url: 'https://cs50.harvard.edu/certificates/c745d590-91f5-4cb1-8738-9e5aeda49f3b',
+        verify: 'https://cs50.harvard.edu/certificates/c745d590-91f5-4cb1-8738-9e5aeda49f3b',
         file: '/certificates/cs50x.pdf',
     },
 ];
