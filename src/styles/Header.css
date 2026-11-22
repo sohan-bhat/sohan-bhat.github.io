@@ -61,19 +61,29 @@
     margin-bottom: 1.75rem;
 }
 
+/* The email, the three icons and the CV button: everything centred on one
+   line, with the same 24px between each. */
 .social-links {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 24px;
     flex-wrap: wrap;
 }
 
-/* Icon links: gray at rest, orange on hover and focus, no underline. */
+/* Icon links, 22px: gray at rest, orange on hover and focus, no underline.
+   Each takes exactly its icon's space, so the gaps stay equal; an unseen
+   margin around it keeps it easy to tap. */
 .social-link {
+    position: relative;
     display: inline-flex;
-    padding: 2px;
-    font-size: 1.3rem;
+    font-size: 22px;
     color: var(--ink-soft);
+}
+
+.social-link::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
 }
 
 .social-link:hover,
@@ -90,7 +100,12 @@
    filled blue: a hard shadow gives it depth, and a click presses it in. */
 .hero-cv {
     --press: 3px;
-    padding: 0.25rem 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    /* 34px tall, with its blue face centred on the row's line; the shadow
+       hangs below without moving it. */
+    height: 34px;
+    padding: 0 0.8rem;
     border: 1px solid #1c3a7e;
     border-radius: var(--radius);
     background: var(--blue);
@@ -126,9 +141,18 @@
         row-gap: 1.75rem;
     }
 
-    /* Tighter, so the email, the icons and the CV button fit on one line. */
+    /* Tighter, and still equal, so the email, the icons and the CV button
+       fit on one line. */
     .social-links {
-        gap: 0.6rem;
+        gap: 9px;
+    }
+
+    /* The row needs 281px without its gaps, so on the narrowest phones
+       the gaps close up a little more to keep it on one line. */
+    @media (max-width: 380px) {
+        .social-links {
+            gap: 7px;
+        }
     }
 
     /* Above the name, and smaller. */
