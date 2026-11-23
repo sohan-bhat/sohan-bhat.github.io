@@ -10,10 +10,17 @@
 // with its value, then the post itself. Pictures sit in write-ups/img and are
 // linked as img/<file>. A PNG is taken to be a chart on a white page, and its
 // white is let through to the site's paper; a JPG or WebP is shown as it is.
+//
+// The opening paragraph, which starts with TL;DR, is set in a card. A figure
+// between `<!-- figure -->` and `<!-- /figure -->` is a still picture and its
+// caption, which is what GitHub shows. When write-ups/data/<name>.json
+// exists, the page shows the runs in that file in its place, one per tab,
+// drawn by scripts/write-up-figure.js. Nothing in a post is bold.
 
 const fs = require('fs');
 const path = require('path');
 const { marked } = require('marked');
+const { figure, script } = require('./write-up-figure');
 
 const ROOT = path.resolve(__dirname, '..');
 const POSTS = path.join(ROOT, 'write-ups');
@@ -38,7 +45,7 @@ const pngSize = (file) => {
     return [head.readUInt32BE(0), head.readUInt32BE(4)];
 };
 
-const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE html>
+const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -235,12 +242,144 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
       }
       th {
         border-bottom-color: var(--edge);
-        font-weight: 600;
+        font-weight: 400;
+        color: var(--ink-soft);
       }
       th:not(:first-child),
       td:not(:first-child) {
         text-align: right;
         white-space: nowrap;
+      }
+      /* The summary, in a card. Its label is small and spaced, not bold. */
+      .tldr,
+      .demo-panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgb(255 255 255 / 0.32);
+      }
+      .tldr {
+        padding: 1rem 1.25rem 1.15rem;
+      }
+      .tldr p {
+        margin-top: 0.25rem;
+      }
+      .tldr .tldr-label {
+        margin-top: 0;
+        font-size: 0.8125rem;
+        letter-spacing: 0.14em;
+        color: var(--ink-soft);
+      }
+      /* The figure: a tab for each run, two charts, and what was reported. */
+      .demo {
+        margin-top: 1.75rem;
+      }
+      .demo-tabs {
+        display: flex;
+        gap: 1.5rem;
+        overflow-x: auto;
+      }
+      .demo-tabs button {
+        padding: 0.5rem 0;
+        border: 0;
+        background: none;
+        box-shadow: inset 0 -2px 0 transparent;
+        color: var(--ink-soft);
+        font: inherit;
+        font-size: 1rem;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      .demo-tabs button:hover {
+        color: var(--ink);
+      }
+      .demo-tabs button[aria-selected='true'] {
+        box-shadow: inset 0 -2px 0 var(--accent);
+        color: var(--ink);
+      }
+      .demo-tabs button:focus-visible {
+        outline-offset: -2px;
+      }
+      .demo-panel {
+        padding: 1rem 1.25rem 1.2rem;
+        border-top-left-radius: 0;
+      }
+      .demo .demo-run {
+        margin-top: 0;
+        font-size: 1rem;
+      }
+      .demo-charts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem 1.5rem;
+        margin-top: 0.9rem;
+      }
+      .demo-charts p {
+        margin-top: 0;
+        font-size: 0.9375rem;
+        color: var(--ink-soft);
+      }
+      .demo svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        font-size: 12px;
+        fill: var(--ink-soft);
+      }
+      .demo .band {
+        fill: rgb(98 89 77 / 0.17);
+      }
+      .demo .axis {
+        stroke: var(--edge);
+      }
+      .demo .run {
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 2;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+      }
+      .demo .run.after {
+        opacity: 0.3;
+      }
+      .demo .alarm {
+        stroke: var(--ink);
+        stroke-dasharray: 4 3;
+      }
+      .demo-answers {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: 0.3rem 1.1rem;
+        margin-top: 0.9rem;
+        padding-top: 0.9rem;
+        border-top: 1px solid var(--line);
+        font-size: 1rem;
+      }
+      .demo-answers dt {
+        color: var(--ink-soft);
+      }
+      .demo .demo-signals {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.2rem 1.1rem;
+        margin-top: 0.6rem;
+        padding: 0;
+        list-style: none;
+        font-size: 0.9375rem;
+        color: var(--ink-soft);
+      }
+      .demo .demo-signals li {
+        margin: 0;
+      }
+      .demo .demo-signals .out {
+        color: var(--accent);
+      }
+      @media (max-width: 600px) {
+        .demo-tabs {
+          gap: 1.1rem;
+        }
+        .demo-charts {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -261,7 +400,7 @@ const page = ({ name, title, author, published, summary, html }) => `<!DOCTYPE h
         <p class="byline">${escape(author)}, ${escape(published)}</p>
 ${html}
       </article>
-    </main>
+    </main>${tabs ? `\n    ${script}` : ''}
   </body>
 </html>
 `;
@@ -295,8 +434,23 @@ const posts = fs
         const dir = path.join(OUT, name);
         fs.mkdirSync(path.join(dir, 'img'), { recursive: true });
 
+        // The still figure gives way to the runs in the post's data file.
+        const data = path.join(POSTS, 'data', `${name}.json`);
+        const still = /<!-- figure -->\s*<a id="([^"]+)"><\/a>[\s\S]*?<!-- \/figure -->/;
+        const tabs = fs.existsSync(data) && still.test(text);
+        let drawn = '';
+        if (tabs) {
+            const caption =
+                'Figure 1. Four saved runs, each replayed through LHD. The band is the healthy range and the dashed line is the alarm.';
+            drawn = figure(JSON.parse(fs.readFileSync(data, 'utf8')), text.match(still)[1], caption);
+            text = text.replace(still, 'FIGUREGOESHERE');
+        }
+
         const html = marked
             .parse(text, { gfm: true })
+            .replace('<p>FIGUREGOESHERE</p>', () => drawn)
+            // The summary's card, with its label on a line of its own.
+            .replace(/<p>TL;DR ([\s\S]*?)<\/p>/, '<div class="tldr">\n<p class="tldr-label">TL;DR</p>\n<p>$1</p>\n</div>')
             // Each picture is copied beside the page, given its size so the
             // page does not jump as it loads, and marked if it is a chart.
             .replace(/<img src="(img\/[^"]+)"([^>]*)>/g, (_, src, rest) => {
@@ -308,14 +462,14 @@ const posts = fs
                 return `<img src="${src}"${rest.replace(/\s*\/?$/, '')}${size}${chart ? ' class="chart"' : ''} loading="lazy" decoding="async">`;
             })
             // The line under a figure is its caption.
-            .replace(/<p>(<strong>Figure \d+)/g, '<p class="caption">$1')
+            .replace(/<p>(Figure \d+\.)/g, '<p class="caption">$1')
             // A wide table scrolls inside its own box on a phone.
             .replace(/<table>/g, '<div class="table"><table>')
             .replace(/<\/table>/g, '</table></div>')
             .trim()
             .replace(/^/gm, '        ');
 
-        fs.writeFileSync(path.join(dir, 'index.html'), page({ name, title, author, published, summary, html }));
+        fs.writeFileSync(path.join(dir, 'index.html'), page({ name, title, author, published, summary, html, tabs }));
         return { name, title, published, url: `/write-ups/${name}/`, opening: first };
     })
     // Newest first.
