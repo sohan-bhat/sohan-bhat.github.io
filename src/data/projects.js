@@ -12,7 +12,6 @@
 const projects = [
     {
         id: 'hullo',
-        best: 4,
         groups: ['apps'],
         kind: 'Website',
         title: 'hullo',
@@ -30,12 +29,12 @@ const projects = [
     },
     {
         id: 'openhal',
-        best: 1,
+        best: 2,
         groups: ['tools', 'hardware'],
         kind: 'Protocol',
         title: 'OpenHAL',
         date: '2026-10-17',
-        line: 'Lets AI agents control hardware',
+        line: 'Lets AI agents control hardware through 36 drivers',
         stack: ['Python', 'MCP', 'Svelte'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/OpenHAL/' },
@@ -47,12 +46,12 @@ const projects = [
     },
     {
         id: 'wobbl',
-        best: 2,
+        best: 3,
         groups: ['tools'],
         kind: 'Simulator',
         title: 'wobbl',
         date: '2026-10-13',
-        line: 'Physics simulation for hobbyists up to elite engineers',
+        line: 'Simulates parts and circuits before you build them',
         stack: ['Python', 'SciPy', 'Three.js'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/wobbl/' },
@@ -65,7 +64,7 @@ const projects = [
     },
     {
         id: 'oopsy',
-        best: 3,
+        best: 4,
         groups: ['tools'],
         kind: 'CLI tool',
         title: 'oopsy',
@@ -100,11 +99,12 @@ const projects = [
     },
     {
         id: 'signnet',
+        best: 1,
         groups: ['ml'],
         kind: 'Neural network',
         title: 'signnet',
         date: '2026-06-12',
-        line: 'Classifies traffic signs',
+        line: 'Neural network written by hand, 90.06% on traffic signs',
         stack: ['Python', 'NumPy', 'React'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/signnet/' },
