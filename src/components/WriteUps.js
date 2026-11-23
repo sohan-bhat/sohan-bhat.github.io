@@ -1,10 +1,11 @@
 import React from 'react';
 import writeUps from '../data/write-ups.json';
+import results from '../data/write-up-results';
 import '../styles/WriteUps.css';
 
 // Write-ups, in the intro under the name and links, beside Certificates.
-// Each is its title and when it was published, with a Read link beside the
-// date like a certificate's Certificate link. The title opens it too. The heading
+// Each is its title, its main result in a sentence, and when it was
+// published with a Read link beside the date. The title opens it too. The heading
 // opens the Write-ups page. The list is built from the Markdown files in
 // write-ups/ by scripts/build-write-ups.js, newest first.
 const WriteUps = () => (
@@ -19,6 +20,7 @@ const WriteUps = () => (
                     <h3 className="write-up-title">
                         <a href={post.url}>{post.title}</a>
                     </h3>
+                    {results[post.name] && <p className="write-up-result">{results[post.name]}</p>}
                     <p className="write-up-meta">
                         <span>{post.published}</span>
                         <a className="text-link" href={post.url} aria-label={`Read ${post.title}`}>

@@ -41,6 +41,13 @@
     text-underline-offset: 5px;
 }
 
+/* The main result, small and gray so it stays on one line. */
+.write-up-result {
+    font-size: var(--size-small);
+    color: var(--ink-soft);
+    margin-bottom: 0.2rem;
+}
+
 /* When it was published, then the Read link, on one line, as under a
    certificate. */
 .write-up-meta {
