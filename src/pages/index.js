@@ -2,7 +2,7 @@ import Home from './Home';
 import ProjectsPage from './ProjectsPage';
 import WriteUpsPage from './WriteUpsPage';
 import RoboticsPage from './RoboticsPage';
-import CertificatesPage from './CertificatesPage';
+import HonorsPage from './HonorsPage';
 
 // Every page of the site besides the write-ups themselves, which
 // scripts/build-write-ups.js writes. Each has its address and its component, and
@@ -11,7 +11,7 @@ import CertificatesPage from './CertificatesPage';
 //
 // The project sites share this domain, each at /<its repo's name>/, and a
 // repo's site wins over a page here with the same address. So no repo with a
-// site may be named projects, write-ups, robotics or certificates.
+// site may be named projects, write-ups, robotics or honors.
 export const pages = [
     { path: '/', Page: Home },
     {
@@ -33,10 +33,10 @@ export const pages = [
         description: 'What Sohan Bhat builds for FRC Team 2714 and Team 2728, with the robots and links to the code.',
     },
     {
-        path: '/certificates/',
-        Page: CertificatesPage,
-        title: 'Certificates of Sohan Bhat',
-        description: 'Every certificate Sohan Bhat has earned, newest first, each with a link to the issuer that verifies it.',
+        path: '/honors/',
+        Page: HonorsPage,
+        title: 'Honors of Sohan Bhat',
+        description: 'Every certificate Sohan Bhat has earned, newest first, each with a picture of it and a link to the issuer that verifies it.',
     },
 ];
 

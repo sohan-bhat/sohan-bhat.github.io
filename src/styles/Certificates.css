@@ -43,10 +43,39 @@
     margin-bottom: 1rem;
 }
 
-/* The Certificates page: the rows at a width that reads well. */
-.cert-page {
-    max-width: 34rem;
-    gap: 1.75rem;
+/* The Honors page: a gallery, two pictures to a row and one on a phone,
+   each with its row under it. */
+.cert-gallery {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.75rem 1.75rem;
+}
+
+@media (max-width: 700px) {
+    .cert-gallery {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.25rem;
+    }
+}
+
+/* Every picture sits whole in a frame of one shape, with the tiles' edge
+   and corner. Certificates are printed on white, so the frame is white and
+   one that is wider than the frame shows no bars. */
+.cert-frame {
+    aspect-ratio: 13 / 10;
+    margin-bottom: 0.9rem;
+    overflow: hidden;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius);
+    background: #fff;
+}
+
+.cert-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* The PDF, an icon link like the ones under the name: gray at

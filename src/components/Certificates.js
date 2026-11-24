@@ -13,13 +13,16 @@ const PdfIcon = () => (
     </svg>
 );
 
-// One certificate, a compact row: its title, then one line with who gave it
-// and the year and at most two links. Verify opens the issuer's own page
-// for it. The icon opens our copy of the PDF. Both open in a new tab, and a
-// certificate with no issuer page has only the icon. `short` shows the
-// short title where a certificate has one, to stay on one line.
-export const Certificate = ({ certificate: c, short, Title = 'h3' }) => (
-    <li className="cert-entry">
+// How many certificates the home page shows, the newest ones.
+const HOME = 5;
+
+// A certificate's words: its title, then one line with who gave it and the
+// year and at most two links. Verify opens the issuer's own page for it. The
+// icon opens our copy of the PDF. Both open in a new tab, and a certificate
+// with no issuer page has only the icon. `short` shows the short title
+// where a certificate has one, to stay on one line.
+const Words = ({ certificate: c, short, Title }) => (
+    <>
         <Title className="cert-title" id={`cert-${c.id}`}>
             {(short && c.short) || c.title}
         </Title>
@@ -46,32 +49,59 @@ export const Certificate = ({ certificate: c, short, Title = 'h3' }) => (
                 </a>
             )}
         </p>
+    </>
+);
+
+// One certificate as a compact row, as on the home page.
+export const Certificate = ({ certificate, short, Title = 'h3' }) => (
+    <li className="cert-entry">
+        <Words certificate={certificate} short={short} Title={Title} />
     </li>
 );
 
-// Certificates on the home page, in the intro under my photo: the three
-// marked `home`, newest first. The View all link at the end of the heading's
-// row, and the heading itself, open the Certificates page, which has every
-// one. The list is src/data/certificates.js.
+// One certificate in the Honors page's gallery: a picture of it in a frame,
+// every frame the same shape, and its row underneath. `eager` is for the
+// pictures a visitor sees first; the rest load when scrolled to.
+export const CertificateShot = ({ certificate: c, eager }) => (
+    <li className="cert-shot">
+        <div className="cert-frame">
+            <img
+                src={`/imgs/cert-${c.id}-1120.webp`}
+                srcSet={`/imgs/cert-${c.id}-560.webp 560w, /imgs/cert-${c.id}-1120.webp 1120w`}
+                sizes="(max-width: 700px) 92vw, 462px"
+                width={c.picture[0]}
+                height={c.picture[1]}
+                alt={`${c.title.replace(/ certificate$/, '')} certificate from ${c.issuer}`}
+                loading={eager ? 'eager' : 'lazy'}
+                decoding="async"
+            />
+        </div>
+        <div className="cert-entry">
+            <Words certificate={c} Title="h2" />
+        </div>
+    </li>
+);
+
+// Certificates on the home page, in the intro under my photo: the newest
+// five. The View all link at the end of the heading's row opens the Honors
+// page, which has every one with its picture. The list is
+// src/data/certificates.js.
 const Certificates = () => (
     <div className="hero-certs" id="certificates">
         <div className="section-head">
             <h2 className="section-title">
-                <a href="/certificates/">Certificates</a>
-                <span className="title-period">.</span>
+                Certificates<span className="title-period">.</span>
             </h2>
-            <More href="/certificates/" place="head" rest="certificates">
+            <More href="/honors/" place="head" rest="certificates">
                 View all
             </More>
         </div>
         <ul className="cert-list">
-            {certificates
-                .filter((c) => c.home)
-                .map((c) => (
-                    <Certificate key={c.id} certificate={c} short />
-                ))}
+            {certificates.slice(0, HOME).map((c) => (
+                <Certificate key={c.id} certificate={c} short />
+            ))}
         </ul>
-        <More href="/certificates/" place="foot" rest="certificates">
+        <More href="/honors/" place="foot" rest="certificates">
             View all
         </More>
     </div>

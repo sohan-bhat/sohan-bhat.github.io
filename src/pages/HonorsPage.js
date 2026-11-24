@@ -1,21 +1,22 @@
 import React from 'react';
 import Toolbar from '../components/Toolbar';
 import Footer from '../components/Footer';
-import { Certificate } from '../components/Certificates';
+import { CertificateShot } from '../components/Certificates';
 import certificates from '../data/certificates';
 import '../styles/Pages.css';
 
-// The Certificates page: every certificate, newest first, in the same rows
-// as the home page.
-const CertificatesPage = () => (
+// The Honors page: every certificate, newest first, as a gallery of
+// pictures with each one's row under it. Certificates are the only honors
+// so far, so they are the page's one heading.
+const HonorsPage = () => (
     <>
-        <Toolbar />
+        <Toolbar current="honors" />
         <main className="page">
             <div className="container">
                 <h1 className="section-title">Certificates<span className="title-period">.</span></h1>
-                <ul className="cert-list cert-page">
-                    {certificates.map((c) => (
-                        <Certificate key={c.id} certificate={c} Title="h2" />
+                <ul className="cert-gallery">
+                    {certificates.map((c, i) => (
+                        <CertificateShot key={c.id} certificate={c} eager={i < 2} />
                     ))}
                 </ul>
             </div>
@@ -24,4 +25,4 @@ const CertificatesPage = () => (
     </>
 );
 
-export default CertificatesPage;
+export default HonorsPage;
