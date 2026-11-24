@@ -153,11 +153,13 @@ button.card-shot:focus-visible {
 
 .more-arrow {
     flex: none;
-    transition: transform 0.4s var(--spring);
+    transition: transform 180ms var(--ease-out);
 }
 
-.more:hover .more-arrow {
-    transform: translateX(3px);
+@media (hover: hover) and (pointer: fine) {
+    .more:hover .more-arrow {
+        transform: translateX(3px);
+    }
 }
 
 /* The longer of the two rows, Robotics, needs 275px, which a screen 323px
@@ -239,15 +241,15 @@ button.card-shot:focus-visible {
     }
 }
 
-/* A tile dips a little when pressed and springs back, like the links. */
+/* A tile gives a little when pressed, less than a button because it is so
+   much bigger. */
 @media (prefers-reduced-motion: no-preference) {
     .card-frame {
-        transition: transform 0.45s var(--spring);
+        transition: transform var(--press) var(--ease-out);
     }
 
     .card-frame:active {
         transform: scale(0.985);
-        transition-duration: 0.08s;
     }
 }
 

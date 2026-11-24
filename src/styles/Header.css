@@ -126,17 +126,35 @@
     transform: translate(var(--press), var(--press));
 }
 
-/* The button goes down fast and springs back up when let go. */
+.hero-cv {
+    transition: background-color var(--fade) ease;
+}
+
+/* The button goes down fast and comes back up a little slower. Where the
+   browser can draw a spring, it comes up on one: the only overshoot on the
+   site, under 2% of the 3px it travels. */
 @media (prefers-reduced-motion: no-preference) {
     .hero-cv {
         transition:
-            background-color var(--ease-time) ease,
-            transform 0.4s var(--spring),
-            box-shadow 0.4s var(--spring);
+            background-color var(--fade) ease,
+            transform var(--press) var(--ease-out),
+            box-shadow var(--press) var(--ease-out);
+    }
+
+    @supports (transition-timing-function: linear(0, 1)) {
+        .hero-cv {
+            transition:
+                background-color var(--fade) ease,
+                transform 0.3s var(--spring),
+                box-shadow 0.3s var(--spring);
+        }
     }
 
     .hero-cv:active {
-        transition-duration: var(--ease-time), 0.06s, 0.06s;
+        transition:
+            background-color var(--fade) ease,
+            transform 0.1s var(--ease-out),
+            box-shadow 0.1s var(--ease-out);
     }
 }
 

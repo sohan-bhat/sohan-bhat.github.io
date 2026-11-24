@@ -182,6 +182,29 @@
         src: url('%PUBLIC_URL%/fonts/source-sans-3-variable.woff2') format('woff2');
       }
     </style>
+    <!-- Loads one of the site's own pages ahead when a link to it is about
+         to be followed (pointed at for a moment, or pressed), so the page
+         is there at once and the cross-fade starts without a wait. A
+         browser without speculation rules skips this. The project sites
+         and the PDFs are left out. -->
+    <script type="speculationrules">
+      {
+        "prerender": [
+          {
+            "where": {
+              "or": [
+                { "href_matches": "/" },
+                { "href_matches": "/projects/" },
+                { "href_matches": "/write-ups/*" },
+                { "href_matches": "/robotics/" },
+                { "href_matches": "/honors/" }
+              ]
+            },
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

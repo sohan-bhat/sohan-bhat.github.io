@@ -163,44 +163,28 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
       .toolbar-links a[aria-current] {
         color: var(--ink);
       }
-      /* The site's motion, from MOTION in src/styles/App.css: colours ease,
-         a pressed link dips and springs back, and going to another page
-         the old one fades out and the new one fades in and settles while
-         the toolbar stays put. */
+      /* The site's motion, from MOTION in src/styles/App.css: colours fade,
+         a pressed button dips 3%, and going to another page the browser
+         cross-fades the two together. */
+      .toolbar-links a,
+      .toolbar-home {
+        transition: color 150ms ease;
+      }
       @media (prefers-reduced-motion: no-preference) {
-        .toolbar-links a,
         .toolbar-home {
           transition:
-            color 0.2s ease,
-            transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color 150ms ease,
+            transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
         }
-        .toolbar-links a:active,
         .toolbar-home:active {
-          transform: scale(0.93);
-          transition-duration: 0.2s, 0.08s;
+          transform: scale(0.97);
         }
         @view-transition {
           navigation: auto;
         }
-        .toolbar {
-          view-transition-name: toolbar;
-        }
-        ::view-transition-old(root) {
-          animation: 0.14s ease-in both page-out;
-        }
+        ::view-transition-old(root),
         ::view-transition-new(root) {
-          animation: 0.38s cubic-bezier(0.33, 0.6, 0.3, 1) both page-in;
-        }
-      }
-      @keyframes page-out {
-        to {
-          opacity: 0;
-        }
-      }
-      @keyframes page-in {
-        from {
-          opacity: 0;
-          transform: translateY(8px);
+          animation-duration: 0.2s;
         }
       }
       /* The post: one column at a width that reads well. */
@@ -247,7 +231,7 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         text-decoration-color: rgb(164 68 28 / 0.5);
         text-decoration-thickness: 1px;
         text-underline-offset: 5px;
-        transition: text-decoration-color 0.2s ease;
+        transition: text-decoration-color 150ms ease;
       }
       article a:hover {
         text-decoration-color: var(--accent);
@@ -334,19 +318,18 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         white-space: nowrap;
         cursor: pointer;
         transition:
-          color 0.2s ease,
-          box-shadow 0.2s ease;
+          color 150ms ease,
+          box-shadow 150ms ease;
       }
       @media (prefers-reduced-motion: no-preference) {
         .demo-tabs button {
           transition:
-            color 0.2s ease,
-            box-shadow 0.2s ease,
-            transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color 150ms ease,
+            box-shadow 150ms ease,
+            transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
         }
         .demo-tabs button:active {
-          transform: scale(0.95);
-          transition-duration: 0.2s, 0.2s, 0.08s;
+          transform: scale(0.97);
         }
       }
       .demo-tabs button:hover {
@@ -442,6 +425,29 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         }
       }
     </style>
+    <!-- Loads one of the site's own pages ahead when a link to it is about
+         to be followed (pointed at for a moment, or pressed), so the page
+         is there at once and the cross-fade starts without a wait. A
+         browser without speculation rules skips this. The project sites
+         and the PDFs are left out. -->
+    <script type="speculationrules">
+      {
+        "prerender": [
+          {
+            "where": {
+              "or": [
+                { "href_matches": "/" },
+                { "href_matches": "/projects/" },
+                { "href_matches": "/write-ups/*" },
+                { "href_matches": "/robotics/" },
+                { "href_matches": "/honors/" }
+              ]
+            },
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <nav class="toolbar" aria-label="Site">
