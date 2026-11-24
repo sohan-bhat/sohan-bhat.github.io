@@ -337,6 +337,18 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
           color 0.2s ease,
           box-shadow 0.2s ease;
       }
+      @media (prefers-reduced-motion: no-preference) {
+        .demo-tabs button {
+          transition:
+            color 0.2s ease,
+            box-shadow 0.2s ease,
+            transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .demo-tabs button:active {
+          transform: scale(0.95);
+          transition-duration: 0.2s, 0.2s, 0.08s;
+        }
+      }
       .demo-tabs button:hover {
         color: var(--ink);
       }

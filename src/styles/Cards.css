@@ -140,13 +140,15 @@ button.card-shot:focus-visible {
     font-weight: 500;
     white-space: nowrap;
     color: var(--accent);
-    text-decoration: none;
+    /* The underline is always there and clear, so it can fade in. */
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
 }
 
 .more:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
+    text-decoration-color: currentColor;
 }
 
 .more-arrow {
@@ -234,6 +236,18 @@ button.card-shot:focus-visible {
     /* A touch presses the tile in a little, so it feels like a button. */
     button.card-shot:active img {
         opacity: 0.7;
+    }
+}
+
+/* A tile dips a little when pressed and springs back, like the links. */
+@media (prefers-reduced-motion: no-preference) {
+    .card-frame {
+        transition: transform 0.45s var(--spring);
+    }
+
+    .card-frame:active {
+        transform: scale(0.985);
+        transition-duration: 0.08s;
     }
 }
 

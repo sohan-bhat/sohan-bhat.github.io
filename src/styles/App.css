@@ -202,7 +202,8 @@ section {
    - Colours ease over --ease-time instead of switching.
    - Under a title that is a link, the wave draws in (above).
    - A thing that is pressed dips to a little under its size and springs
-     back with one small overshoot when let go. That is --spring.
+     back with one small overshoot when let go. That is --spring. An icon
+     also rises a pixel or so when pointed at, on the same spring.
    - Going to another page of the site, the old page fades out and the new
      one fades in a few pixels low and settles. The toolbar stays put. The
      browser does this itself, with no script; one that can't simply
@@ -222,11 +223,34 @@ section {
     .social-link,
     .footer-icon,
     .cert-pdf,
-    .more,
     .sorter-tab {
         transition:
             color var(--ease-time) ease,
             transform 0.45s var(--spring);
+    }
+
+    .more {
+        transition:
+            text-decoration-color var(--ease-time) ease,
+            transform 0.45s var(--spring);
+    }
+
+    /* A text link on a line of its own dips as well. One inside a sentence
+       is laid out with its words, where a transform does nothing. */
+    .text-link {
+        transition:
+            text-decoration-color var(--ease-time) ease,
+            transform 0.45s var(--spring);
+    }
+
+    /* Only where there is a pointer to hover with, so a tap on a phone
+       does not leave an icon raised. */
+    @media (hover: hover) {
+        .social-link:hover,
+        .footer-icon:hover,
+        .cert-pdf:hover {
+            transform: translateY(-1.5px);
+        }
     }
 
     .toolbar-links a:active,
@@ -235,7 +259,8 @@ section {
     .footer-icon:active,
     .cert-pdf:active,
     .more:active,
-    .sorter-tab:active {
+    .sorter-tab:active,
+    .text-link:active {
         transform: scale(0.93);
         transition-duration: var(--ease-time), 0.08s;
     }
