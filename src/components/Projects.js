@@ -8,8 +8,7 @@ import '../styles/Projects.css';
 // Projects on the home page: the best ones as large tiles, all one size,
 // showing a picture and a name; the line and links slide up when a tile is
 // pointed at or tapped. The View all projects link at the end of the
-// heading's row, and the heading itself, open the Projects page, which has
-// every project.
+// heading's row opens the Projects page, which has every project.
 const { best } = split(projects);
 
 const Projects = () => {
@@ -20,8 +19,7 @@ const Projects = () => {
             <div className="container">
                 <div className="section-head">
                     <h2 className="section-title">
-                        <a href="/projects/">Projects</a>
-                        <span className="title-period">.</span>
+                        Projects<span className="title-period">.</span>
                     </h2>
                     <More href="/projects/" place="head">
                         View all projects
