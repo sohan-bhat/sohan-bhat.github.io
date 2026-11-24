@@ -2,13 +2,14 @@ import React from 'react';
 import '../styles/Toolbar.css';
 
 // The bar across the top of every page: the S on the left, back to the home
-// page, and on the right one link to each of the three pages. `current`
+// page, and on the right one link to each of the four pages. `current`
 // names the page being shown. Each write-up carries the same bar (see
 // scripts/build-write-ups.js).
 const LINKS = [
     ['projects', 'Projects', '/projects/'],
     ['write-ups', 'Write-ups', '/write-ups/'],
     ['robotics', 'Robotics', '/robotics/'],
+    ['honors', 'Honors', '/honors/'],
 ];
 
 const Toolbar = ({ current }) => (

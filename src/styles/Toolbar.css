@@ -1,4 +1,4 @@
-/* The bar across the top, as plain as it can be: the S, and three quiet
+/* The bar across the top, as plain as it can be: the S, and four quiet
    links that brighten when pointed at. */
 .toolbar {
     padding: 1.1rem 0;
@@ -22,20 +22,27 @@
     border-radius: 5px;
 }
 
+/* The gap shrinks with a phone's width, so the four links fit beside the
+   S on the narrowest ones. */
 .toolbar-links {
     display: flex;
-    gap: 1.6rem;
+    gap: clamp(0.7rem, 3.2vw, 1.5rem);
     font-size: var(--size-small);
 }
 
-/* Wider than a phone, the links spread across the width of the home page's
-   right column: the first starts where the photo starts and the last ends
-   where it ends. They sit there on every page. */
+@media (max-width: 350px) {
+    .toolbar-links {
+        gap: 0.55rem;
+        font-size: 0.8125rem;
+    }
+}
+
+/* Wider than a phone, the links end where the home page's photo ends, on
+   every page. Four of them need more room than the photo's column has, so
+   they start a little to its left. */
 @media (min-width: 601px) {
     .toolbar-links {
-        justify-content: space-between;
-        gap: 0;
-        width: var(--side);
+        gap: 1.5rem;
     }
 }
 
