@@ -104,7 +104,7 @@ const projects = [
         kind: 'Neural network',
         title: 'signnet',
         date: '2026-06-12',
-        line: 'Neural network written by hand, 90.06% on traffic signs',
+        line: 'Neural network in pure math, 90.06% on traffic signs',
         stack: ['Python', 'NumPy', 'React'],
         links: [
             { label: 'Site', url: 'https://sohanbhat.me/signnet/' },
