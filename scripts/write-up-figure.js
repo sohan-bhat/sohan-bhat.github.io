@@ -69,10 +69,10 @@ const chart = ({ values, low, high, alarm, percent, floorAtZero, label }) => {
 };
 
 const describe = (run) => {
-    if (!run.fault) return `${run.network}, a healthy run${run.lhd ? ' that we flagged' : ''}`;
+    if (!run.fault) return `${run.network}, a healthy run${run.lhd ? ' that was flagged' : ''}`;
     const dead = run.fault.kind.match(/^dead(\d+)$/);
     const what = dead ? `${dead[1]}% of ${run.fault.layer}'s units killed` : `${run.fault.layer} frozen`;
-    return `${run.network} with ${what}${run.lhd ? '' : ', a fault we missed'}`;
+    return `${run.network} with ${what}${run.lhd ? '' : ', a fault that was missed'}`;
 };
 
 const silent = (run) => `No alarm in ${run.epochs} epochs`;
