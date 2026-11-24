@@ -130,8 +130,10 @@
     transition: background-color var(--fade) ease;
 }
 
-/* The button goes down fast and comes back up on the spring, about half a
-   pixel past where it rests, with its shadow. */
+/* The button moves on the spring both ways. Pressed, it is down within a
+   tenth of a second, sinks about half a pixel past the bottom and comes
+   back to it. Let go, it comes up a little slower, about half a pixel past
+   where it rests, with its shadow. */
 @media (prefers-reduced-motion: no-preference) {
     .hero-cv {
         transition:
@@ -143,7 +145,7 @@
     .hero-cv:active {
         transition:
             background-color var(--fade) ease,
-            transform var(--press) var(--ease-out),
+            transform calc(var(--settle) * 0.67) var(--spring),
             box-shadow var(--press) var(--ease-out);
     }
 }
