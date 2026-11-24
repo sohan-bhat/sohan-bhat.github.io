@@ -107,6 +107,16 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         --accent: #a4441c;
         --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         --font-display: var(--font-body);
+        /* The site's motion tokens, from src/styles/App.css. */
+        --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+        --spring: var(--ease-out);
+        --settle: 200ms;
+      }
+      @supports (transition-timing-function: linear(0, 1)) {
+        :root {
+          --spring: linear(0, 0.026 2%, 0.118 4.5%, 0.255 7%, 0.45 10%, 0.651 13%, 0.833 16%, 0.984 19%, 1.11 22.5%, 1.181 26%, 1.205 29.9%, 1.185 34%, 1.125 39%, 1.057 44%, 0.994 50%, 0.965 55%, 0.958 59.7%, 0.967 66%, 0.989 74%, 1.009 89.6%, 1);
+          --settle: 450ms;
+        }
       }
       * {
         margin: 0;
@@ -170,20 +180,31 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         color: var(--ink);
       }
       /* The site's motion, from MOTION in src/styles/App.css: colours fade,
-         a pressed button dips 3%, and going to another page the browser
-         cross-fades the two together. */
-      .toolbar-links a,
+         whatever is pressed gives a little and springs back a hair past
+         where it rests, a pressed text link dims, and going to another
+         page the browser cross-fades the two together. */
       .toolbar-home {
         transition: color 150ms ease;
+      }
+      .toolbar-links a {
+        transition:
+          color 150ms ease,
+          opacity 150ms ease;
+      }
+      .toolbar-links a:active {
+        opacity: 0.6;
       }
       @media (prefers-reduced-motion: no-preference) {
         .toolbar-home {
           transition:
             color 150ms ease,
-            transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+            transform var(--settle) var(--spring);
         }
         .toolbar-home:active {
-          transform: scale(0.97);
+          transform: scale(0.9);
+          transition:
+            color 150ms ease,
+            transform 100ms var(--ease-out);
         }
         @view-transition {
           navigation: auto;
@@ -332,10 +353,14 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
           transition:
             color 150ms ease,
             box-shadow 150ms ease,
-            transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+            transform var(--settle) var(--spring);
         }
         .demo-tabs button:active {
           transform: scale(0.97);
+          transition:
+            color 150ms ease,
+            box-shadow 150ms ease,
+            transform 100ms var(--ease-out);
         }
       }
       .demo-tabs button:hover {
