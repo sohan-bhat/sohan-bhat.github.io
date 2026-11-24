@@ -60,7 +60,7 @@ const builds = [
         top: true,
         team: 2714,
         year: '2025',
-        fact: 'We won the Innovation in Control Award at the Texas state championship with it',
+        fact: 'We won the Innovation in Control Award at the Texas state championship with this display',
         alt: 'The heads-up display, a hexagon labeled Barge and Driver beside the connection status and time left.',
         link: {
             label: 'Code',

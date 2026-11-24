@@ -60,7 +60,7 @@ const projects = [
         ],
         image: 'wobbl',
         icon: '/imgs/icons/wobbl.svg',
-        alt: 'Wobbl’s site, “Simulate anything before you build it,” beside a 3D bracket colored by stress.',
+        alt: 'Wobbl’s site, with a 3D bracket colored by stress beside the headline.',
     },
     {
         id: 'oopsy',

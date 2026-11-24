@@ -18,7 +18,7 @@ export const pages = [
         path: '/projects/',
         Page: ProjectsPage,
         title: 'Projects by Sohan Bhat',
-        description: 'Every project by Sohan Bhat, with what each one does, what it is built with and links to its site and code.',
+        description: 'Every project by Sohan Bhat, each with a short description, the tools used and links to the site and code.',
     },
     {
         path: '/write-ups/',
@@ -36,7 +36,7 @@ export const pages = [
         path: '/honors/',
         Page: HonorsPage,
         title: 'Honors of Sohan Bhat',
-        description: 'Every certificate Sohan Bhat has earned, newest first, each with a picture of it and a link to the issuer that verifies it.',
+        description: 'Every certificate Sohan Bhat has earned, newest first, each with a picture and a link for verification on the page of the issuer.',
     },
 ];
 
