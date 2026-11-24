@@ -18,9 +18,7 @@ const WriteUpsPage = () => (
                     {writeUps.map((post) => (
                         <li className="post" key={post.name}>
                             <h2 className="show-title">
-                                <a href={post.url}>
-                                    <span>{post.title}</span>
-                                </a>
+                                <a href={post.url}>{post.title}</a>
                             </h2>
                             <p className="show-facts">
                                 <span>{post.published}</span>

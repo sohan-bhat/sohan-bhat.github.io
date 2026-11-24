@@ -10,18 +10,14 @@ import '../styles/WriteUps.css';
 const WriteUps = () => (
     <div className="hero-write-ups" id="write-ups">
         <h2 className="section-title">
-            <a href="/write-ups/">
-                <span>Write-ups</span>
-            </a>
+            <a href="/write-ups/">Write-ups</a>
             <span className="title-period">.</span>
         </h2>
         <ul className="write-up-list">
             {writeUps.map((post) => (
                 <li className="write-up" key={post.name}>
                     <h3 className="write-up-title">
-                        <a href={post.url}>
-                            <span>{post.title}</span>
-                        </a>
+                        <a href={post.url}>{post.title}</a>
                     </h3>
                     {results[post.name] && <p className="write-up-result">{results[post.name]}</p>}
                     <p className="write-up-meta">{post.published}</p>
