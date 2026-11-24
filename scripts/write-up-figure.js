@@ -8,19 +8,19 @@ const SIGNAL = {
     weight_change: 'Weight change',
     weight_norm: 'Weight norm',
     grad_norm: 'Gradient norm',
-    dead_unit_fraction: 'Dead units',
-    never_fired_fraction: 'Always dead units',
+    dead_unit_fraction: 'Dead-unit fraction',
+    never_fired_fraction: 'Always-dead fraction',
 };
 // Signals that are a share of a layer's units, shown as a percent.
 const SHARES = ['dead_unit_fraction', 'never_fired_fraction'];
-const PLACE = { below: 'below range', inside: 'in range', above: 'above range', invalid: 'not a number' };
-const CAUSE = { frozen_layer: 'a frozen layer', dead_units: 'dead units', unrecognized: 'no known cause' };
+const PLACE = { below: 'below the healthy range', inside: 'within the healthy range', above: 'above the healthy range', invalid: 'not a number' };
+const CAUSE = { frozen_layer: 'a frozen-layer fault', dead_units: 'a dead-unit fault', unrecognized: 'an unclassified cause' };
 const TAB = {
-    frozen: 'Frozen layer',
-    dead: 'Dead units',
-    healthy: 'Healthy run',
-    missed: 'A miss',
-    flagged: 'A false alarm',
+    frozen: 'Frozen-layer fault',
+    dead: 'Dead-unit fault',
+    healthy: 'True negative',
+    missed: 'False negative',
+    flagged: 'False positive',
 };
 
 const W = 340;
@@ -54,7 +54,7 @@ const chart = ({ values, low, high, alarm, percent, floorAtZero, label }) => {
         ? `<polyline class="run" points="${points(values, 0, alarm)}" /><polyline class="run after" points="${points(values, alarm - 1)}" />`
         : `<polyline class="run" points="${points(values)}" />`;
     const mark = alarm
-        ? `<line class="alarm" x1="${x(alarm - 1)}" y1="${TOP - 6}" x2="${x(alarm - 1)}" y2="${H - BOTTOM}" /><text x="${x(alarm - 1) + 6}" y="${TOP - 8}">Alarm</text>`
+        ? `<line class="alarm" x1="${x(alarm - 1)}" y1="${TOP - 6}" x2="${x(alarm - 1)}" y2="${H - BOTTOM}" /><text x="${x(alarm - 1) + 6}" y="${TOP - 8}">Detection</text>`
         : '';
 
     return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${label}">
@@ -69,23 +69,23 @@ const chart = ({ values, low, high, alarm, percent, floorAtZero, label }) => {
 };
 
 const describe = (run) => {
-    if (!run.fault) return `${run.network}, a healthy run${run.lhd ? ' that was flagged' : ''}`;
+    if (!run.fault) return `${run.network}, a healthy run${run.lhd ? ' flagged as a false positive' : ''}`;
     const dead = run.fault.kind.match(/^dead(\d+)$/);
-    const what = dead ? `${dead[1]}% of ${run.fault.layer}'s units killed` : `${run.fault.layer} frozen`;
-    return `${run.network} with ${what}${run.lhd ? '' : ', a fault that was missed'}`;
+    const what = dead ? `${dead[1]}% of ${run.fault.layer}'s units disabled` : `${run.fault.layer} frozen`;
+    return `${run.network} with ${what}${run.lhd ? '' : ', a false negative'}`;
 };
 
-const silent = (run) => `No alarm in ${run.epochs} epochs`;
+const silent = (run) => `No detection in ${run.epochs} epochs`;
 
 const panel = (run, first) => {
     const { lhd } = run;
     const signal = SIGNAL[run.signal];
     const answer = lhd
-        ? `Alarm at epoch ${lhd.epoch} in ${lhd.layer}, ${CAUSE[lhd.cause] || lhd.cause.replace(/_/g, ' ')}`
+        ? `Detection at epoch ${lhd.epoch} in ${lhd.layer}, ${CAUSE[lhd.cause] || lhd.cause.replace(/_/g, ' ')}`
         : silent(run);
-    const curve = run.accuracy_alarm ? `Alarm at epoch ${run.accuracy_alarm}` : silent(run);
+    const curve = run.accuracy_alarm ? `Detection at epoch ${run.accuracy_alarm}` : silent(run);
     const signals = lhd
-        ? `\n  <ul class="demo-signals" aria-label="Signals of ${lhd.layer} at the alarm">${Object.entries(lhd.positions)
+        ? `\n  <ul class="demo-signals" aria-label="Signals of ${lhd.layer} at the detection">${Object.entries(lhd.positions)
               .map(([name, place]) => `<li${place === 'inside' ? '' : ' class="out"'}>${SIGNAL[name]} ${PLACE[place]}</li>`)
               .join('')}</ul>`
         : '';
@@ -110,7 +110,7 @@ const panel = (run, first) => {
         label: 'Validation accuracy for each epoch, with its healthy range',
     })}</div>
   </div>
-  <dl class="demo-answers"><dt>LHD</dt><dd>${answer}</dd><dt>Accuracy curve</dt><dd>${curve}</dd></dl>${signals}
+  <dl class="demo-answers"><dt>LHD</dt><dd>${answer}</dd><dt>Accuracy baseline</dt><dd>${curve}</dd></dl>${signals}
 </div>`;
 };
 

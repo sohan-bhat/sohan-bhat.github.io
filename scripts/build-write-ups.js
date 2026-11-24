@@ -547,7 +547,7 @@ const posts = fs
         let drawn = '';
         if (tabs) {
             const caption =
-                'Figure 1. Five saved runs, each replayed through LHD. The band is the healthy range and the dashed line is the alarm.';
+                'Figure 1. Five saved runs from the evaluation, each replayed through LHD, with the healthy range drawn as a band and the detection epoch drawn as a dashed line.';
             drawn = figure(JSON.parse(fs.readFileSync(data, 'utf8')), text.match(still)[1], caption);
             text = text.replace(still, 'FIGUREGOESHERE');
         }
