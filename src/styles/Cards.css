@@ -153,7 +153,7 @@ button.card-shot:focus-visible {
 
 .more-arrow {
     flex: none;
-    transition: transform 180ms var(--ease-out);
+    transition: transform var(--settle) var(--spring);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -241,15 +241,16 @@ button.card-shot:focus-visible {
     }
 }
 
-/* A tile gives a little when pressed, less than a button because it is so
-   much bigger. */
+/* A tile gives a little when pressed, a smaller share of its size than an
+   icon because it is so much bigger, and springs back when let go. */
 @media (prefers-reduced-motion: no-preference) {
     .card-frame {
-        transition: transform var(--press) var(--ease-out);
+        transition: transform var(--settle) var(--spring);
     }
 
     .card-frame:active {
         transform: scale(0.985);
+        transition: transform 160ms var(--ease-out);
     }
 }
 

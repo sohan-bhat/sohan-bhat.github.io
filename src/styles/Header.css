@@ -99,7 +99,7 @@
    links. It is the retro push button the site once used for its main links,
    filled blue: a hard shadow gives it depth, and a click presses it in. */
 .hero-cv {
-    --press: 3px;
+    --push: 3px;
     display: inline-flex;
     align-items: center;
     /* 34px tall, with its blue face centred on the row's line; the shadow
@@ -109,7 +109,7 @@
     border: 1px solid #1c3a7e;
     border-radius: var(--radius);
     background: var(--blue);
-    box-shadow: var(--press) var(--press) 0 #1c3a7e;
+    box-shadow: var(--push) var(--push) 0 #1c3a7e;
     color: var(--bg);
     font-size: var(--size-small);
     font-weight: 600;
@@ -123,38 +123,28 @@
 
 .hero-cv:active {
     box-shadow: none;
-    transform: translate(var(--press), var(--press));
+    transform: translate(var(--push), var(--push));
 }
 
 .hero-cv {
     transition: background-color var(--fade) ease;
 }
 
-/* The button goes down fast and comes back up a little slower. Where the
-   browser can draw a spring, it comes up on one: the only overshoot on the
-   site, under 2% of the 3px it travels. */
+/* The button goes down fast and comes back up on the spring, about half a
+   pixel past where it rests, with its shadow. */
 @media (prefers-reduced-motion: no-preference) {
     .hero-cv {
         transition:
             background-color var(--fade) ease,
-            transform var(--press) var(--ease-out),
-            box-shadow var(--press) var(--ease-out);
-    }
-
-    @supports (transition-timing-function: linear(0, 1)) {
-        .hero-cv {
-            transition:
-                background-color var(--fade) ease,
-                transform 0.3s var(--spring),
-                box-shadow 0.3s var(--spring);
-        }
+            transform var(--settle) var(--spring),
+            box-shadow var(--settle) var(--spring);
     }
 
     .hero-cv:active {
         transition:
             background-color var(--fade) ease,
-            transform 0.1s var(--ease-out),
-            box-shadow 0.1s var(--ease-out);
+            transform var(--press) var(--ease-out),
+            box-shadow var(--press) var(--ease-out);
     }
 }
 
