@@ -15,7 +15,9 @@
 // between `<!-- figure -->` and `<!-- /figure -->` is a still picture and its
 // caption, which is what GitHub shows. When write-ups/data/<name>.json
 // exists, the page shows the runs in that file in its place, one per tab,
-// drawn by scripts/write-up-figure.js. Nothing in a post is bold.
+// drawn by scripts/write-up-figure.js. Nothing in a post is bold. The
+// Write-ups page previews a post with its line in write-ups/synopses.json,
+// or with its opening paragraph when it has none.
 
 const fs = require('fs');
 const path = require('path');
@@ -26,6 +28,10 @@ const ROOT = path.resolve(__dirname, '..');
 const POSTS = path.join(ROOT, 'write-ups');
 const OUT = path.join(ROOT, 'public', 'write-ups');
 const LIST = path.join(ROOT, 'src', 'data', 'write-ups.json');
+// A write-up's preview on the Write-ups page, by the name of its file,
+// for a write-up whose first paragraph is too long to be one.
+const SYNOPSES = path.join(POSTS, 'synopses.json');
+const synopses = fs.existsSync(SYNOPSES) ? JSON.parse(fs.readFileSync(SYNOPSES, 'utf8')) : {};
 const SITE = 'https://sohanbhat.me';
 
 const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -488,9 +494,11 @@ const posts = fs
         [author, text] = take(text, 'Author');
         [published, text] = take(text, 'Published');
 
-        // The page's description: the first paragraph without its TL;DR
-        // label, as many whole sentences as a search result shows.
-        const first = plain(text.trim().split(/\n\s*\n/)[0]).replace(/\s+/g, ' ').replace(/^TL;DR\s*/, '');
+        // The write-up's preview on the Write-ups page: the one written for
+        // it in write-ups/synopses.json, or else its first paragraph
+        // without the TL;DR label. The page's description is as many whole
+        // sentences of that preview as a search result shows.
+        const first = synopses[name] || plain(text.trim().split(/\n\s*\n/)[0]).replace(/\s+/g, ' ').replace(/^TL;DR\s*/, '');
         let summary = '';
         for (const sentence of first.match(/[^.!?]+[.!?]+/g)) {
             if (summary && (summary + sentence).length > 158) break;
