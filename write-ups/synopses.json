@@ -1,3 +1,3 @@
 {
-    "lhd": "As models advance, the compute needed for training increases exponentially. This makes one kind of bug expensive to deal with: silent failures. For instance, a layer in a convolutional neural network may stop learning while the outputs look normal. Layer Health Diagnostics (LHD) monitors each layer during training and stops these runs when a layer breaks."
+    "lhd": "As models advance, the compute needed for training increases exponentially. Many runs are also experimental, which makes one kind of bug expensive to deal with, namely the silent failure. For instance, a layer in a convolutional neural network may stop learning while the outputs look normal. Layer Health Diagnostics, or LHD, checks each layer during training and stops a run when a layer breaks."
 }
