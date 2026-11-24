@@ -2,14 +2,12 @@ import React from 'react';
 import Toolbar from '../components/Toolbar';
 import Footer from '../components/Footer';
 import writeUps from '../data/write-ups.json';
-import synopses from '../data/write-up-synopses';
 import '../styles/Cards.css';
 import '../styles/Pages.css';
 
 // The Write-ups page: every write-up, newest first, with its title, when it
-// was published and its synopsis, or its opening paragraph when it has none.
-// The title opens it. The list is built from the Markdown files in write-ups/
-// by scripts/build-write-ups.js.
+// was published and its opening paragraph. The title opens it. The list is
+// built from the Markdown files in write-ups/ by scripts/build-write-ups.js.
 const WriteUpsPage = () => (
     <>
         <Toolbar current="write-ups" />
@@ -25,7 +23,7 @@ const WriteUpsPage = () => (
                             <p className="show-facts">
                                 <span>{post.published}</span>
                             </p>
-                            <p className="show-line">{synopses[post.name] || post.opening}</p>
+                            <p className="show-line">{post.opening}</p>
                         </li>
                     ))}
                 </ul>

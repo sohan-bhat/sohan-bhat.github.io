@@ -63,7 +63,7 @@ const describe = (run) => {
     if (!run.fault) return `${run.network}, a healthy run`;
     const dead = run.fault.kind.match(/^dead(\d+)$/);
     const what = dead ? `${dead[1]}% of ${run.fault.layer}'s units killed` : `${run.fault.layer} frozen`;
-    return `${run.network} with ${what}${run.lhd ? '' : ', a fault I missed'}`;
+    return `${run.network} with ${what}${run.lhd ? '' : ', a fault LHD missed'}`;
 };
 
 const silent = (run) => `No alarm in ${run.epochs} epochs`;
