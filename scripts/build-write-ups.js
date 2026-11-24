@@ -423,8 +423,14 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         color: var(--accent);
       }
       @media (max-width: 600px) {
+        /* On a phone the tabs take a second row and a column heading two
+           lines, so every tab and every column is in view. */
         .demo-tabs {
-          gap: 1.1rem;
+          flex-wrap: wrap;
+          gap: 0 1.1rem;
+        }
+        th:not(:first-child) {
+          white-space: normal;
         }
         .demo-charts {
           grid-template-columns: 1fr;
@@ -516,7 +522,7 @@ const posts = fs
         let drawn = '';
         if (tabs) {
             const caption =
-                'Figure 1. Four saved runs, each replayed through LHD. The band is the healthy range and the dashed line is the alarm.';
+                'Figure 1. Five saved runs, each replayed through LHD. The band is the healthy range and the dashed line is the alarm.';
             drawn = figure(JSON.parse(fs.readFileSync(data, 'utf8')), text.match(still)[1], caption);
             text = text.replace(still, 'FIGUREGOESHERE');
         }

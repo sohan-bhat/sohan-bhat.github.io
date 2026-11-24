@@ -9,10 +9,19 @@ const SIGNAL = {
     weight_norm: 'Weight norm',
     grad_norm: 'Gradient norm',
     dead_unit_fraction: 'Dead units',
+    never_fired_fraction: 'Always dead units',
 };
+// Signals that are a share of a layer's units, shown as a percent.
+const SHARES = ['dead_unit_fraction', 'never_fired_fraction'];
 const PLACE = { below: 'below range', inside: 'in range', above: 'above range', invalid: 'not a number' };
-const CAUSE = { frozen_layer: 'a frozen layer', dead_units: 'dead units' };
-const TAB = { frozen: 'Frozen layer', dead: 'Dead units', healthy: 'Healthy run', missed: 'A miss' };
+const CAUSE = { frozen_layer: 'a frozen layer', dead_units: 'dead units', unrecognized: 'no known cause' };
+const TAB = {
+    frozen: 'Frozen layer',
+    dead: 'Dead units',
+    healthy: 'Healthy run',
+    missed: 'A miss',
+    flagged: 'A false alarm',
+};
 
 const W = 340;
 const H = 190;
@@ -60,7 +69,7 @@ const chart = ({ values, low, high, alarm, percent, floorAtZero, label }) => {
 };
 
 const describe = (run) => {
-    if (!run.fault) return `${run.network}, a healthy run`;
+    if (!run.fault) return `${run.network}, a healthy run${run.lhd ? ' that we flagged' : ''}`;
     const dead = run.fault.kind.match(/^dead(\d+)$/);
     const what = dead ? `${dead[1]}% of ${run.fault.layer}'s units killed` : `${run.fault.layer} frozen`;
     return `${run.network} with ${what}${run.lhd ? '' : ', a fault we missed'}`;
@@ -88,7 +97,7 @@ const panel = (run, first) => {
         low: run.low,
         high: run.high,
         alarm: lhd && lhd.epoch,
-        percent: run.signal === 'dead_unit_fraction',
+        percent: SHARES.includes(run.signal),
         floorAtZero: true,
         label: `${signal} of ${run.layer} for each epoch, with its healthy range`,
     })}</div>
