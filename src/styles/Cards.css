@@ -151,7 +151,7 @@ button.card-shot:focus-visible {
 
 .more-arrow {
     flex: none;
-    transition: transform 0.15s ease-out;
+    transition: transform 0.4s var(--spring);
 }
 
 .more:hover .more-arrow {

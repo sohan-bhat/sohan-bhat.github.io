@@ -126,6 +126,20 @@
     transform: translate(var(--press), var(--press));
 }
 
+/* The button goes down fast and springs back up when let go. */
+@media (prefers-reduced-motion: no-preference) {
+    .hero-cv {
+        transition:
+            background-color var(--ease-time) ease,
+            transform 0.4s var(--spring),
+            box-shadow 0.4s var(--spring);
+    }
+
+    .hero-cv:active {
+        transition-duration: var(--ease-time), 0.06s, 0.06s;
+    }
+}
+
 @media (max-width: 600px) {
     .header {
         padding-top: 2.5rem;

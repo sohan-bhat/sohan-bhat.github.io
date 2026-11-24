@@ -140,14 +140,18 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
       }
       .toolbar-links {
         display: flex;
-        gap: 1.6rem;
+        gap: clamp(0.7rem, 3.2vw, 1.5rem);
         font-size: 0.9375rem;
+      }
+      @media (max-width: 350px) {
+        .toolbar-links {
+          gap: 0.55rem;
+          font-size: 0.8125rem;
+        }
       }
       @media (min-width: 601px) {
         .toolbar-links {
-          justify-content: space-between;
-          gap: 0;
-          width: clamp(240px, 26vw, 270px);
+          gap: 1.5rem;
         }
       }
       .toolbar-links a {
@@ -158,6 +162,46 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
       .toolbar-links a:hover,
       .toolbar-links a[aria-current] {
         color: var(--ink);
+      }
+      /* The site's motion, from MOTION in src/styles/App.css: colours ease,
+         a pressed link dips and springs back, and going to another page
+         the old one fades out and the new one fades in and settles while
+         the toolbar stays put. */
+      @media (prefers-reduced-motion: no-preference) {
+        .toolbar-links a,
+        .toolbar-home {
+          transition:
+            color 0.2s ease,
+            transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .toolbar-links a:active,
+        .toolbar-home:active {
+          transform: scale(0.93);
+          transition-duration: 0.2s, 0.08s;
+        }
+        @view-transition {
+          navigation: auto;
+        }
+        .toolbar {
+          view-transition-name: toolbar;
+        }
+        ::view-transition-old(root) {
+          animation: 0.14s ease-in both page-out;
+        }
+        ::view-transition-new(root) {
+          animation: 0.38s cubic-bezier(0.33, 0.6, 0.3, 1) both page-in;
+        }
+      }
+      @keyframes page-out {
+        to {
+          opacity: 0;
+        }
+      }
+      @keyframes page-in {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
       }
       /* The post: one column at a width that reads well. */
       main {
@@ -203,6 +247,7 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         text-decoration-color: rgb(164 68 28 / 0.5);
         text-decoration-thickness: 1px;
         text-underline-offset: 5px;
+        transition: text-decoration-color 0.2s ease;
       }
       article a:hover {
         text-decoration-color: var(--accent);
@@ -288,6 +333,9 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         font-size: 1rem;
         white-space: nowrap;
         cursor: pointer;
+        transition:
+          color 0.2s ease,
+          box-shadow 0.2s ease;
       }
       .demo-tabs button:hover {
         color: var(--ink);
@@ -392,6 +440,7 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         <a href="/projects/">Projects</a>
         <a href="/write-ups/" aria-current="true">Write-ups</a>
         <a href="/robotics/">Robotics</a>
+        <a href="/honors/">Honors</a>
       </div>
     </nav>
     <main>
