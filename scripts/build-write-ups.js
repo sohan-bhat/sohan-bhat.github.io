@@ -116,6 +116,7 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
       :root {
         color-scheme: light;
         --bg: #e9e3d6;
+        --raised: #dfd8c9;
         --ink: #26211b;
         --ink-soft: #62594d;
         --line: #d2c9b7;
@@ -148,6 +149,32 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
       }
       ::selection {
         background: rgb(164 68 28 / 0.18);
+      }
+      /* The site's scrollbar, from src/styles/App.css: a square thumb with a
+         hairline edge on a finely hatched track. Firefox, which has no such
+         selectors, gets matching colors. */
+      ::-webkit-scrollbar {
+        width: 14px;
+        height: 14px;
+      }
+      ::-webkit-scrollbar-track {
+        border-left: 1px solid var(--line);
+        background: var(--bg) repeating-linear-gradient(45deg, rgb(38 33 27 / 0.04) 0 2px, transparent 2px 4px);
+      }
+      ::-webkit-scrollbar-thumb {
+        border: 1px solid var(--edge);
+        background: var(--raised);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        border-color: var(--ink-soft);
+      }
+      ::-webkit-scrollbar-corner {
+        background: var(--bg);
+      }
+      @supports not selector(::-webkit-scrollbar) {
+        html {
+          scrollbar-color: var(--edge) var(--bg);
+        }
       }
       :focus-visible {
         outline: 2px solid var(--ink);
