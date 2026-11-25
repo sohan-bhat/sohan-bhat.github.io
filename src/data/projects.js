@@ -140,8 +140,8 @@ const projects = [
         stack: ['Kotlin', 'TensorFlow Lite', 'React'],
         links: [
             { label: 'Site', url: 'https://vacantcourt.netlify.app' },
-            { label: 'Code', url: 'https://github.com/sohan-bhat/VacantCourt', title: 'Website code' },
-            { label: 'App', url: 'https://github.com/sohan-bhat/VacantCourtApp', title: 'Android app code' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/vacantcourt', title: 'Website code' },
+            { label: 'App', url: 'https://github.com/sohan-bhat/vacantcourtapp', title: 'Android app code' },
         ],
         image: 'vacantcourt',
         icon: '/imgs/icons/vacantcourt.png',
@@ -157,7 +157,7 @@ const projects = [
         stack: ['React', 'Node.js', 'Groq'],
         links: [
             { label: 'Site', url: 'https://trymochi.netlify.app' },
-            { label: 'Code', url: 'https://github.com/sohan-bhat/Mochi' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/mochi' },
         ],
         image: 'mochi',
         icon: '/imgs/icons/mochi.png',
@@ -174,7 +174,7 @@ const projects = [
         stack: ['React', 'Node.js', 'Groq'],
         links: [
             { label: 'Site', url: 'https://careerai.netlify.app' },
-            { label: 'Code', url: 'https://github.com/sohan-bhat/CareerAI' },
+            { label: 'Code', url: 'https://github.com/sohan-bhat/careerai' },
         ],
         image: 'careerai',
         icon: '/imgs/icons/career-ai.png',
