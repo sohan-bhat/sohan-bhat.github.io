@@ -122,6 +122,8 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         --line: #d2c9b7;
         --edge: #a89c87;
         --accent: #a4441c;
+        --good: #356a3f;
+        --bad: #9c3528;
         --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         --font-display: var(--font-body);
         /* The site's motion tokens, from src/styles/App.css. */
@@ -491,11 +493,14 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
         font-size: 0.9375rem;
         color: var(--ink-soft);
       }
+      /* A signal inside its healthy range is green and one outside is red.
+         The words say the same, so the colour is never the only cue. */
       .demo .demo-signals li {
         margin: 0;
+        color: var(--good);
       }
       .demo .demo-signals .out {
-        color: var(--accent);
+        color: var(--bad);
       }
       @media (max-width: 600px) {
         /* On a phone the tabs take a second row and a column heading two
