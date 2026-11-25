@@ -13,8 +13,9 @@ const PdfIcon = () => (
     </svg>
 );
 
-// How many certificates the home page shows, the newest ones.
-const HOME = 5;
+// The home page's certificates: the newest five of those not kept to the
+// Honors page.
+const onHome = certificates.filter((c) => c.home !== false).slice(0, 5);
 
 // A certificate's words: its title, then one line with who gave it and the
 // year and at most two links. Verify opens the issuer's own page for it. The
@@ -82,10 +83,9 @@ export const CertificateShot = ({ certificate: c, eager }) => (
     </li>
 );
 
-// Certificates on the home page, in the intro under my photo: the newest
-// five. The View all link at the end of the heading's row opens the Honors
-// page, which has every one with its picture. The list is
-// src/data/certificates.js.
+// Certificates on the home page, in the intro under my photo. The View all
+// link at the end of the heading's row opens the Honors page, which has
+// every one with its picture. The list is src/data/certificates.js.
 const Certificates = () => (
     <div className="hero-certs" id="certificates">
         <div className="section-head">
@@ -97,7 +97,7 @@ const Certificates = () => (
             </More>
         </div>
         <ul className="cert-list">
-            {certificates.slice(0, HOME).map((c) => (
+            {onHome.map((c) => (
                 <Certificate key={c.id} certificate={c} short />
             ))}
         </ul>

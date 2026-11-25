@@ -1,6 +1,7 @@
 // Certificates. `earned` is when each was earned, and lists are newest
-// first, so a new one slots in by its date. The home page shows the newest
-// five and the Honors page shows them all, each with its picture.
+// first, so a new one slots in by its date. The Honors page shows them all,
+// each with its picture. The home page shows the newest five, leaving out
+// any marked `home: false`.
 // `verify` is the issuer's own page for a certificate, the Verify link.
 // `file` is a copy of the PDF in public/certificates, opened by the icon.
 // One with no issuer page has only the icon. `short` is the title the home
@@ -22,7 +23,7 @@ const certificates = [
     {
         id: 'hackerrank-software-engineer',
         title: 'HackerRank Software Engineer certificate',
-        short: 'Software Engineer',
+        home: false,
         issuer: 'HackerRank',
         earned: '2026-11-21',
         verify: 'https://www.hackerrank.com/certificates/afa5ebe6b947',
@@ -32,7 +33,7 @@ const certificates = [
     {
         id: 'hackerrank-problem-solving-intermediate',
         title: 'Problem Solving (Intermediate)',
-        short: 'Problem Solving',
+        home: false,
         issuer: 'HackerRank',
         earned: '2026-11-21',
         verify: 'https://www.hackerrank.com/certificates/ed6512f46484',
