@@ -30,6 +30,22 @@ const OUT = path.join(ROOT, 'public', 'write-ups');
 const LIST = path.join(ROOT, 'src', 'data', 'write-ups.json');
 // A write-up's preview on the Write-ups page, by the name of its file,
 // for a write-up whose first paragraph is too long to be one.
+// Marks every cell of a table column that holds words: a column after the
+// first where some body cell has no digit in it.
+const wordColumns = (table) => {
+    const rows = table.match(/<tr>[\s\S]*?<\/tr>/g) || [];
+    const cells = (row) => row.match(/<t[hd][^>]*>[\s\S]*?<\/t[hd]>/g) || [];
+    const body = rows.slice(1).map(cells);
+    const words = (i) => i > 0 && body.some((row) => row[i] && !/\d/.test(row[i].replace(/<[^>]+>/g, '')));
+    return table.replace(/<tr>[\s\S]*?<\/tr>/g, (row) => {
+        let i = -1;
+        return row.replace(/<(t[hd])([^>]*)>/g, (cell, tag, rest) => {
+            i += 1;
+            return words(i) ? `<${tag}${rest} class="words">` : cell;
+        });
+    });
+};
+
 const SYNOPSES = path.join(POSTS, 'synopses.json');
 const synopses = fs.existsSync(SYNOPSES) ? JSON.parse(fs.readFileSync(SYNOPSES, 'utf8')) : {};
 const SITE = 'https://sohanbhat.me';
@@ -216,7 +232,7 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
       }
       /* The post: one column at a width that reads well. */
       main {
-        max-width: 46rem;
+        max-width: 50rem;
         margin: 0 auto;
         padding: 3rem 1.5rem 6rem;
       }
@@ -305,6 +321,13 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
       td:not(:first-child) {
         text-align: right;
         white-space: nowrap;
+      }
+      /* A column of words reads from the left and wraps, so a table of
+         text fits the page with no scrollbar. */
+      th.words,
+      td.words {
+        text-align: left;
+        white-space: normal;
       }
       /* The summary, in a card. Its label is small and spaced, not bold. */
       .tldr,
@@ -569,6 +592,9 @@ const posts = fs
             })
             // The line under a figure is its caption.
             .replace(/<p>(Figure \d+\.)/g, '<p class="caption">$1')
+            // A column with a cell of words and no number is marked, so it
+            // is set from the left and wraps.
+            .replace(/<table>[\s\S]*?<\/table>/g, wordColumns)
             // A wide table scrolls inside its own box on a phone.
             .replace(/<table>/g, '<div class="table"><table>')
             .replace(/<\/table>/g, '</table></div>')
