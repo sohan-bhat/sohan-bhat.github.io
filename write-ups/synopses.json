@@ -1,3 +1,3 @@
 {
-    "lhd": "With each new generation of models, the compute needed for training increases exponentially. Many runs are also experimental, so one kind of bug is expensive to deal with, namely the silent failure. For instance, the weights of a layer in a convolutional neural network may stay unchanged while the outputs appear normal. With Layer Health Diagnostics, or LHD, each layer is checked during training and a run is stopped when a layer becomes faulty."
+    "lhd": "With each new generation of models, the compute needed for training is exponentially higher. Many runs are also experimental, so one kind of bug is expensive to deal with, namely the silent failure. For instance, the weights of a layer in a convolutional neural network may be unchanged during training while the outputs are still normal. With Layer Health Diagnostics, or LHD, each layer is checked during training and a run is stopped when a layer is faulty."
 }
