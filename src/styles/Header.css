@@ -2,7 +2,8 @@
     padding: 3.5rem 0 2rem;
 }
 
-/* The name and links beside the photo, then Write-ups beside Certificates.
+/* The name, links and skills beside the photo, then Write-ups beside
+   Certificates.
    The photo fills the right column, so its right edge, the certificates'
    and the toolbar's all line up with the right edge of the page, as the
    left edges line up with the name. */
@@ -26,11 +27,9 @@
     grid-area: certs;
 }
 
-/* Write-ups, then Skills under them. */
+/* Write-ups. */
 .hero-left {
     grid-area: writeups;
-    display: grid;
-    row-gap: 2.5rem;
     min-width: 0;
 }
 

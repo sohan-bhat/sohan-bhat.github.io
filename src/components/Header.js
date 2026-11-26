@@ -53,6 +53,8 @@ const Header = () => (
                         CV
                     </a>
                 </div>
+
+                <Skills />
             </div>
 
             <img
@@ -69,7 +71,6 @@ const Header = () => (
             <Certificates />
             <div className="hero-left">
                 <WriteUps />
-                <Skills />
             </div>
 
         </div>

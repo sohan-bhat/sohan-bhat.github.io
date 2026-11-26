@@ -2,21 +2,15 @@ import React from 'react';
 import skills from '../data/skills';
 import '../styles/Skills.css';
 
-// Skills, in the intro under the write-ups: one row per group, its name on
-// the left and its languages or tools beside it, as plain text. The list is
+// Skills, in the intro under the links: one small gray line of languages
+// and tools, with space between them and no marks. The list is
 // src/data/skills.js.
 const Skills = () => (
-    <div className="hero-skills" id="skills">
-        <h2 className="section-title">Skills</h2>
-        <dl className="skill-rows">
-            {skills.map(({ group, items }) => (
-                <div className="skill-row" key={group}>
-                    <dt className="skill-label">{group}</dt>
-                    <dd className="skill-list">{items.join(', ')}</dd>
-                </div>
-            ))}
-        </dl>
-    </div>
+    <ul className="skills-line" id="skills" aria-label="Skills">
+        {skills.map((skill) => (
+            <li key={skill}>{skill}</li>
+        ))}
+    </ul>
 );
 
 export default Skills;

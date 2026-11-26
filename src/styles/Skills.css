@@ -1,37 +1,16 @@
-/* Skills: four rows of plain text behind the same orange line as a write-up
-   or a certificate. Each row is its group's name in gray, at a fixed width,
-   then the list in ink. No badges, boxes or dividers. */
-.hero-skills .section-title {
-    margin-bottom: 1rem;
-}
-
-.skill-rows {
-    display: grid;
-    row-gap: 0.35rem;
-    border-left: 2px solid var(--accent);
-    padding-left: 1.25rem;
-}
-
-.skill-row {
-    display: grid;
-    /* Wide enough for the longest name on one line. */
-    grid-template-columns: 200px minmax(0, 1fr);
-    column-gap: 1rem;
-    font-size: var(--size-body);
-    line-height: 1.6;
-}
-
-.skill-label {
+/* Skills: one small gray line under the links in the intro. The space
+   between two skills is all that separates them, wider than the space
+   inside a name. On a narrow screen the line wraps between skills. */
+.skills-line {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 1.1rem;
+    margin-top: 1.5rem;
+    font-size: var(--size-small);
     color: var(--ink-soft);
 }
 
-/* Phones: each name above its list. */
-@media (max-width: 600px) {
-    .skill-rows {
-        row-gap: 0.8rem;
-    }
-
-    .skill-row {
-        grid-template-columns: minmax(0, 1fr);
-    }
+.skills-line li {
+    white-space: nowrap;
 }
