@@ -3,7 +3,7 @@ import writeUps from '../data/write-ups.json';
 import results from '../data/write-up-results';
 import '../styles/WriteUps.css';
 
-// Write-ups, in the intro under the name and links, beside Certificates.
+// Write-ups, under the intro's name and links, beside Certificates.
 // Each is its title, which opens it, its main result in a sentence, and
 // when it was published. The heading opens the Write-ups page. The list is built from the Markdown files in
 // write-ups/ by scripts/build-write-ups.js, newest first.

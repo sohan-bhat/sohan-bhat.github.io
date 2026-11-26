@@ -1,21 +1,30 @@
 .header {
-    padding: 3.5rem 0 2rem;
+    padding: 3.5rem 0 0;
 }
 
-/* The name, links and skills beside the photo, then Write-ups beside
-   Certificates.
+/* The name, links and skills beside the photo, then, in a second block
+   with the same two columns, Write-ups beside Certificates.
    The photo fills the right column, so its right edge, the certificates'
    and the toolbar's all line up with the right edge of the page, as the
    left edges line up with the name. */
-.hero-layout {
+.hero-layout,
+.intro-more {
     display: grid;
     grid-template-columns: minmax(0, 1fr) var(--side);
-    grid-template-areas:
-        'text photo'
-        'writeups certs';
     column-gap: 3rem;
-    row-gap: 2rem;
     align-items: start;
+}
+
+.hero-layout {
+    grid-template-areas: 'text photo';
+}
+
+/* The block is a part of the page in .App's column, where a centred box
+   is only as wide as its contents unless told otherwise. */
+.container.intro-more {
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .hero-text {
@@ -23,13 +32,7 @@
     min-width: 0;
 }
 
-.hero-certs {
-    grid-area: certs;
-}
-
-/* Write-ups. */
-.hero-left {
-    grid-area: writeups;
+.hero-write-ups {
     min-width: 0;
 }
 
@@ -158,10 +161,45 @@
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
             'photo'
-            'text'
-            'certs'
-            'writeups';
+            'text';
         row-gap: 1.75rem;
+    }
+
+    /* A phone shows one column, and a visitor should not have to scroll
+       past two lists of words to reach the work. So the projects come
+       straight after the intro, and Write-ups and Certificates each become
+       a part of the page in their own right: write-ups after the projects,
+       certificates after the robotics. The page reads pictures, words,
+       pictures, words. The parts of a page are laid out in a column by
+       .App, so `order` moves them. */
+    .intro-more {
+        display: contents;
+    }
+
+    .hero-write-ups,
+    .hero-certs {
+        max-width: none;
+        padding: 3.25rem 1.5rem;
+    }
+
+    .header ~ .projects {
+        order: 1;
+    }
+
+    .hero-write-ups {
+        order: 2;
+    }
+
+    .header ~ .robotics {
+        order: 3;
+    }
+
+    .hero-certs {
+        order: 4;
+    }
+
+    .header ~ .footer {
+        order: 5;
     }
 
     /* Tighter, and still equal, so the email, the icons and the CV button

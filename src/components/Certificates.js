@@ -83,7 +83,7 @@ export const CertificateShot = ({ certificate: c, eager }) => (
     </li>
 );
 
-// Certificates on the home page, in the intro under my photo. The View all
+// Certificates on the home page, under my photo. The View all
 // link at the end of the heading's row opens the Honors page, which has
 // every one with its picture. The list is src/data/certificates.js.
 const Certificates = () => (
