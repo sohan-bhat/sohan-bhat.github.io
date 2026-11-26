@@ -26,7 +26,7 @@ const Projects = () => {
                     </More>
                 </div>
 
-                <Skills />
+                <Skills id="skills" />
 
                 <ul className="cards project-cards">
                     {best.map((p) => (

@@ -1,5 +1,5 @@
-/* Skills: one small gray line under the Projects heading, starting at the
-   heading's left edge. Wide spaces are all that separate the skills. The
+/* Skills: one small gray line under the Projects heading and one under
+   Robotics, each starting at its heading's left edge. Wide spaces are all that separate the skills. The
    line is text, so on a narrow screen it wraps between skills, and its
    rows come out near one length. */
 .skills-line {
@@ -17,8 +17,9 @@
     white-space: nowrap;
 }
 
-/* The heading sits close over its line, and the line keeps the tiles'
+/* Each heading sits close over its line, and the line keeps the tiles'
    usual distance. */
-.projects .section-head {
+.projects .section-head,
+.robotics .section-head {
     margin-bottom: 0.3rem;
 }
