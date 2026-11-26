@@ -18,8 +18,9 @@ const PdfIcon = () => (
 const onHome = certificates.filter((c) => c.home !== false).slice(0, 5);
 
 // A certificate's words: its title, then one line with who gave it and the
-// year and at most two links. Verify opens the issuer's own page for it. The
-// icon opens our copy of the PDF. Both open in a new tab, and a certificate
+// year and at most two links, which stay together where the line wraps.
+// Verify opens the issuer's own page for it. The icon opens our copy of
+// the PDF. Both open in a new tab, and a certificate
 // with no issuer page has only the icon. `short` shows the short title
 // where a certificate has one, to stay on one line.
 const Words = ({ certificate: c, short, Title }) => (
@@ -31,24 +32,26 @@ const Words = ({ certificate: c, short, Title }) => (
             <span>
                 {c.issuer}, {c.earned.slice(0, 4)}
             </span>
-            {c.verify && (
-                <a className="cert-link text-link" href={c.verify} target="_blank" rel="noreferrer" aria-label={`Verify the ${c.title.replace(/ certificate$/, '')} certificate`}>
-                    Verify
-                </a>
-            )}
-            {c.file && (
-                <a
-                    className="cert-pdf"
-                    href={c.file}
-                    target="_blank"
-                    rel="noreferrer"
-                    title="View certificate PDF"
-                    aria-label="View certificate PDF"
-                    aria-describedby={`cert-${c.id}`}
-                >
-                    <PdfIcon />
-                </a>
-            )}
+            <span className="cert-links">
+                {c.verify && (
+                    <a className="cert-link text-link" href={c.verify} target="_blank" rel="noreferrer" aria-label={`Verify the ${c.title.replace(/ certificate$/, '')} certificate`}>
+                        Verify
+                    </a>
+                )}
+                {c.file && (
+                    <a
+                        className="cert-pdf"
+                        href={c.file}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="View certificate PDF"
+                        aria-label="View certificate PDF"
+                        aria-describedby={`cert-${c.id}`}
+                    >
+                        <PdfIcon />
+                    </a>
+                )}
+            </span>
         </p>
     </>
 );
@@ -61,15 +64,16 @@ export const Certificate = ({ certificate, short, Title = 'h3' }) => (
 );
 
 // One certificate in the Honors page's gallery: a picture of it in a frame,
-// every frame the same shape, and its row underneath. `eager` is for the
-// pictures a visitor sees first; the rest load when scrolled to.
+// every frame the same shape, and its words underneath, or beside it on a
+// phone. `eager` is for the pictures a visitor sees first; the rest load
+// when scrolled to.
 export const CertificateShot = ({ certificate: c, eager }) => (
     <li className="cert-shot">
         <div className="cert-frame">
             <img
                 src={`/imgs/cert-${c.id}-1120.webp`}
                 srcSet={`/imgs/cert-${c.id}-560.webp 560w, /imgs/cert-${c.id}-1120.webp 1120w`}
-                sizes="(max-width: 700px) 92vw, 462px"
+                sizes="(max-width: 700px) 120px, 302px"
                 width={c.picture[0]}
                 height={c.picture[1]}
                 alt={`${c.title.replace(/ certificate$/, '')} certificate from ${c.issuer}`}

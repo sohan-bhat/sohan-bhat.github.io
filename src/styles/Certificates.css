@@ -31,6 +31,14 @@
     color: var(--ink-soft);
 }
 
+/* The two links keep to one line, so the icon never drops under Verify
+   alone. */
+.cert-links {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 1.1rem;
+}
+
 .cert-link {
     font-size: var(--size-small);
 }
@@ -43,19 +51,31 @@
     margin-bottom: 1rem;
 }
 
-/* The Honors page: a gallery, two pictures to a row and one on a phone,
-   each with its row under it. */
+/* The Honors page: a gallery, three pictures to a row with each one's
+   words under it, so all five show on one laptop screen. On a phone each
+   is a small picture with its words beside it, one under the next. */
 .cert-gallery {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2.75rem 1.75rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.25rem 1.5rem;
 }
 
 @media (max-width: 700px) {
     .cert-gallery {
         grid-template-columns: minmax(0, 1fr);
-        gap: 2.25rem;
+        gap: 1.5rem;
+    }
+
+    .cert-shot {
+        display: grid;
+        grid-template-columns: 7.5rem minmax(0, 1fr);
+        column-gap: 1rem;
+        align-items: center;
+    }
+
+    .cert-shot .cert-frame {
+        margin-bottom: 0;
     }
 }
 

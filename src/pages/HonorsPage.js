@@ -5,8 +5,8 @@ import { CertificateShot } from '../components/Certificates';
 import certificates from '../data/certificates';
 import '../styles/Pages.css';
 
-// The Honors page: every certificate, newest first, as a gallery of
-// pictures with each one's row under it. Certificates are the only honors
+// The Honors page: every certificate, newest first, as a compact gallery
+// of pictures with each one's words under it. Certificates are the only honors
 // so far, so they are the page's one heading.
 const HonorsPage = () => (
     <>
@@ -16,7 +16,7 @@ const HonorsPage = () => (
                 <h1 className="section-title">Certificates</h1>
                 <ul className="cert-gallery">
                     {certificates.map((c, i) => (
-                        <CertificateShot key={c.id} certificate={c} eager={i < 2} />
+                        <CertificateShot key={c.id} certificate={c} eager={i < 3} />
                     ))}
                 </ul>
             </div>
