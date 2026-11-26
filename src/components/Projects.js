@@ -10,7 +10,7 @@ import '../styles/Projects.css';
 // showing a picture and a name; the line and links slide up when a tile is
 // pointed at or tapped. The View all projects link at the end of the
 // heading's row opens the Projects page, which has every project. Under
-// the heading, one small line says what the projects are built with.
+// the heading, one small line lists my skills.
 const { best } = split(projects);
 
 const Projects = () => {
