@@ -61,11 +61,11 @@
 }
 
 /* The email, the three icons and the CV button: everything centred on one
-   line, with the same 24px between each. */
+   line, with the same 32px between each. */
 .social-links {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 32px;
     flex-wrap: wrap;
 }
 
@@ -182,5 +182,19 @@
     .hero-photo {
         width: 112px;
         height: 112px;
+    }
+}
+
+/* Where the browser can measure the column the links sit in, their gaps are
+   as wide as that column allows, from 7px up to 32px, so the row keeps to
+   one line on every screen with room for it. The row is 281px wide without
+   its four gaps. The fixed gaps above are for older browsers. */
+@supports (width: 1cqw) {
+    .hero-text {
+        container-type: inline-size;
+    }
+
+    .social-links {
+        gap: clamp(7px, calc((100cqw - 284px) / 4), 32px);
     }
 }
