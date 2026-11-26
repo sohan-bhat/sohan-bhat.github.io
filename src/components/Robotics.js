@@ -10,7 +10,8 @@ import '../styles/Robotics.css';
 // same tiles Projects uses, a picture and a title each. A tile's link
 // slides up when it is pointed at or tapped. The See more link at the
 // end of the heading's row opens the Robotics page, which has everything.
-// Under the heading, one small line lists the tools.
+// Beside the heading, small and gray, is my role on the team, and under
+// the heading one small line lists the tools.
 const top = builds.filter((build) => build.top);
 const idOf = (build) => build.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
@@ -21,7 +22,10 @@ const Robotics = () => {
         <section className="robotics" id="robotics">
             <div className="container">
                 <div className="section-head">
-                    <h2 className="section-title">Robotics</h2>
+                    <div className="section-lead">
+                        <h2 className="section-title">Robotics</h2>
+                        <p className="section-role">Lead programmer</p>
+                    </div>
                     <More href="/robotics/" place="head" rest="robotics">
                         See more
                     </More>

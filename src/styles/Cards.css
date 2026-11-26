@@ -130,6 +130,23 @@ button.card-shot:focus-visible {
     margin-bottom: 0;
 }
 
+/* A heading with a few words beside it, small and gray on the heading's
+   baseline: my role beside Robotics. Where the row has no room for them,
+   they go under the heading. */
+.section-lead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.85rem;
+    min-width: 0;
+}
+
+.section-role {
+    font-size: var(--size-small);
+    color: var(--ink-soft);
+    white-space: nowrap;
+}
+
 /* The View all link: accent words with no underline until pointed at, and
    an arrow that steps 3px to the right then. */
 .more {
