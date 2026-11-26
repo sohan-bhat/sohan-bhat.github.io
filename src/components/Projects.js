@@ -18,9 +18,7 @@ const Projects = () => {
         <section className="projects" id="projects">
             <div className="container">
                 <div className="section-head">
-                    <h2 className="section-title">
-                        Projects<span className="title-period">.</span>
-                    </h2>
+                    <h2 className="section-title">Projects</h2>
                     <More href="/projects/" place="head">
                         View all projects
                     </More>

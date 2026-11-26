@@ -18,9 +18,7 @@ const Robotics = () => {
         <section className="robotics" id="robotics">
             <div className="container">
                 <div className="section-head">
-                    <h2 className="section-title">
-                        Robotics<span className="title-period">.</span>
-                    </h2>
+                    <h2 className="section-title">Robotics</h2>
                     <More href="/robotics/" place="head" rest="robotics">
                         See more
                     </More>

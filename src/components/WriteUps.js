@@ -11,7 +11,6 @@ const WriteUps = () => (
     <div className="hero-write-ups" id="write-ups">
         <h2 className="section-title">
             <a href="/write-ups/">Write-ups</a>
-            <span className="title-period">.</span>
         </h2>
         <ul className="write-up-list">
             {writeUps.map((post) => (

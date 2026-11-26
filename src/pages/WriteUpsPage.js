@@ -13,7 +13,7 @@ const WriteUpsPage = () => (
         <Toolbar current="write-ups" />
         <main className="page">
             <div className="container">
-                <h1 className="section-title">Write-ups<span className="title-period">.</span></h1>
+                <h1 className="section-title">Write-ups</h1>
                 <ul className="posts">
                     {writeUps.map((post) => (
                         <li className="post" key={post.name}>

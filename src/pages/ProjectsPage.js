@@ -26,7 +26,7 @@ const ProjectsPage = () => {
             <main className="page">
                 <div className="container">
                     <div className="page-head">
-                        <h1 className="section-title">Projects<span className="title-period">.</span></h1>
+                        <h1 className="section-title">Projects</h1>
                         <div className="sorter" role="group" aria-label="Show one kind of project">
                             {TABS.map((name) => (
                                 <button key={name} type="button" className="sorter-tab" aria-pressed={name === tab} onClick={() => setTab(name)}>

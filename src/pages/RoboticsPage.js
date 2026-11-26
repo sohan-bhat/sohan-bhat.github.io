@@ -49,13 +49,12 @@ const RoboticsPage = () => (
         <Toolbar current="robotics" />
         <main className="page">
             <div className="container">
-                <h1 className="section-title">Robotics<span className="title-period">.</span></h1>
+                <h1 className="section-title">Robotics</h1>
 
                 {teams.map((team) => (
                     <section className="page-group" key={team}>
                         <h2 className="section-title">
                             Team {team}
-                            <span className="title-period">.</span>
                         </h2>
                         <ul className="shows">
                             {builds

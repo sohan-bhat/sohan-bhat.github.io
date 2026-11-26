@@ -13,7 +13,7 @@ const HonorsPage = () => (
         <Toolbar current="honors" />
         <main className="page">
             <div className="container">
-                <h1 className="section-title">Certificates<span className="title-period">.</span></h1>
+                <h1 className="section-title">Certificates</h1>
                 <ul className="cert-gallery">
                     {certificates.map((c, i) => (
                         <CertificateShot key={c.id} certificate={c} eager={i < 2} />

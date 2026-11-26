@@ -7,9 +7,7 @@ import '../styles/Skills.css';
 // src/data/skills.js.
 const Skills = () => (
     <div className="hero-skills" id="skills">
-        <h2 className="section-title">
-            Skills<span className="title-period">.</span>
-        </h2>
+        <h2 className="section-title">Skills</h2>
         <dl className="skill-rows">
             {skills.map(({ group, items }) => (
                 <div className="skill-row" key={group}>

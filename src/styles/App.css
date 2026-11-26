@@ -1,16 +1,15 @@
 /* THE SYSTEM. Every section follows these rules.
 
    - One language, plain and clean, in one face, Source Sans 3. The name and
-     the section headings are bold and end in an orange period. No serif
-     and no monospace anywhere.
+     the section headings are bold. No serif and no monospace anywhere.
    - Four text styles and no others: the section heading, the card title,
      body text and one small style, set as --size-heading, --size-title,
      --size-body and --size-small. The name alone is larger.
    - Projects and Robotics share one card (Cards.css), so every picture has
      the same shape, edge and corner, and sits a little dimmed until its
      card is pointed at.
-   - Orange (--accent) is for heading periods, links and the line beside a
-     write-up or a certificate. Nothing else is orange.
+   - Orange (--accent) is for links and the line beside a write-up or a
+     certificate. Nothing else is orange.
    - Blue (--blue) is only for the CV button in the intro, a retro push
      button with a hard shadow that presses in on a click. It is the one
      button on the page, so it stands out as the place to look.
@@ -160,10 +159,6 @@ section {
     font-weight: 700;
     letter-spacing: -0.01em;
     margin-bottom: 1.75rem;
-}
-
-.title-period {
-    color: var(--accent);
 }
 
 /* Titles that open a page: the Write-ups heading on the home page, which

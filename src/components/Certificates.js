@@ -89,9 +89,7 @@ export const CertificateShot = ({ certificate: c, eager }) => (
 const Certificates = () => (
     <div className="hero-certs" id="certificates">
         <div className="section-head">
-            <h2 className="section-title">
-                Certificates<span className="title-period">.</span>
-            </h2>
+            <h2 className="section-title">Certificates</h2>
             <More href="/honors/" place="head" rest="certificates">
                 View all
             </More>
