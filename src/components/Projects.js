@@ -1,6 +1,7 @@
 import React from 'react';
 import Card, { useOpenCard } from './Card';
 import More from './More';
+import Skills from './Skills';
 import { split, picture, ProjectLine, ProjectLinks } from './ProjectParts';
 import projects from '../data/projects';
 import '../styles/Projects.css';
@@ -8,7 +9,8 @@ import '../styles/Projects.css';
 // Projects on the home page: the best ones as large tiles, all one size,
 // showing a picture and a name; the line and links slide up when a tile is
 // pointed at or tapped. The View all projects link at the end of the
-// heading's row opens the Projects page, which has every project.
+// heading's row opens the Projects page, which has every project. Under
+// the heading, one small line says what the projects are built with.
 const { best } = split(projects);
 
 const Projects = () => {
@@ -23,6 +25,8 @@ const Projects = () => {
                         View all projects
                     </More>
                 </div>
+
+                <Skills />
 
                 <ul className="cards project-cards">
                     {best.map((p) => (

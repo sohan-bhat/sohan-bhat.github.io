@@ -1,10 +1,9 @@
 import React from 'react';
 import { FaGithub, FaXTwitter, FaInstagram } from 'react-icons/fa6';
-import Skills from './Skills';
 import '../styles/Header.css';
 
-// The intro: the name, a line about me, the links and the skills, beside my
-// photo. Write-ups and Certificates follow it in src/pages/Home.js.
+// The intro: the name, a line about me and the links, beside my photo.
+// Write-ups and Certificates follow it in src/pages/Home.js.
 const Header = () => (
     <header className="header" id="intro">
         <div className="container hero-layout">
@@ -53,8 +52,6 @@ const Header = () => (
                         CV
                     </a>
                 </div>
-
-                <Skills />
             </div>
 
             <img

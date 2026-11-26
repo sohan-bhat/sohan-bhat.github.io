@@ -1,16 +1,33 @@
-/* Skills: one small gray line under the links in the intro. The space
-   between two skills is all that separates them, wider than the space
-   inside a name. On a narrow screen the line wraps between skills. */
+/* Skills: one small gray line under the Projects heading, "Built with"
+   and then each skill. Wide spaces are all that separate the skills, wider
+   than the space inside "Built with". The line is text, so on a narrow
+   screen it wraps between skills, and its rows come out near one length. */
 .skills-line {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.2rem 1.1rem;
-    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     font-size: var(--size-small);
+    line-height: 1.5;
     color: var(--ink-soft);
+    word-spacing: 0.9rem;
+    text-wrap: balance;
+}
+
+.skills-label {
+    word-spacing: normal;
+    white-space: nowrap;
+}
+
+.skills-line ul,
+.skills-line li {
+    display: inline;
+    list-style: none;
 }
 
 .skills-line li {
     white-space: nowrap;
+}
+
+/* The heading sits close over its line, and the line keeps the tiles'
+   usual distance. */
+.projects .section-head {
+    margin-bottom: 0.3rem;
 }
