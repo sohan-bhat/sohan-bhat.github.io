@@ -7,7 +7,8 @@
 // A post is written the way blog/lhd.md is in sohan-bhat/lhd, which
 // write-ups/lhd.md here began as a copy of and has since been reworded: a
 // `# Title`, then `### Author` and `### Published`, each followed by a line
-// with its value, then the post itself. Pictures sit in write-ups/img and are
+// with its value, then the post itself. Published is the day the post was
+// finished, written as in "November 25, 2026". Pictures sit in write-ups/img and are
 // linked as img/<file>. A PNG is taken to be a chart on a white page, and its
 // white is let through to the site's paper; a JPG or WebP is shown as it is.
 //
@@ -61,6 +62,13 @@ const take = (text, label) => {
     return [found[1].trim(), text.replace(found[0], '')];
 };
 
+// A post's Published line as a date. A line with only a month and a year
+// counts as the first of that month.
+const hasDay = (published) => /\d,? \d{4}$/.test(published);
+const dateOf = (published) => new Date(`${hasDay(published) ? '' : '1 '}${published} UTC`);
+// The same for structured data: 2026-11-25, or 2026-11 for a month alone.
+const isoOf = (published) => dateOf(published).toISOString().slice(0, hasDay(published) ? 10 : 7);
+
 // A PNG's width and height, read from its header.
 const pngSize = (file) => {
     const head = fs.readFileSync(file).subarray(16, 24);
@@ -90,7 +98,7 @@ const page = ({ name, title, author, published, summary, html, tabs }) => `<!DOC
           '@type': 'Article',
           headline: title,
           url: `${SITE}/write-ups/${name}/`,
-          datePublished: new Date(`1 ${published} UTC`).toISOString().slice(0, 7),
+          datePublished: isoOf(published),
           inLanguage: 'en',
           author: { '@type': 'Person', '@id': `${SITE}/#person`, name: author, url: `${SITE}/` },
           isPartOf: { '@id': `${SITE}/#website` },
@@ -637,7 +645,7 @@ const posts = fs
         return { name, title, published, url: `/write-ups/${name}/`, opening: first };
     })
     // Newest first.
-    .sort((a, b) => new Date(`1 ${b.published} UTC`) - new Date(`1 ${a.published} UTC`));
+    .sort((a, b) => dateOf(b.published) - dateOf(a.published));
 
 fs.writeFileSync(LIST, `${JSON.stringify(posts, null, 4)}\n`);
 console.log(`Built ${posts.length} write-up${posts.length === 1 ? '' : 's'} into public/write-ups.`);
