@@ -147,6 +147,16 @@ button.card-shot:focus-visible {
     white-space: nowrap;
 }
 
+/* On a wide screen the words stand beside the heading alone, where sharing
+   its baseline makes small words look dropped, so they sit at the middle
+   of the heading's capital letters. A phone keeps one baseline, since the
+   See more link is right beside them there. */
+@media (min-width: 601px) {
+    .section-lead {
+        align-items: center;
+    }
+}
+
 /* The View all link: accent words with no underline until pointed at, and
    an arrow that steps 3px to the right then. */
 .more {
