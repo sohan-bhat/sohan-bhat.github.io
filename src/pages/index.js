@@ -36,7 +36,7 @@ export const pages = [
         path: '/honors/',
         Page: HonorsPage,
         title: 'Honors of Sohan Bhat',
-        description: 'Every certificate Sohan Bhat has earned, newest first, each with a picture and a link for verification on the page of the issuer.',
+        description: 'Awards won by FRC Team 2714 in the 2025 and 2026 seasons, and every certificate Sohan Bhat has earned, each with a link for verification.',
     },
 ];
 

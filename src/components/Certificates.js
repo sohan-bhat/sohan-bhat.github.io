@@ -82,19 +82,19 @@ export const CertificateShot = ({ certificate: c, eager }) => (
             />
         </div>
         <div className="cert-entry">
-            <Words certificate={c} Title="h2" />
+            <Words certificate={c} Title="h3" />
         </div>
     </li>
 );
 
 // Certificates on the home page, under my photo. The View all
-// link at the end of the heading's row opens the Honors page, which has
-// every one with its picture. The list is src/data/certificates.js.
+// link at the end of the heading's row opens the Honors page at its
+// certificates, where every one has its picture. The list is src/data/certificates.js.
 const Certificates = () => (
     <div className="hero-certs" id="certificates">
         <div className="section-head">
             <h2 className="section-title">Certificates</h2>
-            <More href="/honors/" place="head" rest="certificates">
+            <More href="/honors/#certificates" place="head" rest="certificates">
                 View all
             </More>
         </div>
@@ -103,7 +103,7 @@ const Certificates = () => (
                 <Certificate key={c.id} certificate={c} short />
             ))}
         </ul>
-        <More href="/honors/" place="foot" rest="certificates">
+        <More href="/honors/#certificates" place="foot" rest="certificates">
             View all
         </More>
     </div>
