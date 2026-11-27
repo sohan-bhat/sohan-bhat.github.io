@@ -95,6 +95,14 @@
     background: var(--sand);
 }
 
+/* On a wide screen the certificates start a little closer under the
+   awards than two parts of a page usually sit. */
+@media (min-width: 701px) {
+    .page .awards + .page-group {
+        margin-top: 1.5rem;
+    }
+}
+
 /* Phones: one column, the photo after the seasons, and smaller banners. */
 @media (max-width: 700px) {
     .awards-body {
