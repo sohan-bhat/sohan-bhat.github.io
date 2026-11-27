@@ -1,9 +1,10 @@
 /* Awards on the Honors page. The heading with the team and a Verify link
-   beside it, small and gray on the heading's baseline. */
+   beside it, small and gray at the middle of the heading's capital letters,
+   since on the heading's baseline small words look dropped. */
 .awards-head {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     gap: 0 0.85rem;
     margin-bottom: 2.25rem;
 }
