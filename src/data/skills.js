@@ -5,8 +5,9 @@
 // that reason). Ask before adding one. The list fits one row on a laptop.
 const skills = ['Python', 'TypeScript', 'Java', 'Kotlin', 'PyTorch', 'NumPy', 'React', 'Next.js', 'Three.js'];
 
-// The same kind of line under the Robotics heading: what the robot code and
-// the driver display use. Sohan chose these eight; ask before adding one.
-export const roboticsSkills = ['Java', 'Limelight', 'PathPlanner', 'WPILib', 'AprilTags', 'TypeScript', 'React', 'NetworkTables'];
+// The same kind of line under the Robotics heading: what the robot code
+// uses. Sohan chose these three (WPILib, AprilTags, TypeScript, React and
+// NetworkTables were here and he had them taken off); ask before adding one.
+export const roboticsSkills = ['Java', 'Limelight', 'PathPlanner'];
 
 export default skills;
